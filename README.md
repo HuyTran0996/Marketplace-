@@ -67,3 +67,35 @@ Our product is a web application that serves as a marketplace for buyers and sel
 1. User schema: This schema would include fields such as user ID, username, email, password, and user role (buyer, seller, or admin).
 2. Product schema: This schema would include fields such as product ID, title, description, price, images, and seller ID.
 3. Order schema: This schema would include fields such as order ID, buyer ID, product ID, order status, delivery information, and payment information.
+
+## Entity Relationship Diagram:
+
+https://github.com/HuyTran0996/Marketplace/blob/main/marketplacediagram.pdf
+
+## API endpoints
+
+##### Users:
+
+1. /users: CRUD operations for user accounts (Create, Read, Update, Delete).
+2. /users/login: Login endpoint for user authentication.
+3. /users/{id}: Get individual user details.
+4. /users/me: Get the currently logged-in user's details.
+
+##### Products:
+
+1. /products: CRUD operations for products.
+2. /products/search: Search for products based on various criteria.
+3. /products/{id}: Get details of a specific product.
+4. /products/{id}/reviews: Get reviews for a specific product.
+
+##### Orders:
+
+1. /orders: Create and manage orders.
+2. /orders/{id}: Get details of a specific order.
+3. /orders/{id}/update-status: Update the delivery status of an order (accessible only to seller).
+4. /orders/{id}/track: Track the order status.
+
+##### Admins:
+
+1. /admins/users: Manage user accounts and access levels.
+2. /admins/dashboard: Get key metrics on marketplace activity.
