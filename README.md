@@ -76,26 +76,29 @@ https://github.com/HuyTran0996/Marketplace/blob/main/marketplacediagram.pdf
 
 ##### Users:
 
-1. /users: CRUD operations for user accounts (Create, Read, Update, Delete).
-2. /users/login: Login endpoint for user authentication.
-3. /users/{id}: Get individual user details.
-4. /users/me: Get the currently logged-in user's details.
+1. GET POST PUT /users: CRUD operations for user accounts (Create, Read, Update, Delete).
+2. POST /users/login: Login endpoint for user authentication.
+3. POST /users/register: Register endpoint for user authentication.
+4. GET /users/{id}: Get individual user details.
+5. GET /user: Get the currently logged-in user's details.
 
 ##### Products:
 
-1. /products: CRUD operations for products.
-2. /products/search: Search for products based on various criteria.
-3. /products/{id}: Get details of a specific product.
-4. /products/{id}/reviews: Get reviews for a specific product.
+1. GET POST PUT /products: CRUD operations for products.
+2. GET / POST /products/search: Search for products based on various criteria.
+3. GET /products/{id}: Get details of a specific product.
+4. GET /products/{id}/reviews: Get reviews for a specific product.
 
 ##### Orders:
 
-1. /orders: Create and manage orders.
-2. /orders/{id}: Get details of a specific order.
-3. /orders/{id}/update-status: Update the delivery status of an order (accessible only to seller).
-4. /orders/{id}/track: Track the order status.
+1. POST /orders: Create and manage orders.
+2. GET /orders/{id}: Get details of a specific order.
+3. PATCH /orders/{id}/status: Update the delivery status of an order (accessible only to seller).
+4. GET /orders/{id}/track: Track the order status.
 
 ##### Admins:
 
-1. /admins/users: Manage user accounts and access levels.
-2. /admins/dashboard: Get key metrics on marketplace activity.
+1. POST /admins/users: Manage user accounts and access levels.
+2. GET /admins/orders: Get all metrics about orders in system
+3. GET /admins/shops: Get all metrics about shops in system
+4. GET /admins/reviews: Get all metrics about reviews in system
