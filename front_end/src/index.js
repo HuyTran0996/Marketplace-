@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 
 import App from "./App";
-import storeProvider from "./store/Provider";
+import { StoreProvider } from "./store/Provider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <storeProvider>
-    <App />
-  </storeProvider>
+  <StoreProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StoreProvider>
 );

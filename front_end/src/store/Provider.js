@@ -3,7 +3,7 @@ import { useReducer } from "react";
 import Context from "./Context";
 import reducer, { initialState } from "./reducer";
 
-function Provider({ children }) {
+function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {} = state;
 
@@ -12,4 +12,4 @@ function Provider({ children }) {
   return <Context.Provider value={valueToShare}>{children}</Context.Provider>;
 }
 
-export default Provider;
+export { StoreProvider };
