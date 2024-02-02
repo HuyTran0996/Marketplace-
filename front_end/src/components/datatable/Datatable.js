@@ -35,6 +35,7 @@ const Datatable = () => {
       },
     },
   ];
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
