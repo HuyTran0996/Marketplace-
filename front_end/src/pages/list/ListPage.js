@@ -1,9 +1,18 @@
-import React from "react";
-
 import "./list.scss";
+import Sidebar from "../../components/sidebar/SideBar";
+import Navbar from "../../components/navbar/NavBar";
+import Datatable from "../../components/datatable/Datatable";
 
-function ListPage() {
-  return <div>ListPage</div>;
-}
+const ListPage = () => {
+  return (
+    <div className="list">
+      <Sidebar />
+      <div className="listContainer">
+        <Navbar />
+        <Datatable />
+      </div>
+    </div>
+  );
+};
 
 export default ListPage;

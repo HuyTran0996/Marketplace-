@@ -6,7 +6,6 @@ import LoginPage from "./pages/login/LoginPage";
 import ListPage from "./pages/list/ListPage";
 import NewPage from "./pages/new/NewPage";
 import SinglePage from "./pages/single/SinglePage";
-import NotFoundPage from "./pages/notfound/NotFoundPage";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
             <Route path="new" element={<NewPage title="Add New Product" />} />
           </Route>
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
