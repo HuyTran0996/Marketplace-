@@ -5,13 +5,13 @@
   background-color: white;
 
   .top {
-    height: 50px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .logo {
-      font-size: 20px;
+      font-size: 30px;
       font-weight: bold;
       color: #6439ff;
     }
@@ -31,7 +31,7 @@
       padding: 0;
 
       .title {
-        font-size: 10px;
+        font-size: 20px;
         font-weight: bold;
         color: #999;
         margin-top: 15px;
@@ -46,15 +46,16 @@
 
         &:hover {
           background-color: #ece8ff;
+          transition: 0.3s;
         }
 
         .icon {
-          font-size: 18px;
+          font-size: 25px;
           color: #7451f8;
         }
 
         span {
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 600;
           color: #888;
           margin-left: 10px;
@@ -70,7 +71,7 @@
     margin: 10px;
 
     .title {
-      font-size: 10px;
+      font-size: 20px;
       font-weight: bold;
       color: #999;
       margin-top: 15px;
@@ -81,8 +82,8 @@
       display: flex;
 
       .colorOption {
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border-radius: 5px;
         border: 1px solid #7451f8;
         cursor: pointer;

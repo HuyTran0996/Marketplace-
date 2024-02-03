@@ -1,9 +1,9 @@
 .navbar {
-  height: 50px;
+  height: 70px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   color: #555;
 
   .wrapper {
@@ -17,16 +17,19 @@
       display: flex;
       align-items: center;
       border: 0.5px solid lightgray;
+      border-radius: 10px;
       padding: 3px;
 
       input {
+        height: 35px;
         width: 50vw;
         border: none;
         outline: none;
         background: transparent;
+        font-size: 18px;
 
         &::placeholder {
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }
@@ -42,12 +45,17 @@
         position: relative;
 
         .icon {
-          font-size: 20px;
+          font-size: 30px;
+          cursor: pointer;
+          &:hover {
+            color: rgb(18, 183, 128);
+            transition: 0.15s;
+          }
         }
 
         .avatar {
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
         }
 
