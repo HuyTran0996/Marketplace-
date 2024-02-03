@@ -20,12 +20,13 @@
       padding: 3px;
 
       input {
+        width: 50vw;
         border: none;
         outline: none;
         background: transparent;
 
         &::placeholder {
-          font-size: 12px;
+          font-size: 14px;
         }
       }
     }
