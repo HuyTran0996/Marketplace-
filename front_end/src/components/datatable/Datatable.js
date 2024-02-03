@@ -21,9 +21,13 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={`/users/${params.row.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">View</div>
             </Link>
+
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -45,9 +49,9 @@ const Datatable = () => {
         </Link>
       </div>
       <DataGrid
+        rows={data} //userRows
+        columns={userColumns.concat(actionColumn)} //userColumns
         className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

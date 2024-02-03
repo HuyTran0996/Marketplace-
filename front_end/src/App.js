@@ -19,7 +19,9 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<HomePage />} />
+
           <Route path="login" element={<LoginPage />} />
+
           <Route path="users">
             <Route index element={<ListPage />} />
             <Route path=":userId" element={<SinglePage />} />
@@ -28,9 +30,12 @@ function App() {
               element={<NewPage inputs={userInputs} title="Add New User" />}
             />
           </Route>
+
           <Route path="products">
             <Route index element={<ListPage />} />
+
             <Route path=":productId" element={<SinglePage />} />
+
             <Route
               path="new"
               element={
