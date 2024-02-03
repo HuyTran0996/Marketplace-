@@ -31,7 +31,7 @@
       padding: 0;
 
       .title {
-        font-size: 20px;
+        font-size: 14px;
         font-weight: bold;
         color: #999;
         margin-top: 15px;
@@ -45,19 +45,20 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #ece8ff;
-          transition: 0.3s;
+          background-color: #373637;
+          color: aqua;
+          transition: 0.15s;
         }
 
         .icon {
           font-size: 25px;
-          color: #7451f8;
+          // color: #7451f8;
         }
 
         span {
           font-size: 16px;
           font-weight: 600;
-          color: #888;
+          // color: #888;
           margin-left: 10px;
         }
       }
