@@ -43,6 +43,7 @@
         align-items: center;
         padding: 5px;
         cursor: pointer;
+        color: #7451f8;
 
         &:hover {
           background-color: #373637;
@@ -52,13 +53,11 @@
 
         .icon {
           font-size: 25px;
-          // color: #7451f8;
         }
 
         span {
           font-size: 16px;
           font-weight: 600;
-          // color: #888;
           margin-left: 10px;
         }
       }
