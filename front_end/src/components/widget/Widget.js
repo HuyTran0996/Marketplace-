@@ -1,4 +1,5 @@
 import "./widget.scss";
+import { Link } from "react-router-dom";
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -10,15 +11,19 @@ const Widget = ({ type }) => {
   let data;
 
   //temporary
-  const amount = 100;
-  const diff = 20;
+  const amount = "100 (update here)";
+  const diff = "20 (update here)";
 
   switch (type) {
     case "user":
       data = {
         title: "USERS",
         isMoney: false,
-        link: "See all users",
+        link: (
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <span>See all users</span>
+          </Link>
+        ),
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -35,7 +40,11 @@ const Widget = ({ type }) => {
       data = {
         title: "ORDERS",
         isMoney: false,
-        link: "View all orders",
+        link: (
+          <Link to="/orders" style={{ textDecoration: "none" }}>
+            <span>See all orders</span>
+          </Link>
+        ),
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
