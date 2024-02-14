@@ -53,5 +53,3 @@ const Chart = ({ aspect, title }) => {
 };
 
 export default Chart;
-
-let x = 1;
