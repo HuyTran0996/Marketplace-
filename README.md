@@ -164,3 +164,47 @@ update store informations
 ### 5. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),storeController.deleteStore);
 
 Admin can delete any store
+
+## Product
+
+### app.use('/api/v1/products', productRouter);
+
+### 1. router.route('/').get(authController.protect, productController.getAllProducts);
+
+fetch all products, fetch all product of a store
+
+### 2. router.route('/').post(authController.protect, productController.createProduct);
+
+create a product
+
+### 3. router.route('/:id').get(productController.getProduct);
+
+get a product
+
+### 4. router.route('/:id').patch(productController.updateProduct);
+
+update a product
+
+### 5. router .route('/:id') .delete( authController.protect, authController.restrictTo('admin'), productController.deleteProduct );
+
+admin can delete any product
+
+## Reviews
+
+### app.use('/api/v1/reviews', reviewRouter);
+
+### 1. router.route('/').get(authController.protect, reviewController.getAllReviews);
+
+fetch all reviews of a product
+
+### 2. router.route('/:id').post(authController.protect, reviewController.createReview);
+
+create a review, this route uses ID of the product
+
+### 3. router.route('/:id').patch(reviewController.updateReview);
+
+update a review, this routes use ID of review
+
+### 4. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),reviewController.adminDeleteReview);
+
+only admin can delete review so if reviewer use bad language, store owner can report reviewer to admin
