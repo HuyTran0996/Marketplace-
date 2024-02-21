@@ -70,7 +70,7 @@ Our product is a web application that serves as a marketplace for buyers and sel
 
 ## Entity Relationship Diagram:
 
-https://github.com/HuyTran0996/Marketplace/blob/main/marketplacediagram.pdf
+https://github.com/HuyTran0996/Marketplace/blob/main/marketplacediagram2024-02-21.pdf
 
 ## API endpoints
 
@@ -105,78 +105,62 @@ https://github.com/HuyTran0996/Marketplace/blob/main/marketplacediagram.pdf
 
 ////////////////2024-02-21//////
 
-##### Users:
+## Users:
 
-app.use('/api/v1/users', userRouter);
+### app.use('/api/v1/users', userRouter);
 
-1. router.post('/signup', authController.signup);
+### 1. router.post('/signup', authController.signup);
 
 Sign Up user, role default is user, must login to DataBase to promote a user to admin
 
-2. router.post('/login', authController.login);
+### 2. router.post('/login', authController.login);
 
 Login to the app
 
-3. router.patch(
-   '/updateMyPassword',
-   authController.protect,
-   authController.updatePassword
-   );
+### 3. router.patch('/updateMyPassword',authController.protect,authController.updatePassword);
 
 User can update password
 
-4. router.route('/').get(userController.getAllUsers);
+### 4. router.route('/').get(userController.getAllUsers);
 
 fetch all users (for admin dashboard)
 
-5. router.route('/:id').get(userController.getUser);
+### 5. router.route('/:id').get(userController.getUser);
 
 fetch a user by user ID
 
-6. router.route('/:id').patch(userController.updateUser);
+### 6. router.route('/:id').patch(userController.updateUser);
 
 update user information
 
-7. router.delete('/deleteMe', authController.protect, userController.deleteMe);
+### 7. router.delete('/deleteMe', authController.protect, userController.deleteMe);
 
 user can delete their own account
 
-8. router
-   .route('/:id')
-   .delete(
-   authController.protect,
-   authController.restrictTo('admin'),
-   userController.adminDeleteUser
-   );
+### 8. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),userController.adminDeleteUser);
 
 Admin can delete any user
 
-##### Stores:
+## Stores:
 
-app.use('/api/v1/stores', storeRouter);
+## app.use('/api/v1/stores', storeRouter);
 
-1. router.route('/').get(authController.protect, storeController.getAllStores);
+### 1. router.route('/').get(authController.protect, storeController.getAllStores);
 
 fetch all stores
 
-2. router.route('/').post(authController.protect, storeController.createStore);
+### 2. router.route('/').post(authController.protect, storeController.createStore);
 
 user can create their store
 
-3. router.route('/:id').get(storeController.getStore);
+### 3. router.route('/:id').get(storeController.getStore);
 
 fetch a store
 
-4. router.route('/:id').patch(storeController.updateStore);
+### 4. router.route('/:id').patch(storeController.updateStore);
 
 update store informations
 
-5. router
-   .route('/:id')
-   .delete(
-   authController.protect,
-   authController.restrictTo('admin'),
-   storeController.deleteStore
-   );
+### 5. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),storeController.deleteStore);
 
 Admin can delete any store
