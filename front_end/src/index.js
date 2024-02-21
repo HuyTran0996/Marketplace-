@@ -4,12 +4,15 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import { DarkModeContextProvider } from "./context/darkModeContext";
+import { PageProvider } from "./context/PageContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <DarkModeContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PageProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PageProvider>
   </DarkModeContextProvider>
 );

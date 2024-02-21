@@ -7,16 +7,16 @@ import StoreIcon from "@mui/icons-material/Store";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-const Widget = ({ type }) => {
-  let data;
-
+const Widget = ({ type, totalNumber }) => {
+  let dataWidget;
   //temporary
-  const amount = 100;
+
+  const amount = totalNumber || "Error";
   const diff = 20;
 
   switch (type) {
     case "user":
-      data = {
+      dataWidget = {
         title: "USERS",
         isUser: true,
         link: (
@@ -37,7 +37,7 @@ const Widget = ({ type }) => {
       break;
 
     case "order":
-      data = {
+      dataWidget = {
         title: "ORDERS",
         isOrder: true,
         link: (
@@ -58,7 +58,7 @@ const Widget = ({ type }) => {
       break;
 
     case "store":
-      data = {
+      dataWidget = {
         title: "STORES",
         isStore: true,
         link: (
@@ -82,16 +82,16 @@ const Widget = ({ type }) => {
   return (
     <div className="widget">
       <div className="left">
-        <span className="title">{data.title}</span>
+        <span className="title">{dataWidget.title}</span>
         <span className="counter">
           {amount}
-          {data.isStore && <StoreIcon />}
-          {data.isOrder && <ShoppingCartOutlinedIcon />}
-          {data.isUser && <PersonIcon />}
+          {dataWidget.isStore && <StoreIcon />}
+          {dataWidget.isOrder && <ShoppingCartOutlinedIcon />}
+          {dataWidget.isUser && <PersonIcon />}
         </span>
-        <span className="link">{data.link}</span>
+        <span className="link">{dataWidget.link}</span>
       </div>
-      <div className="right">{data.icon}</div>
+      <div className="right">{dataWidget.icon}</div>
     </div>
   );
 };
