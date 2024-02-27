@@ -8,21 +8,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 200px;
 
+    .title {
+      align-self: flex-start;
+    }
     input {
       width: 200px;
       height: 30px;
-      margin: 10px;
+      margin-bottom: 20px;
     }
 
     button {
       width: 200px;
       height: 30px;
+      margin-bottom: 10px;
+      border-radius: 5px;
       border: none;
       background-color: purple;
       color: white;
       font-weight: bold;
       cursor: pointer;
+      transition-duration: 0.3s;
+    }
+
+    button:hover {
+      background-color: #002ead;
     }
 
     span {

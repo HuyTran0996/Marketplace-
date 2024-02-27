@@ -1,12 +1,12 @@
 import { createContext, useReducer, useEffect } from "react";
 import { initialState, PageReducer } from "./PageReducer";
-import { FetchAllUsers } from "../data/FetchData";
+import { FetchAllUsers } from "../data/FetchUsersData";
 
 const PageContext = createContext();
 
 function PageProvider({ children }) {
   const [state, dispatch] = useReducer(PageReducer, initialState);
-  const { dataAllUsers } = state;
+  const { dataAllUser } = state;
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
   console.log("current Url:", currentUrl);
