@@ -23,10 +23,19 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const result = await apiService.post("/users/login", {
-        email: email,
-        password: password,
-      });
+      const result = await apiService.post(
+        "/users/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
       navigate("/");
       console.log("999", result);
       setIsLoading(false);
@@ -34,7 +43,7 @@ export default function LoginPage() {
     } catch (error) {
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
-      let errorName = error.response.data.error;
+      let errorName = error.response;
       setErrorMessage(errorName);
     }
   };
