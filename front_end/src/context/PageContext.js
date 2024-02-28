@@ -1,13 +1,13 @@
 import { createContext, useReducer, useEffect } from "react";
 
 import { initialState, PageReducer } from "./PageReducer";
-import { FetchAllUsers } from "../data/FetchUsersData";
+import { FetchAllUsers, FetchAllOrders } from "../data/FetchUsersData";
 
 const PageContext = createContext();
 
 function PageProvider({ children }) {
   const [state, dispatch] = useReducer(PageReducer, initialState);
-  const { isLogin, dataAllUser } = state;
+  const { isLogin, dataAllUsers, dataAllOrders } = state;
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
   console.log("current Url:", currentUrl);
@@ -18,6 +18,12 @@ function PageProvider({ children }) {
       dispatch({
         type: "SET_DATA_ALL_USERS",
         payload: resultAllUsers,
+      });
+
+      const resultAllOrders = await FetchAllOrders();
+      dispatch({
+        type: "SET_DATA_ALL_ORDERS",
+        payload: resultAllOrders,
       });
       return;
     } catch (err) {
