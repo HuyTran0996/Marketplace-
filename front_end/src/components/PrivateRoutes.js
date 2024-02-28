@@ -1,21 +1,21 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useCookies } from "react-cookie";
+import { useEffect, useContext } from "react";
+
+import { PageContext } from "../context/PageContext";
 
 const PrivateRoutes = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies("jwt"); // Access cookies
 
-  let auth = cookies.jwt; // Use the token from cookies
-  console.log("AUTH", auth);
+  const { state, dispatch } = useContext(PageContext);
+  const { isLogin } = state;
 
   useEffect(() => {
-    if (!auth) {
+    if (!isLogin) {
       navigate(`/login`);
     }
-  }, [auth, navigate]);
+  }, [isLogin, navigate]);
 
-  return auth ? <Outlet /> : null;
+  return isLogin ? <Outlet /> : null;
 };
 
 export default PrivateRoutes;

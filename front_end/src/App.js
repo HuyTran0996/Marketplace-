@@ -1,8 +1,9 @@
 import React from "react";
 import "./style/dark.scss";
 import { Routes, Route } from "react-router-dom";
-import { productInputs, userInputs } from "./formSource";
+import { useContext } from "react";
 
+import { productInputs, userInputs } from "./formSource";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import ListPage from "./pages/list/ListPage";
@@ -10,7 +11,6 @@ import NewPage from "./pages/new/NewPage";
 import SinglePage from "./pages/single/SinglePage";
 import PrivateRoutes from "./components/PrivateRoutes";
 
-import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 
 function App() {

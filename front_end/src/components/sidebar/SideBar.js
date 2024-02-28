@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import "./sidebar.scss";
+import { apiService } from "../../app/apiService";
 import { DarkModeContext } from "../../context/darkModeContext";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -14,6 +16,32 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+
+  const handleLogOut = async (e) => {
+    // e.preventDefault();
+    Cookies.remove("forFe");
+
+    try {
+      const result = await apiService.post(
+        "/users/logout",
+        {
+          email: "",
+          password: "",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      return result;
+    } catch (error) {
+      console.log(`Error fetchData: ${error.name}: ${error.message}`);
+      let errorName = error.response.data.message;
+      alert(errorName);
+    }
+  };
   return (
     <div className="sidebar">
       <div className="top">
@@ -69,7 +97,11 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/login" style={{ textDecoration: "none" }}>
+          <Link
+            to="/login"
+            onClick={handleLogOut}
+            style={{ textDecoration: "none" }}
+          >
             <li>
               <ExitToAppIcon className="icon" />
               <span>Logout</span>
