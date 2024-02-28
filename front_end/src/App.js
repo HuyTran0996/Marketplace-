@@ -1,5 +1,6 @@
 import React from "react";
 import "./style/dark.scss";
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 

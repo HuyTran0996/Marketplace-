@@ -25,14 +25,12 @@ function PageProvider({ children }) {
       });
 
       const resultAllOrders = await FetchAllOrders();
-      console.log("data all orders", resultAllOrders);
       dispatch({
         type: "SET_DATA_ALL_ORDERS",
         payload: resultAllOrders,
       });
 
       const resultAllStores = await FetchAllStores();
-      console.log("data all orders", resultAllStores);
       dispatch({
         type: "SET_DATA_ALL_STORES",
         payload: resultAllStores,

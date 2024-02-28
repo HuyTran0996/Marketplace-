@@ -48,6 +48,7 @@ const Datatable = () => {
           Add New
         </Link>
       </div>
+
       <DataGrid
         rows={data} //userRows
         columns={userColumns.concat(actionColumn)} //userColumns
