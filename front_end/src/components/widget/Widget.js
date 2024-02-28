@@ -11,7 +11,7 @@ const Widget = ({ type, totalNumber }) => {
   let dataWidget;
   //temporary
 
-  const amount = totalNumber || "Error";
+  const amount = totalNumber;
   const diff = 20;
 
   switch (type) {

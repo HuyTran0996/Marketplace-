@@ -12,7 +12,7 @@ import Chart from "../../components/chart/Chart";
 
 const HomePage = () => {
   const { state, dispatch, getData } = useContext(PageContext);
-  const { dataAllUsers, dataAllOrders } = state;
+  const { dataAllUsers, dataAllOrders, dataAllStores } = state;
   if (!dataAllUsers) {
     getData();
     console.log("chưa có dataAllUsers");
@@ -31,13 +31,9 @@ const HomePage = () => {
       </div>
     );
   } else {
-    console.log("dataAllOrders", dataAllOrders);
-    // let totalUsers = null;
-    let totalUsers = dataAllUsers.data.totalUsers;
-
-    let totalOrders = null;
-    // let totalOrders = dataAllOrders.data.results || null;
-    let totalStores = null;
+    let totalUsers = dataAllUsers?.data?.totalUsers;
+    let totalOrders = dataAllOrders?.data?.totalOrders;
+    let totalStores = dataAllStores?.data?.totalStores;
     return (
       <div className="home">
         <Sidebar />

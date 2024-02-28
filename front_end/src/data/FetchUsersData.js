@@ -18,4 +18,13 @@ const FetchAllOrders = async () => {
   }
 };
 
-export { FetchAllUsers, FetchAllOrders };
+const FetchAllStores = async () => {
+  try {
+    const dataAllStores = await apiService.get(`/stores`);
+    return dataAllStores;
+  } catch (err) {
+    console.log(`Error FetchAllStores:${err.name}: ${err.message}`);
+  }
+};
+
+export { FetchAllUsers, FetchAllOrders, FetchAllStores };

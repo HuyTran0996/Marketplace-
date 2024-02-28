@@ -1,7 +1,11 @@
 import { createContext, useReducer, useEffect } from "react";
 
 import { initialState, PageReducer } from "./PageReducer";
-import { FetchAllUsers, FetchAllOrders } from "../data/FetchUsersData";
+import {
+  FetchAllUsers,
+  FetchAllOrders,
+  FetchAllStores,
+} from "../data/FetchUsersData";
 
 const PageContext = createContext();
 
@@ -21,10 +25,19 @@ function PageProvider({ children }) {
       });
 
       const resultAllOrders = await FetchAllOrders();
+      console.log("data all orders", resultAllOrders);
       dispatch({
         type: "SET_DATA_ALL_ORDERS",
         payload: resultAllOrders,
       });
+
+      const resultAllStores = await FetchAllStores();
+      console.log("data all orders", resultAllStores);
+      dispatch({
+        type: "SET_DATA_ALL_STORES",
+        payload: resultAllStores,
+      });
+
       return;
     } catch (err) {
       console.log(`Error Home: ${err.name}: ${err.message}`);
