@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./datatable.scss";
+import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 import { AdminDeleteUser } from "../../data/FetchUsersData";
 
@@ -43,7 +44,11 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
-            <img className="cellImg" src={params.row.photo} alt="avatar" />
+            <img
+              className="cellImg"
+              src={params.row.photo ? params.row.photo : avatar}
+              alt="avatar"
+            />
             {params.row.name}
           </div>
         );

@@ -4,6 +4,7 @@ const initialState = {
   dataAllUsers: null,
   dataAllOrders: null,
   dataAllStores: null,
+  dataSingle: null,
 };
 
 function PageReducer(state, action) {
@@ -16,6 +17,9 @@ function PageReducer(state, action) {
       return { ...state, dataAllOrders: action.payload };
     case "SET_DATA_ALL_STORES":
       return { ...state, dataAllStores: action.payload };
+    case "SET_DATA_SINGLE":
+      return { ...state, dataSingle: action.payload };
+
     default:
       throw new Error("Invalid Action");
   }

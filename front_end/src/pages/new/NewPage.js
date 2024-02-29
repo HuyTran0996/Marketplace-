@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { FetchSingleUser } from "../../data/FetchUsersData";
@@ -58,15 +58,16 @@ const Loading = ({ title }) => {
     </div>
   );
 };
-const UserDetails = ({ userData, title, setUserData }) => {
-  const navigate = useNavigate();
 
-  const [name, setName] = useState(`${userData.data.user.name}`);
-  const [phone, setPhone] = useState(`${userData.data.user.phone}`);
-  const [fileSubmit, setFileSubmit] = useState(`${userData.data.user.photo}`);
-  const [file, setFile] = useState(`${userData.data.user.photo}`);
+const UserDetails = ({ dataSingle, getSingleUser, title }) => {
+  const { userId } = useParams();
+  const [name, setName] = useState(`${dataSingle.data.user.name}`);
+  const [phone, setPhone] = useState(`${dataSingle.data.user.phone}`);
+  const [fileSubmit, setFileSubmit] = useState(`${dataSingle.data.user.photo}`);
+  const [file, setFile] = useState(`${dataSingle.data.user.photo}`);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -77,6 +78,7 @@ const UserDetails = ({ userData, title, setUserData }) => {
     setFile(URL.createObjectURL(e.target.files[0]));
     setFileSubmit(e.target.files[0]);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -89,20 +91,25 @@ const UserDetails = ({ userData, title, setUserData }) => {
         formData.append("image", fileSubmit);
       }
 
-      const result = await apiService.patch("/users/updateMe", formData, {
+      await apiService.patch("/users/updateMe", formData, {
         withCredentials: true,
       });
-      setUserData(result);
-      setError(false);
+
+      dataSingle = await getSingleUser(userId);
+      setName(dataSingle.data.user.name);
+      setPhone(dataSingle.data.user.phone);
+      setFile(dataSingle.data.user.photo);
+
+      setIsSubmitting(false);
       return;
     } catch (error) {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
       let errorMessage = `${error.codeName}`;
-      setError(errorMessage);
-    } finally {
       setIsSubmitting(false);
+      setError(errorMessage);
     }
   };
+
   return (
     <div className="new">
       <Sidebar />
@@ -149,7 +156,7 @@ const UserDetails = ({ userData, title, setUserData }) => {
 
               <div className="formInput" key="2">
                 <label>Email (email can not be changed)</label>
-                <input type="email" value={userData.data.user.email} />
+                <input type="email" value={dataSingle.data.user.email} />
               </div>
 
               <div className="formInput" key="3">
@@ -177,20 +184,21 @@ const UserDetails = ({ userData, title, setUserData }) => {
 
 const NewPage = ({ title }) => {
   const { userId } = useParams();
-  const [userData, setUserData] = useState(null);
-  const fetchData = async () => {
-    const data = await FetchSingleUser(userId);
-    setUserData(data);
-  };
-  useEffect(() => {
-    fetchData();
-  }, [userId]);
+  const { state, dispatch, getData, getSingleUser } = useContext(PageContext);
+  const { dataAllUsers, dataAllOrders, dataAllStores, dataSingle } = state;
 
-  return userData ? (
-    <UserDetails userData={userData} title={title} setUserData={setUserData} />
-  ) : (
-    <Loading title={title} />
-  );
+  if (!dataSingle) {
+    getSingleUser(userId);
+    return <Loading title={title} />;
+  } else {
+    return (
+      <UserDetails
+        dataSingle={dataSingle}
+        getSingleUser={getSingleUser}
+        title={title}
+      />
+    );
+  }
 };
 
 export default NewPage;

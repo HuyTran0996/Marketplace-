@@ -10,16 +10,16 @@ const FetchAllUsers = async () => {
 };
 const FetchSingleUser = async (id) => {
   try {
-    const dataAllUsers = await apiService.get(`/users/${id}`);
-    return dataAllUsers;
+    const dataSingleUser = await apiService.get(`/users/${id}`);
+    return dataSingleUser;
   } catch (err) {
     console.log(`Error FetchAllUsers:${err.name}: ${err.message}`);
   }
 };
 const AdminDeleteUser = async (id) => {
   try {
-    const dataAllUsers = await apiService.delete(`/users/${id}`);
-    return dataAllUsers;
+    const adminDeleteUser = await apiService.delete(`/users/${id}`);
+    return adminDeleteUser;
   } catch (err) {
     console.log(`Error AdminDeleteUser:${err.name}: ${err.message}`);
   }
