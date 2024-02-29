@@ -1,11 +1,9 @@
 import { createContext, useReducer, useEffect } from "react";
 
 import { initialState, PageReducer } from "./PageReducer";
-import {
-  FetchAllUsers,
-  FetchAllOrders,
-  FetchAllStores,
-} from "../data/FetchUsersData";
+import { FetchAllUsers, AdminDeleteUser } from "../data/FetchUsersData";
+import { FetchAllOrders } from "../data/FetchOrdersData";
+import { FetchAllStores } from "../data/FetchStoresData";
 
 const PageContext = createContext();
 

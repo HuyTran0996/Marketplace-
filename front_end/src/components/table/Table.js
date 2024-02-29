@@ -67,7 +67,7 @@ const List = () => {
   // ];
 
   let rows = dataAllOrders?.data?.orders;
-  console.log("98798798", rows);
+
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

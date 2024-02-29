@@ -3,7 +3,7 @@
   display: flex;
 
   .newContainer {
-    flex: 6;
+    width: 85vw;
 
     .top,
     .bottom {
@@ -23,24 +23,28 @@
         text-align: center;
 
         img {
-          width: 100px;
-          height: 100px;
+          width: 500px;
+          height: 500px;
+
           border-radius: 50%;
           object-fit: cover;
         }
       }
 
       .right {
-        flex: 2;
+        width: 40vw;
+        margin-top: 8vh;
 
         form {
           display: flex;
-          flex-wrap: wrap;
+          flex-direction: column; /* Change to column to stack elements vertically */
           gap: 30px;
           justify-content: space-around;
 
           .formInput {
-            width: 40%;
+            margin-left: 2vw;
+            width: 30vw;
+            order: 1; /* Ensure this appears first */
 
             label {
               display: flex;
@@ -60,15 +64,31 @@
             }
           }
 
+          .error {
+            margin-left: 2vw;
+            order: 2;
+            color: red;
+            font-size: 26px;
+          }
+
           button {
+            margin-left: 2vw;
             width: 150px;
             padding: 10px;
             border: none;
+            border-radius: 10px;
             background-color: teal;
             color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
+            transition-duration: 0.3s;
+            order: 3; /* Ensure this appears last */
+          }
+          button:hover {
+            filter: brightness(120%);
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
           }
         }
       }

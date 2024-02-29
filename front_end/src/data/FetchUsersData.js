@@ -8,23 +8,21 @@ const FetchAllUsers = async () => {
     console.log(`Error FetchAllUsers:${err.name}: ${err.message}`);
   }
 };
-
-const FetchAllOrders = async () => {
+const FetchSingleUser = async (id) => {
   try {
-    const dataAllOrders = await apiService.get(`/orders`);
-    return dataAllOrders;
+    const dataAllUsers = await apiService.get(`/users/${id}`);
+    return dataAllUsers;
   } catch (err) {
-    console.log(`Error FetchAllOrders:${err.name}: ${err.message}`);
+    console.log(`Error FetchAllUsers:${err.name}: ${err.message}`);
+  }
+};
+const AdminDeleteUser = async (id) => {
+  try {
+    const dataAllUsers = await apiService.delete(`/users/${id}`);
+    return dataAllUsers;
+  } catch (err) {
+    console.log(`Error AdminDeleteUser:${err.name}: ${err.message}`);
   }
 };
 
-const FetchAllStores = async () => {
-  try {
-    const dataAllStores = await apiService.get(`/stores`);
-    return dataAllStores;
-  } catch (err) {
-    console.log(`Error FetchAllStores:${err.name}: ${err.message}`);
-  }
-};
-
-export { FetchAllUsers, FetchAllOrders, FetchAllStores };
+export { FetchAllUsers, AdminDeleteUser, FetchSingleUser };

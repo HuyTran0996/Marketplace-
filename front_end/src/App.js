@@ -29,8 +29,8 @@ function App() {
               <Route index element={<ListPage />} />
               <Route path=":userId" element={<SinglePage />} />
               <Route
-                path="new"
-                element={<NewPage inputs={userInputs} title="Add New User" />}
+                path="edit/:userId"
+                element={<NewPage title="Edit User" />}
               />
             </Route>
 

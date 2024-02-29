@@ -1,27 +1,6 @@
 .datatable {
   height: 600px;
   padding: 20px;
-  
-  .datatableTitle{
-    width: 100%;
-    font-size: 24px;
-    color: gray;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .link{
-      text-decoration: none;
-      color: green;
-      font-size: 16px;
-      font-weight: 400;
-      border: 1px solid green;
-      padding: 5px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  }
 
   .cellWithImg {
     display: flex;
@@ -65,14 +44,43 @@
       color: darkblue;
       border: 1px dotted rgba(0, 0, 139, 0.596);
       cursor: pointer;
+      transition-duration: 0.3s;
     }
-    
+    .viewButton:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .editButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgb(0, 139, 88);
+      border: 1px dotted rgba(0, 139, 81, 0.596);
+      cursor: pointer;
+      transition-duration: 0.3s;
+    }
+    .editButton:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
     .deleteButton {
       padding: 2px 5px;
       border-radius: 5px;
       color: crimson;
       border: 1px dotted rgba(220, 20, 60, 0.6);
       cursor: pointer;
+      transition-duration: 0.3s;
+    }
+    .deleteButton:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
     }
   }
 }
