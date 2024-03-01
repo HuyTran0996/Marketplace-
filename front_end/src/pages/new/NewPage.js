@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 
-import { FetchSingleUser } from "../../data/FetchUsersData";
+import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 
@@ -93,14 +93,10 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
       }
 
       if (currentUrl.includes("myInfo")) {
-        await apiService.patch("/users/updateMe", formData, {
-          withCredentials: true,
-        });
+        await FetchUpdateMe(formData);
         await getMyInfo();
       } else {
-        await apiService.patch(`/users/updateUser/${userId}`, formData, {
-          withCredentials: true,
-        });
+        await FetchUpdateUser({ userId, formData });
         await getSingleUser(userId);
       }
 
