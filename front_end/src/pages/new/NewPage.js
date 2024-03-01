@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
+import { FetchUpdateStore } from "../../data/FetchStoresData";
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 
@@ -214,15 +215,12 @@ const StoreDetails = ({ dataSingle, getSingleStore, title }) => {
 
     try {
       const formData = new FormData();
-      formData.append("name", name);
+      formData.append("storeName", name);
       formData.append("address", address);
       if (fileSubmit) {
         formData.append("image", fileSubmit);
       }
-
-      await apiService.patch(`/stores/${storeId}`, formData, {
-        withCredentials: true,
-      });
+      await FetchUpdateStore({ storeId, formData });
 
       await getSingleStore(storeId);
 

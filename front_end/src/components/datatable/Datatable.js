@@ -281,6 +281,7 @@ const Datatable = () => {
         field: "customerName",
         headerName: "Buyer",
         width: 100,
+
         renderCell: (params) => {
           return <div className="cellWithImg">{params.row.customerName}</div>;
         },
@@ -288,7 +289,7 @@ const Datatable = () => {
       {
         field: "deliverTo",
         headerName: "Deliver To",
-        width: 200,
+        width: 350,
       },
       {
         field: "orderStatus",
