@@ -9,4 +9,13 @@ const FetchAllOrders = async () => {
   }
 };
 
-export { FetchAllOrders };
+const DeleteOrder = async (id) => {
+  try {
+    const deleteOrder = await apiService.delete(`/orders/${id}`);
+    return deleteOrder;
+  } catch (err) {
+    console.log(`Error FetchAllOrders:${err.name}: ${err.message}`);
+  }
+};
+
+export { FetchAllOrders, DeleteOrder };

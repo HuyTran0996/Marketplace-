@@ -1,27 +1,27 @@
 import { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./datatable.scss";
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 import { AdminDeleteUser } from "../../data/FetchUsersData";
 import { DeleteStore } from "../../data/FetchStoresData";
+import { DeleteOrder } from "../../data/FetchOrdersData";
 
 import { DataGrid } from "@mui/x-data-grid";
 
 const Datatable = () => {
   const { state, dispatch, getData } = useContext(PageContext);
   const { dataAllUsers, dataAllOrders, dataAllStores } = state;
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
       await getData();
     };
 
-    if (!dataAllUsers) {
-      fetchData();
-    }
-  }, []);
+    fetchData();
+  }, [location]);
 
   let dataOriginal = [];
   let userColumns = [
@@ -274,6 +274,63 @@ const Datatable = () => {
     ];
   } else if (currentUrl.includes("orders")) {
     dataOriginal = dataAllOrders ? dataAllOrders.data.orders : [];
+    userColumns = [
+      { field: "id", headerName: "ID", width: 240 },
+
+      {
+        field: "customerName",
+        headerName: "Buyer",
+        width: 100,
+        renderCell: (params) => {
+          return <div className="cellWithImg">{params.row.customerName}</div>;
+        },
+      },
+      {
+        field: "deliverTo",
+        headerName: "Deliver To",
+        width: 200,
+      },
+      {
+        field: "orderStatus",
+        headerName: "STATUS",
+        width: 110,
+        renderCell: (params) => {
+          // Correctly reference the isDeleted field and convert the boolean to a string
+          const status = params.row.orderStatus ? "Active" : "Deleted";
+          return (
+            <div className={`cellWithStatus ${status.toLowerCase()}`}>
+              {params.row.orderStatus}
+            </div>
+          );
+        },
+      },
+    ];
+    actionColumn = [
+      {
+        field: "action",
+        headerName: "ACTION",
+        width: 200,
+        renderCell: (params) => {
+          return (
+            <div className="cellAction">
+              <Link
+                to={`/orders/edit/${params.row.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="editButton">View & Edit</div>
+              </Link>
+
+              <div
+                className="deleteButton"
+                onClick={() => handleDelete(params.row.id)}
+              >
+                Delete
+              </div>
+            </div>
+          );
+        },
+      },
+    ];
   }
 
   const data = dataOriginal.map((user) => {
@@ -290,7 +347,10 @@ const Datatable = () => {
     if (currentUrl.includes("stores")) {
       await DeleteStore(id);
     }
-    getData();
+    if (currentUrl.includes("orders")) {
+      await DeleteOrder(id);
+    }
+    await getData();
   };
 
   return (

@@ -48,6 +48,14 @@ function App() {
               />
             </Route>
 
+            <Route path="orders">
+              <Route index element={<ListPage />} />
+              <Route
+                path="edit/:orderId"
+                element={<NewPage title="Edit Order" />}
+              />
+            </Route>
+
             <Route path="products">
               <Route index element={<ListPage />} />
               <Route
