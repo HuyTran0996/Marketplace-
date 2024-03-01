@@ -95,10 +95,10 @@ const UserDetails = ({ dataSingle, getSingleUser, title }) => {
         withCredentials: true,
       });
 
-      dataSingle = await getSingleUser(userId);
-      setName(dataSingle.data.user.name);
-      setPhone(dataSingle.data.user.phone);
-      setFile(dataSingle.data.user.photo);
+      await getSingleUser(userId);
+
+      // Reset the file input value
+      document.getElementById("file").value = "";
 
       setIsSubmitting(false);
       return;
@@ -184,21 +184,39 @@ const UserDetails = ({ dataSingle, getSingleUser, title }) => {
 
 const NewPage = ({ title }) => {
   const { userId } = useParams();
-  const { state, dispatch, getData, getSingleUser } = useContext(PageContext);
-  const { dataAllUsers, dataAllOrders, dataAllStores, dataSingle } = state;
+  const { state, getSingleUser, getMyInfo } = useContext(PageContext);
+  const { dataSingle } = state;
 
-  if (!dataSingle) {
-    getSingleUser(userId);
-    return <Loading title={title} />;
-  } else {
-    return (
-      <UserDetails
-        dataSingle={dataSingle}
-        getSingleUser={getSingleUser}
-        title={title}
-      />
-    );
-  }
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const currentUrl =
+      typeof window !== "undefined" ? window.location.href : "";
+
+    if (currentUrl.includes("myInfo")) {
+      const fetchMyInfo = async () => {
+        await getMyInfo();
+        setIsLoading(false);
+      };
+      fetchMyInfo();
+    } else {
+      const fetchData = async () => {
+        await getSingleUser(userId);
+        setIsLoading(false);
+      };
+      fetchData();
+    }
+  }, [userId]);
+
+  return isLoading ? (
+    <Loading title={title} />
+  ) : (
+    <UserDetails
+      dataSingle={dataSingle}
+      getSingleUser={getSingleUser}
+      title={title}
+    />
+  );
 };
 
 export default NewPage;

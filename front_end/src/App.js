@@ -25,11 +25,25 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/">
             <Route index element={<HomePage />} />
+
             <Route path="users">
               <Route index element={<ListPage />} />
-              <Route path=":userId" element={<SinglePage />} />
+              {/* <Route path="myInfo" element={<SinglePage />} /> */}
+              {/* <Route path=":userId" element={<SinglePage />} /> */}
+              <Route
+                path="edit/myInfo"
+                element={<NewPage title="Edit User" />}
+              />
               <Route
                 path="edit/:userId"
+                element={<NewPage title="Edit User" />}
+              />
+            </Route>
+
+            <Route path="stores">
+              <Route index element={<ListPage />} />
+              <Route
+                path="edit/:storeId"
                 element={<NewPage title="Edit User" />}
               />
             </Route>

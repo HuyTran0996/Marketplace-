@@ -1,7 +1,11 @@
 import { createContext, useReducer, useEffect } from "react";
 
 import { initialState, PageReducer } from "./PageReducer";
-import { FetchAllUsers, FetchSingleUser } from "../data/FetchUsersData";
+import {
+  FetchAllUsers,
+  FetchSingleUser,
+  FetchMyInfo,
+} from "../data/FetchUsersData";
 import { FetchAllOrders } from "../data/FetchOrdersData";
 import { FetchAllStores } from "../data/FetchStoresData";
 
@@ -53,7 +57,20 @@ function PageProvider({ children }) {
     }
   };
 
-  const valueToShare = { state, dispatch, getData, getSingleUser };
+  const getMyInfo = async () => {
+    try {
+      const resultMyInfo = await FetchMyInfo();
+      dispatch({
+        type: "SET_DATA_SINGLE",
+        payload: resultMyInfo,
+      });
+      return resultMyInfo;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+
+  const valueToShare = { state, dispatch, getData, getSingleUser, getMyInfo };
 
   return (
     <PageContext.Provider value={valueToShare}>{children}</PageContext.Provider>

@@ -22,7 +22,18 @@ const Datatable = () => {
     }
   }, [dataAllUsers, getData]);
 
-  const dataOriginal = dataAllUsers ? dataAllUsers.data.users : [];
+  let dataOriginal = [];
+
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  if (currentUrl.includes("users")) {
+    dataOriginal = dataAllUsers ? dataAllUsers.data.users : [];
+  } else if (currentUrl.includes("stores")) {
+    dataOriginal = dataAllStores ? dataAllStores.data.stores : [];
+  } else if (currentUrl.includes("orders")) {
+    dataOriginal = dataAllOrders ? dataAllOrders.data.orders : [];
+  }
+
   const data = dataOriginal.map((user) => {
     return {
       ...user,
@@ -37,6 +48,7 @@ const Datatable = () => {
 
   const userColumns = [
     { field: "id", headerName: "ID", width: 240 },
+
     {
       field: "user",
       headerName: "User",
@@ -54,24 +66,28 @@ const Datatable = () => {
         );
       },
     },
+
     {
       field: "email",
       headerName: "Email",
       width: 150,
     },
+
     {
       field: "phone",
       headerName: "Phone",
       width: 100,
     },
+
     {
       field: "role",
       headerName: "Role",
       width: 100,
     },
+
     {
       field: "isDeleted",
-      headerName: "Status",
+      headerName: "STATUS",
       width: 90,
       renderCell: (params) => {
         // Correctly reference the isDeleted field and convert the boolean to a string
@@ -88,23 +104,23 @@ const Datatable = () => {
   const actionColumn = [
     {
       field: "action",
-      headerName: "Action",
+      headerName: "ACTION",
       width: 200,
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link
+            {/* <Link
               to={`/users/${params.row.id}`}
               style={{ textDecoration: "none" }}
             >
               <div className="viewButton">View</div>
-            </Link>
+            </Link> */}
 
             <Link
               to={`/users/edit/${params.row.id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className="editButton">Edit</div>
+              <div className="editButton">View & Edit</div>
             </Link>
 
             <div

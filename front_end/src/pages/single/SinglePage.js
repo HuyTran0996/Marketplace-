@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./single.scss";
 
+import { PageContext } from "../../context/PageContext";
 import { FetchSingleUser } from "../../data/FetchUsersData";
 import avatar from "../../images/avatar.png";
 
@@ -46,10 +47,9 @@ const UserDetails = ({ userData }) => (
   <div className="single">
     <Sidebar />
     <div className="singleContainer">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="top">
         <div className="left">
-          <div className="editButton">Edit</div>
           <h1 className="title">Information</h1>
           <div className="item">
             <img
@@ -88,8 +88,20 @@ const UserDetails = ({ userData }) => (
 
 const SinglePage = () => {
   const { userId } = useParams();
+  const { state, dispatch, getData, getMyInfo } = useContext(PageContext);
+  const { dataAllUsers, dataAllOrders, dataAllStores, dataSingle } = state;
   const [userData, setUserData] = useState(null);
 
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  console.log("current Url:", currentUrl);
+
+  if (currentUrl.includes("myInfo")) {
+    const fetchData = async () => {
+      await getMyInfo();
+      setUserData(dataSingle);
+    };
+    fetchData();
+  }
   useEffect(() => {
     const fetchData = async () => {
       const data = await FetchSingleUser(userId);

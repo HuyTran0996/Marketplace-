@@ -90,7 +90,7 @@ const Sidebar = () => {
           </Link>
 
           <p className="title">USER</p>
-          <Link to="/users/id" style={{ textDecoration: "none" }}>
+          <Link to="/users/edit/myInfo" style={{ textDecoration: "none" }}>
             <li>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>

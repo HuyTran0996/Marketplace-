@@ -8,6 +8,16 @@ const FetchAllUsers = async () => {
     console.log(`Error FetchAllUsers:${err.name}: ${err.message}`);
   }
 };
+
+const FetchMyInfo = async () => {
+  try {
+    const dataMyInfo = await apiService.get(`/users/myInfo`);
+    return dataMyInfo;
+  } catch (err) {
+    console.log(`Error FetchAllUsers:${err.name}: ${err.message}`);
+  }
+};
+
 const FetchSingleUser = async (id) => {
   try {
     const dataSingleUser = await apiService.get(`/users/${id}`);
@@ -16,6 +26,7 @@ const FetchSingleUser = async (id) => {
     console.log(`Error FetchAllUsers:${err.name}: ${err.message}`);
   }
 };
+
 const AdminDeleteUser = async (id) => {
   try {
     const adminDeleteUser = await apiService.delete(`/users/${id}`);
@@ -25,4 +36,4 @@ const AdminDeleteUser = async (id) => {
   }
 };
 
-export { FetchAllUsers, AdminDeleteUser, FetchSingleUser };
+export { FetchAllUsers, AdminDeleteUser, FetchSingleUser, FetchMyInfo };
