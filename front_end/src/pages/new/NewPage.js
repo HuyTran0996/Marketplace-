@@ -193,20 +193,22 @@ const NewPage = ({ title }) => {
     const currentUrl =
       typeof window !== "undefined" ? window.location.href : "";
 
-    if (currentUrl.includes("myInfo")) {
+    if (currentUrl.includes("myInfo") && currentUrl.includes("users")) {
       const fetchMyInfo = async () => {
         await getMyInfo();
         setIsLoading(false);
       };
       fetchMyInfo();
-    } else {
+    } else if (currentUrl.includes("users")) {
       const fetchData = async () => {
         await getSingleUser(userId);
         setIsLoading(false);
       };
       fetchData();
+    } else if (currentUrl.includes("stores")) {
+      setIsLoading(true);
     }
-  }, [userId]);
+  });
 
   return isLoading ? (
     <Loading title={title} />

@@ -44,7 +44,7 @@ function App() {
               <Route index element={<ListPage />} />
               <Route
                 path="edit/:storeId"
-                element={<NewPage title="Edit User" />}
+                element={<NewPage title="Edit Store" />}
               />
             </Route>
 

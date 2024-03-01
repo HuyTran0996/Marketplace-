@@ -23,30 +23,7 @@ const Datatable = () => {
   }, [dataAllUsers, getData]);
 
   let dataOriginal = [];
-
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-
-  if (currentUrl.includes("users")) {
-    dataOriginal = dataAllUsers ? dataAllUsers.data.users : [];
-  } else if (currentUrl.includes("stores")) {
-    dataOriginal = dataAllStores ? dataAllStores.data.stores : [];
-  } else if (currentUrl.includes("orders")) {
-    dataOriginal = dataAllOrders ? dataAllOrders.data.orders : [];
-  }
-
-  const data = dataOriginal.map((user) => {
-    return {
-      ...user,
-      id: user._id,
-    };
-  });
-
-  const handleDelete = async (id) => {
-    await AdminDeleteUser(id);
-    getData();
-  };
-
-  const userColumns = [
+  let userColumns = [
     { field: "id", headerName: "ID", width: 240 },
 
     {
@@ -100,8 +77,7 @@ const Datatable = () => {
       },
     },
   ];
-
-  const actionColumn = [
+  let actionColumn = [
     {
       field: "action",
       headerName: "ACTION",
@@ -134,6 +110,182 @@ const Datatable = () => {
       },
     },
   ];
+
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  if (currentUrl.includes("users")) {
+    dataOriginal = dataAllUsers ? dataAllUsers.data.users : [];
+    userColumns = [
+      { field: "id", headerName: "ID", width: 240 },
+
+      {
+        field: "user",
+        headerName: "User",
+        width: 120,
+        renderCell: (params) => {
+          return (
+            <div className="cellWithImg">
+              <img
+                className="cellImg"
+                src={params.row.photo ? params.row.photo : avatar}
+                alt="avatar"
+              />
+              {params.row.name}
+            </div>
+          );
+        },
+      },
+
+      {
+        field: "email",
+        headerName: "Email",
+        width: 150,
+      },
+
+      {
+        field: "phone",
+        headerName: "Phone",
+        width: 100,
+      },
+
+      {
+        field: "role",
+        headerName: "Role",
+        width: 100,
+      },
+
+      {
+        field: "isDeleted",
+        headerName: "STATUS",
+        width: 90,
+        renderCell: (params) => {
+          // Correctly reference the isDeleted field and convert the boolean to a string
+          const status = params.row.isDeleted ? "Deleted" : "Active";
+          return (
+            <div className={`cellWithStatus ${status.toLowerCase()}`}>
+              {status}
+            </div>
+          );
+        },
+      },
+    ];
+    actionColumn = [
+      {
+        field: "action",
+        headerName: "ACTION",
+        width: 200,
+        renderCell: (params) => {
+          return (
+            <div className="cellAction">
+              <Link
+                to={`/users/edit/${params.row.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="editButton">View & Edit</div>
+              </Link>
+
+              <div
+                className="deleteButton"
+                onClick={() => handleDelete(params.row.id)}
+              >
+                Delete
+              </div>
+            </div>
+          );
+        },
+      },
+    ];
+  } else if (currentUrl.includes("stores")) {
+    dataOriginal = dataAllStores ? dataAllStores.data.stores : [];
+    userColumns = [
+      { field: "id", headerName: "ID", width: 240 },
+
+      {
+        field: "storeName",
+        headerName: "Store Name",
+        width: 150,
+        renderCell: (params) => {
+          return (
+            <div className="cellWithImg">
+              <img
+                className="cellImg"
+                src={params.row.photo ? params.row.photo : avatar}
+                alt="avatar"
+              />
+              {params.row.storeName}
+            </div>
+          );
+        },
+      },
+
+      {
+        field: "ownerEmail",
+        headerName: "Owner Email",
+        width: 150,
+      },
+
+      {
+        field: "address",
+        headerName: "Address",
+        width: 200,
+      },
+
+      {
+        field: "isDeleted",
+        headerName: "STATUS",
+        width: 110,
+        renderCell: (params) => {
+          // Correctly reference the isDeleted field and convert the boolean to a string
+          const status = params.row.isDeleted ? "Deleted" : "Active";
+          return (
+            <div className={`cellWithStatus ${status.toLowerCase()}`}>
+              {status}
+            </div>
+          );
+        },
+      },
+    ];
+    actionColumn = [
+      {
+        field: "action",
+        headerName: "ACTION",
+        width: 200,
+        renderCell: (params) => {
+          return (
+            <div className="cellAction">
+              <Link
+                to={`/stores/edit/${params.row.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="editButton">View & Edit</div>
+              </Link>
+
+              <div
+                className="deleteButton"
+                onClick={() => handleDelete(params.row.id)}
+              >
+                Delete
+              </div>
+            </div>
+          );
+        },
+      },
+    ];
+  } else if (currentUrl.includes("orders")) {
+    dataOriginal = dataAllOrders ? dataAllOrders.data.orders : [];
+  }
+
+  const data = dataOriginal.map((user) => {
+    return {
+      ...user,
+      id: user._id,
+    };
+  });
+
+  const handleDelete = async (id) => {
+    await AdminDeleteUser(id);
+    getData();
+  };
 
   return (
     <div className="datatable">
