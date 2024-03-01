@@ -7,7 +7,7 @@ import {
   FetchMyInfo,
 } from "../data/FetchUsersData";
 import { FetchAllStores, FetchSingleStore } from "../data/FetchStoresData";
-import { FetchAllOrders } from "../data/FetchOrdersData";
+import { FetchAllOrders, FetchSingleOrder } from "../data/FetchOrdersData";
 
 const PageContext = createContext();
 
@@ -82,6 +82,19 @@ function PageProvider({ children }) {
     }
   };
 
+  const getSingleOrder = async (orderId) => {
+    try {
+      const resultSingleOrder = await FetchSingleOrder(orderId);
+      dispatch({
+        type: "SET_DATA_SINGLE",
+        payload: resultSingleOrder,
+      });
+      return resultSingleOrder;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+
   const valueToShare = {
     state,
     dispatch,
@@ -89,6 +102,7 @@ function PageProvider({ children }) {
     getSingleUser,
     getMyInfo,
     getSingleStore,
+    getSingleOrder,
   };
 
   return (

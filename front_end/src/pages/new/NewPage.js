@@ -3,6 +3,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { FetchUpdateStore } from "../../data/FetchStoresData";
+import { FetchUpdateOrder } from "../../data/FetchOrdersData";
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 
@@ -310,26 +311,22 @@ const StoreDetails = ({ dataSingle, getSingleStore, title }) => {
   );
 };
 
-const OrderDetails = ({ dataSingle, getSingleStore, title }) => {
-  const { storeId } = useParams();
-  const [name, setName] = useState(`${dataSingle.data.store.storeName}`);
-  const [address, setAddress] = useState(`${dataSingle.data.store.address}`);
-  const [fileSubmit, setFileSubmit] = useState(
-    `${dataSingle.data.store.photo}`
+const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
+  const { orderId } = useParams();
+
+  const [address, setAddress] = useState(`${dataSingle.data.order.deliverTo}`);
+  const [orderStatus, setOrderStatus] = useState(
+    `${dataSingle.data.order.orderStatus}`
   );
-  const [file, setFile] = useState(`${dataSingle.data.store.photo}`);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-  const handlePhoneChange = (e) => {
+  const handleAddressChange = (e) => {
     setAddress(e.target.value);
   };
-  const handleFileChange = (e) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
-    setFileSubmit(e.target.files[0]);
+  const handleOrderStatusChange = (e) => {
+    setOrderStatus(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -338,17 +335,13 @@ const OrderDetails = ({ dataSingle, getSingleStore, title }) => {
 
     try {
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("address", address);
-      if (fileSubmit) {
-        formData.append("image", fileSubmit);
-      }
 
-      await apiService.patch(`/stores/${storeId}`, formData, {
-        withCredentials: true,
-      });
+      formData.append("orderStatus", orderStatus);
+      formData.append("deliverTo", address);
 
-      await getSingleStore(storeId);
+      await FetchUpdateOrder({ orderId, formData });
+
+      await getSingleOrder(orderId);
 
       // Reset the file input value
       document.getElementById("file").value = "";
@@ -373,53 +366,36 @@ const OrderDetails = ({ dataSingle, getSingleStore, title }) => {
           <h1>{title}</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? file
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt="avatar"
-            />
-          </div>
-
           <div className="right">
             <form onSubmit={handleSubmit}>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
+              <div className="formInput" key="1">
+                <label>Buyer (can not change buyer)</label>
                 <input
-                  type="file"
-                  id="file"
-                  onChange={handleFileChange}
-                  style={{ display: "none" }}
+                  type="text"
+                  placeholder="user name"
+                  value={dataSingle.data.order.customerName}
                 />
               </div>
 
               <div className="formInput" key="1">
-                <label>Store Name</label>
-                <input
-                  type="text"
-                  placeholder="user name"
-                  value={name}
-                  onChange={handleNameChange}
-                />
-              </div>
-
-              <div className="formInput" key="2">
-                <label>Owner Email (email can not be changed)</label>
-                <input type="email" value={dataSingle.data.store.ownerEmail} />
+                <label>Order Status</label>
+                <select value={orderStatus} onChange={handleOrderStatusChange}>
+                  <option value="">{orderStatus}</option>
+                  <option value="openToAdd">Open To Add</option>
+                  <option value="delivering">Delivering</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="canceledByCustomer">Cancel</option>
+                  <option value="canceledByStore">Option 5</option>
+                </select>
               </div>
 
               <div className="formInput" key="3">
-                <label>Address</label>
+                <label>Deliver To</label>
                 <input
                   type="text"
                   placeholder="Store Address"
                   value={address}
-                  onChange={handlePhoneChange}
+                  onChange={handleAddressChange}
                 />
               </div>
 
@@ -437,10 +413,10 @@ const OrderDetails = ({ dataSingle, getSingleStore, title }) => {
 };
 
 const NewPage = ({ title }) => {
-  const { userId, storeId } = useParams();
+  const { userId, storeId, orderId } = useParams();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const { state, getSingleUser, getMyInfo, getSingleStore } =
+  const { state, getSingleUser, getMyInfo, getSingleStore, getSingleOrder } =
     useContext(PageContext);
   const { dataSingle } = state;
 
@@ -467,7 +443,7 @@ const NewPage = ({ title }) => {
       fetchData();
     } else if (currentUrl.includes("orders")) {
       const fetchData = async () => {
-        await getSingleStore(storeId);
+        await getSingleOrder(orderId);
         setIsLoading(false);
       };
       fetchData();
@@ -503,7 +479,7 @@ const NewPage = ({ title }) => {
     ) : (
       <OrderDetails
         dataSingle={dataSingle}
-        getSingleStore={getSingleStore}
+        getSingleOrder={getSingleOrder}
         title={title}
       />
     );

@@ -9,6 +9,31 @@ const FetchAllOrders = async () => {
   }
 };
 
+const FetchSingleOrder = async (orderId) => {
+  try {
+    const dataSingleOrder = await apiService.get(`/orders/${orderId}`);
+    return dataSingleOrder;
+  } catch (err) {
+    console.log(`Error FetchSingleOrder:${err.name}: ${err.message}`);
+  }
+};
+
+const FetchUpdateOrder = async ({ orderId, formData }) => {
+  try {
+    const dataUpdateStore = await apiService.patch(
+      `/orders/${orderId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return dataUpdateStore;
+  } catch (err) {
+    console.log(`Error FetchUpdateOrder:${err.name}: ${err.message}`);
+  }
+};
+
 const DeleteOrder = async (id) => {
   try {
     const deleteOrder = await apiService.delete(`/orders/${id}`);
@@ -18,4 +43,4 @@ const DeleteOrder = async (id) => {
   }
 };
 
-export { FetchAllOrders, DeleteOrder };
+export { FetchAllOrders, FetchSingleOrder, FetchUpdateOrder, DeleteOrder };
