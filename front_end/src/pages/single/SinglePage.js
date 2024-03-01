@@ -93,7 +93,6 @@ const SinglePage = () => {
   const [userData, setUserData] = useState(null);
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-  console.log("current Url:", currentUrl);
 
   if (currentUrl.includes("myInfo")) {
     const fetchData = async () => {

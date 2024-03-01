@@ -9,4 +9,22 @@ const FetchAllStores = async () => {
   }
 };
 
-export { FetchAllStores };
+const FetchSingleStore = async (storeId) => {
+  try {
+    const dataSingleStore = await apiService.get(`/stores/${storeId}`);
+    return dataSingleStore;
+  } catch (err) {
+    console.log(`Error FetchAllStores:${err.name}: ${err.message}`);
+  }
+};
+
+const DeleteStore = async (storeId) => {
+  try {
+    const deleteStore = await apiService.delete(`/stores/${storeId}`);
+    return deleteStore;
+  } catch (err) {
+    console.log(`Error FetchAllStores:${err.name}: ${err.message}`);
+  }
+};
+
+export { FetchAllStores, FetchSingleStore, DeleteStore };

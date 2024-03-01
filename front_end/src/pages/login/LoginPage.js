@@ -48,7 +48,7 @@ export default function LoginPage() {
           withCredentials: true,
         }
       );
-      await checkCookie();
+      // await checkCookie();
       navigate("/");
       setIsLoading(false);
       return result;

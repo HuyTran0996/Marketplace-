@@ -5,6 +5,7 @@ import "./datatable.scss";
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 import { AdminDeleteUser } from "../../data/FetchUsersData";
+import { DeleteStore } from "../../data/FetchStoresData";
 
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -20,7 +21,7 @@ const Datatable = () => {
     if (!dataAllUsers) {
       fetchData();
     }
-  }, [dataAllUsers, getData]);
+  }, []);
 
   let dataOriginal = [];
   let userColumns = [
@@ -283,7 +284,12 @@ const Datatable = () => {
   });
 
   const handleDelete = async (id) => {
-    await AdminDeleteUser(id);
+    if (currentUrl.includes("users")) {
+      await AdminDeleteUser(id);
+    }
+    if (currentUrl.includes("stores")) {
+      await DeleteStore(id);
+    }
     getData();
   };
 

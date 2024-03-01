@@ -21,7 +21,7 @@ apiService.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log("RESPONSE ERROR", error);
+    // console.log("RESPONSE ERROR", error);
     console.log("RESPONSE ERROR", error.response.data.error);
 
     // return Promise.reject(error);
@@ -30,6 +30,5 @@ apiService.interceptors.response.use(
     // return errorName;
   }
 );
-///////////////////////////////////////////////
 
 export { apiService };

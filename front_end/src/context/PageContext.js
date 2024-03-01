@@ -6,8 +6,8 @@ import {
   FetchSingleUser,
   FetchMyInfo,
 } from "../data/FetchUsersData";
+import { FetchAllStores, FetchSingleStore } from "../data/FetchStoresData";
 import { FetchAllOrders } from "../data/FetchOrdersData";
-import { FetchAllStores } from "../data/FetchStoresData";
 
 const PageContext = createContext();
 
@@ -16,7 +16,6 @@ function PageProvider({ children }) {
   const { isLogin, dataAllUsers, dataAllOrders, dataSingle } = state;
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-  console.log("current Url:", currentUrl);
 
   const getData = async () => {
     try {
@@ -70,7 +69,27 @@ function PageProvider({ children }) {
     }
   };
 
-  const valueToShare = { state, dispatch, getData, getSingleUser, getMyInfo };
+  const getSingleStore = async (storeId) => {
+    try {
+      const resultSingleStore = await FetchSingleStore(storeId);
+      dispatch({
+        type: "SET_DATA_SINGLE",
+        payload: resultSingleStore,
+      });
+      return resultSingleStore;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+
+  const valueToShare = {
+    state,
+    dispatch,
+    getData,
+    getSingleUser,
+    getMyInfo,
+    getSingleStore,
+  };
 
   return (
     <PageContext.Provider value={valueToShare}>{children}</PageContext.Provider>

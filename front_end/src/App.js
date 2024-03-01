@@ -50,12 +50,9 @@ function App() {
 
             <Route path="products">
               <Route index element={<ListPage />} />
-              <Route path=":productId" element={<SinglePage />} />
               <Route
-                path="new"
-                element={
-                  <NewPage inputs={productInputs} title="Add New Product" />
-                }
+                path="edit/:productId"
+                element={<NewPage title="Edit Product" />}
               />
             </Route>
           </Route>
