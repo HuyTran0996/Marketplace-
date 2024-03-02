@@ -19,6 +19,8 @@ const FetchSingleStore = async (storeId) => {
 };
 
 const FetchUpdateStore = async ({ storeId, formData }) => {
+  console.log("store Id", storeId);
+  console.log("Form Data000", formData);
   try {
     const dataUpdateStore = await apiService.patch(
       `/stores/${storeId}`,

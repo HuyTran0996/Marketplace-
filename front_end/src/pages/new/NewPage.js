@@ -220,6 +220,7 @@ const StoreDetails = ({ dataSingle, getSingleStore, title }) => {
       if (fileSubmit) {
         formData.append("image", fileSubmit);
       }
+
       await FetchUpdateStore({ storeId, formData });
 
       await getSingleStore(storeId);
@@ -334,14 +335,12 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
 
     try {
       const formData = new FormData();
-
       formData.append("orderStatus", orderStatus);
       formData.append("deliverTo", address);
 
       await FetchUpdateOrder({ orderId, formData });
-      console.log("formData", formData);
 
-      // await getSingleOrder(orderId);
+      await getSingleOrder(orderId);
 
       setIsSubmitting(false);
       setError(false);
@@ -389,7 +388,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
                 <label>Deliver To</label>
                 <input
                   type="text"
-                  placeholder="Store Address"
+                  placeholder="Deliver To"
                   value={address}
                   onChange={handleAddressChange}
                 />
