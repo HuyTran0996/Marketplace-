@@ -10,10 +10,80 @@ import { DeleteOrder, FetchCancelOrder } from "../../data/FetchOrdersData";
 
 import { DataGrid } from "@mui/x-data-grid";
 
+const Loading = () => {
+  let userColumns = [
+    { field: "id", headerName: " Loading...", width: 240 },
+
+    {
+      field: "user",
+      headerName: " Loading...",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <div className="cellWithImg">
+            <img className="cellImg" src={avatar} alt="avatar" />
+            Loading...
+          </div>
+        );
+      },
+    },
+
+    {
+      field: "email",
+      headerName: " Loading...",
+      width: 150,
+    },
+
+    {
+      field: "phone",
+      headerName: " Loading...",
+      width: 100,
+    },
+
+    {
+      field: "role",
+      headerName: " Loading...",
+      width: 100,
+    },
+
+    {
+      field: "isDeleted",
+      headerName: " Loading...",
+      width: 90,
+      renderCell: (params) => {
+        const status = params.row.isDeleted ? "Deleted" : "Active";
+        return (
+          <div className={`cellWithStatus ${status.toLowerCase()}`}>
+            Loading...
+          </div>
+        );
+      },
+    },
+  ];
+  let actionColumn = [
+    {
+      field: "action",
+      headerName: "ACTION",
+      width: 200,
+      renderCell: () => {
+        return (
+          <div className="cellAction">
+            <Link style={{ textDecoration: "none" }}>
+              <div className="editButton"> Loading...</div>
+            </Link>
+            <div className="deleteButton">Loading...</div>
+          </div>
+        );
+      },
+    },
+  ];
+};
+
 const Datatable = () => {
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch, getData } = useContext(PageContext);
   const { dataAllUsers, dataAllOrders, dataAllStores } = state;
-  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {

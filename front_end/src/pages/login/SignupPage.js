@@ -8,6 +8,7 @@ import "./login.scss";
 
 export default function SignupPage() {
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(PageContext);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -68,13 +69,18 @@ export default function SignupPage() {
       );
       checkCookie();
       setIsLoading(false);
+
+      dispatch({
+        type: "SET_USER_LOGIN",
+        payload: result.data.user.role,
+      });
       navigate("/");
       alert("Successful account registration, click ok to continue");
       return result;
     } catch (error) {
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
-      let errorName = error.response.data.message;
+      let errorName = error.message;
       setMessage(errorName);
     }
   };

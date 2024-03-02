@@ -10,7 +10,7 @@ import "./login.scss";
 export default function LoginPage() {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(PageContext);
-  const { roleForLogin } = state;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -62,10 +62,9 @@ export default function LoginPage() {
 
       return;
     } catch (error) {
-      console.log("5446465", error);
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
-      let errorName = error.response.data.message;
+      let errorName = error.message;
       setMessage(errorName);
     }
   };

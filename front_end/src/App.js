@@ -15,8 +15,6 @@ import PrivateRoutes from "./components/PrivateRoutes";
 
 import { DarkModeContext } from "./context/darkModeContext";
 
-import { productInputs, userInputs } from "./formSource";
-
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   return (

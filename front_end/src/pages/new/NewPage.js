@@ -336,10 +336,6 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
     setIsSubmitting(true);
 
     try {
-      // const formData = new FormData();
-      // formData.append("orderStatus", orderStatus);
-      // formData.append("deliverTo", deliverTo);
-
       const data = {
         orderStatus: orderStatus,
         deliverTo: deliverTo,
