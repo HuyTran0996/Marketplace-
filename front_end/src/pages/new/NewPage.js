@@ -314,7 +314,9 @@ const StoreDetails = ({ dataSingle, getSingleStore, title }) => {
 const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
   const { orderId } = useParams();
 
-  const [address, setAddress] = useState(`${dataSingle.data.order.deliverTo}`);
+  const [deliverTo, setAddress] = useState(
+    `${dataSingle.data.order.deliverTo}`
+  );
   const [orderStatus, setOrderStatus] = useState(
     `${dataSingle.data.order.orderStatus}`
   );
@@ -336,11 +338,11 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
     try {
       const formData = new FormData();
       formData.append("orderStatus", orderStatus);
-      formData.append("deliverTo", address);
+      formData.append("deliverTo", deliverTo);
 
       await FetchUpdateOrder({ orderId, formData });
 
-      await getSingleOrder(orderId);
+      // await getSingleOrder(orderId);
 
       setIsSubmitting(false);
       setError(false);
@@ -389,7 +391,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
                 <input
                   type="text"
                   placeholder="Deliver To"
-                  value={address}
+                  value={deliverTo}
                   onChange={handleAddressChange}
                 />
               </div>

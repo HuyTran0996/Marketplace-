@@ -19,15 +19,13 @@ const FetchSingleOrder = async (orderId) => {
 };
 
 const FetchUpdateOrder = async ({ orderId, formData }) => {
-  console.log("order Id", orderId);
-  console.log("Form Data000", formData);
   try {
     const dataUpdateOrder = await apiService.patch(
-      `/orders/update/${orderId}`,
-      formData
-      // {
-      //   withCredentials: true,
-      // }
+      `/orders/${orderId}`,
+      formData,
+      {
+        withCredentials: true,
+      }
     );
 
     return dataUpdateOrder;
