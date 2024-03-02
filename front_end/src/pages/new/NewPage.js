@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { FetchUpdateStore } from "../../data/FetchStoresData";
 import { FetchUpdateOrder } from "../../data/FetchOrdersData";
 import { PageContext } from "../../context/PageContext";
+import { usePage } from "../../components/usePage";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
@@ -62,13 +63,13 @@ const Loading = ({ title }) => {
 
 const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
   const { userId } = useParams();
+  const { isUserPage, isUserPageMe } = usePage();
   const [name, setName] = useState(`${dataSingle.data.user.name}`);
   const [phone, setPhone] = useState(`${dataSingle.data.user.phone}`);
   const [fileSubmit, setFileSubmit] = useState(`${dataSingle.data.user.photo}`);
   const [file, setFile] = useState(`${dataSingle.data.user.photo}`);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -93,10 +94,11 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
         formData.append("image", fileSubmit);
       }
 
-      if (currentUrl.includes("myInfo")) {
+      if (isUserPageMe) {
         await FetchUpdateMe(formData);
         await getMyInfo();
-      } else {
+      }
+      if (isUserPage) {
         await FetchUpdateUser({ userId, formData });
         await getSingleUser(userId);
       }
@@ -411,44 +413,46 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
 };
 
 const NewPage = ({ title }) => {
+  const { isUserPage, isUserPageMe, isStorePage, isOrderPage, isProductPage } =
+    usePage();
   const { userId, storeId, orderId } = useParams();
-  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const { state, getSingleUser, getMyInfo, getSingleStore, getSingleOrder } =
     useContext(PageContext);
   const { dataSingle } = state;
 
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-
   useEffect(() => {
-    if (currentUrl.includes("myInfo") && currentUrl.includes("users")) {
+    if (isUserPageMe) {
       const fetchMyInfo = async () => {
         await getMyInfo();
         setIsLoading(false);
       };
       fetchMyInfo();
-    } else if (currentUrl.includes("users")) {
+    } else if (isUserPage) {
       const fetchData = async () => {
         await getSingleUser(userId);
         setIsLoading(false);
       };
       fetchData();
-    } else if (currentUrl.includes("stores")) {
+    }
+
+    if (isStorePage) {
       const fetchData = async () => {
         await getSingleStore(storeId);
         setIsLoading(false);
       };
       fetchData();
-    } else if (currentUrl.includes("orders")) {
+    }
+    if (isOrderPage) {
       const fetchData = async () => {
         await getSingleOrder(orderId);
         setIsLoading(false);
       };
       fetchData();
     }
-  }, [location]);
+  }, [isUserPageMe, isUserPage, isStorePage, isOrderPage]);
 
-  if (currentUrl.includes("users")) {
+  if (isUserPage) {
     return isLoading ? (
       <Loading title={title} />
     ) : (
@@ -460,7 +464,7 @@ const NewPage = ({ title }) => {
       />
     );
   }
-  if (currentUrl.includes("stores")) {
+  if (isStorePage) {
     return isLoading ? (
       <Loading title={title} />
     ) : (
@@ -471,7 +475,7 @@ const NewPage = ({ title }) => {
       />
     );
   }
-  if (currentUrl.includes("orders")) {
+  if (isOrderPage) {
     return isLoading ? (
       <Loading title={title} />
     ) : (
