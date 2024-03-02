@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { usePage } from "../../components/usePage";
 
@@ -13,7 +13,6 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const Datatable = () => {
-  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch, getData } = useContext(PageContext);
   const { dataAllUsers, dataAllOrders, dataAllStores } = state;
