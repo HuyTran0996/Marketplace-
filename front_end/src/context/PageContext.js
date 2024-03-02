@@ -13,7 +13,7 @@ const PageContext = createContext();
 
 function PageProvider({ children }) {
   const [state, dispatch] = useReducer(PageReducer, initialState);
-  const { isLogin, dataAllUsers, dataAllOrders, dataSingle } = state;
+  const { roleForLogin, dataAllUsers, dataAllOrders, dataSingle } = state;
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 

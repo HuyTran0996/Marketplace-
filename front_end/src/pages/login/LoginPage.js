@@ -2,12 +2,15 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
+import PrivateRoutes from "../../components/PrivateRoutes";
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 import "./login.scss";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(PageContext);
+  const { roleForLogin } = state;
   const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -19,9 +22,9 @@ export default function LoginPage() {
     if (!cookie) {
       const value = Date.now();
       Cookies.set("forFe", value, { expires: 2 });
-      // return;
+      return;
     }
-    // return;
+    return;
   };
 
   const handleEmailChange = (e) => {
@@ -48,11 +51,18 @@ export default function LoginPage() {
           withCredentials: true,
         }
       );
-      await checkCookie();
-      navigate("/");
+      checkCookie();
       setIsLoading(false);
-      return result;
+
+      dispatch({
+        type: "SET_USER_LOGIN",
+        payload: result.data.user.role,
+      });
+      navigate("/");
+
+      return;
     } catch (error) {
+      console.log("5446465", error);
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
       let errorName = error.response.data.message;

@@ -7,15 +7,14 @@ const PrivateRoutes = () => {
   const navigate = useNavigate();
 
   const { state, dispatch } = useContext(PageContext);
-  const { isLogin } = state;
-
+  const { roleForLogin } = state;
   useEffect(() => {
-    if (!isLogin) {
+    if (roleForLogin !== "admin") {
       navigate(`/login`);
     }
-  }, [isLogin, navigate]);
+  }, [roleForLogin, navigate]);
 
-  return isLogin ? <Outlet /> : null;
+  return roleForLogin ? <Outlet /> : null;
 };
 
 export default PrivateRoutes;
