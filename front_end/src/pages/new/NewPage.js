@@ -1,11 +1,10 @@
-import { useContext, useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { FetchUpdateStore } from "../../data/FetchStoresData";
 import { FetchUpdateOrder } from "../../data/FetchOrdersData";
 import { PageContext } from "../../context/PageContext";
-import { apiService } from "../../app/apiService";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
@@ -340,11 +339,9 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
       formData.append("deliverTo", address);
 
       await FetchUpdateOrder({ orderId, formData });
+      console.log("formData", formData);
 
-      await getSingleOrder(orderId);
-
-      // Reset the file input value
-      document.getElementById("file").value = "";
+      // await getSingleOrder(orderId);
 
       setIsSubmitting(false);
       setError(false);
@@ -377,15 +374,14 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
                 />
               </div>
 
-              <div className="formInput" key="1">
+              <div className="formInput" key="2">
                 <label>Order Status</label>
                 <select value={orderStatus} onChange={handleOrderStatusChange}>
                   <option value="">{orderStatus}</option>
                   <option value="openToAdd">Open To Add</option>
+                  <option value="sentOrderToStore">Sent Order To Store</option>
                   <option value="delivering">Delivering</option>
                   <option value="delivered">Delivered</option>
-                  <option value="canceledByCustomer">Cancel</option>
-                  <option value="canceledByStore">Option 5</option>
                 </select>
               </div>
 

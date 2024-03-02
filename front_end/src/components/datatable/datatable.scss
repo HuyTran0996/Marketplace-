@@ -38,21 +38,6 @@
     align-items: center;
     gap: 15px;
 
-    // .viewButton {
-    //   padding: 2px 5px;
-    //   border-radius: 5px;
-    //   color: darkblue;
-    //   border: 1px dotted rgba(0, 0, 139, 0.596);
-    //   cursor: pointer;
-    //   transition-duration: 0.3s;
-    // }
-    // .viewButton:hover {
-    //   background-color: aqua;
-    //   filter: brightness(120%);
-    //   transform: scale(1.05);
-    //   transition: transform 0.3s ease-in-out;
-    // }
-
     .editButton {
       padding: 2px 5px;
       border-radius: 5px;
@@ -62,6 +47,21 @@
       transition-duration: 0.3s;
     }
     .editButton:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .cancelButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: darkblue;
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+      cursor: pointer;
+      transition-duration: 0.3s;
+    }
+    .cancelButton:hover {
       background-color: aqua;
       filter: brightness(120%);
       transform: scale(1.05);

@@ -6,7 +6,7 @@ import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 import { AdminDeleteUser } from "../../data/FetchUsersData";
 import { DeleteStore } from "../../data/FetchStoresData";
-import { DeleteOrder } from "../../data/FetchOrdersData";
+import { DeleteOrder, FetchCancelOrder } from "../../data/FetchOrdersData";
 
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -297,7 +297,8 @@ const Datatable = () => {
         width: 110,
         renderCell: (params) => {
           // Correctly reference the isDeleted field and convert the boolean to a string
-          const status = params.row.orderStatus ? "Active" : "Deleted";
+          const status =
+            params.row.orderStatus === "openToAdd" ? "Active" : "Passive";
           return (
             <div className={`cellWithStatus ${status.toLowerCase()}`}>
               {params.row.orderStatus}
@@ -310,7 +311,7 @@ const Datatable = () => {
       {
         field: "action",
         headerName: "ACTION",
-        width: 200,
+        width: 350,
         renderCell: (params) => {
           return (
             <div className="cellAction">
@@ -321,6 +322,12 @@ const Datatable = () => {
                 <div className="editButton">View & Edit</div>
               </Link>
 
+              <div
+                className="cancelButton"
+                onClick={() => handleCancelOrder(params.row.id)}
+              >
+                Cancel Order
+              </div>
               <div
                 className="deleteButton"
                 onClick={() => handleDelete(params.row.id)}
@@ -340,6 +347,11 @@ const Datatable = () => {
       id: user._id,
     };
   });
+
+  const handleCancelOrder = async (id) => {
+    await FetchCancelOrder(id);
+    await getData();
+  };
 
   const handleDelete = async (id) => {
     if (currentUrl.includes("users")) {
