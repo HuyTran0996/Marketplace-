@@ -336,13 +336,18 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
     setIsSubmitting(true);
 
     try {
-      const formData = new FormData();
-      formData.append("orderStatus", orderStatus);
-      formData.append("deliverTo", deliverTo);
+      // const formData = new FormData();
+      // formData.append("orderStatus", orderStatus);
+      // formData.append("deliverTo", deliverTo);
 
-      await FetchUpdateOrder({ orderId, formData });
+      const data = {
+        orderStatus: orderStatus,
+        deliverTo: deliverTo,
+      };
 
-      // await getSingleOrder(orderId);
+      await FetchUpdateOrder({ orderId, data });
+
+      await getSingleOrder(orderId);
 
       setIsSubmitting(false);
       setError(false);

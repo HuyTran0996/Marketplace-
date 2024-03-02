@@ -19,9 +19,9 @@ export default function LoginPage() {
     if (!cookie) {
       const value = Date.now();
       Cookies.set("forFe", value, { expires: 2 });
-      return;
+      // return;
     }
-    return;
+    // return;
   };
 
   const handleEmailChange = (e) => {
@@ -48,7 +48,7 @@ export default function LoginPage() {
           withCredentials: true,
         }
       );
-      // await checkCookie();
+      await checkCookie();
       navigate("/");
       setIsLoading(false);
       return result;
