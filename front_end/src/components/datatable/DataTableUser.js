@@ -106,7 +106,7 @@ const DataTableUser = () => {
     ];
   }
 
-  if (isUserPage) {
+  if (isUserPage && !isLoading) {
     dataOriginal = dataAllUsers.data.users;
     userColumns = [
       { field: "id", headerName: "ID", width: 240 },

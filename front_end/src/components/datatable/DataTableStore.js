@@ -110,7 +110,7 @@ const DataTableStore = () => {
     ];
   }
 
-  if (isStorePage) {
+  if (isStorePage && !isLoading) {
     dataOriginal = dataAllStores.data.stores;
     userColumns = [
       { field: "id", headerName: "ID", width: 240 },

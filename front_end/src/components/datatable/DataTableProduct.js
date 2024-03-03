@@ -36,7 +36,6 @@ const DataTableProduct = () => {
   if (isLoading) {
     userColumns = [
       { field: "id", headerName: " Loading...", width: 240 },
-
       {
         field: "user",
         headerName: " Loading...",
@@ -102,11 +101,10 @@ const DataTableProduct = () => {
     ];
   }
 
-  if (isProductPage) {
+  if (isProductPage && !isLoading) {
     dataOriginal = dataAllProducts.data.products;
     userColumns = [
       { field: "id", headerName: "ID", width: 240 },
-
       {
         field: "storeName",
         headerName: "Store",

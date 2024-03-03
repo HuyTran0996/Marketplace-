@@ -107,7 +107,7 @@ const DataTableOrder = () => {
     ];
   }
 
-  if (isOrderPage) {
+  if (isOrderPage && !isLoading) {
     dataOriginal = dataAllOrders.data.orders;
     userColumns = [
       { field: "id", headerName: "ID", width: 240 },
