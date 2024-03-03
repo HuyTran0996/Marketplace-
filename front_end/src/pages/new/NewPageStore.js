@@ -1,11 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { FetchUpdateStore } from "../../data/FetchStoresData";
-import { FetchUpdateOrder } from "../../data/FetchOrdersData";
+
 import { PageContext } from "../../context/PageContext";
 import { usePage } from "../../components/usePage";
+import avatar from "../../images/avatar.png";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
@@ -24,12 +24,7 @@ const Loading = ({ title }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img
-              src={
-                "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt="avatar"
-            />
+            <img src={avatar} alt="avatar" />
           </div>
 
           <div className="right">
@@ -123,14 +118,7 @@ const StoreDetails = ({ dataSingle, getSingleStore, title }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img
-              src={
-                file
-                  ? file
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt="avatar"
-            />
+            <img src={avatar} alt="avatar" />
           </div>
 
           <div className="right">

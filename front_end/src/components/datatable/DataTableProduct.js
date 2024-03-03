@@ -117,7 +117,19 @@ const DataTableProduct = () => {
       {
         field: "productName",
         headerName: "Product",
-        width: 100,
+        width: 150,
+        renderCell: (params) => {
+          return (
+            <div className="cellWithImg">
+              <img
+                className="cellImg"
+                src={params.row.photo ? params.row.photo : avatar}
+                alt="avatar"
+              />
+              {params.row.productName}
+            </div>
+          );
+        },
       },
       {
         field: "description",

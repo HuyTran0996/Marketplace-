@@ -188,6 +188,7 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
 };
 
 const NewPageUser = ({ title }) => {
+  const location = useLocation();
   const { isUserEditPage, isMyInfoEditPage } = usePage();
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -205,8 +206,6 @@ const NewPageUser = ({ title }) => {
           await getSingleUser(userId);
           setIsLoading(false);
         }
-
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);
