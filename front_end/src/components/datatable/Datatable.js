@@ -7,6 +7,7 @@ import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 import { AdminDeleteUser } from "../../data/FetchUsersData";
 import { DeleteStore } from "../../data/FetchStoresData";
+import { DeleteProduct } from "../../data/FetchProductsData";
 import { DeleteOrder, FetchCancelOrder } from "../../data/FetchOrdersData";
 
 import "./datatable.scss";
@@ -14,8 +15,14 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const Datatable = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { state, dispatch, getData } = useContext(PageContext);
-  const { dataAllUsers, dataAllOrders, dataAllStores } = state;
+  const {
+    state,
+    getDataAllUsers,
+    getDataAllOrders,
+    getDataAllStores,
+    getDataAllProducts,
+  } = useContext(PageContext);
+  const { dataAllUsers, dataAllOrders, dataAllStores, dataAllProducts } = state;
   const { isUserPage, isStorePage, isOrderPage, isProductPage } = usePage();
   let dataOriginal = [];
   let userColumns = [];
@@ -24,7 +31,19 @@ const Datatable = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        await getData();
+        if (isUserPage) {
+          await getDataAllUsers();
+        }
+        if (isStorePage) {
+          await getDataAllStores();
+        }
+        if (isOrderPage) {
+          await getDataAllOrders();
+        }
+        if (isProductPage) {
+          await getDataAllProducts();
+        }
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -333,6 +352,68 @@ const Datatable = () => {
       },
     ];
   }
+  if (isProductPage) {
+    dataOriginal = dataAllProducts.data.products;
+    userColumns = [
+      { field: "id", headerName: "ID", width: 240 },
+
+      {
+        field: "storeName",
+        headerName: "Store",
+        width: 100,
+
+        renderCell: (params) => {
+          return <div className="cellWithImg">{params.row.storeName}</div>;
+        },
+      },
+      {
+        field: "productName",
+        headerName: "Product",
+        width: 100,
+      },
+      {
+        field: "description",
+        headerName: "Description",
+        width: 350,
+      },
+      {
+        field: "price",
+        headerName: "Price",
+        width: 110,
+      },
+      {
+        field: "unit",
+        headerName: "Unit",
+        width: 110,
+      },
+    ];
+    actionColumn = [
+      {
+        field: "action",
+        headerName: "ACTION",
+        width: 350,
+        renderCell: (params) => {
+          return (
+            <div className="cellAction">
+              <Link
+                to={`/products/edit/${params.row.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="editButton">View & Edit</div>
+              </Link>
+
+              <div
+                className="deleteButton"
+                onClick={() => handleDelete(params.row.id)}
+              >
+                Delete
+              </div>
+            </div>
+          );
+        },
+      },
+    ];
+  }
 
   const data = dataOriginal.map((user) => {
     return {
@@ -343,20 +424,26 @@ const Datatable = () => {
 
   const handleCancelOrder = async (id) => {
     await FetchCancelOrder(id);
-    await getData();
+    await getDataAllOrders();
   };
 
   const handleDelete = async (id) => {
     if (isUserPage) {
       await AdminDeleteUser(id);
+      await getDataAllUsers();
     }
     if (isStorePage) {
       await DeleteStore(id);
+      await getDataAllStores();
     }
     if (isOrderPage) {
       await DeleteOrder(id);
+      await getDataAllOrders();
     }
-    await getData();
+    if (isProductPage) {
+      await DeleteProduct(id);
+      await getDataAllProducts();
+    }
   };
 
   return (

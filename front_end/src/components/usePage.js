@@ -5,6 +5,8 @@ export const usePage = () => {
   const location = useLocation();
   const [pageType, setPageType] = useState({
     isUserPage: false,
+    isUserPageMe: false,
+    isStorePage: false,
     isOrderPage: false,
     isProductPage: false,
   });

@@ -4,6 +4,7 @@ const initialState = {
   dataAllUsers: null,
   dataAllOrders: null,
   dataAllStores: null,
+  dataAllProducts: null,
   dataSingle: null,
 };
 
@@ -17,6 +18,8 @@ function PageReducer(state, action) {
       return { ...state, dataAllOrders: action.payload };
     case "SET_DATA_ALL_STORES":
       return { ...state, dataAllStores: action.payload };
+    case "SET_DATA_ALL_PRODUCTS":
+      return { ...state, dataAllProducts: action.payload };
     case "SET_DATA_SINGLE":
       return { ...state, dataSingle: action.payload };
 

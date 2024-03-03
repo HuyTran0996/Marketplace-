@@ -415,41 +415,45 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
 const NewPage = ({ title }) => {
   const { isUserPage, isUserPageMe, isStorePage, isOrderPage, isProductPage } =
     usePage();
-  const { userId, storeId, orderId } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
-  const { state, getSingleUser, getMyInfo, getSingleStore, getSingleOrder } =
-    useContext(PageContext);
+  const { userId, storeId, orderId, productId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    state,
+    getSingleUser,
+    getMyInfo,
+    getSingleStore,
+    getSingleOrder,
+    getSingleProduct,
+  } = useContext(PageContext);
   const { dataSingle } = state;
 
   useEffect(() => {
-    if (isUserPageMe) {
-      const fetchMyInfo = async () => {
-        await getMyInfo();
-        setIsLoading(false);
-      };
-      fetchMyInfo();
-    } else if (isUserPage) {
-      const fetchData = async () => {
-        await getSingleUser(userId);
-        setIsLoading(false);
-      };
-      fetchData();
-    }
+    setIsLoading(true);
+    const fetchData = async () => {
+      try {
+        if (isUserPageMe) {
+          await getMyInfo();
+        } else if (isUserPage) {
+          await getSingleUser(userId);
+        }
 
-    if (isStorePage) {
-      const fetchData = async () => {
-        await getSingleStore(storeId);
+        if (isStorePage) {
+          await getSingleStore(storeId);
+        }
+        if (isOrderPage) {
+          await getSingleOrder(orderId);
+        }
+        if (isProductPage) {
+          await getSingleProduct(productId);
+        }
+
         setIsLoading(false);
-      };
-      fetchData();
-    }
-    if (isOrderPage) {
-      const fetchData = async () => {
-        await getSingleOrder(orderId);
+      } catch (error) {
+        console.error("Error fetching data:", error);
         setIsLoading(false);
-      };
-      fetchData();
-    }
+      }
+    };
+    fetchData();
   }, [isUserPageMe, isUserPage, isStorePage, isOrderPage]);
 
   if (isUserPage) {

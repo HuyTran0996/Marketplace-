@@ -8,14 +8,15 @@ import {
 } from "../data/FetchUsersData";
 import { FetchAllStores, FetchSingleStore } from "../data/FetchStoresData";
 import { FetchAllOrders, FetchSingleOrder } from "../data/FetchOrdersData";
+import {
+  FetchAllProducts,
+  FetchSingleProduct,
+} from "../data/FetchProductsData";
 
 const PageContext = createContext();
 
 function PageProvider({ children }) {
   const [state, dispatch] = useReducer(PageReducer, initialState);
-  const { roleForLogin, dataAllUsers, dataAllOrders, dataSingle } = state;
-
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   const getData = async () => {
     try {
@@ -31,6 +32,58 @@ function PageProvider({ children }) {
         payload: resultAllOrders,
       });
 
+      const resultAllStores = await FetchAllStores();
+      dispatch({
+        type: "SET_DATA_ALL_STORES",
+        payload: resultAllStores,
+      });
+
+      return;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+  const getDataAllUsers = async () => {
+    try {
+      const resultAllUsers = await FetchAllUsers();
+      dispatch({
+        type: "SET_DATA_ALL_USERS",
+        payload: resultAllUsers,
+      });
+
+      return;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+  const getDataAllOrders = async () => {
+    try {
+      const resultAllOrders = await FetchAllOrders();
+      dispatch({
+        type: "SET_DATA_ALL_ORDERS",
+        payload: resultAllOrders,
+      });
+
+      return;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+  const getDataAllProducts = async () => {
+    try {
+      const resultAllProducts = await FetchAllProducts();
+      dispatch({
+        type: "SET_DATA_ALL_PRODUCTS",
+        payload: resultAllProducts,
+      });
+
+      return;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
+  const getDataAllStores = async () => {
+    try {
       const resultAllStores = await FetchAllStores();
       dispatch({
         type: "SET_DATA_ALL_STORES",
@@ -82,6 +135,18 @@ function PageProvider({ children }) {
     }
   };
 
+  const getSingleProduct = async (productId) => {
+    try {
+      const resultSingleProduct = await FetchSingleProduct(productId);
+      dispatch({
+        type: "SET_DATA_SINGLE",
+        payload: resultSingleProduct,
+      });
+      return resultSingleProduct;
+    } catch (err) {
+      console.log(`Error Home: ${err.name}: ${err.message}`);
+    }
+  };
   const getSingleOrder = async (orderId) => {
     try {
       const resultSingleOrder = await FetchSingleOrder(orderId);
@@ -99,10 +164,15 @@ function PageProvider({ children }) {
     state,
     dispatch,
     getData,
+    getDataAllUsers,
+    getDataAllOrders,
+    getDataAllStores,
+    getDataAllProducts,
     getSingleUser,
     getMyInfo,
     getSingleStore,
     getSingleOrder,
+    getSingleProduct,
   };
 
   return (
