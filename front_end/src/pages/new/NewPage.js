@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { FetchUpdateStore } from "../../data/FetchStoresData";
@@ -413,8 +413,14 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
 };
 
 const NewPage = ({ title }) => {
-  const { isUserPage, isUserPageMe, isStorePage, isOrderPage, isProductPage } =
-    usePage();
+  const location = useLocation();
+  const {
+    isUserEditPage,
+    isMyInfoEditPage,
+    isStoreEditPage,
+    isOrderEditPage,
+    isProductEditPage,
+  } = usePage();
   const { userId, storeId, orderId, productId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -431,20 +437,21 @@ const NewPage = ({ title }) => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        if (isUserPageMe) {
+        if (isMyInfoEditPage) {
           await getMyInfo();
-        } else if (isUserPage) {
+        } else if (isUserEditPage) {
           await getSingleUser(userId);
         }
-
-        if (isStorePage) {
+        if (isStoreEditPage) {
           await getSingleStore(storeId);
         }
-        if (isOrderPage) {
+        if (isOrderEditPage) {
           await getSingleOrder(orderId);
         }
-        if (isProductPage) {
+        if (isProductEditPage) {
           await getSingleProduct(productId);
+        } else {
+          throw new Error("lỗi");
         }
 
         setIsLoading(false);
@@ -454,9 +461,15 @@ const NewPage = ({ title }) => {
       }
     };
     fetchData();
-  }, [isUserPageMe, isUserPage, isStorePage, isOrderPage]);
+  }, [
+    isUserEditPage,
+    isMyInfoEditPage,
+    isStoreEditPage,
+    isOrderEditPage,
+    isProductEditPage,
+  ]);
 
-  if (isUserPage) {
+  if (isUserEditPage) {
     return isLoading ? (
       <Loading title={title} />
     ) : (
@@ -468,7 +481,7 @@ const NewPage = ({ title }) => {
       />
     );
   }
-  if (isStorePage) {
+  if (isStoreEditPage) {
     return isLoading ? (
       <Loading title={title} />
     ) : (
@@ -479,7 +492,7 @@ const NewPage = ({ title }) => {
       />
     );
   }
-  if (isOrderPage) {
+  if (isOrderEditPage) {
     return isLoading ? (
       <Loading title={title} />
     ) : (

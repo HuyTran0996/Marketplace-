@@ -11,16 +11,42 @@ export const usePage = () => {
     isProductPage: false,
   });
 
+  //url
+  const myInfo = "myInfo";
+  const user = "user";
+  const stores = "stores";
+  const orders = "orders";
+  const products = "products";
+  const edit = "edit";
+  // const myInfo = "myInfo";
+  // const myInfo = "myInfo";
+  // const myInfo = "myInfo";
+  // const myInfo = "myInfo";
+  // const myInfo = "myInfo";
+  // const myInfo = "myInfo";
+
   useEffect(() => {
     const currentUrl = location.pathname;
 
-    const isUserPage = currentUrl.includes("user");
+    const isUserPage = currentUrl.includes(user);
     const isUserPageMe =
-      currentUrl.includes("myInfo") && currentUrl.includes("users");
+      currentUrl.includes(myInfo) && currentUrl.includes(user);
 
-    const isStorePage = currentUrl.includes("stores");
-    const isOrderPage = currentUrl.includes("orders");
-    const isProductPage = currentUrl.includes("products");
+    const isStorePage = currentUrl.includes(stores);
+    const isOrderPage = currentUrl.includes(orders);
+    const isProductPage = currentUrl.includes(products);
+
+    const isUserEditPage =
+      currentUrl.includes(user) && currentUrl.includes(edit);
+    const isMyInfoEditPage =
+      currentUrl.includes(myInfo) && currentUrl.includes(edit);
+
+    const isStoreEditPage =
+      currentUrl.includes(stores) && currentUrl.includes(edit);
+    const isOrderEditPage =
+      currentUrl.includes(orders) && currentUrl.includes(edit);
+    const isProductEditPage =
+      currentUrl.includes(products) && currentUrl.includes(edit);
 
     setPageType({
       isUserPage,
@@ -28,6 +54,11 @@ export const usePage = () => {
       isStorePage,
       isOrderPage,
       isProductPage,
+      isUserEditPage,
+      isMyInfoEditPage,
+      isStoreEditPage,
+      isOrderEditPage,
+      isProductEditPage,
     });
   }, [location]);
 

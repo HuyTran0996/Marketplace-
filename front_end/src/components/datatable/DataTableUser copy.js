@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-import { usePage } from "../../components/usePage";
+import { usePage } from "../usePage";
 
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
@@ -13,7 +13,8 @@ import { DeleteOrder, FetchCancelOrder } from "../../data/FetchOrdersData";
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
-const Datatable = () => {
+const DataTableUser = () => {
+  const location = useLocation;
   const [isLoading, setIsLoading] = useState(true);
   const {
     state,
@@ -27,6 +28,7 @@ const Datatable = () => {
   let dataOriginal = [];
   let userColumns = [];
   let actionColumn = [];
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -50,8 +52,9 @@ const Datatable = () => {
         setIsLoading(false);
       }
     };
+
     fetchData();
-  }, [isUserPage, isStorePage, isOrderPage, isProductPage]);
+  }, [isProductPage, isUserPage, isStorePage, isOrderPage]);
 
   if (isLoading) {
     userColumns = [
@@ -460,4 +463,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default DataTableUser;

@@ -7,7 +7,13 @@ import { useContext } from "react";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/login/SignupPage";
-import ListPage from "./pages/list/ListPage";
+import {
+  ListPageUser,
+  ListPageStore,
+  ListPageOrder,
+  ListPageProduct,
+} from "./pages/list/ListPage";
+
 import NewPage from "./pages/new/NewPage";
 import SinglePage from "./pages/single/SinglePage";
 
@@ -25,7 +31,7 @@ function App() {
             <Route index element={<HomePage />} />
 
             <Route path="users">
-              <Route index element={<ListPage />} />
+              <Route index element={<ListPageUser />} />
               {/* <Route path="myInfo" element={<SinglePage />} /> */}
               {/* <Route path=":userId" element={<SinglePage />} /> */}
               <Route
@@ -39,7 +45,7 @@ function App() {
             </Route>
 
             <Route path="stores">
-              <Route index element={<ListPage />} />
+              <Route index element={<ListPageStore />} />
               <Route
                 path="edit/:storeId"
                 element={<NewPage title="Edit Store" />}
@@ -47,7 +53,7 @@ function App() {
             </Route>
 
             <Route path="orders">
-              <Route index element={<ListPage />} />
+              <Route index element={<ListPageOrder />} />
               <Route
                 path="edit/:orderId"
                 element={<NewPage title="Edit Order" />}
@@ -55,7 +61,7 @@ function App() {
             </Route>
 
             <Route path="products">
-              <Route index element={<ListPage />} />
+              <Route index element={<ListPageProduct />} />
               <Route
                 path="edit/:productId"
                 element={<NewPage title="Edit Product" />}
