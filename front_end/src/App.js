@@ -14,12 +14,15 @@ import {
   ListPageProduct,
 } from "./pages/list/ListPage";
 
-import NewPage from "./pages/new/NewPage";
-import SinglePage from "./pages/single/SinglePage";
+import NewPageUser from "./pages/new/NewPageUser";
+import NewPageStore from "./pages/new/NewPageStore";
+import NewPageOrder from "./pages/new/NewPageOrder";
+import NewPageProduct from "./pages/new/NewPageProduct";
 
 import PrivateRoutes from "./components/PrivateRoutes";
 
 import { DarkModeContext } from "./context/darkModeContext";
+import SinglePage from "./pages/single/SinglePage";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -36,11 +39,11 @@ function App() {
               {/* <Route path=":userId" element={<SinglePage />} /> */}
               <Route
                 path="edit/myInfo"
-                element={<NewPage title="Edit User" />}
+                element={<NewPageUser title="Edit User" />}
               />
               <Route
                 path="edit/:userId"
-                element={<NewPage title="Edit User" />}
+                element={<NewPageUser title="Edit User" />}
               />
             </Route>
 
@@ -48,7 +51,7 @@ function App() {
               <Route index element={<ListPageStore />} />
               <Route
                 path="edit/:storeId"
-                element={<NewPage title="Edit Store" />}
+                element={<NewPageStore title="Edit Store" />}
               />
             </Route>
 
@@ -56,7 +59,7 @@ function App() {
               <Route index element={<ListPageOrder />} />
               <Route
                 path="edit/:orderId"
-                element={<NewPage title="Edit Order" />}
+                element={<NewPageOrder title="Edit Order" />}
               />
             </Route>
 
@@ -64,7 +67,7 @@ function App() {
               <Route index element={<ListPageProduct />} />
               <Route
                 path="edit/:productId"
-                element={<NewPage title="Edit Product" />}
+                element={<NewPageProduct title="Edit Product" />}
               />
             </Route>
           </Route>

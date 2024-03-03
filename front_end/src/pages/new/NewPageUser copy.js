@@ -412,7 +412,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
   );
 };
 
-const NewPage = ({ title }) => {
+const NewPageUser = ({ title }) => {
   const location = useLocation();
   const {
     isUserEditPage,
@@ -504,4 +504,4 @@ const NewPage = ({ title }) => {
     );
   }
 };
-export default NewPage;
+export default NewPageUser;
