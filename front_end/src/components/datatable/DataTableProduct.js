@@ -134,7 +134,7 @@ const DataTableProduct = () => {
       {
         field: "description",
         headerName: "Description",
-        width: 350,
+        width: 200,
       },
       {
         field: "price",

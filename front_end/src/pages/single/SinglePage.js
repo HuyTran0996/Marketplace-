@@ -7,14 +7,14 @@ import { FetchSingleUser } from "../../data/FetchUsersData";
 import avatar from "../../images/avatar.png";
 
 import Sidebar from "../../components/sidebar/SideBar";
-import Navbar from "../../components/navbar/NavBar";
+// import Navbar from "../../components/navbar/NavBar";
 import Chart from "../../components/chart/Chart";
 
 const Loading = () => (
   <div className="single">
     <Sidebar />
     <div className="singleContainer">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="top">
         <div className="left">
           <div className="editButton">Edit</div>

@@ -4,7 +4,7 @@ import "./home.scss";
 import { PageContext } from "../../context/PageContext";
 
 import Sidebar from "../../components/sidebar/SideBar";
-import Navbar from "../../components/navbar/NavBar";
+// import Navbar from "../../components/navbar/NavBar";
 import Widget from "../../components/widget/Widget";
 
 const HomePage = () => {
@@ -17,7 +17,7 @@ const HomePage = () => {
       <div className="home">
         <Sidebar />
         <div className="homeContainer">
-          <Navbar />
+          {/* <Navbar /> */}
           <div className="widgets">loading....</div>
 
           <div className="listContainer">

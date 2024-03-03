@@ -7,7 +7,7 @@ import { usePage } from "../../components/usePage";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
-import Navbar from "../../components/navbar/NavBar";
+// import Navbar from "../../components/navbar/NavBar";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
