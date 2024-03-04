@@ -15,7 +15,7 @@ const PrivateRoutes = () => {
   //3. sau khi decoded thì ta có một Object gồm { id: '65dee16ac3d7d9a0150ed1aa', iat: 1709392401, exp: 1709565201 }
   //4. lấy id này để getSingleUser và từ đó tra được role của user, sử dụng role của user để cấp quyền vào trang của admin hay user thường
   useEffect(() => {
-    if (!token) {
+    if (token !== "admin") {
       navigate(`/login`);
     }
   }, [token, navigate]);

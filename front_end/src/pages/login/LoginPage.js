@@ -51,7 +51,7 @@ export default function LoginPage() {
           withCredentials: true,
         }
       );
-      const token = result.data.token;
+      const token = result.data.user.role;
       checkCookie(token);
       setIsLoading(false);
 
