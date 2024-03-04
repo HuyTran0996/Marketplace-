@@ -7,7 +7,7 @@ const PrivateRoutes = () => {
   const navigate = useNavigate();
 
   const { state, dispatch } = useContext(PageContext);
-  const { roleForLogin } = state;
+  const { token } = state;
 
   //đây là cách làm tạm, phương án chính như sau:
   //1. khi login thì server trả 1 token trên cookie
@@ -15,12 +15,12 @@ const PrivateRoutes = () => {
   //3. sau khi decoded thì ta có một Object gồm { id: '65dee16ac3d7d9a0150ed1aa', iat: 1709392401, exp: 1709565201 }
   //4. lấy id này để getSingleUser và từ đó tra được role của user, sử dụng role của user để cấp quyền vào trang của admin hay user thường
   useEffect(() => {
-    if (roleForLogin !== "admin") {
+    if (!token) {
       navigate(`/login`);
     }
-  }, [roleForLogin, navigate]);
+  }, [token, navigate]);
 
-  return roleForLogin ? <Outlet /> : null;
+  return token ? <Outlet /> : null;
 };
 
 export default PrivateRoutes;

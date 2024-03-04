@@ -10,7 +10,9 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableProduct = () => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const { state, getDataAllProducts } = useContext(PageContext);
   const { dataAllProducts } = state;
   const { isProductPage } = usePage();
@@ -20,159 +22,100 @@ const DataTableProduct = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       try {
+        setIsLoading(true);
         await getDataAllProducts();
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(true);
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [isProductPage]);
+  }, [location]);
 
   if (isLoading) {
-    userColumns = [
-      { field: "id", headerName: " Loading...", width: 240 },
-      {
-        field: "user",
-        headerName: " Loading...",
-        width: 120,
-        renderCell: (params) => {
-          return (
-            <div className="cellWithImg">
-              <img className="cellImg" src={avatar} alt="avatar" />
-              Loading...
-            </div>
-          );
-        },
-      },
-
-      {
-        field: "email",
-        headerName: " Loading...",
-        width: 150,
-      },
-
-      {
-        field: "phone",
-        headerName: " Loading...",
-        width: 100,
-      },
-
-      {
-        field: "role",
-        headerName: " Loading...",
-        width: 100,
-      },
-
-      {
-        field: "isDeleted",
-        headerName: " Loading...",
-        width: 90,
-        renderCell: (params) => {
-          const status = params.row.isDeleted ? "Deleted" : "Active";
-          return (
-            <div className={`cellWithStatus ${status.toLowerCase()}`}>
-              Loading...
-            </div>
-          );
-        },
-      },
-    ];
-    actionColumn = [
-      {
-        field: "action",
-        headerName: "ACTION",
-        width: 200,
-        renderCell: () => {
-          return (
-            <div className="cellAction">
-              <Link style={{ textDecoration: "none" }}>
-                <div className="editButton"> Loading...</div>
-              </Link>
-              <div className="deleteButton">Loading...</div>
-            </div>
-          );
-        },
-      },
-    ];
+    userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   }
 
   if (isProductPage && !isLoading) {
-    dataOriginal = dataAllProducts.data.products;
-    userColumns = [
-      { field: "id", headerName: "ID", width: 240 },
-      {
-        field: "storeName",
-        headerName: "Store",
-        width: 100,
+    if (error) {
+      userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
+    } else {
+      dataOriginal = dataAllProducts.data.products;
+      userColumns = [
+        { field: "id", headerName: "ID", width: 240 },
+        {
+          field: "storeName",
+          headerName: "Store",
+          width: 100,
 
-        renderCell: (params) => {
-          return <div className="cellWithImg">{params.row.storeName}</div>;
+          renderCell: (params) => {
+            return <div className="cellWithImg">{params.row.storeName}</div>;
+          },
         },
-      },
-      {
-        field: "productName",
-        headerName: "Product",
-        width: 150,
-        renderCell: (params) => {
-          return (
-            <div className="cellWithImg">
-              <img
-                className="cellImg"
-                src={params.row.photo ? params.row.photo : avatar}
-                alt="avatar"
-              />
-              {params.row.productName}
-            </div>
-          );
-        },
-      },
-      {
-        field: "description",
-        headerName: "Description",
-        width: 200,
-      },
-      {
-        field: "price",
-        headerName: "Price",
-        width: 110,
-      },
-      {
-        field: "unit",
-        headerName: "Unit",
-        width: 110,
-      },
-    ];
-    actionColumn = [
-      {
-        field: "action",
-        headerName: "ACTION",
-        width: 350,
-        renderCell: (params) => {
-          return (
-            <div className="cellAction">
-              <Link
-                to={`/products/edit/${params.row.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div className="editButton">View & Edit</div>
-              </Link>
-
-              <div
-                className="deleteButton"
-                onClick={() => handleDelete(params.row.id)}
-              >
-                Delete
+        {
+          field: "productName",
+          headerName: "Product",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <div className="cellWithImg">
+                <img
+                  className="cellImg"
+                  src={params.row.photo ? params.row.photo : avatar}
+                  alt="avatar"
+                />
+                {params.row.productName}
               </div>
-            </div>
-          );
+            );
+          },
         },
-      },
-    ];
+        {
+          field: "description",
+          headerName: "Description",
+          width: 200,
+        },
+        {
+          field: "price",
+          headerName: "Price",
+          width: 110,
+        },
+        {
+          field: "unit",
+          headerName: "Unit",
+          width: 110,
+        },
+      ];
+      actionColumn = [
+        {
+          field: "action",
+          headerName: "ACTION",
+          width: 350,
+          renderCell: (params) => {
+            return (
+              <div className="cellAction">
+                <Link
+                  to={`/products/edit/${params.row.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="editButton">View & Edit</div>
+                </Link>
+
+                <div
+                  className="deleteButton"
+                  onClick={() => handleDelete(params.row.id)}
+                >
+                  Delete
+                </div>
+              </div>
+            );
+          },
+        },
+      ];
+    }
   }
 
   const data = dataOriginal.map((user) => {

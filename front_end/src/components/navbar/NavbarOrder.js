@@ -27,8 +27,7 @@ const NavbarOrder = () => {
       }
       setIsLoading(false);
     } catch (error) {
-      setError(error.message);
-
+      setError("ERROR....");
       setIsLoading(false);
     }
   };

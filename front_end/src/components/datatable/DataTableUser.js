@@ -12,6 +12,7 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableUser = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const { state, getDataAllUsers } = useContext(PageContext);
   const { dataAllUsers } = state;
   const { isUserPage } = usePage();
@@ -21,15 +22,13 @@ const DataTableUser = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       try {
-        if (isUserPage) {
-          await getDataAllUsers();
-        }
-
+        setIsLoading(true);
+        await getDataAllUsers();
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(true);
         setIsLoading(false);
       }
     };
@@ -38,156 +37,95 @@ const DataTableUser = () => {
   }, [isUserPage]);
 
   if (isLoading) {
-    userColumns = [
-      { field: "id", headerName: " Loading...", width: 240 },
-
-      {
-        field: "user",
-        headerName: " Loading...",
-        width: 120,
-        renderCell: (params) => {
-          return (
-            <div className="cellWithImg">
-              <img className="cellImg" src={avatar} alt="avatar" />
-              Loading...
-            </div>
-          );
-        },
-      },
-
-      {
-        field: "email",
-        headerName: " Loading...",
-        width: 150,
-      },
-
-      {
-        field: "phone",
-        headerName: " Loading...",
-        width: 100,
-      },
-
-      {
-        field: "role",
-        headerName: " Loading...",
-        width: 100,
-      },
-
-      {
-        field: "isDeleted",
-        headerName: " Loading...",
-        width: 90,
-        renderCell: (params) => {
-          const status = params.row.isDeleted ? "Deleted" : "Active";
-          return (
-            <div className={`cellWithStatus ${status.toLowerCase()}`}>
-              Loading...
-            </div>
-          );
-        },
-      },
-    ];
-    actionColumn = [
-      {
-        field: "action",
-        headerName: "ACTION",
-        width: 200,
-        renderCell: () => {
-          return (
-            <div className="cellAction">
-              <Link style={{ textDecoration: "none" }}>
-                <div className="editButton"> Loading...</div>
-              </Link>
-              <div className="deleteButton">Loading...</div>
-            </div>
-          );
-        },
-      },
-    ];
+    userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   }
 
   if (isUserPage && !isLoading) {
-    dataOriginal = dataAllUsers.data.users;
-    userColumns = [
-      { field: "id", headerName: "ID", width: 240 },
+    if (error) {
+      userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
+    } else {
+      dataOriginal = dataAllUsers.data.users;
+      userColumns = [
+        { field: "id", headerName: "ID", width: 240 },
 
-      {
-        field: "user",
-        headerName: "User",
-        width: 120,
-        renderCell: (params) => {
-          return (
-            <div className="cellWithImg">
-              <img
-                className="cellImg"
-                src={params.row.photo ? params.row.photo : avatar}
-                alt="avatar"
-              />
-              {params.row.name}
-            </div>
-          );
-        },
-      },
-
-      {
-        field: "email",
-        headerName: "Email",
-        width: 150,
-      },
-
-      {
-        field: "phone",
-        headerName: "Phone",
-        width: 100,
-      },
-
-      {
-        field: "role",
-        headerName: "Role",
-        width: 100,
-      },
-
-      {
-        field: "isDeleted",
-        headerName: "STATUS",
-        width: 90,
-        renderCell: (params) => {
-          // Correctly reference the isDeleted field and convert the boolean to a string
-          const status = params.row.isDeleted ? "Deleted" : "Active";
-          return (
-            <div className={`cellWithStatus ${status.toLowerCase()}`}>
-              {status}
-            </div>
-          );
-        },
-      },
-    ];
-    actionColumn = [
-      {
-        field: "action",
-        headerName: "ACTION",
-        width: 200,
-        renderCell: (params) => {
-          return (
-            <div className="cellAction">
-              <Link
-                to={`/users/edit/${params.row.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div className="editButton">View & Edit</div>
-              </Link>
-
-              <div
-                className="deleteButton"
-                onClick={() => handleDelete(params.row.id)}
-              >
-                Delete
+        {
+          field: "user",
+          headerName: "User",
+          width: 120,
+          renderCell: (params) => {
+            return (
+              <div className="cellWithImg">
+                <img
+                  className="cellImg"
+                  src={params.row.photo ? params.row.photo : avatar}
+                  alt="avatar"
+                />
+                {params.row.name}
               </div>
-            </div>
-          );
+            );
+          },
         },
-      },
-    ];
+
+        {
+          field: "email",
+          headerName: "Email",
+          width: 150,
+        },
+
+        {
+          field: "phone",
+          headerName: "Phone",
+          width: 100,
+        },
+
+        {
+          field: "role",
+          headerName: "Role",
+          width: 100,
+        },
+
+        {
+          field: "isDeleted",
+          headerName: "STATUS",
+          width: 90,
+          renderCell: (params) => {
+            // Correctly reference the isDeleted field and convert the boolean to a string
+            const status = params.row.isDeleted ? "Deleted" : "Active";
+            return (
+              <div className={`cellWithStatus ${status.toLowerCase()}`}>
+                {status}
+              </div>
+            );
+          },
+        },
+      ];
+      actionColumn = [
+        {
+          field: "action",
+          headerName: "ACTION",
+          width: 200,
+          renderCell: (params) => {
+            return (
+              <div className="cellAction">
+                <Link
+                  to={`/users/edit/${params.row.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="editButton">View & Edit</div>
+                </Link>
+
+                <div
+                  className="deleteButton"
+                  onClick={() => handleDelete(params.row.id)}
+                >
+                  Delete
+                </div>
+              </div>
+            );
+          },
+        },
+      ];
+    }
   }
 
   const data = dataOriginal.map((user) => {

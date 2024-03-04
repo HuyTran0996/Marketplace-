@@ -18,11 +18,11 @@ export default function SignupPage() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [phone, setPhone] = useState("");
 
-  const checkCookie = () => {
+  const checkCookie = (token) => {
     const cookie = Cookies.get("forFe");
     if (!cookie) {
-      const value = Date.now();
-      Cookies.set("forFe", value, { expires: 2 });
+      // const value = Date.now();
+      Cookies.set("forFe", token, { expires: 2 });
       return;
     }
     return;
@@ -67,13 +67,9 @@ export default function SignupPage() {
           withCredentials: true,
         }
       );
-      checkCookie();
+      const token = result.data.token;
+      checkCookie(token);
       setIsLoading(false);
-
-      dispatch({
-        type: "SET_USER_LOGIN",
-        payload: result.data.user.role,
-      });
       navigate("/");
       alert("Successful account registration, click ok to continue");
       return result;

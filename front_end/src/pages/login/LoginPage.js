@@ -17,11 +17,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const checkCookie = () => {
+  const checkCookie = (token) => {
     const cookie = Cookies.get("forFe");
     if (!cookie) {
-      const value = Date.now();
-      Cookies.set("forFe", value, { expires: 2 });
+      // const value = Date.now();
+      Cookies.set("forFe", token, { expires: 2 });
       return;
     }
     return;
@@ -51,13 +51,10 @@ export default function LoginPage() {
           withCredentials: true,
         }
       );
-      checkCookie();
+      const token = result.data.token;
+      checkCookie(token);
       setIsLoading(false);
 
-      dispatch({
-        type: "SET_USER_LOGIN",
-        payload: result.data.user.role,
-      });
       navigate("/");
 
       return;

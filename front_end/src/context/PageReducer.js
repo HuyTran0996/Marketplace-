@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 const initialState = {
-  roleForLogin: null,
+  token: Cookies.get("forFe"),
   dataAllUsers: null,
   dataAllOrders: null,
   dataAllStores: null,
@@ -11,7 +11,7 @@ const initialState = {
 function PageReducer(state, action) {
   switch (action.type) {
     case "SET_USER_LOGIN":
-      return { ...state, roleForLogin: action.payload };
+      return { ...state, token: action.payload };
     case "SET_DATA_ALL_USERS":
       return { ...state, dataAllUsers: action.payload };
     case "SET_DATA_ALL_ORDERS":
