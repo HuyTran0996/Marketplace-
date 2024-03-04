@@ -4,24 +4,24 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";
 
-const NavbarProduct = () => {
-  const { searchProductByName, getDataAllProducts } = useContext(PageContext);
+const NavbarUser = () => {
+  const { getDataAllUsers } = useContext(PageContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [productName, setProductName] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
-    setProductName(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      if (productName === "") {
-        await getDataAllProducts();
+      if (email === "") {
+        await getDataAllUsers();
       } else {
-        await searchProductByName(productName);
+        await getDataAllUsers(email);
       }
       setIsLoading(false);
     } catch (error) {
@@ -36,8 +36,8 @@ const NavbarProduct = () => {
         <form className="search" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Search Product Name..."
-            value={productName}
+            placeholder="Search By Email..."
+            value={email}
             onChange={handleChange}
           />
           {isLoading ? (
@@ -54,4 +54,4 @@ const NavbarProduct = () => {
   );
 };
 
-export default NavbarProduct;
+export default NavbarUser;

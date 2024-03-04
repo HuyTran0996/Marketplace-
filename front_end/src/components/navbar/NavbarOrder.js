@@ -4,29 +4,32 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";
 
-const NavbarProduct = () => {
-  const { searchProductByName, getDataAllProducts } = useContext(PageContext);
+const NavbarOrder = () => {
+  const { getDataAllOrders } = useContext(PageContext);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [productName, setProductName] = useState("");
+  const [orderId, setOrderId] = useState("");
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
-    setProductName(e.target.value);
+    setOrderId(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
     try {
-      if (productName === "") {
-        await getDataAllProducts();
+      if (orderId === "") {
+        await getDataAllOrders();
       } else {
-        await searchProductByName(productName);
+        await getDataAllOrders(orderId);
       }
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
-      setError(error);
+      setError(error.message);
+
+      setIsLoading(false);
     }
   };
 
@@ -36,22 +39,27 @@ const NavbarProduct = () => {
         <form className="search" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Search Product Name..."
-            value={productName}
+            placeholder="Search By OrderId..."
+            value={orderId}
             onChange={handleChange}
           />
           {isLoading ? (
-            <AutorenewIcon />
+            <>
+              {error && <div className="error">Error: {error}</div>}{" "}
+              <AutorenewIcon />
+            </>
           ) : (
-            <button className="button" type="submit" aria-label="Search">
-              <SearchOutlinedIcon />
-            </button>
+            <>
+              {error && <div className="error">Error: {error}</div>}{" "}
+              <button className="button" type="submit" aria-label="Search">
+                <SearchOutlinedIcon />
+              </button>
+            </>
           )}
-          {error && <div className="error">Error: {error}</div>}{" "}
         </form>
       </div>
     </div>
   );
 };
 
-export default NavbarProduct;
+export default NavbarOrder;

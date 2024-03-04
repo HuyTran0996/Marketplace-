@@ -1,54 +1,40 @@
 import { apiService } from "../app/apiService";
 
-const FetchAllOrders = async () => {
-  try {
+const FetchAllOrders = async (orderId) => {
+  if (orderId) {
+    const encodedOrderId = encodeURIComponent(orderId);
+    const dataAllOrders = await apiService.get(`/orders?_id=${encodedOrderId}`);
+    return dataAllOrders;
+  } else {
     const dataAllOrders = await apiService.get(`/orders`);
     return dataAllOrders;
-  } catch (err) {
-    console.log(`Error FetchAllOrders:${err.name}: ${err.message}`);
   }
 };
 
 const FetchSingleOrder = async (orderId) => {
-  try {
-    const dataSingleOrder = await apiService.get(`/orders/${orderId}`);
-    return dataSingleOrder;
-  } catch (err) {
-    console.log(`Error FetchSingleOrder:${err.name}: ${err.message}`);
-  }
+  const dataSingleOrder = await apiService.get(`/orders/${orderId}`);
+  return dataSingleOrder;
 };
 
 const FetchUpdateOrder = async ({ orderId, data }) => {
-  try {
-    const dataUpdateOrder = await apiService.patch(`/orders/${orderId}`, data, {
-      withCredentials: true,
-    });
+  const dataUpdateOrder = await apiService.patch(`/orders/${orderId}`, data, {
+    withCredentials: true,
+  });
 
-    return dataUpdateOrder;
-  } catch (err) {
-    console.log(`Error FetchUpdateOrder:${err.name}: ${err.message}`);
-  }
+  return dataUpdateOrder;
 };
 
 const FetchCancelOrder = async (orderId) => {
-  try {
-    const dataCancelOrder = await apiService.patch(
-      `/orders/cancelOrder/${orderId}`
-    );
+  const dataCancelOrder = await apiService.patch(
+    `/orders/cancelOrder/${orderId}`
+  );
 
-    return dataCancelOrder;
-  } catch (err) {
-    console.log(`Error FetchCancelOrder:${err.name}: ${err.message}`);
-  }
+  return dataCancelOrder;
 };
 
 const DeleteOrder = async (id) => {
-  try {
-    const deleteOrder = await apiService.delete(`/orders/${id}`);
-    return deleteOrder;
-  } catch (err) {
-    console.log(`Error FetchAllOrders:${err.name}: ${err.message}`);
-  }
+  const deleteOrder = await apiService.delete(`/orders/${id}`);
+  return deleteOrder;
 };
 
 export {

@@ -1,46 +1,37 @@
 import { apiService } from "../app/apiService";
 
-const FetchAllStores = async () => {
-  try {
+const FetchAllStores = async (storeName) => {
+  if (storeName) {
+    const dataAllStores = await apiService.get(
+      `/stores?storeName=${storeName}`
+    );
+    return dataAllStores;
+  } else {
     const dataAllStores = await apiService.get(`/stores`);
     return dataAllStores;
-  } catch (err) {
-    console.log(`Error FetchAllStores:${err.name}: ${err.message}`);
   }
 };
 
 const FetchSingleStore = async (storeId) => {
-  try {
-    const dataSingleStore = await apiService.get(`/stores/${storeId}`);
-    return dataSingleStore;
-  } catch (err) {
-    console.log(`Error FetchSingleStore:${err.name}: ${err.message}`);
-  }
+  const dataSingleStore = await apiService.get(`/stores/${storeId}`);
+  return dataSingleStore;
 };
 
 const FetchUpdateStore = async ({ storeId, formData }) => {
-  try {
-    const dataUpdateStore = await apiService.patch(
-      `/stores/${storeId}`,
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+  const dataUpdateStore = await apiService.patch(
+    `/stores/${storeId}`,
+    formData,
+    {
+      withCredentials: true,
+    }
+  );
 
-    return dataUpdateStore;
-  } catch (err) {
-    console.log(`Error FetchUpdateStore:${err.name}: ${err.message}`);
-  }
+  return dataUpdateStore;
 };
 
 const DeleteStore = async (storeId) => {
-  try {
-    const deleteStore = await apiService.delete(`/stores/${storeId}`);
-    return deleteStore;
-  } catch (err) {
-    console.log(`Error DeleteStore :${err.name}: ${err.message}`);
-  }
+  const deleteStore = await apiService.delete(`/stores/${storeId}`);
+  return deleteStore;
 };
 
 export { FetchAllStores, FetchSingleStore, FetchUpdateStore, DeleteStore };

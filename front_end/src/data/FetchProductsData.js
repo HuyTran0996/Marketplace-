@@ -1,50 +1,45 @@
 import { apiService } from "../app/apiService";
 
 const FetchAllProducts = async () => {
-  try {
-    const dataAllProducts = await apiService.get(`/products`);
-    return dataAllProducts;
-  } catch (err) {
-    console.log(`Error FetchAllProducts:${err.name}: ${err.message}`);
-  }
+  const dataAllProducts = await apiService.get(`/products`);
+  return dataAllProducts;
+};
+const FetchSearchProductByName = async (productName) => {
+  // Properly encode the productName to handle special characters and spaces
+  // const encodedProductName = encodeURIComponent(productName);
+
+  // Use the encoded productName in the request URL
+  const dataAllProducts = await apiService.get(
+    `/products?search=${productName}`
+  );
+  return dataAllProducts;
 };
 
 const FetchSingleProduct = async (productId) => {
-  try {
-    const dataSingleProduct = await apiService.get(`/products/${productId}`);
-    return dataSingleProduct;
-  } catch (err) {
-    console.log(`Error FetchSingleProduct:${err.name}: ${err.message}`);
-  }
+  const dataSingleProduct = await apiService.get(`/products/${productId}`);
+  return dataSingleProduct;
 };
 
 const FetchUpdateProduct = async ({ productId, formData }) => {
-  try {
-    const dataUpdateStore = await apiService.patch(
-      `/products/${productId}`,
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+  const dataUpdateStore = await apiService.patch(
+    `/products/${productId}`,
+    formData,
+    {
+      withCredentials: true,
+    }
+  );
 
-    return dataUpdateStore;
-  } catch (err) {
-    console.log(`Error FetchUpdateProduct:${err.name}: ${err.message}`);
-  }
+  return dataUpdateStore;
 };
 
 const DeleteProduct = async (productId) => {
-  try {
-    const deleteProduct = await apiService.delete(`/products/${productId}`);
-    return deleteProduct;
-  } catch (err) {
-    console.log(`Error DeleteProduct :${err.name}: ${err.message}`);
-  }
+  const deleteProduct = await apiService.delete(`/products/${productId}`);
+  return deleteProduct;
 };
 
 export {
   FetchAllProducts,
+  FetchSearchProductByName,
   FetchSingleProduct,
   FetchUpdateProduct,
   DeleteProduct,

@@ -11,6 +11,7 @@ apiService.interceptors.request.use(
   },
   function (error) {
     console.log("REQUEST ERROR", error);
+    return Promise.reject(error);
   }
 );
 

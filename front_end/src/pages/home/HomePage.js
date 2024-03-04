@@ -12,7 +12,7 @@ const HomePage = () => {
   const { dataAllUsers, dataAllOrders, dataAllStores } = state;
   if (!dataAllUsers) {
     getData();
-    console.log("HomePage chưa có datas");
+
     return (
       <div className="home">
         <Sidebar />

@@ -1,7 +1,12 @@
 import "./list.scss";
 
 import Sidebar from "../../components/sidebar/SideBar";
+
 import NavbarProduct from "../../components/navbar/NavbarProduct";
+import NavbarUser from "../../components/navbar/NavbarUser";
+import NavbarOrder from "../../components/navbar/NavbarOrder";
+import NavbarStore from "../../components/navbar/NavbarStore";
+
 import DataTableUser from "../../components/datatable/DataTableUser";
 import DataTableStore from "../../components/datatable/DataTableStore";
 import DataTableOrder from "../../components/datatable/DataTableOrder";
@@ -12,7 +17,7 @@ const ListPageUser = () => {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <NavbarProduct />
+        <NavbarUser />
         <DataTableUser />
       </div>
     </div>
@@ -23,7 +28,7 @@ const ListPageStore = () => {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <NavbarProduct />
+        <NavbarStore />
         <DataTableStore />
       </div>
     </div>
@@ -34,7 +39,7 @@ const ListPageOrder = () => {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <NavbarProduct />
+        <NavbarOrder />
         <DataTableOrder />
       </div>
     </div>
