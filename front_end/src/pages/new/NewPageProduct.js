@@ -66,6 +66,7 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
   );
   const [price, setPrice] = useState(`${dataSingle.data.product.price}`);
   const [unit, setUnit] = useState(`${dataSingle.data.product.unit}`);
+  const [genre, setGenre] = useState(`${dataSingle.data.product.genre}`);
 
   const [fileSubmit, setFileSubmit] = useState(
     `${dataSingle.data.product.photo}`
@@ -73,6 +74,10 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
   const [file, setFile] = useState(`${dataSingle.data.product.photo}`);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
+
+  const handleGenreChange = (e) => {
+    setGenre(e.target.value);
+  };
 
   const handleProductNameChange = (e) => {
     setProductName(e.target.value);
@@ -101,9 +106,18 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
       formData.append("description", description);
       formData.append("price", price);
       formData.append("unit", unit);
+      formData.append("genre", genre);
       if (fileSubmit) {
         formData.append("image", fileSubmit);
       }
+
+      // const formData = {
+      //   productName,
+      //   description,
+      //   price,
+      //   unit,
+      //   genre,
+      // };
 
       await FetchUpdateProduct({ productId, formData });
 
@@ -182,7 +196,7 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
                 />
               </div>
 
-              <div className="formInput" key="4">
+              <div className="formInput" key="5">
                 <label>Unit</label>
                 <input
                   type="text"
@@ -190,6 +204,17 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
                   value={unit}
                   onChange={handleUnitChange}
                 />
+              </div>
+
+              <div className="formInput" key="6">
+                <label>Order Status</label>
+                <select value={genre} onChange={handleGenreChange}>
+                  <option value="">{genre}</option>
+                  <option value="Foods">Foods</option>
+                  <option value="Devices">Devices</option>
+                  <option value="Stationery">Stationery</option>
+                  <option value="Others">Others</option>
+                </select>
               </div>
 
               {error ? <div className="error">{error}</div> : ""}

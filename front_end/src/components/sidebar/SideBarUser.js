@@ -6,8 +6,12 @@ import "./sidebar.scss";
 import { apiService } from "../../app/apiService";
 import { DarkModeContext } from "../../context/darkModeContext";
 
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import HomeIcon from "@mui/icons-material/Home";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import DevicesIcon from "@mui/icons-material/Devices";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import ExploreIcon from "@mui/icons-material/Explore";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -45,51 +49,71 @@ const SideBarUser = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">User</span>
+        <span className="logo">Marketplace</span>
       </div>
 
       <hr />
 
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
+          <p className="title">HOME</p>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              <HomeIcon className="icon" />
+              <span>Home Page</span>
             </li>
           </Link>
 
-          <p className="title">LISTS</p>
+          <p className="title">GENRES</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Some Kind of Genres</span>
+              <FastfoodIcon className="icon" />
+              <span>Foods</span>
+            </li>
+            <li>
+              <DevicesIcon className="icon" />
+              <span>Devices</span>
+            </li>
+            <li>
+              <AutoStoriesIcon className="icon" />
+              <span>Stationery</span>
+            </li>
+            <li>
+              <ExploreIcon className="icon" />
+              <span>Others</span>
             </li>
           </Link>
 
+          <p className="title">ABOUT YOUR STORE</p>
           <Link to="/stores" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
-              <span>Your Stores</span>
+              <span>Your Store</span>
             </li>
           </Link>
 
           <Link to="/orders" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
-              <span>Orders</span>
+              <span>Your Store Order</span>
             </li>
           </Link>
 
           <Link to="/products" style={{ textDecoration: "none" }}>
             <li>
               <CategoryIcon className="icon" />
-              <span>Products</span>
+              <span>Your Store Products</span>
             </li>
           </Link>
 
           <p className="title">USER</p>
+          <Link to="/users/edit/myInfo" style={{ textDecoration: "none" }}>
+            <li>
+              <FormatListBulletedIcon className="icon" />
+              <span>Your Orders</span>
+            </li>
+          </Link>
+
           <Link to="/users/edit/myInfo" style={{ textDecoration: "none" }}>
             <li>
               <AccountCircleOutlinedIcon className="icon" />
