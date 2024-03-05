@@ -4,7 +4,7 @@ import "./home.scss";
 import { PageContext } from "../../context/PageContext";
 
 import SidebarUser from "../../components/sidebar/SideBarUser";
-// import Navbar from "../../components/navbar/NavBar";
+import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import Widget from "../../components/widget/Widget";
 
 const HomePageUser = () => {
@@ -36,7 +36,7 @@ const HomePageUser = () => {
       <div className="home">
         <SidebarUser />
         <div className="homeContainer">
-          {/* <Navbar /> */}
+          <NavbarUserApp />
           <div className="widgets">
             {/* <Widget type="user" totalNumber={totalUsers} /> */}
             {/* <Widget type="order" totalNumber={totalOrders} /> */}

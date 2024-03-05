@@ -14,6 +14,7 @@ export const usePage = () => {
   //url
   const myInfo = "myInfo";
   const user = "user";
+  const userPage = "userPage";
   const stores = "stores";
   const orders = "orders";
   const products = "products";
@@ -27,7 +28,10 @@ export const usePage = () => {
 
   useEffect(() => {
     const currentUrl = location.pathname;
+    //user//
+    const isUserApp = currentUrl.includes(userPage);
 
+    //admin///
     const isUserPage = currentUrl.includes(user);
     const isUserPageMe =
       currentUrl.includes(myInfo) && currentUrl.includes(user);
@@ -49,6 +53,7 @@ export const usePage = () => {
       currentUrl.includes(products) && currentUrl.includes(edit);
 
     setPageType({
+      isUserApp,
       isUserPage,
       isUserPageMe,
       isStorePage,

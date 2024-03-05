@@ -6,6 +6,8 @@ const initialState = {
   dataAllStores: null,
   dataAllProducts: null,
   dataSingle: null,
+
+  cartCounter: 0,
 };
 
 function PageReducer(state, action) {
@@ -22,6 +24,9 @@ function PageReducer(state, action) {
       return { ...state, dataAllProducts: action.payload };
     case "SET_DATA_SINGLE":
       return { ...state, dataSingle: action.payload };
+
+    case "SET_CART_COUNTER":
+      return { ...state, cartCounter: action.payload };
 
     default:
       throw new Error("Invalid Action");

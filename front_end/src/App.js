@@ -88,17 +88,13 @@ function App() {
           </Route>
         )}
         {token === "user" && (
-          <Route path="/user/">
+          <Route path="/userPage/">
             <Route index element={<HomePageUser />} />
 
-            <Route path="users">
-              {/* <Route path="myInfo" element={<SinglePage />} /> */}
-              {/* <Route path=":userId" element={<SinglePage />} /> */}
-              <Route
-                path="edit/myInfo"
-                element={<NewPageUser title="Edit User" />}
-              />
-            </Route>
+            <Route
+              path="edit/myInfo"
+              element={<NewPageUser title="Edit User" />}
+            />
 
             <Route path="stores">
               <Route index element={<ListPageStore />} />

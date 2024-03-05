@@ -7,6 +7,7 @@ import { usePage } from "../../components/usePage";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
+import SideBarUser from "../../components/sidebar/SideBarUser";
 // import Navbar from "../../components/navbar/NavBar";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -61,7 +62,7 @@ const Loading = ({ title }) => {
 
 const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
   const { userId } = useParams();
-  const { isUserEditPage, isMyInfoEditPage } = usePage();
+  const { isUserEditPage, isMyInfoEditPage, isUserApp } = usePage();
   const [name, setName] = useState(`${dataSingle.data.user.name}`);
   const [phone, setPhone] = useState(`${dataSingle.data.user.phone}`);
   const [fileSubmit, setFileSubmit] = useState(`${dataSingle.data.user.photo}`);
@@ -92,11 +93,11 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
         formData.append("image", fileSubmit);
       }
 
-      if (isMyInfoEditPage) {
+      if (isMyInfoEditPage || isUserApp) {
         await FetchUpdateMe(formData);
         await getMyInfo();
       }
-      if (isUserEditPage) {
+      if (isUserEditPage && !isUserApp) {
         await FetchUpdateUser({ userId, formData });
         await getSingleUser(userId);
       }
@@ -117,7 +118,8 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
 
   return (
     <div className="new">
-      <Sidebar />
+      {isUserApp ? <SideBarUser /> : <Sidebar />}
+
       <div className="newContainer">
         {/* <Navbar /> */}
         <div className="top">

@@ -57,7 +57,7 @@ const SideBarUser = () => {
       <div className="center">
         <ul>
           <p className="title">HOME</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/userPage" style={{ textDecoration: "none" }}>
             <li>
               <HomeIcon className="icon" />
               <span>Home Page</span>
@@ -114,7 +114,7 @@ const SideBarUser = () => {
             </li>
           </Link>
 
-          <Link to="/users/edit/myInfo" style={{ textDecoration: "none" }}>
+          <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
             <li>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>
