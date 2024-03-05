@@ -16,25 +16,25 @@ export default function ProductCard({ product }) {
   const navigate = useNavigate();
 
   const handleSeeDetail = () => {
-    localStorage.setItem("movieId", product.id);
+    localStorage.setItem("productId", product._id);
     dispatch({
-      type: "SET_MOVIE_ID",
-      payload: product.id,
+      type: "SET_PRODUCT_ID",
+      payload: product._id,
     });
     dispatch({
       type: "SET_DATA_DETAIL",
       payload: null,
     });
-    navigate(`/detail/${product.id}`);
+    navigate(`/detail/${product._id}`);
   };
 
   const addToCart = () => {
     const favoriteList = favorite ? favorite : [];
     let newFavorite = [...favoriteList];
-    const isMovieAlreadyInCart = newFavorite.find(
-      (existingMovie) => existingMovie.id === product.id
+    const isProductAlreadyInCart = newFavorite.find(
+      (existingProduct) => existingProduct._id === product._id
     );
-    if (!isMovieAlreadyInCart) {
+    if (!isProductAlreadyInCart) {
       newFavorite.push(product);
     }
     dispatch({

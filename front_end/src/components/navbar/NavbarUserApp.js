@@ -19,7 +19,7 @@ const NavbarUserApp = () => {
   const { dispatchDarkMode, darkMode } = useContext(DarkModeContext);
   const { state, searchProductByName, getDataAllProducts } =
     useContext(PageContext);
-  const { cartCounter, avatar } = state;
+  const { avatar, favorite, dataCart } = state;
   const [isLoading, setIsLoading] = useState(false);
 
   const [productName, setProductName] = useState("");
@@ -82,7 +82,7 @@ const NavbarUserApp = () => {
 
           <div className="item">
             <ShoppingCartIcon className="icon" />
-            <div className="counter">{cartCounter}</div>
+            <div className="counter">{dataCart ? dataCart.length : 0}</div>
           </div>
 
           <div className="item">

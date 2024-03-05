@@ -135,6 +135,18 @@ function PageProvider({ children }) {
     return resultSingleOrder;
   };
 
+  useEffect(() => {
+    const productInStoreAge = JSON.parse(localStorage.getItem("favorite"));
+    dispatch({
+      type: "SET_DATA_CART",
+      payload: productInStoreAge,
+    });
+    dispatch({
+      type: "SET_FAVORITE_OVERRIDE",
+      payload: productInStoreAge,
+    });
+  }, []);
+
   const valueToShare = {
     state,
     dispatch,

@@ -29,6 +29,7 @@ const HomePageUser = () => {
           payload: true,
         });
         await getMyInfo();
+        await getDataAllProducts();
         dispatch({
           type: "SET_LOADING",
           payload: false,
@@ -48,34 +49,6 @@ const HomePageUser = () => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      dispatch({
-        type: "SET_LOADING",
-        payload: true,
-      });
-      await getMyInfo();
-      await getDataAllProducts();
-      dispatch({
-        type: "SET_LOADING",
-        payload: false,
-      });
-    } catch (error) {
-      dispatch({
-        type: "SET_LOADING",
-        payload: false,
-      });
-      dispatch({
-        type: "SET_ERROR",
-        payload: true,
-      });
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  if (!dataAllProducts || !dataSingle) {
-    fetchData();
-  }
   if (isLoading) {
     return (
       <div className="home">

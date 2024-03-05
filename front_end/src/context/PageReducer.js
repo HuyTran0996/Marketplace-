@@ -10,8 +10,10 @@ const initialState = {
   dataAllProducts: null,
   dataSingle: null,
 
-  cartCounter: 0,
   avatar: null,
+  dataCart: [],
+  favorite: [],
+  productId: localStorage.getItem("productId"),
 };
 
 function PageReducer(state, action) {
@@ -32,11 +34,16 @@ function PageReducer(state, action) {
       return { ...state, dataAllProducts: action.payload };
     case "SET_DATA_SINGLE":
       return { ...state, dataSingle: action.payload };
+    ////////////////////USER APP////////////////
 
-    case "SET_CART_COUNTER":
-      return { ...state, cartCounter: action.payload };
     case "SET_AVATAR":
       return { ...state, avatar: action.payload };
+    case "SET_DATA_CART":
+      return { ...state, dataCart: action.payload };
+    case "SET_FAVORITE_OVERRIDE":
+      return { ...state, favorite: action.payload };
+    case "SET_PRODUCT_ID":
+      return { ...state, productId: action.payload };
 
     default:
       throw new Error("Invalid Action");
