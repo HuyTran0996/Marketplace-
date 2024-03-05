@@ -101,6 +101,11 @@ function PageProvider({ children }) {
       type: "SET_DATA_SINGLE",
       payload: resultMyInfo,
     });
+    dispatch({
+      type: "SET_AVATAR",
+      payload: resultMyInfo.data.user.photo,
+    });
+
     return resultMyInfo;
   };
 

@@ -75,7 +75,7 @@ export default function SignupPage() {
         payload: token,
       });
 
-      navigate(token === "admin" ? "/" : "/user");
+      navigate(token === "admin" ? "/" : "/userPage");
       alert("Successful account registration, click ok to continue");
       return result;
     } catch (error) {

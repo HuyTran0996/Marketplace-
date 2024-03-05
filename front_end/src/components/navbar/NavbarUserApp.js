@@ -17,29 +17,13 @@ import { DarkModeContext } from "../../context/darkModeContext";
 
 const NavbarUserApp = () => {
   const { dispatch, darkMode } = useContext(DarkModeContext);
-  const { state, getMyInfo, searchProductByName, getDataAllProducts } =
+  const { state, searchProductByName, getDataAllProducts } =
     useContext(PageContext);
-  const { dataSingle, cartCounter } = state;
+  const { cartCounter, avatar } = state;
   const [isLoading, setIsLoading] = useState(false);
-  const [file, setFile] = useState(false);
 
   const [productName, setProductName] = useState("");
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        await getMyInfo();
-        setFile(dataSingle.data.user.photo);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
 
   const handleChange = (e) => {
     setProductName(e.target.value);
@@ -104,7 +88,7 @@ const NavbarUserApp = () => {
           <div className="item">
             <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
               <img
-                src={file ? file : <AccountCircleOutlinedIcon />}
+                src={avatar ? avatar : <AccountCircleOutlinedIcon />}
                 alt="avatar"
                 className="avatar"
               />

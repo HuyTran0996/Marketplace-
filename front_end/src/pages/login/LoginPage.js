@@ -59,7 +59,7 @@ export default function LoginPage() {
         payload: token,
       });
 
-      navigate(token === "admin" ? "/" : "/user");
+      navigate(token === "admin" ? "/" : "/userPage");
 
       return;
     } catch (error) {

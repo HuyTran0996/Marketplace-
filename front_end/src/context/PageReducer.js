@@ -8,6 +8,7 @@ const initialState = {
   dataSingle: null,
 
   cartCounter: 0,
+  avatar: null,
 };
 
 function PageReducer(state, action) {
@@ -27,6 +28,8 @@ function PageReducer(state, action) {
 
     case "SET_CART_COUNTER":
       return { ...state, cartCounter: action.payload };
+    case "SET_AVATAR":
+      return { ...state, avatar: action.payload };
 
     default:
       throw new Error("Invalid Action");
