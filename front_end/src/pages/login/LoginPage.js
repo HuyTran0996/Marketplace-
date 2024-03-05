@@ -54,8 +54,12 @@ export default function LoginPage() {
       const token = result.data.user.role;
       checkCookie(token);
       setIsLoading(false);
+      dispatch({
+        type: "SET_USER_LOGIN",
+        payload: token,
+      });
 
-      navigate("/");
+      navigate(token === "admin" ? "/" : "/user");
 
       return;
     } catch (error) {

@@ -21,22 +21,24 @@ import NewPageProduct from "./pages/new/NewPageProduct";
 
 import PrivateRoutes from "./components/PrivateRoutes";
 
+import { PageContext } from "./context/PageContext";
 import { DarkModeContext } from "./context/darkModeContext";
 import SinglePage from "./pages/single/SinglePage";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  const { state } = useContext(PageContext);
+  const { token } = state;
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <Routes>
-        <Route element={<PrivateRoutes />}>
+        {token === "admin" && (
           <Route path="/">
             <Route index element={<HomePage />} />
 
             <Route path="users">
               <Route index element={<ListPageUser />} />
-              {/* <Route path="myInfo" element={<SinglePage />} /> */}
-              {/* <Route path=":userId" element={<SinglePage />} /> */}
               <Route
                 path="edit/myInfo"
                 element={<NewPageUser title="Edit User" />}
@@ -71,7 +73,46 @@ function App() {
               />
             </Route>
           </Route>
-        </Route>
+        )}
+        {token === "user" && (
+          <Route path="/user/">
+            <Route index element={<HomePage />} />
+
+            <Route path="users">
+              {/* <Route path="myInfo" element={<SinglePage />} /> */}
+              {/* <Route path=":userId" element={<SinglePage />} /> */}
+              <Route
+                path="edit/myInfo"
+                element={<NewPageUser title="Edit User" />}
+              />
+            </Route>
+
+            <Route path="stores">
+              <Route index element={<ListPageStore />} />
+              <Route
+                path="edit/:storeId"
+                element={<NewPageStore title="Edit Store" />}
+              />
+            </Route>
+
+            <Route path="orders">
+              <Route index element={<ListPageOrder />} />
+              <Route
+                path="edit/:orderId"
+                element={<NewPageOrder title="Edit Order" />}
+              />
+            </Route>
+
+            <Route path="products">
+              <Route index element={<ListPageProduct />} />
+              <Route
+                path="edit/:productId"
+                element={<NewPageProduct title="Edit Product" />}
+              />
+            </Route>
+          </Route>
+        )}
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
@@ -80,3 +121,55 @@ function App() {
 }
 
 export default App;
+
+// return (
+//   <div className={darkMode ? "app dark" : "app"}>
+//     <Routes>
+//       <Route element={<PrivateRoutes />}>
+//         <Route path="/">
+//           <Route index element={<HomePage />} />
+
+//           <Route path="users">
+//             <Route index element={<ListPageUser />} />
+//             {/* <Route path="myInfo" element={<SinglePage />} /> */}
+//             {/* <Route path=":userId" element={<SinglePage />} /> */}
+//             <Route
+//               path="edit/myInfo"
+//               element={<NewPageUser title="Edit User" />}
+//             />
+//             <Route
+//               path="edit/:userId"
+//               element={<NewPageUser title="Edit User" />}
+//             />
+//           </Route>
+
+//           <Route path="stores">
+//             <Route index element={<ListPageStore />} />
+//             <Route
+//               path="edit/:storeId"
+//               element={<NewPageStore title="Edit Store" />}
+//             />
+//           </Route>
+
+//           <Route path="orders">
+//             <Route index element={<ListPageOrder />} />
+//             <Route
+//               path="edit/:orderId"
+//               element={<NewPageOrder title="Edit Order" />}
+//             />
+//           </Route>
+
+//           <Route path="products">
+//             <Route index element={<ListPageProduct />} />
+//             <Route
+//               path="edit/:productId"
+//               element={<NewPageProduct title="Edit Product" />}
+//             />
+//           </Route>
+//         </Route>
+//       </Route>
+//       <Route path="/login" element={<LoginPage />} />
+//       <Route path="/signup" element={<SignupPage />} />
+//     </Routes>
+//   </div>
+// );

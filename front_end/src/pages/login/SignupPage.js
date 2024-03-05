@@ -67,10 +67,15 @@ export default function SignupPage() {
           withCredentials: true,
         }
       );
-      const token = result.data.token;
+      const token = result.data.user.role;
       checkCookie(token);
       setIsLoading(false);
-      navigate("/");
+      dispatch({
+        type: "SET_USER_LOGIN",
+        payload: token,
+      });
+
+      navigate(token === "admin" ? "/" : "/user");
       alert("Successful account registration, click ok to continue");
       return result;
     } catch (error) {
