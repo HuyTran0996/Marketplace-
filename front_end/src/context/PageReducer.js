@@ -1,5 +1,8 @@
 import Cookies from "js-cookie";
 const initialState = {
+  error: false,
+  isLoading: false,
+
   token: Cookies.get("forFe"),
   dataAllUsers: null,
   dataAllOrders: null,
@@ -13,6 +16,10 @@ const initialState = {
 
 function PageReducer(state, action) {
   switch (action.type) {
+    case "SET_ERROR":
+      return { ...state, error: action.payload };
+    case "SET_LOADING":
+      return { ...state, isLoading: action.payload };
     case "SET_USER_LOGIN":
       return { ...state, token: action.payload };
     case "SET_DATA_ALL_USERS":

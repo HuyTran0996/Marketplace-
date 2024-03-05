@@ -1,8 +1,13 @@
 import { apiService } from "../app/apiService";
 
-const FetchAllProducts = async () => {
-  const dataAllProducts = await apiService.get(`/products`);
-  return dataAllProducts;
+const FetchAllProducts = async (genre) => {
+  if (genre) {
+    const dataAllProducts = await apiService.get(`/products?genre=${genre}`);
+    return dataAllProducts;
+  } else {
+    const dataAllProducts = await apiService.get(`/products`);
+    return dataAllProducts;
+  }
 };
 const FetchSearchProductByName = async (productName) => {
   // Properly encode the productName to handle special characters and spaces

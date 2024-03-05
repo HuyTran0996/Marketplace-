@@ -17,41 +17,87 @@ const gridStyle = {
 };
 
 const HomePageUser = () => {
-  const [error, setError] = useState(false);
   const { state, dispatch, getDataAllProducts, getMyInfo } =
     useContext(PageContext);
-  const { dataAllProducts, dataSingle } = state;
+  const { dataAllProducts, dataSingle, error, isLoading } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        dispatch({
+          type: "SET_LOADING",
+          payload: true,
+        });
         await getMyInfo();
+        dispatch({
+          type: "SET_LOADING",
+          payload: false,
+        });
       } catch (error) {
-        setError(true);
+        dispatch({
+          type: "SET_LOADING",
+          payload: false,
+        });
+        dispatch({
+          type: "SET_ERROR",
+          payload: true,
+        });
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, []);
 
-  if (!dataAllProducts) {
-    getDataAllProducts();
+  const fetchData = async () => {
+    try {
+      dispatch({
+        type: "SET_LOADING",
+        payload: true,
+      });
+      await getMyInfo();
+      await getDataAllProducts();
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
+    } catch (error) {
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
+      dispatch({
+        type: "SET_ERROR",
+        payload: true,
+      });
+      console.error("Error fetching data:", error);
+    }
+  };
 
+  if (!dataAllProducts || !dataSingle) {
+    fetchData();
+  }
+  if (isLoading) {
     return (
       <div className="home">
         <SidebarUser />
         <div className="homeContainer">
-          {/* <Navbar /> */}
+          <NavbarUserApp />
           <div className="widgets">loading....</div>
-
-          <div className="listContainer">
-            <div className="listTitle">Latest Transactions</div>
-            Loading....
-          </div>
         </div>
       </div>
     );
-  } else {
+  }
+  if (error) {
+    return (
+      <div className="home">
+        <SidebarUser />
+        <div className="homeContainer">
+          <div className="widgets">ERROR....</div>
+        </div>
+      </div>
+    );
+  }
+  if (!isLoading && !error && dataAllProducts) {
     return (
       <div className="home">
         <SidebarUser />

@@ -16,7 +16,7 @@ import { PageContext } from "../../context/PageContext";
 import { DarkModeContext } from "../../context/darkModeContext";
 
 const NavbarUserApp = () => {
-  const { dispatch, darkMode } = useContext(DarkModeContext);
+  const { dispatchDarkMode, darkMode } = useContext(DarkModeContext);
   const { state, searchProductByName, getDataAllProducts } =
     useContext(PageContext);
   const { cartCounter, avatar } = state;
@@ -70,12 +70,12 @@ const NavbarUserApp = () => {
             {darkMode ? (
               <DarkModeOutlinedIcon
                 className="icon"
-                onClick={() => dispatch({ type: "TOGGLE" })}
+                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
               />
             ) : (
               <Brightness5Icon
                 className="icon"
-                onClick={() => dispatch({ type: "TOGGLE" })}
+                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
               />
             )}
           </div>

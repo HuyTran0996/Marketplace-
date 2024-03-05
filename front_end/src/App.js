@@ -39,6 +39,14 @@ function App() {
       navigate("/login");
       return;
     }
+    if (token === "admin") {
+      navigate("/");
+      return;
+    }
+    if (token === "user") {
+      navigate("/userPage");
+      return;
+    }
   }, []);
 
   return (

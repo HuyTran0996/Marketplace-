@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 
 import "./sidebar.scss";
 import { apiService } from "../../app/apiService";
+import { PageContext } from "../../context/PageContext";
 import { DarkModeContext } from "../../context/darkModeContext";
 
 import HomeIcon from "@mui/icons-material/Home";
@@ -19,10 +20,10 @@ import CategoryIcon from "@mui/icons-material/Category";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const SideBarUser = () => {
-  const { dispatch } = useContext(DarkModeContext);
+  const { dispatchDarkMode } = useContext(DarkModeContext);
+  const { state, dispatch, getDataAllProducts } = useContext(PageContext);
 
   const handleLogOut = async (e) => {
-    // e.preventDefault();
     Cookies.remove("forFe");
 
     try {
@@ -46,6 +47,29 @@ const SideBarUser = () => {
       alert(errorName);
     }
   };
+  const getProductByGenre = async (genre) => {
+    try {
+      dispatch({
+        type: "SET_LOADING",
+        payload: true,
+      });
+      await getDataAllProducts(genre);
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
+    } catch (error) {
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
+      dispatch({
+        type: "SET_ERROR",
+        payload: true,
+      });
+      console.log(error);
+    }
+  };
   return (
     <div className="sidebar">
       <div className="top">
@@ -58,31 +82,30 @@ const SideBarUser = () => {
         <ul>
           <p className="title">HOME</p>
           <Link to="/userPage" style={{ textDecoration: "none" }}>
-            <li>
+            <li onClick={() => getProductByGenre()}>
               <HomeIcon className="icon" />
               <span>Home Page</span>
             </li>
           </Link>
 
           <p className="title">GENRES</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
-            <li>
-              <FastfoodIcon className="icon" />
-              <span>Foods</span>
-            </li>
-            <li>
-              <DevicesIcon className="icon" />
-              <span>Devices</span>
-            </li>
-            <li>
-              <AutoStoriesIcon className="icon" />
-              <span>Stationery</span>
-            </li>
-            <li>
-              <ExploreIcon className="icon" />
-              <span>Others</span>
-            </li>
-          </Link>
+
+          <li onClick={() => getProductByGenre("Foods")}>
+            <FastfoodIcon className="icon" />
+            <span>Foods</span>
+          </li>
+          <li onClick={() => getProductByGenre("Devices")}>
+            <DevicesIcon className="icon" />
+            <span>Devices</span>
+          </li>
+          <li onClick={() => getProductByGenre("Stationery")}>
+            <AutoStoriesIcon className="icon" />
+            <span>Stationery</span>
+          </li>
+          <li onClick={() => getProductByGenre("Others")}>
+            <ExploreIcon className="icon" />
+            <span>Others</span>
+          </li>
 
           <p className="title">ABOUT YOUR STORE</p>
           <Link to="/stores" style={{ textDecoration: "none" }}>
@@ -139,11 +162,11 @@ const SideBarUser = () => {
         <div className="options">
           <div
             className="colorOption"
-            onClick={() => dispatch({ type: "LIGHT" })}
+            onClick={() => dispatchDarkMode({ type: "LIGHT" })}
           />
           <div
             className="colorOption"
-            onClick={() => dispatch({ type: "DARK" })}
+            onClick={() => dispatchDarkMode({ type: "DARK" })}
           />
         </div>
       </div>

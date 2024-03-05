@@ -58,8 +58,8 @@ function PageProvider({ children }) {
 
     return;
   };
-  const getDataAllProducts = async () => {
-    const resultAllProducts = await FetchAllProducts();
+  const getDataAllProducts = async (genre) => {
+    const resultAllProducts = await FetchAllProducts(genre);
     dispatch({
       type: "SET_DATA_ALL_PRODUCTS",
       payload: resultAllProducts,

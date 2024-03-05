@@ -9,21 +9,53 @@ import Widget from "../../components/widget/Widget";
 
 const HomePage = () => {
   const { state, dispatch, getData } = useContext(PageContext);
-  const { dataAllUsers, dataAllOrders, dataAllStores } = state;
-  if (!dataAllUsers) {
-    getData();
+  const { dataAllUsers, dataAllOrders, dataAllStores, error, isLoading } =
+    state;
 
+  const fetch = async () => {
+    try {
+      dispatch({
+        type: "SET_LOADING",
+        payload: true,
+      });
+      await getData();
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
+    } catch (error) {
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
+      dispatch({
+        type: "SET_ERROR",
+        payload: true,
+      });
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  if (!dataAllUsers) {
+    fetch();
+  }
+  if (isLoading) {
     return (
       <div className="home">
         <Sidebar />
         <div className="homeContainer">
-          {/* <Navbar /> */}
           <div className="widgets">loading....</div>
+        </div>
+      </div>
+    );
+  }
 
-          <div className="listContainer">
-            <div className="listTitle">Latest Transactions</div>
-            Loading....
-          </div>
+  if (error) {
+    return (
+      <div className="home">
+        <Sidebar />
+        <div className="homeContainer">
+          <div className="widgets">ERROR....</div>
         </div>
       </div>
     );

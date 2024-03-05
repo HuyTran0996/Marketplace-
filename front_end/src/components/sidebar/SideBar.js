@@ -15,10 +15,9 @@ import CategoryIcon from "@mui/icons-material/Category";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const Sidebar = () => {
-  const { dispatch } = useContext(DarkModeContext);
+  const { dispatchDarkMode } = useContext(DarkModeContext);
 
   const handleLogOut = async (e) => {
-    // e.preventDefault();
     Cookies.remove("forFe");
 
     try {
@@ -115,11 +114,11 @@ const Sidebar = () => {
         <div className="options">
           <div
             className="colorOption"
-            onClick={() => dispatch({ type: "LIGHT" })}
+            onClick={() => dispatchDarkMode({ type: "LIGHT" })}
           />
           <div
             className="colorOption"
-            onClick={() => dispatch({ type: "DARK" })}
+            onClick={() => dispatchDarkMode({ type: "DARK" })}
           />
         </div>
       </div>
