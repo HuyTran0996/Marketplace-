@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
-
+import Cookies from "js-cookie";
 import { PageContext } from "../context/PageContext";
 
 const PrivateRoutes = () => {
@@ -12,6 +12,13 @@ const PrivateRoutes = () => {
   useEffect(() => {
     if (token !== "admin" && token !== "user") {
       navigate(`/login`);
+    }
+    const forFeCookie = Cookies.get("forFe");
+
+    // If the cookie does not exist, navigate to /login
+    if (!forFeCookie) {
+      navigate("/login");
+      return; // Exit the effect early
     }
   }, [token, navigate]);
 
