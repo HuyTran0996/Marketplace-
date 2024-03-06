@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { usePage } from "../usePage";
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
+import { FetchCreateOrder } from "../../data/FetchOrdersData";
 import { DeleteProduct } from "../../data/FetchProductsData";
 
 import "./datatable.scss";
@@ -46,21 +47,20 @@ const DataTableCartProduct = () => {
     localStorage.setItem("favorite", JSON.stringify(updatedCart));
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setIsLoading(true);
-  //       // await getDataAllProducts();
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       setError(true);
-  //       setIsLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const createOrder = async () => {
+      try {
+        setIsLoading(true);
+        await FetchCreateOrder();
+        setIsLoading(false);
+      } catch (error) {
+        setError(true);
+        setIsLoading(false);
+      }
+    };
 
-  //   fetchData();
-  // }, [location]);
+    createOrder();
+  }, [location]);
 
   if (!dataCart || dataCart.length === 0) {
     userColumns = [
@@ -139,7 +139,7 @@ const DataTableCartProduct = () => {
           return (
             <div className="cellAction">
               <Link
-                to={`/products/edit/${params.row.id}`}
+                to={`/userPage/detail/${params.row.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <div className="editButton">See Detail</div>

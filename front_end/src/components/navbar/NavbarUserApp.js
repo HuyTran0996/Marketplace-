@@ -2,6 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import "./navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
 
+import { PageContext } from "../../context/PageContext";
+import { DarkModeContext } from "../../context/darkModeContext";
+import { FetchCreateOrder } from "../../data/FetchOrdersData";
+
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -11,9 +15,6 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-
-import { PageContext } from "../../context/PageContext";
-import { DarkModeContext } from "../../context/darkModeContext";
 
 const NavbarUserApp = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const NavbarUserApp = () => {
     setProductName(e.target.value);
   };
 
-  const moveToCartPage = () => {
+  const moveToCartPage = async () => {
     navigate("/userPage/cartPage");
   };
 

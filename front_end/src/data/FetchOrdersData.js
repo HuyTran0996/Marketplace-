@@ -1,5 +1,10 @@
 import { apiService } from "../app/apiService";
 
+const FetchCreateOrder = async () => {
+  const Order = await apiService.post(`/orders/createOrder`);
+  return Order;
+};
+
 const FetchAllOrders = async (orderId) => {
   if (orderId) {
     const encodedOrderId = encodeURIComponent(orderId);
@@ -38,6 +43,7 @@ const DeleteOrder = async (id) => {
 };
 
 export {
+  FetchCreateOrder,
   FetchAllOrders,
   FetchSingleOrder,
   FetchUpdateOrder,

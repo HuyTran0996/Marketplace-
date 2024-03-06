@@ -56,48 +56,38 @@ const Loading = ({ title }) => {
 };
 
 const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
+  const { state, dispatch } = useContext(PageContext);
   const { productId } = useParams();
 
+  const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // const formData = new FormData();
-      // formData.append("productName", productName);
-      // formData.append("description", description);
-      // formData.append("price", price);
-      // formData.append("unit", unit);
-      // formData.append("genre", genre);
-      // if (fileSubmit) {
-      //   formData.append("image", fileSubmit);
-      // }
-
-      // const formData = {
-      //   productName,
-      //   description,
-      //   price,
-      //   unit,
-      //   genre,
-      // };
-
-      // await FetchUpdateProduct({ productId, formData });
-
-      // await getSingleProduct(productId);
-
-      setIsSubmitting(false);
-      setError(false);
-      return;
-    } catch (error) {
-      console.log(`Error fetchData: ${error.name}: ${error.message}`);
-      let errorMessage = `${error.codeName}`;
-      setIsSubmitting(false);
-      setError(errorMessage);
-    }
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
   };
+
+  const handleAddToCart = async (e) => {
+    e.preventDefault();
+
+    const productInStorage = JSON.parse(localStorage.getItem("favorite"));
+    const favoriteList = productInStorage ? productInStorage : [];
+    let newFavorite = [...favoriteList];
+    const isProductAlreadyInCart = newFavorite.find(
+      (existingProduct) => existingProduct._id === productId
+    );
+    if (!isProductAlreadyInCart) {
+      newFavorite.push(dataSingle.data.product);
+    }
+
+    dispatch({
+      type: "SET_DATA_CART",
+      payload: newFavorite,
+    });
+    localStorage.setItem("favorite", JSON.stringify(newFavorite));
+  };
+
+  const handleSendComment = async (e) => {};
 
   return (
     <div className="new">
@@ -120,7 +110,7 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
           </div>
 
           <div className="right">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleAddToCart}>
               <div className="formInput" key="1">
                 <span>Store Name: {dataSingle.data.product.storeName}</span>
               </div>
@@ -141,6 +131,21 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
               </div>
 
               <button type="submit">Add To Cart</button>
+              {error ? <div className="error">{error}</div> : ""}
+            </form>
+
+            {/* ////Comment section//// */}
+            <form onSubmit={handleSendComment}>
+              <div className="formInput" key="1">
+                <label>Comment:</label>
+                <input
+                  type="text"
+                  placeholder="write a comment..."
+                  value={comment}
+                  onChange={handleCommentChange}
+                />
+              </div>
+
               {error ? <div className="error">{error}</div> : ""}
 
               <button type="submit" disabled={isSubmitting}>

@@ -20,7 +20,6 @@ export default function ProductCard({ product }) {
   };
 
   const addToCart = async () => {
-    ////////////Nhớ gắn function tạo cart, cái này chạy do tạo cart bên postman rồi/////////////
     const productInStorage = JSON.parse(localStorage.getItem("favorite"));
     const favoriteList = productInStorage ? productInStorage : [];
     let newFavorite = [...favoriteList];
