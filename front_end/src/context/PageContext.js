@@ -14,6 +14,8 @@ import {
   FetchSingleProduct,
 } from "../data/FetchProductsData";
 
+import { FetchReviewOfProduct } from "../data/FetchReviewData";
+
 const PageContext = createContext();
 
 function PageProvider({ children }) {
@@ -135,6 +137,14 @@ function PageProvider({ children }) {
     return resultSingleOrder;
   };
 
+  const getReviewsOfThis = async (productId) => {
+    const reviews = await FetchReviewOfProduct(productId);
+    dispatch({
+      type: "SET_REVIEW_THIS",
+      payload: reviews,
+    });
+  };
+
   useEffect(() => {
     const productInStorage = JSON.parse(localStorage.getItem("favorite"));
     dispatch({
@@ -157,6 +167,7 @@ function PageProvider({ children }) {
     getSingleStore,
     getSingleOrder,
     getSingleProduct,
+    getReviewsOfThis,
   };
 
   return (

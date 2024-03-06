@@ -91,6 +91,56 @@
             transition: transform 0.3s ease-in-out;
           }
         }
+
+        //comment section//////
+        .commentsSection {
+          padding: 20px;
+          margin-top: 20px;
+
+          .formInput {
+            order: 1;
+            margin-left: 0;
+            display: flex;
+            margin-bottom: 20px;
+
+            .submitIcon {
+              cursor: pointer;
+              font-size: 24px;
+              margin-left: 10px;
+              transition-duration: 0.3s;
+            }
+
+            .submitIcon:hover {
+              color: rgb(42, 207, 42);
+              filter: brightness(120%);
+              transform: scale(1.2);
+              transition: transform 0.3s ease-in-out;
+            }
+          }
+
+          .comment {
+            order: 2;
+            display: flex;
+            margin-bottom: 20px;
+
+            .commentContent {
+              flex-grow: 1;
+
+              h3 {
+                margin: 0;
+                font-size: 16px;
+                font-weight: bold;
+                color: #333; // Dark text for readability
+              }
+
+              p {
+                margin: 0;
+                font-size: 14px;
+                color: #666; // Lighter text for the review
+              }
+            }
+          }
+        }
       }
     }
   }
