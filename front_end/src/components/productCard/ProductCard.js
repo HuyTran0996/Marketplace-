@@ -12,24 +12,17 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function ProductCard({ product }) {
   const { state, dispatch } = useContext(PageContext);
-  const { favorite } = state;
+  const { dataCart } = state;
   const navigate = useNavigate();
 
   const handleSeeDetail = () => {
-    localStorage.setItem("productId", product._id);
-    dispatch({
-      type: "SET_PRODUCT_ID",
-      payload: product._id,
-    });
-    dispatch({
-      type: "SET_DATA_DETAIL",
-      payload: null,
-    });
-    navigate(`/detail/${product._id}`);
+    navigate(`/userPage/detail/${product._id}`);
   };
 
-  const addToCart = () => {
-    const favoriteList = favorite ? favorite : [];
+  const addToCart = async () => {
+    ////////////Nhớ gắn function tạo cart, cái này chạy do tạo cart bên postman rồi/////////////
+    const productInStorage = JSON.parse(localStorage.getItem("favorite"));
+    const favoriteList = productInStorage ? productInStorage : [];
     let newFavorite = [...favoriteList];
     const isProductAlreadyInCart = newFavorite.find(
       (existingProduct) => existingProduct._id === product._id
@@ -37,10 +30,7 @@ export default function ProductCard({ product }) {
     if (!isProductAlreadyInCart) {
       newFavorite.push(product);
     }
-    dispatch({
-      type: "SET_FAVORITE_OVERRIDE",
-      payload: newFavorite,
-    });
+
     dispatch({
       type: "SET_DATA_CART",
       payload: newFavorite,

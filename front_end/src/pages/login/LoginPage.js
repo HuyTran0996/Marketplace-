@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import PrivateRoutes from "../../components/PrivateRoutes";
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 import "./login.scss";

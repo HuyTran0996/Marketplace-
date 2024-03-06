@@ -24,6 +24,11 @@ const SideBarUser = () => {
   const { state, dispatch, getDataAllProducts } = useContext(PageContext);
 
   const handleLogOut = async (e) => {
+    localStorage.removeItem("favorite");
+    dispatch({
+      type: "SET_DATA_CART",
+      payload: [],
+    });
     Cookies.remove("forFe");
 
     try {

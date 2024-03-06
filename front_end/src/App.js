@@ -15,14 +15,14 @@ import {
   ListPageStore,
   ListPageOrder,
   ListPageProduct,
+  ListPageCartProduct,
 } from "./pages/list/ListPage";
 
 import NewPageUser from "./pages/new/NewPageUser";
 import NewPageStore from "./pages/new/NewPageStore";
 import NewPageOrder from "./pages/new/NewPageOrder";
 import NewPageProduct from "./pages/new/NewPageProduct";
-
-import PrivateRoutes from "./components/PrivateRoutes";
+import NewPageDetailProduct from "./pages/new/NewPageDetailProduct";
 
 import { PageContext } from "./context/PageContext";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -54,6 +54,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+
         {token === "admin" && (
           <Route path="/">
             <Route index element={<HomePage />} />
@@ -98,10 +99,16 @@ function App() {
         {token === "user" && (
           <Route path="/userPage/">
             <Route index element={<HomePageUser />} />
-
             <Route
               path="edit/myInfo"
               element={<NewPageUser title="Edit User" />}
+            />
+
+            <Route path="cartPage" element={<ListPageCartProduct />} />
+
+            <Route
+              path="detail/:productId"
+              element={<NewPageDetailProduct title="Product Detail" />}
             />
 
             <Route path="stores">

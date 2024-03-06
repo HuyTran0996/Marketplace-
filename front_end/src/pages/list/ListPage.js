@@ -1,6 +1,7 @@
 import "./list.scss";
 
 import Sidebar from "../../components/sidebar/SideBar";
+import SideBarUser from "../../components/sidebar/SideBarUser";
 
 import NavbarProduct from "../../components/navbar/NavbarProduct";
 import NavbarUser from "../../components/navbar/NavbarUser";
@@ -11,6 +12,7 @@ import DataTableUser from "../../components/datatable/DataTableUser";
 import DataTableStore from "../../components/datatable/DataTableStore";
 import DataTableOrder from "../../components/datatable/DataTableOrder";
 import DataTableProduct from "../../components/datatable/DataTableProduct";
+import DataTableCartProduct from "../../components/datatable/DataTableCartProduct";
 
 const ListPageUser = () => {
   return (
@@ -56,5 +58,22 @@ const ListPageProduct = () => {
     </div>
   );
 };
+const ListPageCartProduct = () => {
+  return (
+    <div className="list">
+      <SideBarUser />
+      <div className="listContainer">
+        {/* <NavbarProduct /> */}
+        <DataTableCartProduct />
+      </div>
+    </div>
+  );
+};
 
-export { ListPageUser, ListPageStore, ListPageOrder, ListPageProduct };
+export {
+  ListPageUser,
+  ListPageStore,
+  ListPageOrder,
+  ListPageProduct,
+  ListPageCartProduct,
+};

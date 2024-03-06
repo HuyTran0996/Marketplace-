@@ -12,7 +12,6 @@ const initialState = {
 
   avatar: null,
   dataCart: [],
-  favorite: [],
   productId: localStorage.getItem("productId"),
 };
 
@@ -40,8 +39,6 @@ function PageReducer(state, action) {
       return { ...state, avatar: action.payload };
     case "SET_DATA_CART":
       return { ...state, dataCart: action.payload };
-    case "SET_FAVORITE_OVERRIDE":
-      return { ...state, favorite: action.payload };
     case "SET_PRODUCT_ID":
       return { ...state, productId: action.payload };
 
