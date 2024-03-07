@@ -22,28 +22,27 @@ const DataTableCartProduct = () => {
   let userColumns = [];
   let actionColumn = [];
 
-  const handleQuantityChange = (productId, change) => {
-    // Find the product in the cart
-    const productIndex = dataCart.findIndex((item) => item._id === productId);
-    if (productIndex === -1) return; // Product not found, do nothing
-
-    // Update the quantity of the product
-    const updatedProduct = {
-      ...dataCart[productIndex],
-      quantity: dataCart[productIndex].quantity + change,
-    };
-
-    // Update the cart state
-    const updatedCart = [...dataCart];
-    updatedCart[productIndex] = updatedProduct;
-
-    // Dispatch the updated cart to the context
+  const handleIncreaseQuantity = (itemId) => {
+    const updatedCart = dataCart.map((item) =>
+      item._id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+    );
     dispatch({
       type: "SET_DATA_CART",
       payload: updatedCart,
     });
+    localStorage.setItem("favorite", JSON.stringify(updatedCart));
+  };
 
-    // Optionally, update localStorage if you're using it to persist cart data
+  const handleDecreaseQuantity = (itemId) => {
+    const updatedCart = dataCart.map((item) =>
+      item._id === itemId
+        ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+        : item
+    );
+    dispatch({
+      type: "SET_DATA_CART",
+      payload: updatedCart,
+    });
     localStorage.setItem("favorite", JSON.stringify(updatedCart));
   };
 
@@ -106,31 +105,41 @@ const DataTableCartProduct = () => {
       {
         field: "unit",
         headerName: "Unit",
-        width: 50,
+        width: 60,
       },
-      {
-        field: "description",
-        headerName: "Description",
-        width: 200,
-      },
+    ];
+
+    actionColumn = [
       {
         field: "quantity",
         headerName: "Quantity",
-        width: 150,
+        width: 75,
         renderCell: (params) => (
-          <div>
-            <button onClick={() => handleQuantityChange(params.row.id, -1)}>
+          <div className="quantity">
+            <button onClick={() => handleDecreaseQuantity(params.row._id)}>
               -
             </button>
-            <span>{params.row.quantity || 0}</span>
-            <button onClick={() => handleQuantityChange(params.row.id, 1)}>
+            <span>{params.row.quantity}</span>
+            <button onClick={() => handleIncreaseQuantity(params.row._id)}>
               +
             </button>
           </div>
         ),
       },
-    ];
-    actionColumn = [
+
+      {
+        field: "Total",
+        headerName: "Total",
+        width: 90,
+        renderCell: (params) => {
+          return (
+            <span>
+              {(params.row.quantity * params.row.price).toLocaleString()}
+            </span>
+          );
+        },
+      },
+
       {
         field: "action",
         headerName: "ACTION",

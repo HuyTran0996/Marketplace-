@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
       (existingProduct) => existingProduct._id === product._id
     );
     if (!isProductAlreadyInCart) {
-      newFavorite.push(product);
+      newFavorite.push({ ...product, quantity: 1 });
     }
 
     dispatch({

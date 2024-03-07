@@ -86,7 +86,7 @@ const ProductDetails = ({
       (existingProduct) => existingProduct._id === productId
     );
     if (!isProductAlreadyInCart) {
-      newFavorite.push(dataSingle.data.product);
+      newFavorite.push({ ...dataSingle.data.product, quantity: 1 });
     }
 
     dispatch({
