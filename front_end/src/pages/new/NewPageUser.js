@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { PageContext } from "../../context/PageContext";
@@ -61,6 +61,7 @@ const Loading = ({ title }) => {
 };
 
 const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
+  const navigate = useNavigate();
   const { userId } = useParams();
   const { isUserEditPage, isMyInfoEditPage, isUserApp } = usePage();
   const [name, setName] = useState(`${dataSingle.data.user.name}`);
@@ -79,6 +80,11 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
   const handleFileChange = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
     setFileSubmit(e.target.files[0]);
+  };
+
+  const moveToChangePasswordPage = (e) => {
+    e.preventDefault();
+    navigate("/changePassword");
   };
 
   const handleSubmit = async (e) => {
@@ -180,6 +186,12 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
 
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Loading..." : "Send"}
+              </button>
+              <button
+                onClick={moveToChangePasswordPage}
+                disabled={isSubmitting}
+              >
+                Change Your Password
               </button>
             </form>
           </div>

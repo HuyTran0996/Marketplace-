@@ -10,6 +10,7 @@ import HomePage from "./pages/home/HomePage";
 import HomePageUser from "./pages/home/HomePageUser";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/login/SignupPage";
+import ChangePasswordPage from "./pages/login/ChangePasswordPage";
 import {
   ListPageUser,
   ListPageStore,
@@ -54,6 +55,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/changePassword" element={<ChangePasswordPage />} />
 
         {token === "admin" && (
           <Route path="/">
