@@ -53,7 +53,7 @@ export default function ProductCard({ product }) {
         </Typography>
 
         <Typography variant="body2">
-          Price: {product.price}/{product.unit}
+          Price: {product.price.toLocaleString()}/{product.unit}
         </Typography>
       </CardContent>
 

@@ -148,7 +148,7 @@ const ProductDetails = ({
 
               <div className="formInput" key="4">
                 <span>
-                  Price: {dataSingle.data.product.price}/
+                  Price: {dataSingle.data.product.price.toLocaleString()}/
                   {dataSingle.data.product.unit}
                 </span>
               </div>
