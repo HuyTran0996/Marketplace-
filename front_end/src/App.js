@@ -17,6 +17,8 @@ import {
   ListPageOrder,
   ListPageProduct,
   ListPageCartProduct,
+  ListPageOrderUserApp,
+  ListPageOrderDetail,
 } from "./pages/list/ListPage";
 
 import NewPageUser from "./pages/new/NewPageUser";
@@ -112,6 +114,9 @@ function App() {
               path="detail/:productId"
               element={<NewPageDetailProduct title="Product Detail" />}
             />
+
+            <Route path="myOrders" element={<ListPageOrderUserApp />} />
+            <Route path="myOrders/:orderID" element={<ListPageOrderDetail />} />
 
             <Route path="stores">
               <Route index element={<ListPageStore />} />

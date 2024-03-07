@@ -1,13 +1,15 @@
 import { apiService } from "../app/apiService";
 
-const FetchAllOrders = async (orderId) => {
+const FetchAllOrdersProduct = async (orderId) => {
   if (orderId) {
     const encodedOrderId = encodeURIComponent(orderId);
-    const dataAllOrders = await apiService.get(`/orders?_id=${encodedOrderId}`);
-    return dataAllOrders;
+    const dataAllOrdersProduct = await apiService.get(
+      `/orderProducts?orderID=${encodedOrderId}`
+    );
+    return dataAllOrdersProduct;
   } else {
-    const dataAllOrders = await apiService.get(`/orders`);
-    return dataAllOrders;
+    const dataAllOrdersProduct = await apiService.get(`/orderProducts`);
+    return dataAllOrdersProduct;
   }
 };
 const FetchCreateOrderProduct = async (data) => {
@@ -43,4 +45,4 @@ const DeleteOrder = async (id) => {
   return deleteOrder;
 };
 
-export { FetchCreateOrderProduct };
+export { FetchAllOrdersProduct, FetchCreateOrderProduct };

@@ -135,7 +135,7 @@ const SideBarUser = () => {
           </Link>
 
           <p className="title">USER</p>
-          <Link to="/users/edit/myInfo" style={{ textDecoration: "none" }}>
+          <Link to="/userPage/myOrders" style={{ textDecoration: "none" }}>
             <li>
               <FormatListBulletedIcon className="icon" />
               <span>Your Orders</span>

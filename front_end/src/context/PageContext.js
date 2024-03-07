@@ -7,7 +7,11 @@ import {
   FetchMyInfo,
 } from "../data/FetchUsersData";
 import { FetchAllStores, FetchSingleStore } from "../data/FetchStoresData";
-import { FetchAllOrders, FetchSingleOrder } from "../data/FetchOrdersData";
+import {
+  FetchAllOrders,
+  FetchSingleOrder,
+  FetchAllOrdersOfAUser,
+} from "../data/FetchOrdersData";
 import {
   FetchAllProducts,
   FetchSearchProductByName,
@@ -53,6 +57,15 @@ function PageProvider({ children }) {
   };
   const getDataAllOrders = async (orderId) => {
     const resultAllOrders = await FetchAllOrders(orderId);
+    dispatch({
+      type: "SET_DATA_ALL_ORDERS",
+      payload: resultAllOrders,
+    });
+
+    return;
+  };
+  const getDataAllOrdersOfAUser = async (userID) => {
+    const resultAllOrders = await FetchAllOrdersOfAUser(userID);
     dispatch({
       type: "SET_DATA_ALL_ORDERS",
       payload: resultAllOrders,
@@ -159,6 +172,7 @@ function PageProvider({ children }) {
     getData,
     getDataAllUsers,
     getDataAllOrders,
+    getDataAllOrdersOfAUser,
     getDataAllStores,
     getDataAllProducts,
     searchProductByName,

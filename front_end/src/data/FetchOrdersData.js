@@ -15,6 +15,13 @@ const FetchAllOrders = async (orderId) => {
     return dataAllOrders;
   }
 };
+const FetchAllOrdersOfAUser = async (userID) => {
+  const encodedOrderId = encodeURIComponent(userID);
+  const dataAllOrders = await apiService.get(
+    `/orders?customerID=${encodedOrderId}`
+  );
+  return dataAllOrders;
+};
 
 const FetchSingleOrder = async (orderId) => {
   const dataSingleOrder = await apiService.get(`/orders/${orderId}`);
@@ -45,6 +52,7 @@ const DeleteOrder = async (id) => {
 export {
   FetchCreateOrder,
   FetchAllOrders,
+  FetchAllOrdersOfAUser,
   FetchSingleOrder,
   FetchUpdateOrder,
   FetchCancelOrder,

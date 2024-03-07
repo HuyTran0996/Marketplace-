@@ -9,6 +9,7 @@ export const usePage = () => {
     isStorePage: false,
     isOrderPage: false,
     isProductPage: false,
+    isOrderPageUserApp: false,
   });
 
   //url
@@ -19,8 +20,8 @@ export const usePage = () => {
   const orders = "orders";
   const products = "products";
   const edit = "edit";
-  // const myInfo = "myInfo";
-  // const myInfo = "myInfo";
+
+  const myOrders = "myOrders";
   // const myInfo = "myInfo";
   // const myInfo = "myInfo";
   // const myInfo = "myInfo";
@@ -49,6 +50,8 @@ export const usePage = () => {
       currentUrl.includes(stores) && currentUrl.includes(edit);
     const isOrderEditPage =
       currentUrl.includes(orders) && currentUrl.includes(edit);
+    const isOrderPageUserApp =
+      currentUrl.includes(userPage) && currentUrl.includes(myOrders);
     const isProductEditPage =
       currentUrl.includes(products) && currentUrl.includes(edit);
 
@@ -64,6 +67,7 @@ export const usePage = () => {
       isStoreEditPage,
       isOrderEditPage,
       isProductEditPage,
+      isOrderPageUserApp,
     });
   }, [location]);
 

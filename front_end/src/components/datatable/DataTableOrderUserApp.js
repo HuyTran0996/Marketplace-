@@ -2,21 +2,17 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { usePage } from "../usePage";
-
-import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
-
-import { DeleteOrder, FetchCancelOrder } from "../../data/FetchOrdersData";
 
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
-const DataTableOrder = () => {
+const DataTableOrderUserApp = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { state, getDataAllOrders } = useContext(PageContext);
-  const { dataAllOrders } = state;
-  const { isOrderPage } = usePage();
+  const { state, getDataAllOrdersOfAUser } = useContext(PageContext);
+  const { dataAllOrders, dataSingle } = state;
+  const { isOrderPageUserApp } = usePage();
   let dataOriginal = [];
   let userColumns = [];
   let actionColumn = [];
@@ -25,7 +21,7 @@ const DataTableOrder = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataAllOrders();
+        await getDataAllOrdersOfAUser(dataSingle.data.user._id);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -35,19 +31,21 @@ const DataTableOrder = () => {
     };
 
     fetchData();
-  }, [isOrderPage]);
+  }, [isOrderPageUserApp]);
 
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   }
 
-  if (isOrderPage && !isLoading) {
+  if (isOrderPageUserApp && !isLoading) {
     if (error) {
       userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
     } else {
-      dataOriginal = dataAllOrders.data.orders;
+      dataOriginal = dataAllOrders.data.orders.filter(
+        (order) => order.orderStatus !== "openToAdd"
+      );
       userColumns = [
-        { field: "id", headerName: "ID", width: 240 },
+        { field: "id", headerName: "ORDER ID", width: 240 },
 
         {
           field: "customerName",
@@ -88,24 +86,11 @@ const DataTableOrder = () => {
             return (
               <div className="cellAction">
                 <Link
-                  to={`/orders/edit/${params.row.id}`}
+                  to={`/userPage/myOrders/${params.row.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <div className="editButton">View & Edit</div>
+                  <div className="editButton">See Detail</div>
                 </Link>
-
-                <div
-                  className="cancelButton"
-                  onClick={() => handleCancelOrder(params.row.id)}
-                >
-                  Cancel Order
-                </div>
-                <div
-                  className="deleteButton"
-                  onClick={() => handleDelete(params.row.id)}
-                >
-                  Delete
-                </div>
               </div>
             );
           },
@@ -121,18 +106,6 @@ const DataTableOrder = () => {
     };
   });
 
-  const handleCancelOrder = async (id) => {
-    await FetchCancelOrder(id);
-    await getDataAllOrders();
-  };
-
-  const handleDelete = async (id) => {
-    if (isOrderPage) {
-      await DeleteOrder(id);
-      await getDataAllOrders();
-    }
-  };
-
   return (
     <div className="datatable">
       <DataGrid
@@ -147,4 +120,4 @@ const DataTableOrder = () => {
   );
 };
 
-export default DataTableOrder;
+export default DataTableOrderUserApp;

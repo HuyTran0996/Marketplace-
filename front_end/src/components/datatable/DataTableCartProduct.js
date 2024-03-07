@@ -80,11 +80,11 @@ const DataTableCartProduct = () => {
     });
     localStorage.setItem("favorite", JSON.stringify(updatedCart));
   };
+
   const calculateTotalPrice = () => {
-    return dataCart.reduce(
-      (total, item) => total + item.quantity * item.price,
-      0
-    );
+    // Ensure dataCart is always an array to safely use reduce
+    const cart = Array.isArray(dataCart) ? dataCart : [];
+    return cart.reduce((total, item) => total + item.quantity * item.price, 0);
   };
 
   const handleSendOrder = async (e, orderId) => {
@@ -115,11 +115,6 @@ const DataTableCartProduct = () => {
         setIsLoading(false);
         setError(true);
       }
-
-      // console.log(
-      //   `Added To Order: ${item.productName} with quantity ${item.quantity}`
-      // );
-      // console.log("546544", data);
     });
   };
 
