@@ -13,6 +13,7 @@ const initialState = {
   avatar: null,
   dataCart: [],
   reviewsOfThisProduct: null,
+  userEmail: null,
   // productId: localStorage.getItem("productId"),
 };
 
@@ -42,9 +43,10 @@ function PageReducer(state, action) {
       return { ...state, dataCart: action.payload };
     case "SET_REVIEW_THIS":
       return { ...state, reviewsOfThisProduct: action.payload };
+    case "SET_USER_EMAIL":
+      return { ...state, userEmail: action.payload };
     // case "SET_PRODUCT_ID":
     //   return { ...state, productId: action.payload };
-
     default:
       throw new Error("Invalid Action");
   }

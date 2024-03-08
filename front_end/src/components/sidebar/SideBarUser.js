@@ -113,14 +113,17 @@ const SideBarUser = () => {
           </li>
 
           <p className="title">ABOUT YOUR STORE</p>
-          <Link to="/stores" style={{ textDecoration: "none" }}>
+          <Link to="/userPage/stores" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
-              <span>Your Store</span>
+              <span>Your Store Info</span>
             </li>
           </Link>
 
-          <Link to="/orders" style={{ textDecoration: "none" }}>
+          <Link
+            to="/userPage/stores/yourStoreOrdersProduct"
+            style={{ textDecoration: "none" }}
+          >
             <li>
               <CreditCardIcon className="icon" />
               <span>Your Store Order</span>

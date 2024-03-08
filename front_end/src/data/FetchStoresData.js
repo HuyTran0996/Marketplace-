@@ -11,10 +11,24 @@ const FetchAllStores = async (storeName) => {
     return dataAllStores;
   }
 };
+const FetchStoreByOwnerEmail = async (ownerEmail) => {
+  const dataAllStores = await apiService.get(
+    `/stores?ownerEmail=${ownerEmail}`
+  );
+  return dataAllStores;
+};
 
 const FetchSingleStore = async (storeId) => {
   const dataSingleStore = await apiService.get(`/stores/${storeId}`);
   return dataSingleStore;
+};
+
+const FetchCreateStore = async ({ data }) => {
+  const dataUpdateStore = await apiService.post(`/stores`, data, {
+    withCredentials: true,
+  });
+
+  return dataUpdateStore;
 };
 
 const FetchUpdateStore = async ({ storeId, formData }) => {
@@ -34,4 +48,11 @@ const DeleteStore = async (storeId) => {
   return deleteStore;
 };
 
-export { FetchAllStores, FetchSingleStore, FetchUpdateStore, DeleteStore };
+export {
+  FetchAllStores,
+  FetchStoreByOwnerEmail,
+  FetchCreateStore,
+  FetchSingleStore,
+  FetchUpdateStore,
+  DeleteStore,
+};

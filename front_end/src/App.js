@@ -19,6 +19,7 @@ import {
   ListPageCartProduct,
   ListPageOrderUserApp,
   ListPageOrderDetail,
+  ListPageOrderDetailOfStore,
 } from "./pages/list/ListPage";
 
 import NewPageUser from "./pages/new/NewPageUser";
@@ -26,6 +27,7 @@ import NewPageStore from "./pages/new/NewPageStore";
 import NewPageOrder from "./pages/new/NewPageOrder";
 import NewPageProduct from "./pages/new/NewPageProduct";
 import NewPageDetailProduct from "./pages/new/NewPageDetailProduct";
+import NewPageStoreOfUserApp from "./pages/new/NewPageStoreOfUserApp";
 
 import { PageContext } from "./context/PageContext";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -119,11 +121,19 @@ function App() {
             <Route path="myOrders/:orderID" element={<ListPageOrderDetail />} />
 
             <Route path="stores">
-              <Route index element={<ListPageStore />} />
+              {/* <Route index element={<ListPageStore />} /> */}
               <Route
+                index
+                element={<NewPageStoreOfUserApp title="Your Store" />}
+              />
+              <Route
+                path="yourStoreOrdersProduct"
+                element={<ListPageOrderDetailOfStore />}
+              />
+              {/* <Route
                 path="edit/:storeId"
                 element={<NewPageStore title="Edit Store" />}
-              />
+              /> */}
             </Route>
 
             <Route path="orders">

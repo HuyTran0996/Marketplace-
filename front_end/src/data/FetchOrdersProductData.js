@@ -12,6 +12,14 @@ const FetchAllOrdersProduct = async (orderId) => {
     return dataAllOrdersProduct;
   }
 };
+const FetchAllOrdersProductOfStore = async (storeName) => {
+  const encodedOrderId = encodeURIComponent(storeName);
+  const dataAllOrdersProduct = await apiService.get(
+    `/orderProducts?storeName=${storeName}`
+  );
+  return dataAllOrdersProduct;
+};
+
 const FetchCreateOrderProduct = async (data) => {
   const Order = await apiService.post(`/orderProducts`, data, {
     withCredentials: true,
@@ -45,4 +53,8 @@ const DeleteOrder = async (id) => {
   return deleteOrder;
 };
 
-export { FetchAllOrdersProduct, FetchCreateOrderProduct };
+export {
+  FetchAllOrdersProduct,
+  FetchCreateOrderProduct,
+  FetchAllOrdersProductOfStore,
+};

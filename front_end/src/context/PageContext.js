@@ -6,7 +6,11 @@ import {
   FetchSingleUser,
   FetchMyInfo,
 } from "../data/FetchUsersData";
-import { FetchAllStores, FetchSingleStore } from "../data/FetchStoresData";
+import {
+  FetchAllStores,
+  FetchSingleStore,
+  FetchStoreByOwnerEmail,
+} from "../data/FetchStoresData";
 import {
   FetchAllOrders,
   FetchSingleOrder,
@@ -100,6 +104,18 @@ function PageProvider({ children }) {
 
     return;
   };
+  const getDataAllStoreByOwnerEmail = async (ownerEmail) => {
+    const resultStore = await FetchStoreByOwnerEmail(ownerEmail);
+
+    resultStore.data.stores = { ...resultStore.data.stores[0] };
+
+    dispatch({
+      type: "SET_DATA_SINGLE",
+      payload: resultStore,
+    });
+
+    return resultStore;
+  };
 
   const getSingleUser = async (userId) => {
     const resultSingleUser = await FetchSingleUser(userId);
@@ -119,6 +135,10 @@ function PageProvider({ children }) {
     dispatch({
       type: "SET_AVATAR",
       payload: resultMyInfo.data.user.photo,
+    });
+    dispatch({
+      type: "SET_USER_EMAIL",
+      payload: resultMyInfo.data.user.email,
     });
 
     return resultMyInfo;
@@ -174,6 +194,7 @@ function PageProvider({ children }) {
     getDataAllOrders,
     getDataAllOrdersOfAUser,
     getDataAllStores,
+    getDataAllStoreByOwnerEmail,
     getDataAllProducts,
     searchProductByName,
     getSingleUser,

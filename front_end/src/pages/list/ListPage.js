@@ -15,6 +15,7 @@ import DataTableProduct from "../../components/datatable/DataTableProduct";
 import DataTableCartProduct from "../../components/datatable/DataTableCartProduct";
 import DataTableOrderUserApp from "../../components/datatable/DataTableOrderUserApp";
 import DataTableOrderDetail from "../../components/datatable/DataTableOrderDetail";
+import DataTableOrderDetailOfStoreUserApp from "../../components/datatable/DataTableOrderDetailOfStoreUserApp";
 
 const ListPageUser = () => {
   return (
@@ -95,6 +96,18 @@ const ListPageOrderDetail = () => {
     </div>
   );
 };
+const ListPageOrderDetailOfStore = () => {
+  return (
+    <div className="list">
+      <SideBarUser />
+      <div className="listContainer">
+        {/* <NavbarProduct /> */}
+        {/* <DataTableCartProduct /> */}
+        <DataTableOrderDetailOfStoreUserApp />
+      </div>
+    </div>
+  );
+};
 
 export {
   ListPageUser,
@@ -104,4 +117,5 @@ export {
   ListPageCartProduct,
   ListPageOrderUserApp,
   ListPageOrderDetail,
+  ListPageOrderDetailOfStore,
 };
