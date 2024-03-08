@@ -302,14 +302,16 @@ const NewPageStoreOfUserApp = ({ title }) => {
   const [foundNoStore, setFoundNoStore] = useState(false);
   const { state, getSingleStore, getDataAllStoreByOwnerEmail } =
     useContext(PageContext);
-  const { dataSingle, userEmail } = state;
+  const { dataSingle, dataUser } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         // await getSingleStore(storeId);
-        const result = await getDataAllStoreByOwnerEmail(userEmail);
+        const result = await getDataAllStoreByOwnerEmail(
+          dataUser.data.user.email
+        );
 
         if (result?.data?.totalStores === 0) {
           setFoundNoStore(true);
@@ -329,7 +331,7 @@ const NewPageStoreOfUserApp = ({ title }) => {
     <Loading title={title} />
   ) : foundNoStore ? (
     <CreateStore
-      userEmail={userEmail}
+      userEmail={dataUser.data.user.email}
       setFoundNoStore={setFoundNoStore}
       getDataAllStoreByOwnerEmail={getDataAllStoreByOwnerEmail}
     />

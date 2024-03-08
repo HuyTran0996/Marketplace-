@@ -10,8 +10,8 @@ import { DataGrid } from "@mui/x-data-grid";
 const DataTableOrderUserApp = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { state, getDataAllOrdersOfAUser } = useContext(PageContext);
-  const { dataAllOrders, dataSingle } = state;
+  const { state, getDataAllOrdersOfAUser, getMyInfo } = useContext(PageContext);
+  const { dataAllOrders, dataSingle, dataUser } = state;
   const { isOrderPageUserApp } = usePage();
   let dataOriginal = [];
   let userColumns = [];
@@ -21,7 +21,8 @@ const DataTableOrderUserApp = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataAllOrdersOfAUser(dataSingle.data.user._id);
+
+        await getDataAllOrdersOfAUser(dataUser.data.user._id);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);

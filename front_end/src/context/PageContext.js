@@ -132,13 +132,10 @@ function PageProvider({ children }) {
       type: "SET_DATA_SINGLE",
       payload: resultMyInfo,
     });
+
     dispatch({
-      type: "SET_AVATAR",
-      payload: resultMyInfo.data.user.photo,
-    });
-    dispatch({
-      type: "SET_USER_EMAIL",
-      payload: resultMyInfo.data.user.email,
+      type: "SET_DATA_USER",
+      payload: resultMyInfo,
     });
 
     return resultMyInfo;

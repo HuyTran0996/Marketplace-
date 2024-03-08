@@ -27,17 +27,20 @@ const FetchCreateOrderProduct = async (data) => {
   return Order;
 };
 
+const FetchUpdateOrderProduct = async ({ orderProductId, data }) => {
+  const dataUpdateOrder = await apiService.patch(
+    `/orderProducts/${orderProductId}`,
+    data,
+    {
+      withCredentials: true,
+    }
+  );
+
+  return dataUpdateOrder;
+};
 const FetchSingleOrder = async (orderId) => {
   const dataSingleOrder = await apiService.get(`/orders/${orderId}`);
   return dataSingleOrder;
-};
-
-const FetchUpdateOrder = async ({ orderId, data }) => {
-  const dataUpdateOrder = await apiService.patch(`/orders/${orderId}`, data, {
-    withCredentials: true,
-  });
-
-  return dataUpdateOrder;
 };
 
 const FetchCancelOrder = async (orderId) => {
@@ -57,4 +60,5 @@ export {
   FetchAllOrdersProduct,
   FetchCreateOrderProduct,
   FetchAllOrdersProductOfStore,
+  FetchUpdateOrderProduct,
 };

@@ -14,7 +14,7 @@ const NavbarUserCartApp = () => {
   const navigate = useNavigate();
   const { dispatchDarkMode, darkMode } = useContext(DarkModeContext);
   const { state } = useContext(PageContext);
-  const { avatar, dataCart } = state;
+  const { dataCart, dataUser } = state;
 
   const [productName, setProductName] = useState("");
 
@@ -50,7 +50,13 @@ const NavbarUserCartApp = () => {
           <div className="item">
             <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
               <img
-                src={avatar ? avatar : <AccountCircleOutlinedIcon />}
+                src={
+                  dataUser.data.user.photo ? (
+                    dataUser.data.user.photo
+                  ) : (
+                    <AccountCircleOutlinedIcon />
+                  )
+                }
                 alt="avatar"
                 className="avatar"
               />

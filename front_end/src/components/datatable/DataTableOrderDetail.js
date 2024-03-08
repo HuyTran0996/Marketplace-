@@ -109,6 +109,11 @@ const DataTableOrderDetail = () => {
           );
         },
       },
+      {
+        field: "orderProductStatus",
+        headerName: "Order Product Status",
+        width: 190,
+      },
     ];
   }
 

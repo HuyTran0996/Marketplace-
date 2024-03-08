@@ -4,6 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import {
   FetchAllOrdersProduct,
   FetchAllOrdersProductOfStore,
+  FetchUpdateOrderProduct,
 } from "../../data/FetchOrdersProductData";
 import { PageContext } from "../../context/PageContext";
 
@@ -18,10 +19,11 @@ const DataTableOrderDetailOfStoreUserApp = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [listProducts, setListProducts] = useState([]);
+  const [orderStatus, setOrderStatus] = useState("");
 
   const { state, getSingleStore, getDataAllStoreByOwnerEmail } =
     useContext(PageContext);
-  const { dataSingle, userEmail } = state;
+  const { dataSingle, dataUser } = state;
 
   let dataOriginal = [];
   let userColumns = [];
@@ -33,7 +35,9 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         setError(false);
         setIsLoading(true);
         // await getSingleStore(storeId);
-        const result = await getDataAllStoreByOwnerEmail(userEmail);
+        const result = await getDataAllStoreByOwnerEmail(
+          dataUser.data.user.email
+        );
 
         if (result?.data?.totalStores === 0) {
           setFoundNoStore(true);
@@ -65,6 +69,43 @@ const DataTableOrderDetailOfStoreUserApp = () => {
 
   const totalPrice = calculateTotalPrice();
 
+  const handleDelivered = async (orderProductId, productID) => {
+    try {
+      setError(false);
+      setIsLoading(true);
+
+      const data = {
+        orderProductStatus: "deliveredToApp",
+        productID: productID,
+      };
+      await FetchUpdateOrderProduct({ orderProductId, data });
+      await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setIsLoading(false);
+      setError(true);
+    }
+  };
+  const handleCancel = async (orderProductId, productID) => {
+    try {
+      setError(false);
+      setIsLoading(true);
+
+      const data = {
+        orderProductStatus: "canceledByStore",
+        productID: productID,
+      };
+      await FetchUpdateOrderProduct({ orderProductId, data });
+      await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setIsLoading(false);
+      setError(true);
+    }
+  };
+
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   } else if (error || !listProducts) {
@@ -77,6 +118,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
     dataOriginal = listProducts;
     userColumns = [
       { field: "id", headerName: "ID", width: 70 },
+      { field: "productID", headerName: "pID", width: 70 },
       {
         field: "storeName",
         headerName: "Store",
@@ -104,9 +146,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         headerName: "Unit",
         width: 60,
       },
-    ];
 
-    actionColumn = [
       {
         field: "quantity",
         headerName: "Quantity",
@@ -127,6 +167,41 @@ const DataTableOrderDetailOfStoreUserApp = () => {
             <span>
               {(params.row.quantity * params.row.productPrice).toLocaleString()}
             </span>
+          );
+        },
+      },
+      {
+        field: "orderProductStatus",
+        headerName: "Order Status",
+        width: 190,
+      },
+    ];
+
+    actionColumn = [
+      {
+        field: "action",
+        headerName: "ACTION",
+        width: 210,
+        renderCell: (params) => {
+          return (
+            <div className="cellAction">
+              <div
+                className="editButton"
+                onClick={() =>
+                  handleDelivered(params.row.id, params.row.productID)
+                }
+              >
+                Delivered To App
+              </div>
+              <div
+                className="deleteButton"
+                onClick={() =>
+                  handleCancel(params.row.id, params.row.productID)
+                }
+              >
+                Cancel
+              </div>
+            </div>
           );
         },
       },
