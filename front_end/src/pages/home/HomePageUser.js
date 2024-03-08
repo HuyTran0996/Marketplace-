@@ -54,7 +54,7 @@ const HomePageUser = () => {
       <div className="home">
         <SidebarUser />
         <div className="homeContainer">
-          <NavbarUserApp />
+          {/* <NavbarUserApp /> */}
           <div className="widgets">loading....</div>
         </div>
       </div>
