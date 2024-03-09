@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import "./home.scss";
 import { PageContext } from "../../context/PageContext";
@@ -20,6 +21,8 @@ const HomePageUser = () => {
   const { state, dispatch, getDataAllProducts, getMyInfo } =
     useContext(PageContext);
   const { dataAllProducts, dataSingle, error, isLoading } = state;
+  const location = useLocation();
+  const genre = location.state?.genre;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,8 +31,12 @@ const HomePageUser = () => {
           type: "SET_LOADING",
           payload: true,
         });
-        await getMyInfo();
-        await getDataAllProducts();
+        if (genre) {
+          await getDataAllProducts(genre); // Fetch data based on genre if passed
+        } else {
+          await getMyInfo();
+          await getDataAllProducts(); // Fetch all products if no genre is passed
+        }
         dispatch({
           type: "SET_LOADING",
           payload: false,
@@ -47,7 +54,7 @@ const HomePageUser = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [genre]);
 
   if (isLoading) {
     return (

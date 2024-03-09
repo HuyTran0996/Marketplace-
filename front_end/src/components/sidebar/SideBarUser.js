@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import "./sidebar.scss";
@@ -20,6 +20,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const SideBarUser = () => {
+  const navigate = useNavigate();
   const { dispatchDarkMode } = useContext(DarkModeContext);
   const { state, dispatch, getDataAllProducts } = useContext(PageContext);
 
@@ -53,27 +54,7 @@ const SideBarUser = () => {
     }
   };
   const getProductByGenre = async (genre) => {
-    try {
-      dispatch({
-        type: "SET_LOADING",
-        payload: true,
-      });
-      await getDataAllProducts(genre);
-      dispatch({
-        type: "SET_LOADING",
-        payload: false,
-      });
-    } catch (error) {
-      dispatch({
-        type: "SET_LOADING",
-        payload: false,
-      });
-      dispatch({
-        type: "SET_ERROR",
-        payload: true,
-      });
-      console.log(error);
-    }
+    navigate("/userPage", { state: { genre } });
   };
   return (
     <div className="sidebar">
