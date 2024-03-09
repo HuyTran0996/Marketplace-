@@ -53,8 +53,8 @@ export default function LoginPage() {
       );
       const token = result.data.user.role;
       const jwt = `Bearer ${result.data.token}`;
-      checkCookie(token);
-      setIsLoading(false, jwt);
+      checkCookie(token, jwt);
+      setIsLoading(false);
       dispatch({
         type: "SET_USER_LOGIN",
         payload: token,
