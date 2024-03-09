@@ -21,7 +21,7 @@ export default function LoginPage() {
     if (!cookie) {
       // const value = Date.now();
       Cookies.set("forFe", token, { expires: 2 });
-      Cookies.set("jwtFe", token, { expires: 2 });
+      Cookies.set("jwtFe", jwt, { expires: 2 });
       return;
     }
     return;
