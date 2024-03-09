@@ -16,11 +16,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const checkCookie = (token) => {
+  const checkCookie = (token, jwt) => {
     const cookie = Cookies.get("forFe");
     if (!cookie) {
       // const value = Date.now();
       Cookies.set("forFe", token, { expires: 2 });
+      Cookies.set("jwtFe", token, { expires: 2 });
       return;
     }
     return;
@@ -51,8 +52,9 @@ export default function LoginPage() {
         }
       );
       const token = result.data.user.role;
+      const jwt = `Bearer ${result.data.user.token}`;
       checkCookie(token);
-      setIsLoading(false);
+      setIsLoading(false, jwt);
       dispatch({
         type: "SET_USER_LOGIN",
         payload: token,
