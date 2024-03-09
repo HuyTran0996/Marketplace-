@@ -22,7 +22,7 @@ export const usePage = () => {
   const edit = "edit";
 
   const myOrders = "myOrders";
-  // const myInfo = "myInfo";
+
   // const myInfo = "myInfo";
   // const myInfo = "myInfo";
   // const myInfo = "myInfo";
@@ -57,6 +57,7 @@ export const usePage = () => {
 
     setPageType({
       isUserApp,
+
       isUserPage,
       isUserPageMe,
       isStorePage,

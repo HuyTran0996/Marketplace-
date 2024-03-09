@@ -18,6 +18,7 @@ import {
 } from "../data/FetchOrdersData";
 import {
   FetchAllProducts,
+  FetchAllProductsOfAStore,
   FetchSearchProductByName,
   FetchSingleProduct,
 } from "../data/FetchProductsData";
@@ -79,6 +80,16 @@ function PageProvider({ children }) {
   };
   const getDataAllProducts = async (genre) => {
     const resultAllProducts = await FetchAllProducts(genre);
+    dispatch({
+      type: "SET_DATA_ALL_PRODUCTS",
+      payload: resultAllProducts,
+    });
+
+    return;
+  };
+
+  const getDataAllProductsOfAStore = async (storeID) => {
+    const resultAllProducts = await FetchAllProductsOfAStore(storeID);
     dispatch({
       type: "SET_DATA_ALL_PRODUCTS",
       payload: resultAllProducts,
@@ -193,6 +204,7 @@ function PageProvider({ children }) {
     getDataAllStores,
     getDataAllStoreByOwnerEmail,
     getDataAllProducts,
+    getDataAllProductsOfAStore,
     searchProductByName,
     getSingleUser,
     getMyInfo,

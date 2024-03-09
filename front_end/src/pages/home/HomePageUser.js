@@ -79,9 +79,10 @@ const HomePageUser = () => {
           <div className="widgets">
             {dataAllProducts.data.products?.map((product) => {
               return (
-                <Grid style={gridStyle} key={product._id} item xs={12} lg={4}>
-                  <ProductCard product={product} />
-                </Grid>
+                <ProductCard product={product} />
+                // <Grid style={gridStyle} key={product._id} item xs={12} lg={4}>
+                //   <ProductCard product={product} />
+                // </Grid>
               );
             })}
           </div>

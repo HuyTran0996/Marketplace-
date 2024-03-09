@@ -8,14 +8,15 @@ import avatar from "../../images/avatar.png";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
+import SidebarUser from "../../components/sidebar/SideBarUser";
 // import Navbar from "../../components/navbar/NavBar";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
-const Loading = ({ title }) => {
+const Loading = ({ title, isUserPage }) => {
   return (
     <div className="new">
-      <Sidebar />
+      {isUserPage ? <SidebarUser /> : <Sidebar />}
       <div className="newContainer">
         {/* <Navbar /> */}
         <div className="top">
@@ -55,7 +56,12 @@ const Loading = ({ title }) => {
   );
 };
 
-const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
+const ProductDetails = ({
+  dataSingle,
+  getSingleProduct,
+  title,
+  isUserPage,
+}) => {
   const { productId } = useParams();
 
   const [productName, setProductName] = useState(
@@ -136,7 +142,7 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
 
   return (
     <div className="new">
-      <Sidebar />
+      {isUserPage ? <SidebarUser /> : <Sidebar />}
       <div className="newContainer">
         {/* <Navbar /> */}
         <div className="top">
@@ -231,7 +237,7 @@ const ProductDetails = ({ dataSingle, getSingleProduct, title }) => {
 };
 
 const NewPageProduct = ({ title }) => {
-  const { isProductEditPage } = usePage();
+  const { isProductEditPage, isUserPage } = usePage();
   const { productId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const { state, getSingleProduct } = useContext(PageContext);
@@ -252,12 +258,13 @@ const NewPageProduct = ({ title }) => {
   }, [isProductEditPage]);
 
   return isLoading ? (
-    <Loading title={title} />
+    <Loading title={title} isUserPage={isUserPage} />
   ) : (
     <ProductDetails
       dataSingle={dataSingle}
       getSingleProduct={getSingleProduct}
       title={title}
+      isUserPage={isUserPage}
     />
   );
 };

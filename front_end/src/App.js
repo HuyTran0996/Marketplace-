@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import HomePage from "./pages/home/HomePage";
 import HomePageUser from "./pages/home/HomePageUser";
+import YourStoreProducts from "./pages/home/YourStoreProducts";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/login/SignupPage";
 import ChangePasswordPage from "./pages/login/ChangePasswordPage";
@@ -102,6 +103,7 @@ function App() {
             </Route>
           </Route>
         )}
+
         {token === "user" && (
           <Route path="/userPage/">
             <Route index element={<HomePageUser />} />
@@ -121,19 +123,23 @@ function App() {
             <Route path="myOrders/:orderID" element={<ListPageOrderDetail />} />
 
             <Route path="stores">
-              {/* <Route index element={<ListPageStore />} /> */}
               <Route
                 index
                 element={<NewPageStoreOfUserApp title="Your Store" />}
               />
+
               <Route
                 path="yourStoreOrdersProduct"
                 element={<ListPageOrderDetailOfStore />}
               />
-              {/* <Route
-                path="edit/:storeId"
-                element={<NewPageStore title="Edit Store" />}
-              /> */}
+
+              <Route path="yourStoreProducts">
+                <Route index element={<YourStoreProducts />} />
+                <Route
+                  path="edit/:productId"
+                  element={<NewPageProduct title="Edit Product" />}
+                />
+              </Route>
             </Route>
 
             <Route path="orders">

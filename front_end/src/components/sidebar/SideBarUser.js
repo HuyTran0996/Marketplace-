@@ -130,7 +130,10 @@ const SideBarUser = () => {
             </li>
           </Link>
 
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link
+            to="/userPage/stores/yourStoreProducts"
+            style={{ textDecoration: "none" }}
+          >
             <li>
               <CategoryIcon className="icon" />
               <span>Your Store Products</span>

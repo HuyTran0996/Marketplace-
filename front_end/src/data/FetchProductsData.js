@@ -9,6 +9,10 @@ const FetchAllProducts = async (genre) => {
     return dataAllProducts;
   }
 };
+const FetchAllProductsOfAStore = async (storeID) => {
+  const dataAllProducts = await apiService.get(`/products?storeID=${storeID}`);
+  return dataAllProducts;
+};
 const FetchSearchProductByName = async (productName) => {
   // Properly encode the productName to handle special characters and spaces
   // const encodedProductName = encodeURIComponent(productName);
@@ -44,6 +48,7 @@ const DeleteProduct = async (productId) => {
 
 export {
   FetchAllProducts,
+  FetchAllProductsOfAStore,
   FetchSearchProductByName,
   FetchSingleProduct,
   FetchUpdateProduct,
