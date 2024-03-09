@@ -54,6 +54,7 @@ const YourStoreProducts = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault();
+    navigate("/userPage/stores/yourStoreProducts/createProduct");
   };
 
   if (isLoading) {

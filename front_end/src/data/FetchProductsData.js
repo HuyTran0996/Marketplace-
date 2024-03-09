@@ -30,7 +30,7 @@ const FetchSingleProduct = async (productId) => {
 };
 
 const FetchUpdateProduct = async ({ productId, formData }) => {
-  const dataUpdateStore = await apiService.patch(
+  const dataUpdateProduct = await apiService.patch(
     `/products/${productId}`,
     formData,
     {
@@ -38,7 +38,14 @@ const FetchUpdateProduct = async ({ productId, formData }) => {
     }
   );
 
-  return dataUpdateStore;
+  return dataUpdateProduct;
+};
+const FetchCreateProduct = async ({ data }) => {
+  const dataCreateProduct = await apiService.post(`/products`, data, {
+    withCredentials: true,
+  });
+
+  return dataCreateProduct;
 };
 
 const DeleteProduct = async (productId) => {
@@ -52,5 +59,6 @@ export {
   FetchSearchProductByName,
   FetchSingleProduct,
   FetchUpdateProduct,
+  FetchCreateProduct,
   DeleteProduct,
 };

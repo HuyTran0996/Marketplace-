@@ -29,6 +29,7 @@ import NewPageOrder from "./pages/new/NewPageOrder";
 import NewPageProduct from "./pages/new/NewPageProduct";
 import NewPageDetailProduct from "./pages/new/NewPageDetailProduct";
 import NewPageStoreOfUserApp from "./pages/new/NewPageStoreOfUserApp";
+import NewPageCreateProduct from "./pages/new/NewPageCreateProduct";
 
 import { PageContext } from "./context/PageContext";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -139,23 +140,11 @@ function App() {
                   path="edit/:productId"
                   element={<NewPageProduct title="Edit Product" />}
                 />
+                <Route
+                  path="createProduct"
+                  element={<NewPageCreateProduct title="Create Product" />}
+                />
               </Route>
-            </Route>
-
-            <Route path="orders">
-              <Route index element={<ListPageOrder />} />
-              <Route
-                path="edit/:orderId"
-                element={<NewPageOrder title="Edit Order" />}
-              />
-            </Route>
-
-            <Route path="products">
-              <Route index element={<ListPageProduct />} />
-              <Route
-                path="edit/:productId"
-                element={<NewPageProduct title="Edit Product" />}
-              />
             </Route>
           </Route>
         )}
