@@ -39,18 +39,18 @@ function App() {
   const navigate = useNavigate();
   const { darkMode } = useContext(DarkModeContext);
   const { state } = useContext(PageContext);
-  const { token } = state;
+  const { role } = state;
 
   useEffect(() => {
-    if (!token) {
+    if (!role) {
       navigate("/login");
       return;
     }
-    if (token === "admin") {
+    if (role === "admin") {
       navigate("/");
       return;
     }
-    if (token === "user") {
+    if (role === "user") {
       navigate("/userPage");
       return;
     }
@@ -63,7 +63,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/changePassword" element={<ChangePasswordPage />} />
 
-        {token === "admin" && (
+        {role === "admin" && (
           <Route path="/">
             <Route index element={<HomePage />} />
 
@@ -105,7 +105,7 @@ function App() {
           </Route>
         )}
 
-        {token === "user" && (
+        {role === "user" && (
           <Route path="/userPage/">
             <Route index element={<HomePageUser />} />
             <Route

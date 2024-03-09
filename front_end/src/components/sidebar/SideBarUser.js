@@ -31,6 +31,7 @@ const SideBarUser = () => {
       payload: [],
     });
     Cookies.remove("forFe");
+    Cookies.remove("jwtFe");
 
     try {
       const result = await apiService.post(

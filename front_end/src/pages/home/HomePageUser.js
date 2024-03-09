@@ -20,36 +20,42 @@ const gridStyle = {
 const HomePageUser = () => {
   const { state, dispatch, getDataAllProducts, getMyInfo } =
     useContext(PageContext);
-  const { dataAllProducts, dataSingle, error, isLoading } = state;
+  const { dataAllProducts, dataSingle } = state;
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const location = useLocation();
   const genre = location.state?.genre;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch({
-          type: "SET_LOADING",
-          payload: true,
-        });
+        // dispatch({
+        //   type: "SET_LOADING",
+        //   payload: true,
+        // });
+        setIsLoading(true);
         if (genre) {
           await getDataAllProducts(genre); // Fetch data based on genre if passed
         } else {
           await getMyInfo();
           await getDataAllProducts(); // Fetch all products if no genre is passed
         }
-        dispatch({
-          type: "SET_LOADING",
-          payload: false,
-        });
+        setIsLoading(false);
+        // dispatch({
+        //   type: "SET_LOADING",
+        //   payload: false,
+        // });
       } catch (error) {
-        dispatch({
-          type: "SET_LOADING",
-          payload: false,
-        });
-        dispatch({
-          type: "SET_ERROR",
-          payload: true,
-        });
+        // dispatch({
+        //   type: "SET_LOADING",
+        //   payload: false,
+        // });
+        // dispatch({
+        //   type: "SET_ERROR",
+        //   payload: true,
+        // });
+        setIsLoading(false);
+        setError(true);
         console.error("Error fetching data:", error);
       }
     };

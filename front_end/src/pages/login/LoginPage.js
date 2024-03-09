@@ -16,11 +16,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const checkCookie = (token, jwt) => {
-    const cookie = Cookies.get("forFe");
+  const checkCookie = (jwt) => {
+    const cookie = Cookies.get("jwtFe");
     if (!cookie) {
-      // const value = Date.now();
-      Cookies.set("forFe", token, { expires: 2 });
       Cookies.set("jwtFe", jwt, { expires: 2 });
       return;
     }
@@ -51,16 +49,16 @@ export default function LoginPage() {
           withCredentials: true,
         }
       );
-      const token = result.data.user.role;
-      const jwt = `Bearer ${result.data.token}`;
-      checkCookie(token, jwt);
+      const role = result.data.user.role;
+      const jwt = result.data.token;
+      checkCookie(jwt);
       setIsLoading(false);
       dispatch({
         type: "SET_USER_LOGIN",
-        payload: token,
+        payload: role,
       });
 
-      navigate(token === "admin" ? "/" : "/userPage");
+      navigate(role === "admin" ? "/" : "/userPage");
 
       return;
     } catch (error) {

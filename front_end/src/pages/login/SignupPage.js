@@ -18,11 +18,10 @@ export default function SignupPage() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [phone, setPhone] = useState("");
 
-  const checkCookie = (token) => {
-    const cookie = Cookies.get("forFe");
+  const checkCookie = (jwt) => {
+    const cookie = Cookies.get("jwtFe");
     if (!cookie) {
-      // const value = Date.now();
-      Cookies.set("forFe", token, { expires: 2 });
+      Cookies.set("jwtFe", jwt, { expires: 2 });
       return;
     }
     return;
@@ -67,15 +66,18 @@ export default function SignupPage() {
           withCredentials: true,
         }
       );
-      const token = result.data.user.role;
-      checkCookie(token);
+
+      const role = result.data.user.role;
+      const jwt = result.data.token;
+      checkCookie(jwt);
       setIsLoading(false);
       dispatch({
         type: "SET_USER_LOGIN",
-        payload: token,
+        payload: role,
       });
 
-      navigate(token === "admin" ? "/" : "/userPage");
+      navigate(role === "admin" ? "/" : "/userPage");
+
       alert("Successful account registration, click ok to continue");
       return result;
     } catch (error) {

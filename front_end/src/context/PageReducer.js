@@ -3,7 +3,7 @@ const initialState = {
   error: false,
   isLoading: false,
 
-  token: Cookies.get("forFe"),
+  role: Cookies.get("forFe"),
   dataAllUsers: null,
   dataAllOrders: null,
   dataAllStores: null,
@@ -23,7 +23,7 @@ function PageReducer(state, action) {
     case "SET_LOADING":
       return { ...state, isLoading: action.payload };
     case "SET_USER_LOGIN":
-      return { ...state, token: action.payload };
+      return { ...state, role: action.payload };
     case "SET_DATA_ALL_USERS":
       return { ...state, dataAllUsers: action.payload };
     case "SET_DATA_ALL_ORDERS":
