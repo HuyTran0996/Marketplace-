@@ -52,7 +52,7 @@ export default function LoginPage() {
         }
       );
       const token = result.data.user.role;
-      const jwt = `Bearer ${result.data.user.token}`;
+      const jwt = `Bearer ${result.data.token}`;
       checkCookie(token);
       setIsLoading(false, jwt);
       dispatch({
