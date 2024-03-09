@@ -43,7 +43,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
           setFoundNoStore(true);
         }
         let storeName = result.data.stores.storeName;
-        console.log("ádasd", storeName);
+
         let result1 = await FetchAllOrdersProductOfStore(storeName);
 
         setListProducts(result1.data.orderProducts);
@@ -56,7 +56,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [location]);
 
   const calculateTotalPrice = () => {
     // Ensure dataCart is always an array to safely use reduce

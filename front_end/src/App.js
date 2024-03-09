@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./style/dark.scss";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 import HomePage from "./pages/home/HomePage";
@@ -37,24 +38,42 @@ import SinglePage from "./pages/single/SinglePage";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { darkMode } = useContext(DarkModeContext);
   const { state } = useContext(PageContext);
-  const { role } = state;
+  // const { role } = state;
+  const [role, setRole] = useState("");
+  const cookie = Cookies.get("jwtFe");
+  let decoded;
+  // Check if the JWT token exists before attempting to decode it
+  if (cookie) {
+    decoded = jwtDecode(cookie);
+    console.log("ROLE", decoded.role);
+  }
 
   useEffect(() => {
-    if (!role) {
+    // Check if the user is already on a protected route
+    const isProtectedRoute =
+      location.pathname === "/" || location.pathname.startsWith("/userPage");
+
+    const isUserPage = location.pathname.startsWith("/userPage");
+
+    // If the JWT token does not exist or the role is not set, redirect to login
+    if (!decoded || !decoded.role || !isProtectedRoute) {
       navigate("/login");
       return;
     }
-    if (role === "admin") {
+
+    if (decoded.role === "admin" && isUserPage) {
       navigate("/");
       return;
     }
-    if (role === "user") {
+
+    if (decoded.role === "user" && !isUserPage) {
       navigate("/userPage");
       return;
     }
-  }, []);
+  }, [location]);
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
@@ -63,146 +82,90 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/changePassword" element={<ChangePasswordPage />} />
 
-        {role === "admin" && (
-          <Route path="/">
-            <Route index element={<HomePage />} />
+        <Route path="/">
+          <Route index element={<HomePage />} />
 
-            <Route path="users">
-              <Route index element={<ListPageUser />} />
-              <Route
-                path="edit/myInfo"
-                element={<NewPageUser title="Edit User" />}
-              />
-              <Route
-                path="edit/:userId"
-                element={<NewPageUser title="Edit User" />}
-              />
-            </Route>
-
-            <Route path="stores">
-              <Route index element={<ListPageStore />} />
-              <Route
-                path="edit/:storeId"
-                element={<NewPageStore title="Edit Store" />}
-              />
-            </Route>
-
-            <Route path="orders">
-              <Route index element={<ListPageOrder />} />
-              <Route
-                path="edit/:orderId"
-                element={<NewPageOrder title="Edit Order" />}
-              />
-            </Route>
-
-            <Route path="products">
-              <Route index element={<ListPageProduct />} />
-              <Route
-                path="edit/:productId"
-                element={<NewPageProduct title="Edit Product" />}
-              />
-            </Route>
-          </Route>
-        )}
-
-        {role === "user" && (
-          <Route path="/userPage/">
-            <Route index element={<HomePageUser />} />
+          <Route path="users">
+            <Route index element={<ListPageUser />} />
             <Route
               path="edit/myInfo"
               element={<NewPageUser title="Edit User" />}
             />
-
-            <Route path="cartPage" element={<ListPageCartProduct />} />
-
             <Route
-              path="detail/:productId"
-              element={<NewPageDetailProduct title="Product Detail" />}
+              path="edit/:userId"
+              element={<NewPageUser title="Edit User" />}
+            />
+          </Route>
+
+          <Route path="stores">
+            <Route index element={<ListPageStore />} />
+            <Route
+              path="edit/:storeId"
+              element={<NewPageStore title="Edit Store" />}
+            />
+          </Route>
+
+          <Route path="orders">
+            <Route index element={<ListPageOrder />} />
+            <Route
+              path="edit/:orderId"
+              element={<NewPageOrder title="Edit Order" />}
+            />
+          </Route>
+
+          <Route path="products">
+            <Route index element={<ListPageProduct />} />
+            <Route
+              path="edit/:productId"
+              element={<NewPageProduct title="Edit Product" />}
+            />
+          </Route>
+        </Route>
+        {/* ////////////////////USER////////////////////// */}
+        <Route path="/userPage/">
+          <Route index element={<HomePageUser />} />
+          <Route
+            path="edit/myInfo"
+            element={<NewPageUser title="Edit User" />}
+          />
+
+          <Route path="cartPage" element={<ListPageCartProduct />} />
+
+          <Route
+            path="detail/:productId"
+            element={<NewPageDetailProduct title="Product Detail" />}
+          />
+
+          <Route path="myOrders" element={<ListPageOrderUserApp />} />
+          <Route path="myOrders/:orderID" element={<ListPageOrderDetail />} />
+
+          <Route path="stores">
+            <Route
+              index
+              element={<NewPageStoreOfUserApp title="Your Store" />}
             />
 
-            <Route path="myOrders" element={<ListPageOrderUserApp />} />
-            <Route path="myOrders/:orderID" element={<ListPageOrderDetail />} />
+            <Route
+              path="yourStoreOrdersProduct"
+              element={<ListPageOrderDetailOfStore />}
+            />
 
-            <Route path="stores">
+            <Route path="yourStoreProducts">
+              <Route index element={<YourStoreProducts />} />
               <Route
-                index
-                element={<NewPageStoreOfUserApp title="Your Store" />}
+                path="edit/:productId"
+                element={<NewPageProduct title="Edit Product" />}
               />
-
               <Route
-                path="yourStoreOrdersProduct"
-                element={<ListPageOrderDetailOfStore />}
+                path="createProduct"
+                element={<NewPageCreateProduct title="Create Product" />}
               />
-
-              <Route path="yourStoreProducts">
-                <Route index element={<YourStoreProducts />} />
-                <Route
-                  path="edit/:productId"
-                  element={<NewPageProduct title="Edit Product" />}
-                />
-                <Route
-                  path="createProduct"
-                  element={<NewPageCreateProduct title="Create Product" />}
-                />
-              </Route>
             </Route>
           </Route>
-        )}
+        </Route>
       </Routes>
     </div>
   );
 }
 
 export default App;
-
-// return (
-//   <div className={darkMode ? "app dark" : "app"}>
-//     <Routes>
-//       <Route element={<PrivateRoutes />}>
-//         <Route path="/">
-//           <Route index element={<HomePage />} />
-
-//           <Route path="users">
-//             <Route index element={<ListPageUser />} />
-//             {/* <Route path="myInfo" element={<SinglePage />} /> */}
-//             {/* <Route path=":userId" element={<SinglePage />} /> */}
-//             <Route
-//               path="edit/myInfo"
-//               element={<NewPageUser title="Edit User" />}
-//             />
-//             <Route
-//               path="edit/:userId"
-//               element={<NewPageUser title="Edit User" />}
-//             />
-//           </Route>
-
-//           <Route path="stores">
-//             <Route index element={<ListPageStore />} />
-//             <Route
-//               path="edit/:storeId"
-//               element={<NewPageStore title="Edit Store" />}
-//             />
-//           </Route>
-
-//           <Route path="orders">
-//             <Route index element={<ListPageOrder />} />
-//             <Route
-//               path="edit/:orderId"
-//               element={<NewPageOrder title="Edit Order" />}
-//             />
-//           </Route>
-
-//           <Route path="products">
-//             <Route index element={<ListPageProduct />} />
-//             <Route
-//               path="edit/:productId"
-//               element={<NewPageProduct title="Edit Product" />}
-//             />
-//           </Route>
-//         </Route>
-//       </Route>
-//       <Route path="/login" element={<LoginPage />} />
-//       <Route path="/signup" element={<SignupPage />} />
-//     </Routes>
-//   </div>
-// );

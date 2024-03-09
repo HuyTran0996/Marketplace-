@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
@@ -52,8 +51,7 @@ export default function LoginPage() {
       );
       const role = result.data.user.role;
       const jwt = result.data.token;
-      const decoded = jwtDecode(jwt);
-      console.log("ahdgashgdasd", decoded);
+
       checkCookie(jwt);
       setIsLoading(false);
       dispatch({

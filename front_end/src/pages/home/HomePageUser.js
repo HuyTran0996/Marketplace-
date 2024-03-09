@@ -29,31 +29,15 @@ const HomePageUser = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // dispatch({
-        //   type: "SET_LOADING",
-        //   payload: true,
-        // });
         setIsLoading(true);
         if (genre) {
-          await getDataAllProducts(genre); // Fetch data based on genre if passed
+          await getDataAllProducts(genre);
         } else {
           await getMyInfo();
-          await getDataAllProducts(); // Fetch all products if no genre is passed
+          await getDataAllProducts();
         }
         setIsLoading(false);
-        // dispatch({
-        //   type: "SET_LOADING",
-        //   payload: false,
-        // });
       } catch (error) {
-        // dispatch({
-        //   type: "SET_LOADING",
-        //   payload: false,
-        // });
-        // dispatch({
-        //   type: "SET_ERROR",
-        //   payload: true,
-        // });
         setIsLoading(false);
         setError(true);
         console.error("Error fetching data:", error);
