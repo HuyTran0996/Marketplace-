@@ -60,7 +60,7 @@ const SideBarUser = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">Marketplace</span>
+        <div className="logo">BuyIt</div>
       </div>
 
       <div className="center">
@@ -92,7 +92,7 @@ const SideBarUser = () => {
             <span>Others</span>
           </li>
 
-          <p className="title">ABOUT YOUR STORE</p>
+          <p className="title">YOUR STORE</p>
           <Link to="/userPage/stores" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />

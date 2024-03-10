@@ -73,17 +73,19 @@ const NavbarUserApp = () => {
 
       <div className="items">
         <div className="item">
-          {darkMode ? (
-            <DarkModeOutlinedIcon
-              className="icon"
-              onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
-            />
-          ) : (
-            <Brightness5Icon
-              className="icon"
-              onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
-            />
-          )}
+          <span>
+            {darkMode ? (
+              <DarkModeOutlinedIcon
+                className="icon"
+                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
+              />
+            ) : (
+              <Brightness5Icon
+                className="icon"
+                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
+              />
+            )}
+          </span>
         </div>
 
         <div className="item" onClick={moveToCartPage}>
