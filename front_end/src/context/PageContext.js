@@ -130,8 +130,13 @@ function PageProvider({ children }) {
 
   const getSingleUser = async (userId) => {
     const resultSingleUser = await FetchSingleUser(userId);
+    // dispatch({
+    //   type: "SET_DATA_SINGLE",
+    //   payload: resultSingleUser,
+    // });
+
     dispatch({
-      type: "SET_DATA_SINGLE",
+      type: "SET_DATA_USER",
       payload: resultSingleUser,
     });
     return resultSingleUser;
@@ -139,10 +144,6 @@ function PageProvider({ children }) {
 
   const getMyInfo = async () => {
     const resultMyInfo = await FetchMyInfo();
-    dispatch({
-      type: "SET_DATA_SINGLE",
-      payload: resultMyInfo,
-    });
 
     dispatch({
       type: "SET_DATA_USER",
@@ -158,6 +159,7 @@ function PageProvider({ children }) {
       type: "SET_DATA_SINGLE",
       payload: resultSingleStore,
     });
+
     return resultSingleStore;
   };
 

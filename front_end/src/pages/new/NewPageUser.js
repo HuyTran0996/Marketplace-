@@ -72,14 +72,14 @@ const Error = () => {
   );
 };
 
-const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
+const UserDetails = ({ dataUser, getSingleUser, getMyInfo, title }) => {
   const navigate = useNavigate();
   const { userId } = useParams();
   const { isUserEditPage, isMyInfoEditPage, isUserApp } = usePage();
-  const [name, setName] = useState(`${dataSingle.data.user.name}`);
-  const [phone, setPhone] = useState(`${dataSingle.data.user.phone}`);
-  const [fileSubmit, setFileSubmit] = useState(`${dataSingle.data.user.photo}`);
-  const [file, setFile] = useState(`${dataSingle.data.user.photo}`);
+  const [name, setName] = useState(`${dataUser.data.user.name}`);
+  const [phone, setPhone] = useState(`${dataUser.data.user.phone}`);
+  const [fileSubmit, setFileSubmit] = useState(`${dataUser.data.user.photo}`);
+  const [file, setFile] = useState(`${dataUser.data.user.photo}`);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
@@ -181,7 +181,7 @@ const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
 
               <div className="formInput" key="2">
                 <label>Email (email can not be changed)</label>
-                <input type="email" value={dataSingle.data.user.email} />
+                <input type="email" value={dataUser.data.user.email} />
               </div>
 
               <div className="formInput" key="3">
@@ -220,7 +220,7 @@ const NewPageUser = ({ title }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const { state, getSingleUser, getMyInfo } = useContext(PageContext);
-  const { dataSingle } = state;
+  const { dataSingle, dataUser } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -248,7 +248,7 @@ const NewPageUser = ({ title }) => {
     <Error />
   ) : (
     <UserDetails
-      dataSingle={dataSingle}
+      dataUser={dataUser}
       getSingleUser={getSingleUser}
       getMyInfo={getMyInfo}
       title={title}

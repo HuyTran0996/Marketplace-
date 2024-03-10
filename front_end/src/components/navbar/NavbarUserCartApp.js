@@ -13,8 +13,19 @@ import { DarkModeContext } from "../../context/darkModeContext";
 const NavbarUserCartApp = () => {
   const navigate = useNavigate();
   const { dispatchDarkMode, darkMode } = useContext(DarkModeContext);
-  const { state } = useContext(PageContext);
+  const { state, getMyInfo } = useContext(PageContext);
   const { dataCart, dataUser } = state;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        await getMyInfo();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const moveToCartPage = () => {
     navigate("/userPage/cartPage");

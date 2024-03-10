@@ -19,7 +19,7 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 const NavbarUserApp = () => {
   const navigate = useNavigate();
   const { dispatchDarkMode, darkMode } = useContext(DarkModeContext);
-  const { state, searchProductByName, getDataAllProducts } =
+  const { state, searchProductByName, getDataAllProducts, getMyInfo } =
     useContext(PageContext);
   const { dataCart, dataUser } = state;
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +51,17 @@ const NavbarUserApp = () => {
       setError("ERROR....");
     }
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        await getMyInfo();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <div className="wrapper">
