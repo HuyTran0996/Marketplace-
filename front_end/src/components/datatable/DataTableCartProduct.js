@@ -256,8 +256,9 @@ const DataTableCartProduct = () => {
       <button
         className="sendOrder"
         onClick={(e) => handleSendOrder(e, orderId)}
+        disabled={isLoading}
       >
-        Send Order
+        {isLoading ? "Sending..." : "Send Order"}
       </button>
       <div className="totalPrice">
         <span>Total Price: </span>

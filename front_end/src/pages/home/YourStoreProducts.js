@@ -7,6 +7,8 @@ import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import ProductCardOfStoreOwner from "../../components/productCard/ProductCardOfStoreOwner";
 import Widget from "../../components/widget/Widget";
 
+import Grid from "@mui/material/Grid";
+
 import { useNavigate } from "react-router-dom";
 
 const YourStoreProducts = () => {
@@ -87,14 +89,21 @@ const YourStoreProducts = () => {
           <button className="addProduct" onClick={handleAddProduct}>
             Add Product
           </button>
-          <div className="widgets">
-            {dataAllProducts.data.products.length === 0 ? (
-              <div>Your store has no products</div>
-            ) : (
-              dataAllProducts.data.products?.map((product) => {
-                return <ProductCardOfStoreOwner product={product} />;
-              })
-            )}
+
+          <div className="products">
+            <Grid container spacing={3}>
+              {dataAllProducts.data.products.length === 0 ? (
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <div>Your store has no products</div>
+                </Grid>
+              ) : (
+                dataAllProducts.data.products?.map((product) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
+                    <ProductCardOfStoreOwner product={product} />
+                  </Grid>
+                ))
+              )}
+            </Grid>
           </div>
         </div>
       </div>

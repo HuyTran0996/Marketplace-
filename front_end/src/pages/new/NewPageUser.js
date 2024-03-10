@@ -60,9 +60,10 @@ const Loading = ({ title }) => {
   );
 };
 const Error = () => {
+  const { isUserApp } = usePage();
   return (
     <div className="new">
-      <Sidebar />
+      {isUserApp ? <SideBarUser /> : <Sidebar />}
       <div className="newContainer">
         <div className="top">
           <h1>ERROR......</h1>

@@ -42,9 +42,9 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         if (result?.data?.totalStores === 0) {
           setFoundNoStore(true);
         }
-        let storeName = result.data.stores.storeName;
+        let storeID = result.data.stores._id;
 
-        let result1 = await FetchAllOrdersProductOfStore(storeName);
+        let result1 = await FetchAllOrdersProductOfStore(storeID);
 
         setListProducts(result1.data.orderProducts);
 
