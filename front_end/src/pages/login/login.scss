@@ -44,4 +44,21 @@
       margin-top: 10px;
     }
   }
+
+  button {
+    width: 200px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 0.3s;
+  }
+
+  button:hover {
+    background-color: #002ead;
+  }
 }

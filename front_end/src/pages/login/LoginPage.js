@@ -89,7 +89,7 @@ export default function LoginPage() {
   };
 
   const moveToSignUpPage = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     navigate("/signup");
   };
 
@@ -98,27 +98,29 @@ export default function LoginPage() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <form onSubmit={handleLogin}>
-          <div>LOGIN PAGE</div>
-          <div className="title">Email</div>
-          <input
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <div className="title">Password</div>
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          {message && <span>{message}</span>}
-          <button type="submit">Login</button>
-          <button onClick={handleForgotPassword}>Forgot Password</button>
-          <button onClick={moveToSignUpPage}>Sign Up</button>
-        </form>
+        <div>
+          <form onSubmit={handleLogin}>
+            <div>LOGIN PAGE</div>
+            <div className="title">Email</div>
+            <input
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <div className="title">Password</div>
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            {message && <span>{message}</span>}
+            <button type="submit">Login</button>
+            <button onClick={handleForgotPassword}>Forgot Password</button>
+          </form>
+          <button onClick={moveToSignUpPage}>Move To Sign Up Page</button>
+        </div>
       )}
     </div>
   );

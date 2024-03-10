@@ -94,51 +94,53 @@ export default function SignupPage() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <div>SIGNUP PAGE</div>
-          <div className="title">User Name</div>
-          <input
-            type="text"
-            placeholder="name"
-            value={name}
-            onChange={handleNameChange}
-          />
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div>SIGNUP PAGE</div>
+            <div className="title">User Name</div>
+            <input
+              type="text"
+              placeholder="name"
+              value={name}
+              onChange={handleNameChange}
+            />
 
-          <div className="title">Email</div>
-          <input
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
+            <div className="title">Email</div>
+            <input
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
 
-          <div className="title">Password</div>
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+            <div className="title">Password</div>
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
 
-          <div className="title">Password Confirm</div>
-          <input
-            type="password"
-            placeholder="passwordConfirm"
-            value={passwordConfirm}
-            onChange={handlePasswordConfirmChange}
-          />
+            <div className="title">Password Confirm</div>
+            <input
+              type="password"
+              placeholder="passwordConfirm"
+              value={passwordConfirm}
+              onChange={handlePasswordConfirmChange}
+            />
 
-          <div className="title">Phone Number</div>
-          <input
-            type="number"
-            placeholder="number"
-            value={phone}
-            onChange={handlePhoneChange}
-          />
-          {message && <span>{message}</span>}
-          <button type="submit">Submit</button>
-          <button onClick={moveToLoginPage}>Login</button>
-        </form>
+            <div className="title">Phone Number</div>
+            <input
+              type="number"
+              placeholder="number"
+              value={phone}
+              onChange={handlePhoneChange}
+            />
+            {message && <span>{message}</span>}
+            <button type="submit">Submit</button>
+          </form>
+          <button onClick={moveToLoginPage}>Back To Login Page</button>
+        </div>
       )}
     </div>
   );

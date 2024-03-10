@@ -48,13 +48,11 @@ function App() {
   // Check if the JWT token exists before attempting to decode it
   if (cookie) {
     decoded = jwtDecode(cookie);
-    console.log("ROLE", decoded.role);
   }
 
   useEffect(() => {
     // Check if the user is already on a protected route
-    // const isProtectedRoute =
-    //   location.pathname === "/" || location.pathname.startsWith("/userPage");
+
     const isProtectedRoute =
       location.pathname.startsWith("/adminPage") ||
       location.pathname.startsWith("/userPage");
