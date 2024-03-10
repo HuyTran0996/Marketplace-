@@ -53,60 +53,58 @@ const NavbarUserApp = () => {
   };
 
   return (
-    <div className="navbar">
-      <div className="wrapper">
-        <form className="search" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Search Product Name..."
-            value={productName}
-            onChange={handleChange}
-          />
-          {isLoading ? (
-            <AutorenewIcon />
+    <div className="wrapper">
+      <form className="search" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search Product Name..."
+          value={productName}
+          onChange={handleChange}
+        />
+        {isLoading ? (
+          <AutorenewIcon />
+        ) : (
+          <button className="button" type="submit" aria-label="Search">
+            <SearchOutlinedIcon />
+          </button>
+        )}
+        {error && <div className="error">Error: {error}</div>}{" "}
+      </form>
+
+      <div className="items">
+        <div className="item">
+          {darkMode ? (
+            <DarkModeOutlinedIcon
+              className="icon"
+              onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
+            />
           ) : (
-            <button className="button" type="submit" aria-label="Search">
-              <SearchOutlinedIcon />
-            </button>
+            <Brightness5Icon
+              className="icon"
+              onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
+            />
           )}
-          {error && <div className="error">Error: {error}</div>}{" "}
-        </form>
+        </div>
 
-        <div className="items">
-          <div className="item">
-            {darkMode ? (
-              <DarkModeOutlinedIcon
-                className="icon"
-                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
-              />
-            ) : (
-              <Brightness5Icon
-                className="icon"
-                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
-              />
-            )}
-          </div>
+        <div className="item" onClick={moveToCartPage}>
+          <ShoppingCartIcon className="icon" />
+          <div className="counter">{dataCart ? dataCart.length : 0}</div>
+        </div>
 
-          <div className="item" onClick={moveToCartPage}>
-            <ShoppingCartIcon className="icon" />
-            <div className="counter">{dataCart ? dataCart.length : 0}</div>
-          </div>
-
-          <div className="item">
-            <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
-              <img
-                src={
-                  dataUser.data.user.photo ? (
-                    dataUser.data.user.photo
-                  ) : (
-                    <AccountCircleOutlinedIcon />
-                  )
-                }
-                alt="avatar"
-                className="avatar"
-              />
-            </Link>
-          </div>
+        <div className="item">
+          <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
+            <img
+              src={
+                dataUser.data.user.photo ? (
+                  dataUser.data.user.photo
+                ) : (
+                  <AccountCircleOutlinedIcon />
+                )
+              }
+              alt="avatar"
+              className="avatar"
+            />
+          </Link>
         </div>
       </div>
     </div>

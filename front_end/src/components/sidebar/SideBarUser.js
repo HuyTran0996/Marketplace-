@@ -63,8 +63,6 @@ const SideBarUser = () => {
         <span className="logo">Marketplace</span>
       </div>
 
-      <hr />
-
       <div className="center">
         <ul>
           <p className="title">HOME</p>

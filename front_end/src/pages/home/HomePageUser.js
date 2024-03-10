@@ -10,13 +10,6 @@ import Widget from "../../components/widget/Widget";
 
 import Grid from "@mui/material/Grid";
 
-const gridStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "space-evenly",
-  marginTop: "6px",
-};
-
 const HomePageUser = () => {
   const { state, dispatch, getDataAllProducts, getMyInfo } =
     useContext(PageContext);
@@ -74,14 +67,13 @@ const HomePageUser = () => {
         <div className="homeContainer">
           <NavbarUserApp />
           <div className="widgets">
-            {dataAllProducts.data.products?.map((product) => {
-              return (
-                <ProductCard product={product} />
-                // <Grid style={gridStyle} key={product._id} item xs={12} lg={4}>
-                //   <ProductCard product={product} />
-                // </Grid>
-              );
-            })}
+            <Grid container spacing={3}>
+              {dataAllProducts.data.products?.map((product) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
+                  <ProductCard product={product} />
+                </Grid>
+              ))}
+            </Grid>
           </div>
         </div>
       </div>

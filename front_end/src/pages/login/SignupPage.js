@@ -71,10 +71,6 @@ export default function SignupPage() {
       const jwt = result.data.token;
       checkCookie(jwt);
       setIsLoading(false);
-      dispatch({
-        type: "SET_USER_LOGIN",
-        payload: role,
-      });
 
       navigate(role === "admin" ? "/" : "/userPage");
 

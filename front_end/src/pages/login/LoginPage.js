@@ -54,10 +54,6 @@ export default function LoginPage() {
 
       checkCookie(jwt);
       setIsLoading(false);
-      dispatch({
-        type: "SET_USER_LOGIN",
-        payload: role,
-      });
 
       navigate(role === "admin" ? "/" : "/userPage");
 
