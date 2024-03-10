@@ -89,7 +89,7 @@ export default function LoginPage() {
   };
 
   const moveToSignUpPage = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     navigate("/signup");
   };
 
