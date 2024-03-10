@@ -60,12 +60,10 @@ function App() {
     const isLoginPage = location.pathname.startsWith("/login");
 
     // If the JWT token does not exist or the role is not set, redirect to login
-    if (isSignupPage) {
+    if (isSignupPage || isLoginPage) {
       return;
     }
-    if (isLoginPage) {
-      return;
-    }
+
     if (!decoded || !decoded.role || !isProtectedRoute) {
       navigate("/login");
       return;
