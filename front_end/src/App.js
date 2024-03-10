@@ -41,18 +41,15 @@ function App() {
   const location = useLocation();
   const { darkMode } = useContext(DarkModeContext);
   const { state } = useContext(PageContext);
-  // const { role } = state;
   const [role, setRole] = useState("");
-  const cookie = Cookies.get("jwtFe");
-  let decoded;
-  // Check if the JWT token exists before attempting to decode it
-  if (cookie) {
-    decoded = jwtDecode(cookie);
-  }
 
-  useEffect(() => {
-    // Check if the user is already on a protected route
-
+  const checkRole = () => {
+    const cookie = Cookies.get("jwtFe");
+    let decoded;
+    // Check if the JWT token exists before attempting to decode it
+    if (cookie) {
+      decoded = jwtDecode(cookie);
+    }
     const isProtectedRoute =
       location.pathname.startsWith("/adminPage") ||
       location.pathname.startsWith("/userPage");
@@ -60,10 +57,13 @@ function App() {
     const isUserPage = location.pathname.startsWith("/userPage");
     const isAdminPage = location.pathname.startsWith("/adminPage");
     const isSignupPage = location.pathname.startsWith("/signup");
+    const isLoginPage = location.pathname.startsWith("/login");
 
     // If the JWT token does not exist or the role is not set, redirect to login
     if (isSignupPage) {
-      navigate("/signup");
+      return;
+    }
+    if (isLoginPage) {
       return;
     }
     if (!decoded || !decoded.role || !isProtectedRoute) {
@@ -80,7 +80,11 @@ function App() {
       navigate("/userPage");
       return;
     }
-  }, [location]);
+  };
+
+  useEffect(() => {
+    checkRole();
+  }, [location, navigate]);
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
