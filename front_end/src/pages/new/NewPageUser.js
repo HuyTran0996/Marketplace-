@@ -59,6 +59,18 @@ const Loading = ({ title }) => {
     </div>
   );
 };
+const Error = () => {
+  return (
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+        <div className="top">
+          <h1>ERROR......</h1>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const UserDetails = ({ dataSingle, getSingleUser, getMyInfo, title }) => {
   const navigate = useNavigate();
@@ -206,13 +218,14 @@ const NewPageUser = ({ title }) => {
   const { isUserEditPage, isMyInfoEditPage } = usePage();
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const { state, getSingleUser, getMyInfo } = useContext(PageContext);
   const { dataSingle } = state;
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         if (isMyInfoEditPage) {
           await getMyInfo();
           setIsLoading(false);
@@ -223,13 +236,16 @@ const NewPageUser = ({ title }) => {
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);
+        setError(true);
       }
     };
     fetchData();
-  }, [isUserEditPage]);
+  }, [isMyInfoEditPage, isUserEditPage]);
 
   return isLoading ? (
     <Loading title={title} />
+  ) : error ? (
+    <Error />
   ) : (
     <UserDetails
       dataSingle={dataSingle}

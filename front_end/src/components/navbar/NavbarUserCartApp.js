@@ -16,52 +16,47 @@ const NavbarUserCartApp = () => {
   const { state } = useContext(PageContext);
   const { dataCart, dataUser } = state;
 
-  const [productName, setProductName] = useState("");
-
   const moveToCartPage = () => {
     navigate("/userPage/cartPage");
   };
 
   return (
-    <div className="navbar">
-      <div className="wrapper">
-        <span className={productName ? "search" : ""}></span>
+    <div className="wrapper">
+      <div></div>
+      <div className="items">
+        <div className="item">
+          {darkMode ? (
+            <DarkModeOutlinedIcon
+              className="icon"
+              onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
+            />
+          ) : (
+            <Brightness5Icon
+              className="icon"
+              onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
+            />
+          )}
+        </div>
 
-        <div className="items">
-          <div className="item">
-            {darkMode ? (
-              <DarkModeOutlinedIcon
-                className="icon"
-                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
-              />
-            ) : (
-              <Brightness5Icon
-                className="icon"
-                onClick={() => dispatchDarkMode({ type: "TOGGLE" })}
-              />
-            )}
-          </div>
+        <div className="item" onClick={moveToCartPage}>
+          <ShoppingCartIcon className="icon" />
+          <div className="counter">{dataCart ? dataCart.length : 0}</div>
+        </div>
 
-          <div className="item" onClick={moveToCartPage}>
-            <ShoppingCartIcon className="icon" />
-            <div className="counter">{dataCart ? dataCart.length : 0}</div>
-          </div>
-
-          <div className="item">
-            <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
-              <img
-                src={
-                  dataUser.data.user.photo ? (
-                    dataUser.data.user.photo
-                  ) : (
-                    <AccountCircleOutlinedIcon />
-                  )
-                }
-                alt="avatar"
-                className="avatar"
-              />
-            </Link>
-          </div>
+        <div className="item">
+          <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
+            <img
+              src={
+                dataUser?.data?.user.photo ? (
+                  dataUser.data.user.photo
+                ) : (
+                  <AccountCircleOutlinedIcon />
+                )
+              }
+              alt="avatar"
+              className="avatar"
+            />
+          </Link>
         </div>
       </div>
     </div>

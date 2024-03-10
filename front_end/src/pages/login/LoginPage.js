@@ -55,7 +55,7 @@ export default function LoginPage() {
       checkCookie(jwt);
       setIsLoading(false);
 
-      navigate(role === "admin" ? "/" : "/userPage");
+      navigate(role === "admin" ? "/adminPage" : "/userPage");
 
       return;
     } catch (error) {

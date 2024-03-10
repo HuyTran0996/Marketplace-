@@ -118,7 +118,7 @@ const StoreDetails = ({ dataSingle, getSingleStore, title }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img src={avatar} alt="avatar" />
+            <img src={file ? file : avatar} alt="avatar" />
           </div>
 
           <div className="right">

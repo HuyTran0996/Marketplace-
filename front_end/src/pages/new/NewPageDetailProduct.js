@@ -124,7 +124,7 @@ const ProductDetails = ({
           <div className="left">
             <img
               src={
-                dataSingle.data.product.photo
+                dataSingle.data?.product.photo
                   ? dataSingle.data.product.photo
                   : avatar
               }

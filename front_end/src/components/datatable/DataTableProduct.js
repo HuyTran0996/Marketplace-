@@ -98,7 +98,7 @@ const DataTableProduct = () => {
             return (
               <div className="cellAction">
                 <Link
-                  to={`/products/edit/${params.row.id}`}
+                  to={`/adminPage/products/edit/${params.row.id}`}
                   style={{ textDecoration: "none" }}
                 >
                   <div className="editButton">View & Edit</div>

@@ -72,7 +72,7 @@ export default function SignupPage() {
       checkCookie(jwt);
       setIsLoading(false);
 
-      navigate(role === "admin" ? "/" : "/userPage");
+      navigate(role === "admin" ? "/adminPage" : "/userPage");
 
       alert("Successful account registration, click ok to continue");
       return result;

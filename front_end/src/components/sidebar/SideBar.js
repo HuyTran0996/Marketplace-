@@ -48,12 +48,10 @@ const Sidebar = () => {
         <span className="logo">Admin</span>
       </div>
 
-      <hr />
-
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/adminPage" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
@@ -61,28 +59,28 @@ const Sidebar = () => {
           </Link>
 
           <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="/adminPage/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
             </li>
           </Link>
 
-          <Link to="/stores" style={{ textDecoration: "none" }}>
+          <Link to="/adminPage/stores" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Stores</span>
             </li>
           </Link>
 
-          <Link to="/orders" style={{ textDecoration: "none" }}>
+          <Link to="/adminPage/orders" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Orders</span>
             </li>
           </Link>
 
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link to="/adminPage/products" style={{ textDecoration: "none" }}>
             <li>
               <CategoryIcon className="icon" />
               <span>Products</span>
@@ -90,7 +88,10 @@ const Sidebar = () => {
           </Link>
 
           <p className="title">USER</p>
-          <Link to="/users/edit/myInfo" style={{ textDecoration: "none" }}>
+          <Link
+            to="/adminPage/users/edit/myInfo"
+            style={{ textDecoration: "none" }}
+          >
             <li>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>

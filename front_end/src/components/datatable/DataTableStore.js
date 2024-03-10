@@ -104,7 +104,7 @@ const DataTableStore = () => {
             return (
               <div className="cellAction">
                 <Link
-                  to={`/stores/edit/${params.row.id}`}
+                  to={`/adminPage/stores/edit/${params.row.id}`}
                   style={{ textDecoration: "none" }}
                 >
                   <div className="editButton">View & Edit</div>

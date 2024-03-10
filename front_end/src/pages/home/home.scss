@@ -29,10 +29,16 @@
       filter: brightness(120%);
     }
 
-    .widgets {
+    .products {
       display: flex;
       margin-top: 15px;
       margin-left: 5vw;
+    }
+    .widgets {
+      display: flex;
+      padding: 20px;
+      // margin-top: 15px;
+      // margin-left: 5vw;
     }
 
     .listContainer {

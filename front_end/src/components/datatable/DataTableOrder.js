@@ -88,7 +88,7 @@ const DataTableOrder = () => {
             return (
               <div className="cellAction">
                 <Link
-                  to={`/orders/edit/${params.row.id}`}
+                  to={`/adminPage/orders/edit/${params.row.id}`}
                   style={{ textDecoration: "none" }}
                 >
                   <div className="editButton">View & Edit</div>

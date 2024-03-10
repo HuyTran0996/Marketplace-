@@ -53,10 +53,14 @@ function App() {
 
   useEffect(() => {
     // Check if the user is already on a protected route
+    // const isProtectedRoute =
+    //   location.pathname === "/" || location.pathname.startsWith("/userPage");
     const isProtectedRoute =
-      location.pathname === "/" || location.pathname.startsWith("/userPage");
+      location.pathname.startsWith("/adminPage") ||
+      location.pathname.startsWith("/userPage");
 
     const isUserPage = location.pathname.startsWith("/userPage");
+    const isAdminPage = location.pathname.startsWith("/adminPage");
 
     // If the JWT token does not exist or the role is not set, redirect to login
     if (!decoded || !decoded.role || !isProtectedRoute) {
@@ -64,7 +68,7 @@ function App() {
       return;
     }
 
-    if (decoded.role === "admin" && isUserPage) {
+    if (decoded.role === "admin" && !isAdminPage) {
       navigate("/");
       return;
     }
@@ -82,7 +86,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/changePassword" element={<ChangePasswordPage />} />
 
-        <Route path="/">
+        <Route path="/adminPage">
           <Route index element={<HomePage />} />
 
           <Route path="users">

@@ -66,7 +66,6 @@ const ListPageCartProduct = () => {
     <div className="list">
       <SideBarUser />
       <div className="listContainer">
-        {/* <NavbarProduct /> */}
         <DataTableCartProduct />
       </div>
     </div>
@@ -77,7 +76,6 @@ const ListPageOrderUserApp = () => {
     <div className="list">
       <SideBarUser />
       <div className="listContainer">
-        {/* <NavbarProduct /> */}
         <DataTableOrderUserApp />
       </div>
     </div>
@@ -89,8 +87,6 @@ const ListPageOrderDetail = () => {
     <div className="list">
       <SideBarUser />
       <div className="listContainer">
-        {/* <NavbarProduct /> */}
-        {/* <DataTableCartProduct /> */}
         <DataTableOrderDetail />
       </div>
     </div>
@@ -101,8 +97,6 @@ const ListPageOrderDetailOfStore = () => {
     <div className="list">
       <SideBarUser />
       <div className="listContainer">
-        {/* <NavbarProduct /> */}
-        {/* <DataTableCartProduct /> */}
         <DataTableOrderDetailOfStoreUserApp />
       </div>
     </div>

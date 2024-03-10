@@ -37,7 +37,7 @@ const HomePageUser = () => {
       }
     };
     fetchData();
-  }, [genre]);
+  }, [location, genre]);
 
   if (isLoading) {
     return (
@@ -66,7 +66,7 @@ const HomePageUser = () => {
         <SidebarUser />
         <div className="homeContainer">
           <NavbarUserApp />
-          <div className="widgets">
+          <div className="products">
             <Grid container spacing={3}>
               {dataAllProducts.data.products?.map((product) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>

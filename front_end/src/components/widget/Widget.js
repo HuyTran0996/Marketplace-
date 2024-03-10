@@ -76,13 +76,13 @@ const Widget = ({ type, totalNumber }) => {
   const handleClick = (type) => {
     switch (type) {
       case "user":
-        navigate("/users");
+        navigate("/adminPage/users");
         break;
       case "order":
-        navigate("/orders");
+        navigate("/adminPage/orders");
         break;
       case "store":
-        navigate("/stores");
+        navigate("/adminPage/stores");
         break;
       default:
         break;

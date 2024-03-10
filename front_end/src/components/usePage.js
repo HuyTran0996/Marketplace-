@@ -43,6 +43,7 @@ export const usePage = () => {
 
     const isUserEditPage =
       currentUrl.includes(user) && currentUrl.includes(edit);
+
     const isMyInfoEditPage =
       currentUrl.includes(myInfo) && currentUrl.includes(edit);
 
