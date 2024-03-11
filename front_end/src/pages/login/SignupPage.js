@@ -131,7 +131,7 @@ export default function SignupPage() {
           className="no-spinners"
         />
 
-        {message && <span>{message}</span>}
+        {message && <div className="message">{message}</div>}
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Loading..." : "Submit"}

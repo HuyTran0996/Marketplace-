@@ -111,7 +111,7 @@ export default function LoginPage() {
           onChange={handlePasswordChange}
         />
 
-        {message && <span>{message}</span>}
+        {message && <div className="message">{message}</div>}
         <div onClick={handleForgotPassword}>Forget Password?</div>
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Loading..." : "Login"}
