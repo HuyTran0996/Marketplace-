@@ -19,6 +19,13 @@ const FetchAllOrdersProductOfStore = async (storeID) => {
   );
   return dataAllOrdersProduct;
 };
+const FetchAllOrdersProductOfAOrder = async (orderId) => {
+  const encodedOrderId = encodeURIComponent(orderId);
+  const dataAllOrdersProduct = await apiService.get(
+    `/orderProducts?orderID=${orderId}`
+  );
+  return dataAllOrdersProduct;
+};
 
 const FetchCreateOrderProduct = async (data) => {
   const Order = await apiService.post(`/orderProducts`, data, {
@@ -60,5 +67,6 @@ export {
   FetchAllOrdersProduct,
   FetchCreateOrderProduct,
   FetchAllOrdersProductOfStore,
+  FetchAllOrdersProductOfAOrder,
   FetchUpdateOrderProduct,
 };

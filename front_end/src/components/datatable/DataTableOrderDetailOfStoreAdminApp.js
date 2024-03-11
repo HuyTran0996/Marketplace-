@@ -1,28 +1,21 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 
-import {
-  FetchAllOrdersProduct,
-  FetchAllOrdersProductOfStore,
-  FetchUpdateOrderProduct,
-} from "../../data/FetchOrdersProductData";
+import { FetchAllOrdersProductOfAOrder } from "../../data/FetchOrdersProductData";
 import { PageContext } from "../../context/PageContext";
 
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
-const DataTableOrderDetailOfStoreUserApp = () => {
-  // const { orderID } = useParams();
+const DataTableOrderDetailOfStoreAdminApp = () => {
+  const { orderId } = useParams();
   const location = useLocation();
-  // const [storeId, setStoreId] = useState("");
-  const [foundNoStore, setFoundNoStore] = useState(false);
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [listProducts, setListProducts] = useState([]);
-  const [orderStatus, setOrderStatus] = useState("");
 
-  const { state, getSingleStore, getDataAllStoreByOwnerEmail, getMyInfo } =
-    useContext(PageContext);
+  const { state } = useContext(PageContext);
   const { dataSingle, dataUser } = state;
 
   let dataOriginal = [];
@@ -35,20 +28,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         setError(false);
         setIsLoading(true);
 
-        let result;
-        if (!dataUser) {
-          const user = await getMyInfo();
-          result = await getDataAllStoreByOwnerEmail(user.data.user.email);
-        } else {
-          result = await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
-        }
-
-        if (result?.data?.totalStores === 0) {
-          setFoundNoStore(true);
-        }
-        let storeID = result.data.stores._id;
-
-        let result1 = await FetchAllOrdersProductOfStore(storeID);
+        let result1 = await FetchAllOrdersProductOfAOrder(orderId);
 
         setListProducts(result1.data.orderProducts);
 
@@ -61,15 +41,6 @@ const DataTableOrderDetailOfStoreUserApp = () => {
     };
     fetchData();
   }, [location]);
-
-  // const calculateTotalPrice = () => {
-  //   // Ensure dataCart is always an array to safely use reduce
-  //   const cart = Array.isArray(listProducts) ? listProducts : [];
-  //   return cart.reduce(
-  //     (total, item) => total + item.quantity * item.productPrice,
-  //     0
-  //   );
-  // };
 
   const calculateTotalPrice = () => {
     // Ensure dataCart is always an array to safely use reduce
@@ -87,50 +58,6 @@ const DataTableOrderDetailOfStoreUserApp = () => {
 
   const totalPrice = calculateTotalPrice();
 
-  const handleDelivered = async (orderProductId, productID) => {
-    try {
-      setError(false);
-      setIsLoading(true);
-
-      const data = {
-        orderProductStatus: "deliveredToApp",
-        productID: productID,
-      };
-      await FetchUpdateOrderProduct({ orderProductId, data });
-
-      const result = await FetchAllOrdersProductOfStore(
-        dataSingle.data.stores._id
-      );
-      setListProducts(result.data.orderProducts);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setIsLoading(false);
-      setError(true);
-    }
-  };
-  const handleCancel = async (orderProductId, productID) => {
-    try {
-      setError(false);
-      setIsLoading(true);
-
-      const data = {
-        orderProductStatus: "canceledByStore",
-        productID: productID,
-      };
-      await FetchUpdateOrderProduct({ orderProductId, data });
-      const result = await FetchAllOrdersProductOfStore(
-        dataSingle.data.stores._id
-      );
-      setListProducts(result.data.orderProducts);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setIsLoading(false);
-      setError(true);
-    }
-  };
-
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   } else if (error || !listProducts) {
@@ -143,7 +70,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
     dataOriginal = listProducts;
     userColumns = [
       // { field: "id", headerName: "ID", width: 70 },
-      { field: "orderID", headerName: "Order ID", width: 70 },
+      { field: "orderID", headerName: "Order ID", width: 170 },
       { field: "productID", headerName: "pID", width: 70 },
       {
         field: "storeName",
@@ -217,36 +144,6 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         },
       },
     ];
-
-    actionColumn = [
-      {
-        field: "action",
-        headerName: "ACTION",
-        width: 210,
-        renderCell: (params) => {
-          return (
-            <div className="cellAction">
-              <div
-                className="editButton"
-                onClick={() =>
-                  handleDelivered(params.row.id, params.row.productID)
-                }
-              >
-                Delivered To App
-              </div>
-              <div
-                className="deleteButton"
-                onClick={() =>
-                  handleCancel(params.row.id, params.row.productID)
-                }
-              >
-                Cancel
-              </div>
-            </div>
-          );
-        },
-      },
-    ];
   }
 
   const data = dataOriginal.map((user) => {
@@ -275,4 +172,4 @@ const DataTableOrderDetailOfStoreUserApp = () => {
   );
 };
 
-export default DataTableOrderDetailOfStoreUserApp;
+export default DataTableOrderDetailOfStoreAdminApp;

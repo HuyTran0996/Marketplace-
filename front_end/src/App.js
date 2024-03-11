@@ -23,6 +23,7 @@ import {
   ListPageOrderUserApp,
   ListPageOrderDetail,
   ListPageOrderDetailOfStore,
+  ListPageOrderDetailOfStoreAdminApp,
 } from "./pages/list/ListPage";
 
 import NewPageUser from "./pages/new/NewPageUser";
@@ -123,6 +124,10 @@ function App() {
             <Route
               path="edit/:orderId"
               element={<NewPageOrder title="Edit Order" />}
+            />
+            <Route
+              path="orderDetail/:orderId"
+              element={<ListPageOrderDetailOfStoreAdminApp />}
             />
           </Route>
 

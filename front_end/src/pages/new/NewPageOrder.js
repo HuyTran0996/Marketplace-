@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { FetchUpdateOrder } from "../../data/FetchOrdersData";
 import { PageContext } from "../../context/PageContext";
@@ -60,6 +60,7 @@ const Loading = ({ title }) => {
 };
 
 const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
+  const navigate = useNavigate();
   const { orderId } = useParams();
 
   const [deliverTo, setAddress] = useState(
@@ -104,6 +105,11 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
     }
   };
 
+  const moveToOrderDetail = (e) => {
+    e.preventDefault();
+    navigate(`/adminPage/orders/orderDetail/${orderId}`);
+  };
+
   return (
     <div className="new">
       <Sidebar />
@@ -116,6 +122,11 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
           <div className="right">
             <form onSubmit={handleSubmit}>
               <div className="formInput" key="1">
+                <label>ORDER ID</label>
+                <span>{dataSingle.data.order._id}</span>
+              </div>
+
+              <div className="formInput" key="2">
                 <label>Buyer (can not change buyer)</label>
                 <input
                   type="text"
@@ -124,7 +135,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
                 />
               </div>
 
-              <div className="formInput" key="2">
+              <div className="formInput" key="3">
                 <label>Order Status</label>
                 <select value={orderStatus} onChange={handleOrderStatusChange}>
                   <option value="">{orderStatus}</option>
@@ -135,7 +146,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
                 </select>
               </div>
 
-              <div className="formInput" key="3">
+              <div className="formInput" key="4">
                 <label>Deliver To</label>
                 <input
                   type="text"
@@ -150,6 +161,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Loading..." : "Send"}
               </button>
+              <button onClick={moveToOrderDetail}>See Order Detail</button>
             </form>
           </div>
         </div>
