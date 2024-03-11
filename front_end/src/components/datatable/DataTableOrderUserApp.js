@@ -22,7 +22,13 @@ const DataTableOrderUserApp = () => {
       try {
         setIsLoading(true);
 
-        await getDataAllOrdersOfAUser(dataUser.data.user._id);
+        if (!dataUser) {
+          const user = await getMyInfo();
+          await getDataAllOrdersOfAUser(user.data.user._id);
+        } else {
+          await getDataAllOrdersOfAUser(dataUser.data.user._id);
+        }
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
