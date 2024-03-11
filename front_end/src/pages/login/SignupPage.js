@@ -36,7 +36,7 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+
     let requestBody = {
       name,
       email,
@@ -45,6 +45,10 @@ export default function SignupPage() {
       phone,
     };
     try {
+      if (!name || !email || !password || !passwordConfirm || !phone) {
+        throw new Error("All fields are required.");
+      }
+      setIsLoading(true);
       const result = await apiService.post(
         "/users/signup",
         {

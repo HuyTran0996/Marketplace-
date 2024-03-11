@@ -27,6 +27,9 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       setIsLoading(true);
+      if (!email || !password) {
+        throw new Error("All fields are required.");
+      }
       const result = await apiService.post(
         "/users/login",
         {

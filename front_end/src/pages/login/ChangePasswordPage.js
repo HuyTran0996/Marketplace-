@@ -28,6 +28,9 @@ export default function ChangePasswordPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!passwordCurrent || !password || !passwordConfirm) {
+      throw new Error("All fields are required.");
+    }
     setIsLoading(true);
     let requestBody = {
       passwordCurrent,
