@@ -35,7 +35,6 @@ import NewPageCreateProduct from "./pages/new/NewPageCreateProduct";
 
 import { PageContext } from "./context/PageContext";
 import { DarkModeContext } from "./context/darkModeContext";
-import SinglePage from "./pages/single/SinglePage";
 
 function App() {
   const navigate = useNavigate();
@@ -66,13 +65,13 @@ function App() {
       return;
     }
 
-    if (!decoded || !decoded.role || !isProtectedRoute) {
-      navigate("/login");
-      return;
-    }
+    // if (!decoded || !decoded.role || isProtectedRoute) {
+    //   navigate("/login");
+    //   return;
+    // }
 
     if (decoded.role === "admin" && !isAdminPage) {
-      navigate("/");
+      navigate("/adminPage");
       return;
     }
 
@@ -85,6 +84,9 @@ function App() {
   useEffect(() => {
     checkRole();
   }, [location, navigate]);
+  useEffect(() => {
+    checkRole();
+  }, []);
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
