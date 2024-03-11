@@ -60,8 +60,8 @@ export default function LoginPage() {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       const result = await apiService.post("/users/forgotPassword", {
         email: email,
       });
@@ -86,34 +86,34 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="login">
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <form onSubmit={handleLogin}>
-            <div>LOGIN PAGE</div>
-            <div className="title">Email</div>
-            <input
-              type="email"
-              placeholder="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <div className="title">Password</div>
-            <input
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            {message && <span>{message}</span>}
-            <button type="submit">Login</button>
-            <button onClick={handleForgotPassword}>Forgot Password</button>
-          </form>
-          <button onClick={moveToSignUpPage}>Move To Sign Up Page</button>
-        </div>
-      )}
+    <div className="login-form">
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+
+        {message && <span>{message}</span>}
+        <div onClick={handleForgotPassword}>Forget Password?</div>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Login"}
+        </button>
+      </form>
+      <p onClick={moveToSignUpPage}>Not a Member? Sign Up</p>
     </div>
   );
 }

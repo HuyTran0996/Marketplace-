@@ -1,64 +1,75 @@
-.login {
+.login-form {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(108, 95, 158);
+  background-color: #441c54;
+  color: #fff;
+  font-family: sans-serif;
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+  }
 
   form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 200px;
+    width: 300px;
 
-    .title {
-      align-self: flex-start;
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
     }
+
     input {
-      width: 200px;
-      height: 30px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+
+    div {
+      cursor: pointer;
       margin-bottom: 20px;
+      color: #ddd;
+      text-decoration: none;
+      transition-duration: 0.3;
+    }
+    div:hover {
+      color: aqua;
     }
 
     button {
-      width: 200px;
-      height: 30px;
-      margin-bottom: 10px;
-      border-radius: 5px;
+      padding: 10px 20px;
+      background-color: #4caf50;
       border: none;
-      background-color: purple;
+      border-radius: 4px;
       color: white;
-      font-weight: bold;
       cursor: pointer;
       transition-duration: 0.3s;
     }
-
     button:hover {
       background-color: #002ead;
     }
-
-    span {
-      font-size: 16px;
-      font-weight: bold;
-      color: rgb(122, 19, 19);
-      margin-top: 10px;
-    }
   }
 
-  button {
-    width: 200px;
-    height: 30px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: purple;
-    color: white;
-    font-weight: bold;
+  p {
     cursor: pointer;
-    transition-duration: 0.3s;
+    margin-top: 20px;
+  }
+  p:hover {
+    color: aqua;
   }
 
-  button:hover {
-    background-color: #002ead;
+  .no-spinners::-webkit-outer-spin-button,
+  .no-spinners::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .no-spinners {
+    -moz-appearance: textfield;
   }
 }
