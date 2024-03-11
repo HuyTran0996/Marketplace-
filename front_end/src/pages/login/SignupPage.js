@@ -45,6 +45,7 @@ export default function SignupPage() {
       phone,
     };
     try {
+      setMessage("");
       if (!name || !email || !password || !passwordConfirm || !phone) {
         throw new Error("All fields are required.");
       }

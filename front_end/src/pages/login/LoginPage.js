@@ -26,10 +26,11 @@ export default function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      setIsLoading(true);
+      setMessage("");
       if (!email || !password) {
         throw new Error("All fields are required.");
       }
+      setIsLoading(true);
       const result = await apiService.post(
         "/users/login",
         {

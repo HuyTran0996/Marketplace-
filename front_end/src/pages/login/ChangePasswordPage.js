@@ -28,6 +28,7 @@ export default function ChangePasswordPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
     if (!passwordCurrent || !password || !passwordConfirm) {
       throw new Error("All fields are required.");
     }
