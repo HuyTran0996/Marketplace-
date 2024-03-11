@@ -21,7 +21,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
   const [listProducts, setListProducts] = useState([]);
   const [orderStatus, setOrderStatus] = useState("");
 
-  const { state, getSingleStore, getDataAllStoreByOwnerEmail } =
+  const { state, getSingleStore, getDataAllStoreByOwnerEmail, getMyInfo } =
     useContext(PageContext);
   const { dataSingle, dataUser } = state;
 
@@ -34,10 +34,14 @@ const DataTableOrderDetailOfStoreUserApp = () => {
       try {
         setError(false);
         setIsLoading(true);
-        // await getSingleStore(storeId);
-        const result = await getDataAllStoreByOwnerEmail(
-          dataUser.data.user.email
-        );
+
+        let result;
+        if (!dataUser) {
+          const user = await getMyInfo();
+          result = await getDataAllStoreByOwnerEmail(user.data.user.email);
+        } else {
+          result = await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+        }
 
         if (result?.data?.totalStores === 0) {
           setFoundNoStore(true);
@@ -79,7 +83,11 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         productID: productID,
       };
       await FetchUpdateOrderProduct({ orderProductId, data });
-      await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+
+      const result = await FetchAllOrdersProductOfStore(
+        dataSingle.data.stores._id
+      );
+      setListProducts(result.data.orderProducts);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -97,7 +105,10 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         productID: productID,
       };
       await FetchUpdateOrderProduct({ orderProductId, data });
-      await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+      const result = await FetchAllOrdersProductOfStore(
+        dataSingle.data.stores._id
+      );
+      setListProducts(result.data.orderProducts);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);

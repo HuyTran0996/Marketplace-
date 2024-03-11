@@ -32,9 +32,14 @@ const YourStoreProducts = () => {
       try {
         setIsLoading(true);
 
-        const result = await getDataAllStoreByOwnerEmail(
-          dataUser.data.user.email
-        );
+        let result;
+        if (!dataUser) {
+          const user = await getMyInfo();
+          result = await getDataAllStoreByOwnerEmail(user.data.user.email);
+        } else {
+          result = await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+        }
+
         if (result?.data?.totalStores === 0) {
           setFoundNoStore(true);
           setIsLoading(false);

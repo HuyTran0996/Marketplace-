@@ -3,15 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 import "./productCard.scss";
 import { PageContext } from "../../context/PageContext";
+import { DeleteProduct } from "../../data/FetchProductsData";
 
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import HandymanIcon from "@mui/icons-material/Handyman";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function ProductCardOfStoreOwner({ product }) {
-  const { state, dispatch } = useContext(PageContext);
+  const { state, dispatch, getDataAllProductsOfAStore } =
+    useContext(PageContext);
   const { dataCart } = state;
   const navigate = useNavigate();
 
@@ -21,6 +24,15 @@ export default function ProductCardOfStoreOwner({ product }) {
 
   const editProduct = async () => {
     navigate(`/userPage/stores/yourStoreProducts/edit/${product._id}`);
+  };
+
+  const deleteProduct = async () => {
+    try {
+      await DeleteProduct(product._id);
+      await getDataAllProductsOfAStore(product.storeID);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,6 +60,9 @@ export default function ProductCardOfStoreOwner({ product }) {
 
         <button onClick={editProduct}>
           <HandymanIcon />
+        </button>
+        <button onClick={deleteProduct}>
+          <DeleteForeverIcon />
         </button>
       </CardActions>
     </div>

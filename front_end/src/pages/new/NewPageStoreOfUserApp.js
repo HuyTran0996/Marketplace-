@@ -300,7 +300,7 @@ const NewPageStoreOfUserApp = ({ title }) => {
   const [storeId, setStoreId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [foundNoStore, setFoundNoStore] = useState(false);
-  const { state, getSingleStore, getDataAllStoreByOwnerEmail } =
+  const { state, getSingleStore, getDataAllStoreByOwnerEmail, getMyInfo } =
     useContext(PageContext);
   const { dataSingle, dataUser } = state;
 
@@ -308,10 +308,13 @@ const NewPageStoreOfUserApp = ({ title }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        // await getSingleStore(storeId);
-        const result = await getDataAllStoreByOwnerEmail(
-          dataUser.data.user.email
-        );
+        let result;
+        if (!dataUser) {
+          const user = await getMyInfo();
+          result = await getDataAllStoreByOwnerEmail(user.data.user.email);
+        } else {
+          result = await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+        }
 
         if (result?.data?.totalStores === 0) {
           setFoundNoStore(true);
