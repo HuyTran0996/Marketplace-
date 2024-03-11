@@ -29,7 +29,6 @@ export default function ChangePasswordPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    Cookies.remove("jwtFe");
     let requestBody = {
       passwordCurrent,
       password,
@@ -51,6 +50,7 @@ export default function ChangePasswordPage() {
 
       alert("Changed password successfully, login with your new password");
       navigate("/login");
+      Cookies.remove("jwtFe");
       return result;
     } catch (error) {
       alert("Changed password fail, Error system");
@@ -67,42 +67,40 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <div className="login">
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div>CHANGE PASSWORD PAGE</div>
+    <div className="login-form">
+      <h1>CHANGE PASSWORD</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Current Password</label>
+        <input
+          type="password"
+          placeholder="your current password..."
+          value={passwordCurrent}
+          onChange={handlePasswordCurrentChange}
+        />
 
-          <div className="title">Current Password</div>
-          <input
-            type="password"
-            placeholder="your current password..."
-            value={passwordCurrent}
-            onChange={handlePasswordCurrentChange}
-          />
+        <label>New Password</label>
+        <input
+          type="password"
+          placeholder="your new password..."
+          value={password}
+          onChange={handlePasswordChange}
+        />
 
-          <div className="title">New Password</div>
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+        <label>Password Confirm</label>
+        <input
+          type="password"
+          placeholder="passwordConfirm"
+          value={passwordConfirm}
+          onChange={handlePasswordConfirmChange}
+        />
 
-          <div className="title">Password Confirm</div>
-          <input
-            type="password"
-            placeholder="passwordConfirm"
-            value={passwordConfirm}
-            onChange={handlePasswordConfirmChange}
-          />
+        {message && <span>{message}</span>}
 
-          {message && <span>{message}</span>}
-          <button type="submit">Submit</button>
-          <button onClick={moveToLoginPage}>Move To Login Page</button>
-        </form>
-      )}
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Submit"}
+        </button>
+      </form>
+      <p onClick={moveToLoginPage}>Move To Login Page</p>
     </div>
   );
 }
