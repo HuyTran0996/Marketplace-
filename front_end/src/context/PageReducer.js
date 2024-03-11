@@ -18,6 +18,8 @@ const initialState = {
 
 function PageReducer(state, action) {
   switch (action.type) {
+    case "RESET":
+      return initialState;
     case "SET_ERROR":
       return { ...state, error: action.payload };
     case "SET_LOADING":

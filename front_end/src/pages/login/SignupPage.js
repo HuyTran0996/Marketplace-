@@ -18,15 +18,6 @@ export default function SignupPage() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [phone, setPhone] = useState("");
 
-  const checkCookie = (jwt) => {
-    const cookie = Cookies.get("jwtFe");
-    if (!cookie) {
-      Cookies.set("jwtFe", jwt, { expires: 2 });
-      return;
-    }
-    return;
-  };
-
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -69,7 +60,8 @@ export default function SignupPage() {
 
       const role = result.data.user.role;
       const jwt = result.data.token;
-      checkCookie(jwt);
+      Cookies.remove("jwtFe");
+      Cookies.set("jwtFe", jwt, { expires: 2 });
       setIsLoading(false);
 
       navigate(role === "admin" ? "/adminPage" : "/userPage");

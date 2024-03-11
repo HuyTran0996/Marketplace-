@@ -29,6 +29,7 @@ export default function ChangePasswordPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    Cookies.remove("jwtFe");
     let requestBody = {
       passwordCurrent,
       password,

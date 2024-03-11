@@ -16,15 +16,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const checkCookie = (jwt) => {
-    const cookie = Cookies.get("jwtFe");
-    if (!cookie) {
-      Cookies.set("jwtFe", jwt, { expires: 2 });
-      return;
-    }
-    return;
-  };
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -34,8 +25,8 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       const result = await apiService.post(
         "/users/login",
         {
@@ -51,8 +42,9 @@ export default function LoginPage() {
       );
       const role = result.data.user.role;
       const jwt = result.data.token;
+      Cookies.remove("jwtFe");
+      Cookies.set("jwtFe", jwt, { expires: 2 });
 
-      checkCookie(jwt);
       setIsLoading(false);
 
       navigate(role === "admin" ? "/adminPage" : "/userPage");

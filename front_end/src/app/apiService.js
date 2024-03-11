@@ -1,20 +1,22 @@
 import axios from "axios";
+
 import Cookies from "js-cookie";
-const cookie = Cookies.get("jwtFe");
+
 const apiService = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  headers: {
-    Authorization: `Bearer ${cookie}`,
-  },
   withCredentials: true,
 });
 
 apiService.interceptors.request.use(
   (request) => {
+    const token = Cookies.get("jwtFe");
+    if (token) {
+      request.headers.Authorization = `Bearer ${token}`;
+    }
     console.log("Start request", request);
     return request;
   },
-  function (error) {
+  (error) => {
     console.log("REQUEST ERROR", error);
     return Promise.reject(error);
   }

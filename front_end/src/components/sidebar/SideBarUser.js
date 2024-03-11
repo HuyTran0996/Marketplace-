@@ -26,10 +26,10 @@ const SideBarUser = () => {
 
   const handleLogOut = async (e) => {
     localStorage.removeItem("favorite");
-    dispatch({
-      type: "SET_DATA_CART",
-      payload: [],
-    });
+    // dispatch({
+    //   type: "SET_DATA_CART",
+    //   payload: [],
+    // });
     Cookies.remove("forFe");
     Cookies.remove("jwtFe");
 
@@ -47,6 +47,7 @@ const SideBarUser = () => {
           withCredentials: true,
         }
       );
+      dispatch({ type: "RESET" });
       return result;
     } catch (error) {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
