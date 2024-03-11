@@ -65,10 +65,10 @@ function App() {
       return;
     }
 
-    // if (!decoded || !decoded.role || isProtectedRoute) {
-    //   navigate("/login");
-    //   return;
-    // }
+    if (!decoded || !decoded.role) {
+      navigate("/login");
+      return;
+    }
 
     if (decoded.role === "admin" && !isAdminPage) {
       navigate("/adminPage");
