@@ -135,22 +135,26 @@ const ProductDetails = ({
           <div className="right">
             <form onSubmit={handleAddToCart}>
               <div className="formInput" key="1">
-                <span>Store Name: {dataSingle.data.product.storeName}</span>
+                <label>Store Name: {dataSingle.data.product.storeName}</label>
               </div>
 
               <div className="formInput" key="2">
-                <span>Product Name: {dataSingle.data.product.productName}</span>
+                <label>
+                  Product Name: {dataSingle.data.product.productName}
+                </label>
               </div>
 
               <div className="formInput" key="3">
-                <span>Description: {dataSingle.data.product.description}</span>
+                <label>
+                  Description: {dataSingle.data.product.description}
+                </label>
               </div>
 
               <div className="formInput" key="4">
-                <span>
+                <label>
                   Price: {dataSingle.data.product.price.toLocaleString()}/
                   {dataSingle.data.product.unit}
-                </span>
+                </label>
               </div>
 
               <button type="submit">Add To Cart</button>

@@ -204,7 +204,7 @@ const UserDetails = ({ dataUser, getSingleUser, getMyInfo, title }) => {
                 onClick={moveToChangePasswordPage}
                 disabled={isSubmitting}
               >
-                Change Your Password
+                Change Password
               </button>
             </form>
           </div>

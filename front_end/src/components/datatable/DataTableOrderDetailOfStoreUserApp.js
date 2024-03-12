@@ -13,8 +13,8 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableOrderDetailOfStoreUserApp = () => {
   // const { orderID } = useParams();
-  const location = useLocation();
   // const [storeId, setStoreId] = useState("");
+  const location = useLocation();
   const [foundNoStore, setFoundNoStore] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -61,15 +61,6 @@ const DataTableOrderDetailOfStoreUserApp = () => {
     };
     fetchData();
   }, [location]);
-
-  // const calculateTotalPrice = () => {
-  //   // Ensure dataCart is always an array to safely use reduce
-  //   const cart = Array.isArray(listProducts) ? listProducts : [];
-  //   return cart.reduce(
-  //     (total, item) => total + item.quantity * item.productPrice,
-  //     0
-  //   );
-  // };
 
   const calculateTotalPrice = () => {
     // Ensure dataCart is always an array to safely use reduce
@@ -258,13 +249,20 @@ const DataTableOrderDetailOfStoreUserApp = () => {
 
   return (
     <div className="datatable">
-      <DataGrid
+      {/* <DataGrid
         rows={data} //userRows
         columns={userColumns.concat(actionColumn)} //userColumns
         className="datagrid"
         // checkboxSelection
         // pageSize={9}
         // rowsPerPageOptions={[9]}
+      /> */}
+      <DataGrid
+        rows={data}
+        columns={userColumns.concat(actionColumn)}
+        className="datagrid"
+        autoHeight
+        hideFooterPagination
       />
 
       <div className="totalPrice">
