@@ -48,7 +48,7 @@ export default function ProductCard({ product }) {
       />
 
       <CardContent className="cardContent">
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h7" component="div">
           {product.productName}
         </Typography>
 

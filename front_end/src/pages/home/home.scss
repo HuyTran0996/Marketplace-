@@ -57,6 +57,19 @@
 }
 
 @media (max-width: 600px) {
+  .homeContainer {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .products {
+      // margin-top: 15px;
+      margin-left: 50px;
+      width: 65vw;
+    }
+  }
   .widgets {
     height: 90vh;
     display: flex;
