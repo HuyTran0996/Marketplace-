@@ -235,13 +235,20 @@ const DataTableCartProduct = () => {
 
   return (
     <div className="datatable">
-      <DataGrid
+      {/* <DataGrid
         rows={data} //userRows
         columns={userColumns.concat(actionColumn)} //userColumns
         className="datagrid"
         // checkboxSelection
         // pageSize={9}
         // rowsPerPageOptions={[9]}
+      /> */}
+      <DataGrid
+        rows={data}
+        columns={userColumns.concat(actionColumn)}
+        className="datagrid"
+        autoHeight
+        hideFooterPagination
       />
 
       <div className="formInput" key="1">

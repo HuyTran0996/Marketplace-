@@ -93,8 +93,8 @@ const Widget = ({ type, totalNumber }) => {
     <div className={widgetClass} onClick={() => handleClick(type)}>
       <div className="upper">{dataWidget.icon}</div>
       <div className="down">
-        <span className="counter">{amount}</span>
-        <span className="title">{dataWidget.title}</span>
+        <div className="counter">{amount}</div>
+        <div className="title">{dataWidget.title}</div>
       </div>
     </div>
   );

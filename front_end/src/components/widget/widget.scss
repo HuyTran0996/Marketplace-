@@ -52,3 +52,38 @@
   margin: 8px;
   background-color: rgba(0, 128, 0, 0.2);
 }
+
+@media (max-width: 600px) {
+  .widget {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .upper {
+      .icon {
+        display: flex;
+        margin: 10px;
+        font-size: 130px;
+        border-radius: 15px;
+      }
+    }
+
+    .down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .title {
+        font-weight: bold;
+        font-size: 14px;
+        color: rgb(69, 69, 69);
+      }
+
+      .counter {
+        font-size: 10vw;
+        font-weight: 300;
+      }
+    }
+  }
+}

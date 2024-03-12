@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import {
-  FetchAllOrdersProduct,
   FetchAllOrdersProductOfStore,
   FetchUpdateOrderProduct,
 } from "../../data/FetchOrdersProductData";
@@ -12,16 +11,13 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableOrderDetailOfStoreUserApp = () => {
-  // const { orderID } = useParams();
-  // const [storeId, setStoreId] = useState("");
   const location = useLocation();
   const [foundNoStore, setFoundNoStore] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [listProducts, setListProducts] = useState([]);
-  const [orderStatus, setOrderStatus] = useState("");
 
-  const { state, getSingleStore, getDataAllStoreByOwnerEmail, getMyInfo } =
+  const { state, getDataAllStoreByOwnerEmail, getMyInfo } =
     useContext(PageContext);
   const { dataSingle, dataUser } = state;
 
