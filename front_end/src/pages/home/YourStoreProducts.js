@@ -1,6 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
+import {
+  useLocation,
+  useParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 import "./home.scss";
+import { DarkModeContext } from "../../context/darkModeContext";
 import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
 import NavbarUserApp from "../../components/navbar/NavbarUserApp";
@@ -8,11 +15,16 @@ import ProductCardOfStoreOwner from "../../components/productCard/ProductCardOfS
 import Widget from "../../components/widget/Widget";
 
 import Grid from "@mui/material/Grid";
-
-import { useNavigate } from "react-router-dom";
+import Pagination from "@mui/material/Pagination";
+import { red } from "@mui/material/colors";
 
 const YourStoreProducts = () => {
+  const { darkMode } = useContext(DarkModeContext);
+  const location = useLocation();
+  // const { genre } = useParams();
   const navigate = useNavigate();
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
   const {
     state,
     dispatch,
@@ -26,6 +38,17 @@ const YourStoreProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [foundNoStore, setFoundNoStore] = useState(false);
+
+  ///////////STYLES//////////////
+
+  const stackStyle = {
+    marginTop: "15px",
+    marginBottom: "25px",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  ///////////////////
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +70,9 @@ const YourStoreProducts = () => {
           return;
         }
 
-        await getDataAllProductsOfAStore(result.data.stores._id);
+        await getDataAllProductsOfAStore(
+          `${result.data.stores._id}&page=${page}&limit=8`
+        );
 
         setIsLoading(false);
       } catch (error) {
@@ -57,11 +82,15 @@ const YourStoreProducts = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [location]);
 
   const handleAddProduct = (e) => {
     e.preventDefault();
     navigate("/userPage/stores/yourStoreProducts/createProduct");
+  };
+
+  const handleChangeFilter = (e, p) => {
+    navigate(`/userPage/stores/yourStoreProducts?page=${p}`);
   };
 
   if (isLoading) {
@@ -108,6 +137,24 @@ const YourStoreProducts = () => {
                   </Grid>
                 ))
               )}
+            </Grid>
+            <Grid style={stackStyle}>
+              <Pagination
+                count={Math.ceil(dataAllProducts.data.total / 8 || 1)}
+                color="primary"
+                onChange={handleChangeFilter}
+                page={page}
+                sx={{
+                  "& button": {
+                    color: darkMode ? "white" : "black",
+                  },
+                  "& button:hover": {
+                    transition: "0.3s",
+                    backgroundColor: red[100],
+                    color: "green",
+                  },
+                }}
+              />
             </Grid>
           </div>
         </div>

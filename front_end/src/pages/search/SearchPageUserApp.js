@@ -16,8 +16,8 @@ import ProductCard from "../../components/productCard/ProductCard";
 import Widget from "../../components/widget/Widget";
 
 import Pagination from "@mui/material/Pagination";
-import Grid from "@mui/material/Grid";
 import { red } from "@mui/material/colors";
+import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 
 ///////////STYLES//////////////

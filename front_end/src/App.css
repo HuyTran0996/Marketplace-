@@ -2,8 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Note: khi sử dụng Grid của MUI, hay bị tình trạng overflow màn hình một chút, khi đó khắc phục bằng cách add thêm dòng overflow-x: hidden; này ở CSS của body, NHƯNG NHƯỢC ĐIỂM LÀ SET RỒI THÌ CÁI GÌ VƯỢT RA MÀN HÌNH LÀ KO CÓ KÉO CHUỘT HAY VUỐT MÀN HÌNH CHO QUA ĐỂ XEM TIẾP ĐƯỢC, LÀM CÁCH NÀY LÀ PHẢI BỐ CỤC CHẶC CHẼ GỌN GÀN TRONG SCREEN THÔI */
-  overflow-x: hidden;
-  /* background-color: aqua; */
   background-image: url("./style/white.jpg");
+  /* Note: khi sử dụng Grid của MUI, hay bị tình trạng overflow màn hình một chút, khi đó khắc phục bằng cách add thêm dòng overflow-x: hidden; này ở CSS của body, NHƯNG NHƯỢC ĐIỂM LÀ SET RỒI THÌ CÁI GÌ VƯỢT RA MÀN HÌNH LÀ KO CÓ KÉO CHUỘT HAY VUỐT MÀN HÌNH CHO QUA ĐỂ XEM TIẾP ĐƯỢC, LÀM CÁCH NÀY LÀ PHẢI BỐ CỤC CHẶC CHẼ GỌN GÀN TRONG SCREEN THÔI */
+  /* overflow-x: hidden; */
 }

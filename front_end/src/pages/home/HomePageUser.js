@@ -11,6 +11,7 @@ import { PageContext } from "../../context/PageContext";
 import "./genre.scss";
 
 import { Grid, Container } from "@mui/material";
+
 ///////////STYLES//////////////
 
 const cardStyle = {

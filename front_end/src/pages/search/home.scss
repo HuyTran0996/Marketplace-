@@ -1,13 +1,14 @@
 .home {
   display: flex;
   width: 100vw;
+  max-height: 100vh;
 
   .homeContainer {
     // flex: 6;
     padding: 0px;
     width: 90vw;
+
     .movieStyle {
-      padding-top: 10px;
       color: #000000;
       font-weight: bold;
       font-size: 36px;
@@ -40,7 +41,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-top: 15px;
+      // margin-top: 15px;
       margin-left: 5vw;
     }
     .widgets {
@@ -78,11 +79,5 @@
       margin-left: 50px;
       width: 65vw;
     }
-  }
-  .widgets {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
 }
