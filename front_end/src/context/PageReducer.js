@@ -4,6 +4,9 @@ const initialState = {
   isLoading: false,
 
   role: Cookies.get("forFe"),
+  dataPopularFoods: null,
+  dataPopularDevices: null,
+  dataPopularStationery: null,
   dataAllUsers: null,
   dataAllOrders: null,
   dataAllStores: null,
@@ -44,6 +47,13 @@ function PageReducer(state, action) {
       return { ...state, reviewsOfThisProduct: action.payload };
     case "SET_DATA_USER":
       return { ...state, dataUser: action.payload };
+
+    case "SET_DATA_PopularFoods":
+      return { ...state, dataPopularFoods: action.payload };
+    case "SET_DATA_PopularDevices":
+      return { ...state, dataPopularDevices: action.payload };
+    case "SET_DATA_PopularStationery":
+      return { ...state, dataPopularStationery: action.payload };
     // case "SET_PRODUCT_ID":
     //   return { ...state, productId: action.payload };
     default:

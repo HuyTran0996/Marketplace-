@@ -46,7 +46,7 @@ const responsive = {
 };
 ///////////////////
 
-function HomePageUser() {
+function GenrePage() {
   const { state, getDataOfThreeGenres, getDataAllProducts } =
     useContext(PageContext);
   const {
@@ -115,8 +115,8 @@ function HomePageUser() {
         <div className="right">
           <NavbarUserApp />
 
-          <Container style={cardStyle}>
-            <Container>
+          <Container>
+            <Container style={cardStyle}>
               <div className="movieStyle">Popular Foods</div>
               <Carousel
                 className="carousel"
@@ -200,7 +200,6 @@ function HomePageUser() {
                   return (
                     <Grid
                       item
-                      style={gridStyle}
                       xs={12}
                       sm={6}
                       md={4}
@@ -220,4 +219,4 @@ function HomePageUser() {
   }
 }
 
-export default HomePageUser;
+export default GenrePage;

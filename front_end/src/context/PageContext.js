@@ -88,6 +88,28 @@ function PageProvider({ children }) {
     return;
   };
 
+  const getDataOfThreeGenres = async () => {
+    const resultdataPopularFoods = await FetchAllProducts("Foods");
+    dispatch({
+      type: "SET_DATA_PopularFoods",
+      payload: resultdataPopularFoods,
+    });
+
+    const resultdataPopularDevices = await FetchAllProducts("Devices");
+    dispatch({
+      type: "SET_DATA_PopularDevices",
+      payload: resultdataPopularDevices,
+    });
+
+    const resultdataPopularStationery = await FetchAllProducts("Stationery");
+    dispatch({
+      type: "SET_DATA_PopularStationery",
+      payload: resultdataPopularStationery,
+    });
+
+    return;
+  };
+
   const getDataAllProductsOfAStore = async (storeID) => {
     const resultAllProducts = await FetchAllProductsOfAStore(storeID);
     dispatch({
@@ -214,6 +236,7 @@ function PageProvider({ children }) {
     getSingleOrder,
     getSingleProduct,
     getReviewsOfThis,
+    getDataOfThreeGenres,
   };
 
   return (

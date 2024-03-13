@@ -56,7 +56,7 @@ const SideBarUser = () => {
     }
   };
   const getProductByGenre = async (genre) => {
-    navigate("/userPage", { state: { genre } });
+    navigate(`/userPage/search/${genre}`);
   };
   return (
     <div className="sidebar">

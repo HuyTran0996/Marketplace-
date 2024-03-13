@@ -10,10 +10,14 @@ import { useNavigate } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import HomePageUser from "./pages/home/HomePageUser";
 import YourStoreProducts from "./pages/home/YourStoreProducts";
-import LoginPage from "./pages/login/LoginPage";
 
+import SearchPageUserApp from "./pages/search/SearchPageUserApp";
+
+import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/login/SignupPage";
 import ChangePasswordPage from "./pages/login/ChangePasswordPage";
+
+import NotFoundPage from "./pages/NotFoundPage";
 import {
   ListPageUser,
   ListPageStore,
@@ -142,6 +146,10 @@ function App() {
         {/* ////////////////////USER////////////////////// */}
         <Route path="/userPage/">
           <Route index element={<HomePageUser />} />
+
+          <Route path="search/:genre" element={<SearchPageUserApp />} />
+
+          {/* <Route index element={<GenrePage />} /> */}
           <Route
             path="edit/myInfo"
             element={<NewPageUser title="Edit User" />}
@@ -181,6 +189,7 @@ function App() {
             </Route>
           </Route>
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

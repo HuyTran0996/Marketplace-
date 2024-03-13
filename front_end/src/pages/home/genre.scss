@@ -1,0 +1,46 @@
+.home {
+  //nếu bật absolute thì sẽ không nhận dark mode được
+  // position: absolute;
+
+  // width: 100%;
+
+  .left {
+    position: relative;
+    top: 0;
+    width: 12vw;
+  }
+
+  .right {
+    position: relative;
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+
+    .movieStyle {
+      padding-top: 10px;
+      color: #000000;
+      font-weight: bold;
+      font-size: 36px;
+      transition: 0.3s;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    position: absolute;
+    width: 100vw;
+    .left {
+      // display: none;
+      position: relative;
+      top: 0;
+      width: 20vw;
+    }
+
+    .right {
+      position: relative;
+      left: 0px;
+      width: 85vw;
+    }
+  }
+}

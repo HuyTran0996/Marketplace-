@@ -40,9 +40,11 @@ const NavbarUserApp = () => {
     setIsLoading(true);
     try {
       if (productName === "") {
-        await getDataAllProducts();
+        // await getDataAllProducts();
+        navigate("/userPage");
       } else {
-        await searchProductByName(productName);
+        // await searchProductByName(productName);
+        navigate(`/userPage/search/${productName}`);
       }
 
       setIsLoading(false);

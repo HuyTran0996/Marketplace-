@@ -69,6 +69,7 @@ const ProductDetails = ({
         description: description,
         price: price,
         unit: unit,
+        genre: genre,
       };
       let result = await FetchCreateProduct({ data });
       let productId = result.data.product._id;
