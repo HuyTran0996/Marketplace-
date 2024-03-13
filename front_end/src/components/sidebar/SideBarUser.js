@@ -56,7 +56,7 @@ const SideBarUser = () => {
     }
   };
   const getProductByGenre = async (genre) => {
-    navigate(`/userPage/search/${genre}`);
+    navigate(`/userPage/search/${genre}?page=1`);
   };
   return (
     <div className="sidebar">

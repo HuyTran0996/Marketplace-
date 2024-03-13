@@ -10,8 +10,7 @@ import { PageContext } from "../../context/PageContext";
 
 import "./genre.scss";
 
-import Grid from "@mui/material/Grid";
-import { Container } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 ///////////STYLES//////////////
 
 const cardStyle = {
@@ -116,103 +115,107 @@ function HomePageUser() {
           <NavbarUserApp />
 
           <Container style={cardStyle}>
-            <Container>
-              <div className="movieStyle">Popular Foods</div>
-              <Carousel
-                className="carousel"
-                responsive={responsive}
-                transitionDuration={300}
-                infinite={true}
-                ssr={true}
-              >
-                {dataPopularFoods1?.map((product) => {
-                  return (
-                    <Grid
-                      style={gridStyle}
-                      key={product._id}
-                      item
-                      xs={12}
-                      lg={4}
-                    >
-                      <ProductCard product={product} />
-                    </Grid>
-                  );
-                })}
-              </Carousel>
-            </Container>
+            <div className="movieStyle">Popular Foods</div>
+            <Carousel
+              className="carousel"
+              responsive={responsive}
+              transitionDuration={300}
+              infinite={true}
+              ssr={true}
+            >
+              {dataPopularFoods1?.map((product) => {
+                return (
+                  <Grid
+                    style={gridStyle}
+                    key={product._id}
+                    item
+                    xs={12 / 2}
+                    sm={12 / 3}
+                    md={12 / 5}
+                    lg={12 / 7}
+                  >
+                    <ProductCard product={product} />
+                  </Grid>
+                );
+              })}
+            </Carousel>
+          </Container>
 
-            <Container style={cardStyle}>
-              <div className="movieStyle">Popular Devices</div>
+          <Container style={cardStyle}>
+            <div className="movieStyle">Popular Devices</div>
 
-              <Carousel
-                className="carousel"
-                responsive={responsive}
-                transitionDuration={300}
-                infinite={true}
-                ssr={true}
-              >
-                {dataPopularDevices1?.map((product) => {
-                  return (
-                    <Grid
-                      style={gridStyle}
-                      key={product._id}
-                      item
-                      xs={12}
-                      lg={4}
-                    >
-                      <ProductCard product={product} />
-                    </Grid>
-                  );
-                })}
-              </Carousel>
-            </Container>
+            <Carousel
+              className="carousel"
+              responsive={responsive}
+              transitionDuration={300}
+              infinite={true}
+              ssr={true}
+            >
+              {dataPopularDevices1?.map((product) => {
+                return (
+                  <Grid
+                    style={gridStyle}
+                    key={product._id}
+                    item
+                    xs={12 / 2}
+                    sm={12 / 3}
+                    md={12 / 5}
+                    lg={12 / 7}
+                  >
+                    <ProductCard product={product} />
+                  </Grid>
+                );
+              })}
+            </Carousel>
+          </Container>
 
-            <Container style={cardStyle}>
-              <div className="movieStyle">Popular Stationery</div>
+          <Container style={cardStyle}>
+            <div className="movieStyle">Popular Stationery</div>
 
-              <Carousel
-                className="carousel"
-                responsive={responsive}
-                transitionDuration={300}
-                infinite={true}
-                ssr={true}
-              >
-                {dataPopularStationery1?.map((product) => {
-                  return (
-                    <Grid
-                      style={gridStyle}
-                      key={product._id}
-                      item
-                      xs={12}
-                      lg={4}
-                    >
-                      <ProductCard product={product} />
-                    </Grid>
-                  );
-                })}
-              </Carousel>
-            </Container>
+            <Carousel
+              className="carousel"
+              responsive={responsive}
+              transitionDuration={300}
+              infinite={true}
+              ssr={true}
+            >
+              {dataPopularStationery1?.map((product) => {
+                return (
+                  <Grid
+                    style={gridStyle}
+                    key={product._id}
+                    item
+                    xs={12 / 2}
+                    sm={12 / 3}
+                    md={12 / 5}
+                    lg={12 / 7}
+                  >
+                    <ProductCard product={product} />
+                  </Grid>
+                );
+              })}
+            </Carousel>
+          </Container>
 
-            <Container style={cardStyle}>
-              <div className="movieStyle">Products For You</div>
-              <Grid container spacing={3}>
-                {dataAllProducts1?.map((product) => {
-                  return (
-                    <Grid
-                      item
-                      style={gridStyle}
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      lg={12 / 5}
-                      key={product._id}
-                    >
-                      <ProductCard product={product} />
-                    </Grid>
-                  );
-                })}
-              </Grid>
-            </Container>
+          <Container style={cardStyle}>
+            <div className="movieStyle">Products For You</div>
+            <Grid container spacing={3}>
+              {dataAllProducts1?.map((product) => {
+                return (
+                  <Grid
+                    item
+                    style={gridStyle}
+                    xs={12 / 2}
+                    sm={12 / 3}
+                    md={12 / 5}
+                    // lg={12 / 7}
+                    key={product._id}
+                  >
+                    <ProductCard product={product} />
+                  </Grid>
+                );
+              })}
+            </Grid>
           </Container>
         </div>
       </div>

@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 import "./home.scss";
 import { PageContext } from "../../context/PageContext";
@@ -8,10 +13,25 @@ import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import ProductCard from "../../components/productCard/ProductCard";
 import Widget from "../../components/widget/Widget";
 
+import Pagination from "@mui/material/Pagination";
 import Grid from "@mui/material/Grid";
+import { red } from "@mui/material/colors";
 import { Container } from "@mui/material";
 
+///////////STYLES//////////////
+
+const stackStyle = {
+  marginTop: "15px",
+  marginBottom: "25px",
+  display: "flex",
+  alignItems: "center",
+  // backgroundColor: "blue",
+};
+
+///////////////////
+
 const SearchPageUserApp = () => {
+  const navigate = useNavigate();
   const { genre } = useParams();
   const {
     state,
@@ -25,8 +45,10 @@ const SearchPageUserApp = () => {
   const [error, setError] = useState(false);
   const location = useLocation();
 
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+
   useEffect(() => {
-    console.log("dáhd", genre);
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -36,10 +58,11 @@ const SearchPageUserApp = () => {
           genre === "Stationery" ||
           genre === "Others"
         ) {
-          await getDataAllProducts(genre);
+          await getDataAllProducts(`${genre}&page=${page}&limit=8`);
         } else {
-          await searchProductByName(genre);
+          await searchProductByName(`${genre}&page=${page}&limit=8`);
         }
+
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -49,6 +72,10 @@ const SearchPageUserApp = () => {
     };
     fetchData();
   }, [location, genre]);
+
+  const handleChangeFilter = (e, p) => {
+    navigate(`/userPage/search/${genre}?page=${p}`);
+  };
 
   if (isLoading) {
     return (
@@ -86,6 +113,25 @@ const SearchPageUserApp = () => {
                   <ProductCard product={product} />
                 </Grid>
               ))}
+            </Grid>
+
+            <Grid style={stackStyle}>
+              <Pagination
+                count={Math.ceil(dataAllProducts.data.total / 8 || 1)}
+                color="primary"
+                onChange={handleChangeFilter}
+                page={page}
+                sx={{
+                  "& button": {
+                    color: "black",
+                  },
+                  "& button:hover": {
+                    transition: "0.3s",
+                    backgroundColor: red[100],
+                    color: "blue",
+                  },
+                }}
+              />
             </Grid>
           </div>
         </div>
