@@ -149,7 +149,6 @@ function App() {
 
           <Route path="search/:genre" element={<SearchPageUserApp />} />
 
-          {/* <Route index element={<GenrePage />} /> */}
           <Route
             path="edit/myInfo"
             element={<NewPageUser title="Edit User" />}

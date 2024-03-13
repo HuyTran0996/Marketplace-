@@ -6,6 +6,8 @@ import {
   useSearchParams,
 } from "react-router-dom";
 
+import { DarkModeContext } from "../../context/darkModeContext";
+
 import "./home.scss";
 import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
@@ -31,6 +33,7 @@ const stackStyle = {
 ///////////////////
 
 const SearchPageUserApp = () => {
+  const { darkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
   const { genre } = useParams();
   const {
@@ -123,12 +126,12 @@ const SearchPageUserApp = () => {
                 page={page}
                 sx={{
                   "& button": {
-                    color: "black",
+                    color: darkMode ? "white" : "black",
                   },
                   "& button:hover": {
                     transition: "0.3s",
                     backgroundColor: red[100],
-                    color: "blue",
+                    color: "green",
                   },
                 }}
               />
