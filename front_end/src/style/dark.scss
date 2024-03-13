@@ -1,5 +1,7 @@
 .app.dark {
-  background-color: #111;
+  // background-color: #111;
+
+  background-image: url("dark.jpg");
   color: rgb(156, 156, 156);
 
   .chartGrid {
@@ -24,7 +26,8 @@
   }
 
   .sidebar {
-    background-color: #111;
+    // background-color: #111;
+    background-image: url("dark.jpg");
     border-color: #333;
 
     .top {
