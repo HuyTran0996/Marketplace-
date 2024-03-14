@@ -8,7 +8,7 @@ import { FetchCreateOrder, FetchUpdateOrder } from "../../data/FetchOrdersData";
 import { FetchCreateOrderProduct } from "../../data/FetchOrdersProductData";
 import { DeleteProduct } from "../../data/FetchProductsData";
 
-import "./datatable.scss";
+import "./dataTableCartProduct.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableCartProduct = () => {
@@ -178,7 +178,7 @@ const DataTableCartProduct = () => {
             <button onClick={() => handleDecreaseQuantity(params.row._id)}>
               -
             </button>
-            <span>{params.row.quantity}</span>
+            <div>{params.row.quantity}</div>
             <button onClick={() => handleIncreaseQuantity(params.row._id)}>
               +
             </button>
@@ -235,21 +235,15 @@ const DataTableCartProduct = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+        />
+      </div>
 
       <div className="formInput" key="1">
         <label>Deliver To</label>
@@ -260,6 +254,9 @@ const DataTableCartProduct = () => {
           onChange={handleAddressChange}
         />
       </div>
+      <div className="totalPrice">
+        <div>Total Price: {totalPrice.toLocaleString()} </div>
+      </div>
       <button
         className="sendOrder"
         onClick={(e) => handleSendOrder(e, orderId)}
@@ -267,10 +264,6 @@ const DataTableCartProduct = () => {
       >
         {isLoading ? "Sending..." : "Send Order"}
       </button>
-      <div className="totalPrice">
-        <span>Total Price: </span>
-        <span>{totalPrice.toLocaleString()}</span>
-      </div>
     </div>
   );
 };
