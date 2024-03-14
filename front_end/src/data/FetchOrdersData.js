@@ -5,13 +5,15 @@ const FetchCreateOrder = async () => {
   return Order;
 };
 
-const FetchAllOrders = async (orderId) => {
+const FetchAllOrders = async (orderId, page, limit) => {
   if (orderId) {
     const encodedOrderId = encodeURIComponent(orderId);
     const dataAllOrders = await apiService.get(`/orders?_id=${encodedOrderId}`);
     return dataAllOrders;
   } else {
-    const dataAllOrders = await apiService.get(`/orders`);
+    const dataAllOrders = await apiService.get(
+      `/orders?page=${page || 1}&limit=${limit || 8}`
+    );
     return dataAllOrders;
   }
 };

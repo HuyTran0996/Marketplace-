@@ -6,6 +6,8 @@ import {
   useSearchParams,
 } from "react-router-dom";
 
+import "./dataTableUser.scss";
+
 import { Paginate } from "../Pagination";
 import { usePage } from "../usePage";
 
@@ -14,10 +16,10 @@ import { PageContext } from "../../context/PageContext";
 
 import { AdminDeleteUser } from "../../data/FetchUsersData";
 
-import "./dataTableUser.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableUser = () => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const { state, getDataAllUsers } = useContext(PageContext);
@@ -29,12 +31,12 @@ const DataTableUser = () => {
 
   let [searchParams] = useSearchParams();
   let page = parseInt(searchParams.get("page")) || 1;
-
+  const limit = 8;
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataAllUsers("", page, "");
+        await getDataAllUsers("", page, limit);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -44,7 +46,7 @@ const DataTableUser = () => {
     };
 
     fetchData();
-  }, [isUserPage]);
+  }, [location, isUserPage]);
 
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
@@ -153,7 +155,7 @@ const DataTableUser = () => {
   };
 
   return (
-    <div className="datatable">
+    <div className="datatableUser">
       <div className="dataGrid">
         <DataGrid
           rows={data}
@@ -165,7 +167,7 @@ const DataTableUser = () => {
         />
       </div>
 
-      {Paginate(dataAllUsers, "/adminPage/users")}
+      {Paginate(dataAllUsers, "/adminPage/users", limit)}
     </div>
   );
 };

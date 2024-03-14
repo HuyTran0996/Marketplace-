@@ -1,5 +1,12 @@
 import { useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+
+import { Paginate } from "../Pagination";
 
 import {
   FetchAllOrdersProductOfStore,
@@ -7,23 +14,30 @@ import {
 } from "../../data/FetchOrdersProductData";
 import { PageContext } from "../../context/PageContext";
 
-import "./datatable.scss";
+import "./dataTableOrderDetailOfStoreUserApp.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableOrderDetailOfStoreUserApp = () => {
   const location = useLocation();
-  const [foundNoStore, setFoundNoStore] = useState(false);
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [listProducts, setListProducts] = useState([]);
 
-  const { state, getDataAllStoreByOwnerEmail, getMyInfo } =
-    useContext(PageContext);
-  const { dataSingle, dataUser } = state;
+  const {
+    state,
+    getDataAllStoreByOwnerEmail,
+    getMyInfo,
+    getDataAllOrdersProductOfAStore,
+  } = useContext(PageContext);
+  const { dataSingle, dataUser, dataAllOrdersProductOfStore } = state;
 
   let dataOriginal = [];
   let userColumns = [];
   let actionColumn = [];
+
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+  const limit = 8;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,14 +53,9 @@ const DataTableOrderDetailOfStoreUserApp = () => {
           result = await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
         }
 
-        if (result?.data?.totalStores === 0) {
-          setFoundNoStore(true);
-        }
         let storeID = result.data.stores._id;
 
-        let result1 = await FetchAllOrdersProductOfStore(storeID);
-
-        setListProducts(result1.data.orderProducts);
+        await getDataAllOrdersProductOfAStore(storeID, page, limit);
 
         setIsLoading(false);
       } catch (error) {
@@ -60,7 +69,9 @@ const DataTableOrderDetailOfStoreUserApp = () => {
 
   const calculateTotalPrice = () => {
     // Ensure dataCart is always an array to safely use reduce
-    const cart = Array.isArray(listProducts) ? listProducts : [];
+    const cart = Array.isArray(dataAllOrdersProductOfStore?.data.orderProducts)
+      ? dataAllOrdersProductOfStore.data.orderProducts
+      : [];
     // Filter out products with status 'canceledByStore'
     const filteredCart = cart.filter(
       (item) => item.orderProductStatus !== "canceledByStore"
@@ -85,10 +96,12 @@ const DataTableOrderDetailOfStoreUserApp = () => {
       };
       await FetchUpdateOrderProduct({ orderProductId, data });
 
-      const result = await FetchAllOrdersProductOfStore(
-        dataSingle.data.stores._id
+      await getDataAllOrdersProductOfAStore(
+        dataSingle.data.stores._id,
+        page,
+        limit
       );
-      setListProducts(result.data.orderProducts);
+
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -106,10 +119,13 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         productID: productID,
       };
       await FetchUpdateOrderProduct({ orderProductId, data });
-      const result = await FetchAllOrdersProductOfStore(
-        dataSingle.data.stores._id
+
+      await getDataAllOrdersProductOfAStore(
+        dataSingle.data.stores._id,
+        page,
+        limit
       );
-      setListProducts(result.data.orderProducts);
+
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -120,14 +136,14 @@ const DataTableOrderDetailOfStoreUserApp = () => {
 
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
-  } else if (error || !listProducts) {
+  } else if (error) {
     userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
-  } else if (listProducts.length === 0) {
+  } else if (dataAllOrdersProductOfStore.data.orderProducts === 0) {
     userColumns = [
       { field: "id", headerName: " Your Store Has No Orders...", width: 240 },
     ];
-  } else {
-    dataOriginal = listProducts;
+  } else if (dataAllOrdersProductOfStore) {
+    dataOriginal = dataAllOrdersProductOfStore.data.orderProducts;
     userColumns = [
       // { field: "id", headerName: "ID", width: 70 },
       { field: "orderID", headerName: "Order ID", width: 70 },
@@ -245,26 +261,24 @@ const DataTableOrderDetailOfStoreUserApp = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
-
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+        />
+      </div>
       <div className="totalPrice">
         <span>Total Price: </span>
         <span>{totalPrice.toLocaleString()}</span>
       </div>
+      {Paginate(
+        dataAllOrdersProductOfStore,
+        "/userPage/stores/yourStoreOrdersProduct",
+        limit
+      )}
     </div>
   );
 };

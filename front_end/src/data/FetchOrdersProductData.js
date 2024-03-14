@@ -12,10 +12,10 @@ const FetchAllOrdersProduct = async (orderId) => {
     return dataAllOrdersProduct;
   }
 };
-const FetchAllOrdersProductOfStore = async (storeID) => {
+const FetchAllOrdersProductOfStore = async (storeID, page, limit) => {
   const encodedOrderId = encodeURIComponent(storeID);
   const dataAllOrdersProduct = await apiService.get(
-    `/orderProducts?storeID=${storeID}`
+    `/orderProducts?storeID=${storeID}&page=${page || 1}&limit=${limit || 8}`
   );
   return dataAllOrdersProduct;
 };

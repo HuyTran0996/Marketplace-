@@ -1,6 +1,12 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
+import { Paginate } from "../Pagination";
 import { usePage } from "../usePage";
 
 import avatar from "../../images/avatar.png";
@@ -8,10 +14,11 @@ import { PageContext } from "../../context/PageContext";
 
 import { DeleteOrder, FetchCancelOrder } from "../../data/FetchOrdersData";
 
-import "./datatable.scss";
+import "./dataTableOrder.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableOrder = () => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const { state, getDataAllOrders } = useContext(PageContext);
@@ -21,11 +28,15 @@ const DataTableOrder = () => {
   let userColumns = [];
   let actionColumn = [];
 
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+  const limit = 8;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataAllOrders();
+        await getDataAllOrders("", page, limit);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -35,7 +46,7 @@ const DataTableOrder = () => {
     };
 
     fetchData();
-  }, [isOrderPage]);
+  }, [location, isOrderPage]);
 
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
@@ -135,21 +146,17 @@ const DataTableOrder = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+        />
+      </div>
+
+      {Paginate(dataAllOrders, "/adminPage/orders", limit)}
     </div>
   );
 };

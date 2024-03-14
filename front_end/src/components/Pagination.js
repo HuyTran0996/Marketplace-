@@ -18,7 +18,7 @@ const stackStyle = {
   alignItems: "center",
   // backgroundColor: "blue",
 };
-export const Paginate = (data, link) => {
+export const Paginate = (data, link, limit) => {
   const { darkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
   let [searchParams] = useSearchParams();
@@ -30,7 +30,7 @@ export const Paginate = (data, link) => {
   return (
     <Grid style={stackStyle}>
       <Pagination
-        count={Math.ceil(data?.data.total / 8 || 1)}
+        count={Math.ceil(data?.data.total / limit || 1)}
         color="primary"
         onChange={handleChangeFilter}
         page={page}

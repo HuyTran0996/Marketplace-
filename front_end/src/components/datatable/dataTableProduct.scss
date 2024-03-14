@@ -59,7 +59,9 @@
   }
 }
 @media (max-width: 600px) {
-  .dataGrid {
-    width: 80vw;
+  .datatable {
+    .dataGrid {
+      width: 70vw;
+    }
   }
 }

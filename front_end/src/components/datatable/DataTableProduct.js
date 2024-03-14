@@ -31,12 +31,13 @@ const DataTableProduct = () => {
 
   let [searchParams] = useSearchParams();
   let page = parseInt(searchParams.get("page")) || 1;
+  const limit = 8;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataProductsUsePageAndLimit(page);
+        await getDataProductsUsePageAndLimit(page, limit);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -156,7 +157,7 @@ const DataTableProduct = () => {
         />
       </div>
 
-      {Paginate(dataAllProducts, "/adminPage/products")}
+      {Paginate(dataAllProducts, "/adminPage/products", limit)}
     </div>
   );
 };

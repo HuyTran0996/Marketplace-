@@ -1,13 +1,15 @@
 import { apiService } from "../app/apiService";
 
-const FetchAllStores = async (storeName) => {
+const FetchAllStores = async (storeName, page, limit) => {
   if (storeName) {
     const dataAllStores = await apiService.get(
       `/stores?storeName=${storeName}`
     );
     return dataAllStores;
   } else {
-    const dataAllStores = await apiService.get(`/stores`);
+    const dataAllStores = await apiService.get(
+      `/stores?page=${page || 1}&limit=${limit || 8}`
+    );
     return dataAllStores;
   }
 };

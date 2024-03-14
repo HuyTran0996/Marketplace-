@@ -24,6 +24,8 @@ import {
   FetchSingleProduct,
 } from "../data/FetchProductsData";
 
+import { FetchAllOrdersProductOfStore } from "../data/FetchOrdersProductData";
+
 import { FetchReviewOfProduct } from "../data/FetchReviewData";
 
 const PageContext = createContext();
@@ -61,8 +63,8 @@ function PageProvider({ children }) {
 
     return;
   };
-  const getDataAllOrders = async (orderId) => {
-    const resultAllOrders = await FetchAllOrders(orderId);
+  const getDataAllOrders = async (orderId, page, limit) => {
+    const resultAllOrders = await FetchAllOrders(orderId, page, limit);
     dispatch({
       type: "SET_DATA_ALL_ORDERS",
       payload: resultAllOrders,
@@ -70,6 +72,21 @@ function PageProvider({ children }) {
 
     return;
   };
+
+  const getDataAllOrdersProductOfAStore = async (storeID, page, limit) => {
+    const resultAllOrders = await FetchAllOrdersProductOfStore(
+      storeID,
+      page,
+      limit
+    );
+    dispatch({
+      type: "SET_DATA_ALL_ORDERS_PRODUCT_OF_STORE",
+      payload: resultAllOrders,
+    });
+
+    return;
+  };
+
   const getDataAllOrdersOfAUser = async (userID) => {
     const resultAllOrders = await FetchAllOrdersOfAUser(userID);
     dispatch({
@@ -139,8 +156,8 @@ function PageProvider({ children }) {
 
     return;
   };
-  const getDataAllStores = async (storeName) => {
-    const resultAllStores = await FetchAllStores(storeName);
+  const getDataAllStores = async (storeName, page, limit) => {
+    const resultAllStores = await FetchAllStores(storeName, page, limit);
     dispatch({
       type: "SET_DATA_ALL_STORES",
       payload: resultAllStores,
@@ -240,6 +257,7 @@ function PageProvider({ children }) {
     getDataAllStoreByOwnerEmail,
     getDataAllProducts,
     getDataProductsUsePageAndLimit,
+    getDataAllOrdersProductOfAStore,
     getDataAllProductsOfAStore,
     searchProductByName,
     getSingleUser,

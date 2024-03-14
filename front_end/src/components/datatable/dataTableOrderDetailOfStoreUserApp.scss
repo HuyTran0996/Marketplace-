@@ -1,4 +1,7 @@
-.datatableUser {
+.datatable {
+  // height: 600px;
+  padding: 20px;
+
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -6,19 +9,18 @@
   align-items: center;
 
   .dataGrid {
-    width: 88vw;
+    width: 80vw;
   }
 
   .cellWithImg {
     display: flex;
     align-items: center;
+  }
 
-    .cellImg {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 20px;
+  .quantity {
+    span {
+      margin-left: 2px;
+      margin-right: 2px;
     }
   }
 
@@ -75,9 +77,13 @@
       transition: transform 0.3s ease-in-out;
     }
   }
+
+  .totalPrice {
+    font-size: 20px;
+  }
 }
 @media (max-width: 600px) {
-  .datatableUser {
+  .datatable {
     .dataGrid {
       width: 70vw;
     }

@@ -6,6 +6,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 
+import { Paginate } from "../../components/Pagination";
 import { DarkModeContext } from "../../context/darkModeContext";
 
 import "./searchPageUserApp.scss";
@@ -27,7 +28,6 @@ const stackStyle = {
   marginBottom: "25px",
   display: "flex",
   alignItems: "center",
-  // backgroundColor: "blue",
 };
 
 ///////////////////
@@ -50,6 +50,7 @@ const SearchPageUserApp = () => {
 
   let [searchParams] = useSearchParams();
   let page = parseInt(searchParams.get("page")) || 1;
+  const limit = 8;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,9 +62,9 @@ const SearchPageUserApp = () => {
           genre === "Stationery" ||
           genre === "Others"
         ) {
-          await getDataAllProducts(`${genre}&page=${page}&limit=8`);
+          await getDataAllProducts(`${genre}&page=${page}&limit=${limit}`);
         } else {
-          await searchProductByName(`${genre}&page=${page}&limit=8`);
+          await searchProductByName(`${genre}&page=${page}&limit=${limit}`);
         }
 
         setIsLoading(false);

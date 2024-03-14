@@ -2,6 +2,16 @@
   // height: 600px;
   padding: 20px;
 
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .dataGrid {
+    width: 88vw;
+  }
+
   .cellWithImg {
     display: flex;
     align-items: center;
@@ -120,5 +130,12 @@
 
   .totalPrice {
     font-size: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .datatable {
+    .dataGrid {
+      width: 70vw;
+    }
   }
 }

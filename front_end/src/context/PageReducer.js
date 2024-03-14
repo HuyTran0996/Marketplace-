@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
 
   role: Cookies.get("forFe"),
+  dataAllOrdersProductOfStore: null,
   dataPopularFoods: null,
   dataPopularDevices: null,
   dataPopularStationery: null,
@@ -54,6 +55,8 @@ function PageReducer(state, action) {
       return { ...state, dataPopularDevices: action.payload };
     case "SET_DATA_PopularStationery":
       return { ...state, dataPopularStationery: action.payload };
+    case "SET_DATA_ALL_ORDERS_PRODUCT_OF_STORE":
+      return { ...state, dataAllOrdersProductOfStore: action.payload };
     // case "SET_PRODUCT_ID":
     //   return { ...state, productId: action.payload };
     default:

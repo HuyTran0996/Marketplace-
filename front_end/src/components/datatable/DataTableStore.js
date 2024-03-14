@@ -1,16 +1,23 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
+import { Paginate } from "../Pagination";
 import { usePage } from "../usePage";
 
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 import { DeleteStore } from "../../data/FetchStoresData";
 
-import "./datatable.scss";
+import "./dataTableStore.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableStore = () => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const { state, getDataAllStores } = useContext(PageContext);
@@ -20,12 +27,16 @@ const DataTableStore = () => {
   let userColumns = [];
   let actionColumn = [];
 
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+  const limit = 8;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
 
-        await getDataAllStores();
+        await getDataAllStores("", page, limit);
 
         setIsLoading(false);
       } catch (error) {
@@ -36,7 +47,7 @@ const DataTableStore = () => {
     };
 
     fetchData();
-  }, [isStorePage]);
+  }, [location, isStorePage]);
 
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
@@ -140,14 +151,17 @@ const DataTableStore = () => {
 
   return (
     <div className="datatable">
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-        disableRowSelectionOnClick
-      />
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+          disableRowSelectionOnClick
+        />
+      </div>
+      {Paginate(dataAllStores, "/adminPage/stores", limit)}
     </div>
   );
 };
