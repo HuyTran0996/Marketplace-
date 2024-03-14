@@ -1,30 +1,42 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+
+import { Paginate } from "../Pagination";
 
 import { usePage } from "../usePage";
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
+
 import { DeleteProduct } from "../../data/FetchProductsData";
 
-import "./datatable.scss";
+import "./dataTableProduct.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableProduct = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { state, getDataAllProducts } = useContext(PageContext);
+  const { state, getDataAllProducts, getDataProductsUsePageAndLimit } =
+    useContext(PageContext);
   const { dataAllProducts } = state;
   const { isProductPage } = usePage();
   let dataOriginal = [];
   let userColumns = [];
   let actionColumn = [];
 
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataAllProducts();
+        await getDataProductsUsePageAndLimit(page);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,7 +53,7 @@ const DataTableProduct = () => {
   }
 
   if (isProductPage && !isLoading) {
-    if (error) {
+    if (error || !dataAllProducts) {
       userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
     } else {
       dataOriginal = dataAllProducts.data.products;
@@ -93,7 +105,7 @@ const DataTableProduct = () => {
         {
           field: "action",
           headerName: "ACTION",
-          width: 350,
+          width: 170,
           renderCell: (params) => {
             return (
               <div className="cellAction">
@@ -134,21 +146,17 @@ const DataTableProduct = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          disableRowSelectionOnClick
+          hideFooterPagination
+        />
+      </div>
+
+      {Paginate(dataAllProducts, "/adminPage/products")}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-.home {
+.homeAdmin {
   position: absolute;
   top: 0;
   left: 0;
@@ -6,14 +6,14 @@
   flex-direction: row;
   width: 100vw;
 
-  .sideBar {
+  .sideBarAdmin {
     position: relative;
     top: 0;
     left: 0;
     width: 12vw;
   }
 
-  .homeContainer {
+  .homeContainerAdmin {
     position: relative;
     top: 0;
     padding: 0px;
@@ -26,10 +26,10 @@
 }
 
 @media (max-width: 600px) {
-  .home {
+  .homeAdmin {
     display: flex;
     width: 100vw;
-    .homeContainer {
+    .homeContainerAdmin {
       width: 90vw;
       display: flex;
       flex-direction: column;

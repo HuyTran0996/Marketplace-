@@ -1,13 +1,20 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
+import { Paginate } from "../Pagination";
 import { usePage } from "../usePage";
 
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
+
 import { AdminDeleteUser } from "../../data/FetchUsersData";
 
-import "./datatable.scss";
+import "./dataTableUser.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableUser = () => {
@@ -20,11 +27,14 @@ const DataTableUser = () => {
   let userColumns = [];
   let actionColumn = [];
 
+  let [searchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        await getDataAllUsers();
+        await getDataAllUsers("", page, "");
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -144,22 +154,18 @@ const DataTableUser = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+          disableRowSelectionOnClick
+        />
+      </div>
 
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
+      {Paginate(dataAllUsers, "/adminPage/users")}
     </div>
   );
 };

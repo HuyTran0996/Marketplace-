@@ -18,6 +18,7 @@ import {
 } from "../data/FetchOrdersData";
 import {
   FetchAllProducts,
+  FetchProductsUsePageAndLimit,
   FetchAllProductsOfAStore,
   FetchSearchProductByName,
   FetchSingleProduct,
@@ -51,8 +52,8 @@ function PageProvider({ children }) {
 
     return;
   };
-  const getDataAllUsers = async (email) => {
-    const resultAllUsers = await FetchAllUsers(email);
+  const getDataAllUsers = async (email, page, limit) => {
+    const resultAllUsers = await FetchAllUsers(email, page, limit);
     dispatch({
       type: "SET_DATA_ALL_USERS",
       payload: resultAllUsers,
@@ -78,6 +79,16 @@ function PageProvider({ children }) {
 
     return;
   };
+  const getDataProductsUsePageAndLimit = async (page, limit) => {
+    const resultAllProducts = await FetchProductsUsePageAndLimit(page, limit);
+    dispatch({
+      type: "SET_DATA_ALL_PRODUCTS",
+      payload: resultAllProducts,
+    });
+
+    return;
+  };
+
   const getDataAllProducts = async (genre) => {
     const resultAllProducts = await FetchAllProducts(genre);
     dispatch({
@@ -228,6 +239,7 @@ function PageProvider({ children }) {
     getDataAllStores,
     getDataAllStoreByOwnerEmail,
     getDataAllProducts,
+    getDataProductsUsePageAndLimit,
     getDataAllProductsOfAStore,
     searchProductByName,
     getSingleUser,

@@ -68,11 +68,11 @@ const HomePage = () => {
     let totalStores = dataAllStores?.data?.totalStores;
 
     return (
-      <div className="home">
-        <div className="sideBar">
+      <div className="homeAdmin">
+        <div className="sideBarAdmin">
           <Sidebar />
         </div>
-        <div className="homeContainer">
+        <div className="homeContainerAdmin">
           <Widget type="user" totalNumber={totalUsers} />
           <Widget type="order" totalNumber={totalOrders} />
           <Widget type="store" totalNumber={totalStores} />

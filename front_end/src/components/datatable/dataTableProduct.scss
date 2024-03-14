@@ -1,0 +1,65 @@
+.datatable {
+  // height: 600px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .dataGrid {
+    width: 88vw;
+  }
+  .cellWithImg {
+    display: flex;
+    align-items: center;
+
+    .cellImg {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+  }
+
+  .cellAction {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .editButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgb(0, 139, 88);
+      border: 1px dotted rgba(0, 139, 81, 0.596);
+      cursor: pointer;
+      transition-duration: 0.3s;
+    }
+    .editButton:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .deleteButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: crimson;
+      border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+      transition-duration: 0.3s;
+    }
+    .deleteButton:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .dataGrid {
+    width: 80vw;
+  }
+}

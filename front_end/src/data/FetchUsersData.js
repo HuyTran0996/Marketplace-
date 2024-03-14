@@ -1,11 +1,13 @@
 import { apiService } from "../app/apiService";
 
-const FetchAllUsers = async (email) => {
+const FetchAllUsers = async (email, page, limit) => {
   if (email) {
     const dataAllUsers = await apiService.get(`/users?email=${email}`);
     return dataAllUsers;
   } else {
-    const dataAllUsers = await apiService.get(`/users`);
+    const dataAllUsers = await apiService.get(
+      `/users?page=${page || 1}&limit=${limit || 8}`
+    );
     return dataAllUsers;
   }
 };

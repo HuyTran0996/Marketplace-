@@ -9,6 +9,14 @@ const FetchAllProducts = async (genre) => {
     return dataAllProducts;
   }
 };
+
+const FetchProductsUsePageAndLimit = async (page, limit) => {
+  const dataAllProducts = await apiService.get(
+    `/products?page=${page || 1}&limit=${limit || 8}`
+  );
+  return dataAllProducts;
+};
+
 const FetchAllProductsOfAStore = async (storeID) => {
   const dataAllProducts = await apiService.get(`/products?storeID=${storeID}`);
   return dataAllProducts;
@@ -55,6 +63,7 @@ const DeleteProduct = async (productId) => {
 
 export {
   FetchAllProducts,
+  FetchProductsUsePageAndLimit,
   FetchAllProductsOfAStore,
   FetchSearchProductByName,
   FetchSingleProduct,
