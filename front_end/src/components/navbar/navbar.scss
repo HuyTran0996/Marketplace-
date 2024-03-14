@@ -1,5 +1,6 @@
 .wrapper {
   // width: ;
+  max-height: 70px;
   height: 70px;
   display: flex;
   align-items: center;
@@ -45,12 +46,14 @@
 
   .items {
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
+    width: 200px;
 
     .item {
       display: flex;
       align-items: center;
-      margin-right: 20px;
       position: relative;
 
       .icon {
@@ -87,6 +90,41 @@
   }
 }
 @media (max-width: 600px) {
+  .wrapper {
+    .search {
+      input {
+        height: 35px;
+        width: 40vw;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 18px;
+      }
+    }
+
+    .items {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      // width: 200px;
+
+      .item {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .icon {
+          font-size: 30px;
+          cursor: pointer;
+          &:hover {
+            color: rgb(18, 183, 128);
+            transition: 0.15s;
+          }
+        }
+      }
+    }
+  }
   span {
     display: none;
   }

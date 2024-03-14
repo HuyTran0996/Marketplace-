@@ -2,7 +2,7 @@
   //nếu bật absolute thì sẽ không nhận dark mode được
   // position: absolute;
 
-  max-width: 99vw;
+  max-width: fit-content;
 
   .right {
     width: 90vw;
@@ -19,14 +19,18 @@
 
 @media (max-width: 600px) {
   .home {
-    max-width: 100vw;
-    overflow-x: hidden;
+    width: 100vw;
 
     .left {
       width: 20vw;
     }
     .right {
       width: 80vw;
+      max-width: 80vw;
+
+      .navBar {
+        width: 79vw;
+      }
     }
   }
 }

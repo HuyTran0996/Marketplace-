@@ -1,0 +1,54 @@
+.home {
+  display: flex;
+  width: 100vw;
+  // max-height: 100vh;
+
+  .homeContainer {
+    // flex: 6;
+    padding: 0px;
+    width: 90vw;
+
+    .movieStyle {
+      color: #000000;
+      font-weight: bold;
+      font-size: 36px;
+    }
+
+    .products {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      // margin-top: 15px;
+      margin-left: 5vw;
+    }
+    .widgets {
+      display: flex;
+      padding: 20px;
+      margin-top: 15px;
+      margin-left: 5vw;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    width: 100vw;
+    .sideBar {
+      width: 20vw;
+    }
+
+    .homeContainer {
+      width: 80vw;
+      max-width: 80vw;
+
+      .navBar {
+        width: 79vw;
+      }
+
+      .products {
+        width: 65vw;
+      }
+    }
+  }
+}

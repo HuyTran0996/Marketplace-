@@ -8,7 +8,7 @@ import {
 
 import { DarkModeContext } from "../../context/darkModeContext";
 
-import "./home.scss";
+import "./searchPageUserApp.scss";
 import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
 import NavbarUserApp from "../../components/navbar/NavbarUserApp";
@@ -104,9 +104,13 @@ const SearchPageUserApp = () => {
   if (!isLoading && !error && dataAllProducts) {
     return (
       <div className="home">
-        <SidebarUser />
+        <div className="sideBar">
+          <SidebarUser />
+        </div>
         <div className="homeContainer">
-          <NavbarUserApp />
+          <div className="navBar">
+            <NavbarUserApp />
+          </div>
           <div className="products">
             <div className="movieStyle">Result of {genre}</div>
 

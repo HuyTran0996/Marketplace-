@@ -113,7 +113,9 @@ function HomePageUser() {
         </div>
 
         <div className="right">
-          <NavbarUserApp />
+          <div className="navBar">
+            <NavbarUserApp />
+          </div>
 
           <Container style={cardStyle}>
             <div className="movieStyle">Popular Foods</div>
