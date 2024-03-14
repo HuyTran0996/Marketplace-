@@ -2,10 +2,32 @@
   //nếu bật absolute thì sẽ không nhận dark mode được
   // position: absolute;
 
-  max-width: fit-content;
+  // max-width: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+
+  .left {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 12vw;
+  }
 
   .right {
-    width: 90vw;
+    position: relative;
+    max-width: 88vw;
+    width: 88vw;
+    top: 0;
+    left: 0;
+
+    .navBar {
+      position: relative;
+      top: 0;
+    }
 
     .movieStyle {
       padding-top: 10px;

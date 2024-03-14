@@ -1,24 +1,27 @@
 .home {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
+  flex-direction: row;
   width: 100vw;
 
+  .sideBar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 12vw;
+  }
+
   .homeContainer {
+    position: relative;
+    top: 0;
     padding: 0px;
-    width: 90vw;
-    // background-color: red;
+    width: 88vw;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     padding: 20px;
-    // .widgets {
-    //   // background-color: red;
-    //   display: flex;
-    //   flex-direction: row;
-    //   // padding: 20px;
-    //   // margin-top: 15px;
-    //   // margin-left: 5vw;
-    // }
   }
 }
 

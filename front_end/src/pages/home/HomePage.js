@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 
 import "./homeAdmin.scss";
+
 import { PageContext } from "../../context/PageContext";
 
 import Sidebar from "../../components/sidebar/SideBar";
@@ -68,7 +69,9 @@ const HomePage = () => {
 
     return (
       <div className="home">
-        <Sidebar />
+        <div className="sideBar">
+          <Sidebar />
+        </div>
         <div className="homeContainer">
           <Widget type="user" totalNumber={totalUsers} />
           <Widget type="order" totalNumber={totalOrders} />

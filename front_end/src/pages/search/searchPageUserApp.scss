@@ -1,12 +1,34 @@
 .home {
-  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
-  // max-height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+
+  .sideBar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 12vw;
+  }
 
   .homeContainer {
-    // flex: 6;
-    padding: 0px;
-    width: 90vw;
+    position: relative;
+    max-width: 88vw;
+    width: 88vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .navBar {
+      position: relative;
+      // top: 0;
+      width: 88vw;
+    }
 
     .movieStyle {
       color: #000000;
@@ -20,7 +42,7 @@
       justify-content: center;
       align-items: center;
       // margin-top: 15px;
-      margin-left: 5vw;
+      // margin-left: 5vw;
     }
     .widgets {
       display: flex;

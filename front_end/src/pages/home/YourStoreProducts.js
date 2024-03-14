@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 
-import "./home.scss";
+import "./yourStoreProducts.scss";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
@@ -115,10 +115,13 @@ const YourStoreProducts = () => {
       </div>
     );
   }
+
   if (!isLoading && !error && dataAllProducts) {
     return (
       <div className="home">
-        <SidebarUser />
+        <div className="sideBar">
+          <SidebarUser />
+        </div>
         <div className="homeContainer">
           <button className="addProduct" onClick={handleAddProduct}>
             Add Product
