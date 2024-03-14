@@ -3,7 +3,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 
 import { FetchAllOrdersProduct } from "../../data/FetchOrdersProductData";
 
-import "./datatable.scss";
+import "./dataTableOrderDetail.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableOrderDetail = () => {
@@ -109,10 +109,26 @@ const DataTableOrderDetail = () => {
           );
         },
       },
+
       {
         field: "orderProductStatus",
-        headerName: "Order Product Status",
+        headerName: "Order Status",
         width: 190,
+
+        renderCell: (params) => {
+          // Correctly reference the isDeleted field and convert the boolean to a string
+          const status =
+            params.row.orderProductStatus === "deliveredToApp"
+              ? "active"
+              : params.row.orderProductStatus === "canceledByStore"
+              ? "passive"
+              : "pending";
+          return (
+            <div className={`cellWithStatus ${status.toLowerCase()}`}>
+              {params.row.orderProductStatus}
+            </div>
+          );
+        },
       },
     ];
   }
@@ -126,26 +142,17 @@ const DataTableOrderDetail = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
-
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
-
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+        />
+      </div>
       <div className="totalPrice">
-        <span>Total Price: </span>
-        <span>{totalPrice.toLocaleString()}</span>
+        <div>Total Price: {totalPrice.toLocaleString()} </div>
       </div>
     </div>
   );

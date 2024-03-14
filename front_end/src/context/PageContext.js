@@ -87,8 +87,8 @@ function PageProvider({ children }) {
     return;
   };
 
-  const getDataAllOrdersOfAUser = async (userID) => {
-    const resultAllOrders = await FetchAllOrdersOfAUser(userID);
+  const getDataAllOrdersOfAUser = async (userID, page, limit) => {
+    const resultAllOrders = await FetchAllOrdersOfAUser(userID, page, limit);
     dispatch({
       type: "SET_DATA_ALL_ORDERS",
       payload: resultAllOrders,

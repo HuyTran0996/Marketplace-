@@ -17,10 +17,10 @@ const FetchAllOrders = async (orderId, page, limit) => {
     return dataAllOrders;
   }
 };
-const FetchAllOrdersOfAUser = async (userID) => {
+const FetchAllOrdersOfAUser = async (userID, page, limit) => {
   const encodedOrderId = encodeURIComponent(userID);
   const dataAllOrders = await apiService.get(
-    `/orders?customerID=${encodedOrderId}`
+    `/orders?customerID=${encodedOrderId}&page=${page || 1}&limit=${limit || 8}`
   );
   return dataAllOrders;
 };
