@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 
-import "./home.scss";
+import "./homeAdmin.scss";
 import { PageContext } from "../../context/PageContext";
 
 import Sidebar from "../../components/sidebar/SideBar";
@@ -70,12 +70,9 @@ const HomePage = () => {
       <div className="home">
         <Sidebar />
         <div className="homeContainer">
-          {/* <Navbar /> */}
-          <div className="widgets">
-            <Widget type="user" totalNumber={totalUsers} />
-            <Widget type="order" totalNumber={totalOrders} />
-            <Widget type="store" totalNumber={totalStores} />
-          </div>
+          <Widget type="user" totalNumber={totalUsers} />
+          <Widget type="order" totalNumber={totalOrders} />
+          <Widget type="store" totalNumber={totalStores} />
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import ProductCard from "../../components/productCard/ProductCard";
 import { PageContext } from "../../context/PageContext";
 
-import "./genre.scss";
+import "./homePageUserApp.scss";
 
 import { Grid, Container } from "@mui/material";
 
