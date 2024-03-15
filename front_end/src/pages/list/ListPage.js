@@ -21,7 +21,9 @@ import DataTableOrderDetailOfStoreAdminApp from "../../components/datatable/Data
 const ListPageUser = () => {
   return (
     <div className="list">
-      <Sidebar />
+      <div className="sideBar">
+        <Sidebar />
+      </div>
       <div className="listContainer">
         <NavbarUser />
         <DataTableUser />
@@ -32,7 +34,9 @@ const ListPageUser = () => {
 const ListPageStore = () => {
   return (
     <div className="list">
-      <Sidebar />
+      <div className="sideBar">
+        <Sidebar />
+      </div>
       <div className="listContainer">
         <NavbarStore />
         <DataTableStore />
@@ -43,7 +47,9 @@ const ListPageStore = () => {
 const ListPageOrder = () => {
   return (
     <div className="list">
-      <Sidebar />
+      <div className="sideBar">
+        <Sidebar />
+      </div>
       <div className="listContainer">
         <NavbarOrder />
         <DataTableOrder />
@@ -54,7 +60,9 @@ const ListPageOrder = () => {
 const ListPageProduct = () => {
   return (
     <div className="list">
-      <Sidebar />
+      <div className="sideBar">
+        <Sidebar />
+      </div>
       <div className="listContainer">
         <NavbarProduct />
         <DataTableProduct />
@@ -65,7 +73,9 @@ const ListPageProduct = () => {
 const ListPageCartProduct = () => {
   return (
     <div className="list">
-      <SideBarUser />
+      <div className="sideBar">
+        <SideBarUser />
+      </div>
       <div className="listContainer">
         <DataTableCartProduct />
       </div>
@@ -75,7 +85,9 @@ const ListPageCartProduct = () => {
 const ListPageOrderUserApp = () => {
   return (
     <div className="list">
-      <SideBarUser />
+      <div className="sideBar">
+        <SideBarUser />
+      </div>
       <div className="listContainer">
         <DataTableOrderUserApp />
       </div>
@@ -86,7 +98,9 @@ const ListPageOrderUserApp = () => {
 const ListPageOrderDetail = () => {
   return (
     <div className="list">
-      <SideBarUser />
+      <div className="sideBar">
+        <SideBarUser />
+      </div>
       <div className="listContainer">
         <DataTableOrderDetail />
       </div>
@@ -96,7 +110,9 @@ const ListPageOrderDetail = () => {
 const ListPageOrderDetailOfStore = () => {
   return (
     <div className="list">
-      <SideBarUser />
+      <div className="sideBar">
+        <SideBarUser />
+      </div>
       <div className="listContainer">
         <DataTableOrderDetailOfStoreUserApp />
       </div>
@@ -106,7 +122,9 @@ const ListPageOrderDetailOfStore = () => {
 const ListPageOrderDetailOfStoreAdminApp = () => {
   return (
     <div className="list">
-      <Sidebar />
+      <div className="sideBar">
+        <SideBarUser />
+      </div>
       <div className="listContainer">
         <DataTableOrderDetailOfStoreAdminApp />
       </div>
