@@ -31,7 +31,7 @@ const ProductDetails = ({
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [unit, setUnit] = useState("");
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState("Others");
 
   const [fileSubmit, setFileSubmit] = useState("");
   const [file, setFile] = useState("");
