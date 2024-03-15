@@ -1,5 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { usePage } from "../usePage";
 import avatar from "../../images/avatar.png";
@@ -90,11 +92,15 @@ const DataTableCartProduct = () => {
   const handleSendOrder = async (e, orderId) => {
     e.preventDefault();
     if (!address) {
-      alert("Please fill in the address and ensure an order ID is available.");
+      toast.error("Please fill in the address.");
       return;
     }
     if (!orderId) {
-      alert("System Error, please contact to admin");
+      toast.error("System Error, please contact to admin");
+      return;
+    }
+    if (!dataCart) {
+      toast.error("Your Cart Is Empty.");
       return;
     }
     dataCart.forEach(async (item) => {
@@ -110,6 +116,15 @@ const DataTableCartProduct = () => {
         };
 
         await FetchUpdateOrder({ orderId, data: data2 });
+        let result = await FetchCreateOrder();
+        let orderID1 = result.data.order[0]._id;
+        setOrderID(orderID1);
+        dispatch({
+          type: "SET_DATA_CART",
+          payload: null,
+        });
+        localStorage.removeItem("favorite");
+        toast.success("Order has been sent successfully");
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -235,6 +250,7 @@ const DataTableCartProduct = () => {
 
   return (
     <div className="datatable">
+      <ToastContainer />
       <div className="dataGrid">
         <DataGrid
           rows={data}

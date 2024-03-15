@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 
 import { PageContext } from "../../context/PageContext";
@@ -47,7 +49,8 @@ export default function SignupPage() {
     try {
       setMessage("");
       if (!name || !email || !password || !passwordConfirm || !phone) {
-        throw new Error("All fields are required.");
+        toast.error("All fields are required.");
+        return;
       }
       setIsLoading(true);
       const result = await apiService.post(
@@ -69,15 +72,19 @@ export default function SignupPage() {
       Cookies.set("jwtFe", jwt, { expires: 2 });
       setIsLoading(false);
 
-      navigate(role === "admin" ? "/adminPage" : "/userPage");
+      toast.success("Successful account registration");
 
-      alert("Successful account registration, click ok to continue");
+      setTimeout(() => {
+        navigate(role === "admin" ? "/adminPage" : "/userPage");
+      }, 3000); // Delay of 2 second
+
       return result;
     } catch (error) {
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
       let errorName = error.message;
       setMessage(errorName);
+      toast.error(message);
     }
   };
 
@@ -87,57 +94,58 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="login-form">
-      <h1>SIGN UP</h1>
-      <form onSubmit={handleSubmit}>
-        <label>User Name</label>
-        <input
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={handleNameChange}
-        />
+    <>
+      <ToastContainer />
+      <div className="login-form">
+        <h1>SIGN UP</h1>
+        <form onSubmit={handleSubmit}>
+          <label>User Name</label>
+          <input
+            type="text"
+            placeholder="name"
+            value={name}
+            onChange={handleNameChange}
+          />
 
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
 
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
 
-        <label>Password Confirm</label>
-        <input
-          type="password"
-          placeholder="passwordConfirm"
-          value={passwordConfirm}
-          onChange={handlePasswordConfirmChange}
-        />
+          <label>Password Confirm</label>
+          <input
+            type="password"
+            placeholder="passwordConfirm"
+            value={passwordConfirm}
+            onChange={handlePasswordConfirmChange}
+          />
 
-        <label>Phone Number</label>
-        <input
-          type="number"
-          placeholder="Phone number"
-          value={phone}
-          onChange={handlePhoneChange}
-          className="no-spinners"
-        />
+          <label>Phone Number</label>
+          <input
+            type="number"
+            placeholder="Phone number"
+            value={phone}
+            onChange={handlePhoneChange}
+            className="no-spinners"
+          />
 
-        {message && <div className="message">{message}</div>}
-
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Submit"}
-        </button>
-      </form>
-      <p onClick={moveToLoginPage}>Back To Login Page</p>
-    </div>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Submit"}
+          </button>
+        </form>
+        <p onClick={moveToLoginPage}>Back To Login Page</p>
+      </div>
+    </>
   );
 }

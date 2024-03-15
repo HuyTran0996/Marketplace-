@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   FetchUpdateProduct,
@@ -59,6 +61,10 @@ const ProductDetails = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!productName || !description || !price || !unit) {
+      toast.error("Please fill in all the fields");
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -77,8 +83,13 @@ const ProductDetails = ({
         formData.append("image", fileSubmit);
         await FetchUpdateProduct({ productId, formData });
       }
-      alert("Create Product Successfully");
-      navigate("/userPage/stores/yourStoreProducts");
+
+      toast.success("Create Product Successfully");
+
+      setTimeout(() => {
+        navigate("/userPage/stores/yourStoreProducts");
+      }, 2000); // Delay of 2 second
+
       // await getSingleProduct(productId);
 
       setIsSubmitting(false);
@@ -188,12 +199,15 @@ const NewPageCreateProduct = ({ title }) => {
   const { dataSingle } = state;
 
   return (
-    <ProductDetails
-      dataSingle={dataSingle}
-      getSingleProduct={getSingleProduct}
-      title={title}
-      isUserPage={isUserPage}
-    />
+    <>
+      <ToastContainer />
+      <ProductDetails
+        dataSingle={dataSingle}
+        getSingleProduct={getSingleProduct}
+        title={title}
+        isUserPage={isUserPage}
+      />
+    </>
   );
 };
 export default NewPageCreateProduct;
