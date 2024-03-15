@@ -96,7 +96,7 @@ function App() {
   }, []);
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={darkMode ? "app-dark" : "app"}>
       <ToastContainer />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
