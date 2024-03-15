@@ -20,7 +20,9 @@ const FetchAllOrders = async (orderId, page, limit) => {
 const FetchAllOrdersOfAUser = async (userID, page, limit) => {
   const encodedOrderId = encodeURIComponent(userID);
   const dataAllOrders = await apiService.get(
-    `/orders?customerID=${encodedOrderId}&page=${page || 1}&limit=${limit || 8}`
+    `/orders?customerID=${encodedOrderId}&page=${page || 1}&limit=${
+      limit || 8
+    }&orderStatus[ne]=openToAdd`
   );
   return dataAllOrders;
 };

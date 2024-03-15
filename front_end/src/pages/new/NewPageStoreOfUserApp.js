@@ -9,6 +9,7 @@ import avatar from "../../images/avatar.png";
 
 import "./new.scss";
 import SidebarUser from "../../components/sidebar/SideBarUser";
+import { showToast } from "../../components/ToastMessage";
 // import Navbar from "../../components/navbar/NavBar";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -106,7 +107,7 @@ const CreateStore = ({
       // Reset the file input value
       document.getElementById("file").value = "";
       setError(false);
-
+      showToast("Your store has been created!", "success");
       return;
     } catch (error) {
       let errorMessage = `${error}`;
@@ -216,7 +217,7 @@ const StoreDetails = ({ dataSingle, getSingleStore, title, storeId }) => {
 
       // Reset the file input value
       document.getElementById("file").value = "";
-
+      showToast("Your store info has been updated!", "success");
       setIsSubmitting(false);
       setError(false);
       return;

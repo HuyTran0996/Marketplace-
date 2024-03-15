@@ -1,7 +1,5 @@
 import { useContext, useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import {
   FetchUpdateProduct,
@@ -14,6 +12,7 @@ import avatar from "../../images/avatar.png";
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
 import SidebarUser from "../../components/sidebar/SideBarUser";
+import { showToast } from "../../components/ToastMessage";
 // import Navbar from "../../components/navbar/NavBar";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -62,7 +61,7 @@ const ProductDetails = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!productName || !description || !price || !unit) {
-      toast.error("Please fill in all the fields");
+      showToast("Please fill in all the fields", "warn");
       return;
     }
     setIsSubmitting(true);
@@ -84,7 +83,7 @@ const ProductDetails = ({
         await FetchUpdateProduct({ productId, formData });
       }
 
-      toast.success("Create Product Successfully");
+      showToast("Create Product Successfully", "success");
 
       setTimeout(() => {
         navigate("/userPage/stores/yourStoreProducts");
@@ -200,7 +199,6 @@ const NewPageCreateProduct = ({ title }) => {
 
   return (
     <>
-      <ToastContainer />
       <ProductDetails
         dataSingle={dataSingle}
         getSingleProduct={getSingleProduct}

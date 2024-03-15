@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import Cookies from "js-cookie";
 
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 import "./login.scss";
+import { showToast } from "../../components/ToastMessage";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function SignupPage() {
     try {
       setMessage("");
       if (!name || !email || !password || !passwordConfirm || !phone) {
-        toast.error("All fields are required.");
+        showToast("All fields are required.", "warn");
         return;
       }
       setIsLoading(true);
@@ -72,7 +72,7 @@ export default function SignupPage() {
       Cookies.set("jwtFe", jwt, { expires: 2 });
       setIsLoading(false);
 
-      toast.success("Successful account registration");
+      showToast("Successful account registration", "success");
 
       setTimeout(() => {
         navigate(role === "admin" ? "/adminPage" : "/userPage");
@@ -84,7 +84,8 @@ export default function SignupPage() {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
       let errorName = error.message;
       setMessage(errorName);
-      toast.error(message);
+
+      showToast(message, "error");
     }
   };
 
@@ -95,7 +96,6 @@ export default function SignupPage() {
 
   return (
     <>
-      <ToastContainer />
       <div className="login-form">
         <h1>SIGN UP</h1>
         <form onSubmit={handleSubmit}>

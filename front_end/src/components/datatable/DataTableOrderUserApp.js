@@ -10,7 +10,6 @@ import { Paginate } from "../Pagination";
 
 import { usePage } from "../usePage";
 import { PageContext } from "../../context/PageContext";
-
 import "./dataTableOrderUserApp.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -60,6 +59,7 @@ const DataTableOrderUserApp = () => {
     if (error) {
       userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
     } else {
+      //lọc thêm cho chắc, chứ ở FetchAllOrdersOfAUser đã có lọc rồi
       dataOriginal = dataAllOrders.data.orders.filter(
         (order) => order.orderStatus !== "openToAdd"
       );

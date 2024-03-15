@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./style/dark.scss";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -95,6 +97,7 @@ function App() {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+      <ToastContainer />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./productCard.scss";
 import { PageContext } from "../../context/PageContext";
 import { DeleteProduct } from "../../data/FetchProductsData";
+import { showToast } from "../ToastMessage";
 
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -30,6 +31,7 @@ export default function ProductCardOfStoreOwner({ product }) {
     try {
       await DeleteProduct(product._id);
       await getDataAllProductsOfAStore(product.storeID);
+      showToast("Your product has been deleted!", "success");
     } catch (error) {
       console.log(error);
     }

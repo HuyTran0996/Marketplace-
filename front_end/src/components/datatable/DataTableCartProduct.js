@@ -107,23 +107,28 @@ const DataTableCartProduct = () => {
       try {
         setError(false);
         setIsLoading(true);
-        const data = { productID: item._id, quantity: item.quantity };
-        await FetchCreateOrderProduct(data);
+        const promises = dataCart.map(async (item) => {
+          const data = { productID: item._id, quantity: item.quantity };
+          await FetchCreateOrderProduct(data);
 
-        const data2 = {
-          orderStatus: "sentOrderToStore",
-          deliverTo: address,
-        };
+          const data2 = {
+            orderStatus: "sentOrderToStore",
+            deliverTo: address,
+          };
 
-        await FetchUpdateOrder({ orderId, data: data2 });
-        let result = await FetchCreateOrder();
-        let orderID1 = result.data.order[0]._id;
-        setOrderID(orderID1);
-        dispatch({
-          type: "SET_DATA_CART",
-          payload: null,
+          await FetchUpdateOrder({ orderId, data: data2 });
+          let result = await FetchCreateOrder();
+          let orderID1 = result.data.order[0]._id;
+          setOrderID(orderID1);
+          dispatch({
+            type: "SET_DATA_CART",
+            payload: null,
+          });
         });
+
+        await Promise.all(promises);
         localStorage.removeItem("favorite");
+        setAddress("");
         toast.success("Order has been sent successfully");
         setIsLoading(false);
       } catch (error) {

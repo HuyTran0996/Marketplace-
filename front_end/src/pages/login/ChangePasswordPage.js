@@ -1,14 +1,12 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-
 import Cookies from "js-cookie";
 
 import { PageContext } from "../../context/PageContext";
 import { apiService } from "../../app/apiService";
 import "./login.scss";
+import { showToast } from "../../components/ToastMessage";
 
 export default function ChangePasswordPage() {
   const navigate = useNavigate();
@@ -33,7 +31,7 @@ export default function ChangePasswordPage() {
     e.preventDefault();
 
     if (!passwordCurrent || !password || !passwordConfirm) {
-      toast.error("All fields are required.");
+      showToast("All fields are required.", "warn");
       return;
     }
     setIsLoading(true);
@@ -56,12 +54,11 @@ export default function ChangePasswordPage() {
         }
       );
 
-      // alert("Changed password successfully, login with your new password");
-      // navigate("/login");
       Cookies.remove("jwtFe");
 
-      toast.success(
-        "Changed password successfully, login with your new password"
+      showToast(
+        "Changed password successfully, login with your new password",
+        "success"
       );
 
       setTimeout(() => {
@@ -74,7 +71,7 @@ export default function ChangePasswordPage() {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
       let errorName = error.message;
 
-      toast.error(errorName);
+      showToast(errorName, "error");
     }
   };
 
@@ -85,7 +82,6 @@ export default function ChangePasswordPage() {
 
   return (
     <>
-      <ToastContainer />
       <div className="login-form">
         <h1>CHANGE PASSWORD</h1>
         <form onSubmit={handleSubmit}>
