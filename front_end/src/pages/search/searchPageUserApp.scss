@@ -74,3 +74,24 @@
     }
   }
 }
+@media (min-width: 650px) and (max-width: 1024px) {
+  .home {
+    width: 100vw;
+    .sideBar {
+      width: 20vw;
+    }
+
+    .homeContainer {
+      width: 80vw;
+      max-width: 80vw;
+
+      .navBar {
+        width: 79vw;
+      }
+
+      .products {
+        width: 65vw;
+      }
+    }
+  }
+}

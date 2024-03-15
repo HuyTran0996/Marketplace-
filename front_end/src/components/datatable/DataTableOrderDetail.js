@@ -92,7 +92,7 @@ const DataTableOrderDetail = () => {
         width: 75,
         renderCell: (params) => (
           <div className="quantity">
-            <span>{params.row.quantity.toLocaleString()}</span>
+            <div>{params.row.quantity.toLocaleString()}</div>
           </div>
         ),
       },
