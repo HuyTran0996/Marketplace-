@@ -212,9 +212,9 @@ const DataTableCartProduct = () => {
         width: 90,
         renderCell: (params) => {
           return (
-            <span>
+            <div>
               {(params.row.quantity * params.row.price).toLocaleString()}
-            </span>
+            </div>
           );
         },
       },

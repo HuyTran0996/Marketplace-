@@ -103,9 +103,9 @@ const DataTableOrderDetail = () => {
         width: 90,
         renderCell: (params) => {
           return (
-            <span>
+            <div>
               {(params.row.quantity * params.row.productPrice).toLocaleString()}
-            </span>
+            </div>
           );
         },
       },
