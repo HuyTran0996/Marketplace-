@@ -12,6 +12,7 @@ import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
 import ProductCardOfStoreOwner from "../../components/productCard/ProductCardOfStoreOwner";
 import Loading from "../../components/Loading";
+import { showToast } from "../../components/ToastMessage";
 
 import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import Widget from "../../components/widget/Widget";
@@ -69,6 +70,7 @@ const YourStoreProducts = () => {
           setFoundNoStore(true);
           setIsLoading(false);
           navigate("/userPage/stores");
+          showToast("Your need to create your store first!", "warn");
           return;
         }
 

@@ -13,10 +13,12 @@ import {
   FetchUpdateOrderProduct,
 } from "../../data/FetchOrdersProductData";
 import { PageContext } from "../../context/PageContext";
+import { showToast } from "../ToastMessage";
 import { DataGrid } from "@mui/x-data-grid";
 import "./dataTableOrderDetailOfStoreUserApp.scss";
 
 const DataTableOrderDetailOfStoreUserApp = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -50,6 +52,11 @@ const DataTableOrderDetailOfStoreUserApp = () => {
           result = await getDataAllStoreByOwnerEmail(user.data.user.email);
         } else {
           result = await getDataAllStoreByOwnerEmail(dataUser.data.user.email);
+        }
+        if (result?.data?.totalStores === 0) {
+          navigate("/userPage/stores");
+          showToast("Your need to create your store first!", "warn");
+          return;
         }
 
         let storeID = result.data.stores._id;
