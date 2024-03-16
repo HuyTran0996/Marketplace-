@@ -109,17 +109,15 @@ const NavbarUserApp = () => {
 
         <div className="item">
           <Link to="/userPage/edit/myInfo" style={{ textDecoration: "none" }}>
-            <img
-              src={
-                dataUser?.data?.user.photo ? (
-                  dataUser.data.user.photo
-                ) : (
-                  <AccountCircleOutlinedIcon />
-                )
-              }
-              alt="avatar"
-              className="avatar"
-            />
+            {dataUser?.data?.user.photo ? (
+              <img
+                src={dataUser.data.user.photo}
+                alt="avatar"
+                className="avatar"
+              />
+            ) : (
+              <AccountCircleOutlinedIcon className="avatar" />
+            )}
           </Link>
         </div>
       </div>
