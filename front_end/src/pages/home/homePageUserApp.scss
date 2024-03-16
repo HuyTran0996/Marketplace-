@@ -12,6 +12,7 @@
 
   .left {
     position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     width: 12vw;
@@ -22,7 +23,7 @@
     max-width: 88vw;
     width: 88vw;
     top: 0;
-    left: 0;
+    left: 12vw;
 
     .navBar {
       position: relative;
@@ -49,6 +50,7 @@
     .right {
       width: 80vw;
       max-width: 80vw;
+      left: 20vw;
 
       .navBar {
         width: 79vw;
@@ -62,12 +64,13 @@
     width: 100vw;
 
     .left {
+      position: relative;
       width: 20vw;
     }
     .right {
       width: 80vw;
       max-width: 80vw;
-
+      left: 0vw;
       .navBar {
         width: 79vw;
       }
