@@ -83,3 +83,11 @@
     }
   }
 }
+
+@media (min-width: 650px) and (max-width: 1024px) {
+  .datatableUser {
+    .dataGrid {
+      width: 70vw;
+    }
+  }
+}

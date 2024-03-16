@@ -38,3 +38,23 @@
     }
   }
 }
+@media (min-width: 650px) and (max-width: 1024px) {
+  .homeAdmin {
+    display: flex;
+    width: 100vw;
+
+    .sideBarAdmin {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 15vw;
+    }
+    .homeContainerAdmin {
+      width: 90vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
