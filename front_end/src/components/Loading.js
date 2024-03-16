@@ -10,7 +10,7 @@ const Loading = () => {
         key={i}
         className="widgets"
         variant="rectangular"
-        width="80%"
+        width={100}
         height={40}
       />
     );
