@@ -97,7 +97,7 @@ const UserDetails = ({ dataUser, getSingleUser, getMyInfo, title }) => {
 
   const moveToChangePasswordPage = (e) => {
     e.preventDefault();
-    navigate("/changePassword");
+    navigate(`/adminPage/users/adminChangeUserPassword/${userId}`);
   };
 
   const handleSubmit = async (e) => {

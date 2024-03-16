@@ -17,6 +17,7 @@ import SearchPageUserApp from "./pages/search/SearchPageUserApp";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/login/SignupPage";
 import ChangePasswordPage from "./pages/login/ChangePasswordPage";
+import AdminChangeUserPasswordPage from "./pages/login/AdminChangeUserPasswordPage";
 
 import NotFoundPage from "./pages/NotFoundPage";
 import {
@@ -116,6 +117,10 @@ function App() {
             <Route
               path="edit/:userId"
               element={<NewPageUser title="Edit User" />}
+            />
+            <Route
+              path="adminChangeUserPassword/:userId"
+              element={<AdminChangeUserPasswordPage />}
             />
           </Route>
 
