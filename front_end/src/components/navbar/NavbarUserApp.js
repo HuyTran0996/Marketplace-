@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import "./navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
+
+import "./navbarUserApp.scss";
 
 import { PageContext } from "../../context/PageContext";
 import { DarkModeContext } from "../../context/darkModeContext";

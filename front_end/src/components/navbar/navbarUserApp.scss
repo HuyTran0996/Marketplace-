@@ -1,0 +1,138 @@
+.wrapper {
+  // width: ;
+  max-height: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 12px;
+  border-bottom: 0.5px solid rgb(230, 227, 227);
+  font-size: 16px;
+  color: #555;
+  ////////////
+
+  .search {
+    display: flex;
+    align-items: center;
+    border: 0.5px solid lightgray;
+    border-radius: 10px;
+    padding: 3px;
+    margin-left: 2vw;
+
+    input {
+      height: 35px;
+      width: 50vw;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 18px;
+
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+
+    .button {
+      cursor: pointer;
+      transition-duration: 0.5s;
+      transition: transform 0.3s ease-in-out;
+      background: transparent;
+      border: none;
+    }
+    .button:hover {
+      color: rgb(36, 230, 71);
+      transform: scale(1.3);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  .items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 200px;
+
+    .item {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .icon {
+        font-size: 30px;
+        cursor: pointer;
+        &:hover {
+          color: rgb(18, 183, 128);
+          transition: 0.15s;
+        }
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .counter {
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .wrapper {
+    .search {
+      margin-left: 0px;
+      input {
+        height: 35px;
+        width: 40vw;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 18px;
+      }
+    }
+
+    .items {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      // width: 200px;
+
+      .item {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .icon {
+          font-size: 30px;
+          cursor: pointer;
+          &:hover {
+            color: rgb(18, 183, 128);
+            transition: 0.15s;
+          }
+        }
+      }
+    }
+  }
+  span {
+    display: none;
+  }
+
+  img {
+    display: none;
+  }
+}
