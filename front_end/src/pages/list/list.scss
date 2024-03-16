@@ -31,3 +31,21 @@
     }
   }
 }
+
+@media (min-width: 650px) and (max-width: 1024px) {
+  .list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+    .sideBar {
+      width: 15vw;
+    }
+    .listContainer {
+      // flex: 6;
+      position: relative;
+      left: 0px;
+      max-width: 90vw;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import "./sidebar.scss";
+import "./sidebarAdmin.scss";
 import { apiService } from "../../app/apiService";
 import { DarkModeContext } from "../../context/darkModeContext";
 

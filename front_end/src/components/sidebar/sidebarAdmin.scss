@@ -2,7 +2,7 @@
   // flex: 1;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
-  // width: 10vw;
+  width: 12vw;
   /////////////
 
   .top {
@@ -100,6 +100,15 @@
 @media (max-width: 600px) {
   .sidebar {
     width: 20vw;
+  }
+  span {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) and (max-width: 1024px) {
+  .sidebar {
+    width: 30vw;
   }
   span {
     display: none;
