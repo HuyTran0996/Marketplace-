@@ -270,8 +270,7 @@ const DataTableOrderDetailOfStoreUserApp = () => {
         />
       </div>
       <div className="totalPrice">
-        <span>Total Price: </span>
-        <span>{totalPrice.toLocaleString()}</span>
+        <div>Total Price: {totalPrice.toLocaleString()}</div>
       </div>
       {Paginate(
         dataAllOrdersProductOfStore,
