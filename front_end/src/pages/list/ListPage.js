@@ -123,7 +123,7 @@ const ListPageOrderDetailOfStoreAdminApp = () => {
   return (
     <div className="list">
       <div className="sideBar">
-        <SideBarUser />
+        <Sidebar />
       </div>
       <div className="listContainer">
         <DataTableOrderDetailOfStoreAdminApp />

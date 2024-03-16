@@ -4,7 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { FetchAllOrdersProductOfAOrder } from "../../data/FetchOrdersProductData";
 import { PageContext } from "../../context/PageContext";
 
-import "./datatable.scss";
+import "./dataTableOrderDetailOfStoreAdminApp.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableOrderDetailOfStoreAdminApp = () => {
@@ -155,22 +155,15 @@ const DataTableOrderDetailOfStoreAdminApp = () => {
 
   return (
     <div className="datatable">
-      {/* <DataGrid
-        rows={data} //userRows
-        columns={userColumns.concat(actionColumn)} //userColumns
-        className="datagrid"
-        // checkboxSelection
-        // pageSize={9}
-        // rowsPerPageOptions={[9]}
-      /> */}
-
-      <DataGrid
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        className="datagrid"
-        autoHeight
-        hideFooterPagination
-      />
+      <div className="dataGrid">
+        <DataGrid
+          rows={data}
+          columns={userColumns.concat(actionColumn)}
+          className="datagrid"
+          autoHeight
+          hideFooterPagination
+        />
+      </div>
 
       <div className="totalPrice">
         <div>Total Price: {totalPrice.toLocaleString()}</div>
