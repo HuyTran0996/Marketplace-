@@ -42,6 +42,7 @@ import NewPageCreateProduct from "./pages/new/NewPageCreateProduct";
 
 import { PageContext } from "./context/PageContext";
 import { DarkModeContext } from "./context/darkModeContext";
+import { showToast } from "./components/ToastMessage";
 
 function App() {
   const navigate = useNavigate();
@@ -66,23 +67,27 @@ function App() {
     const isSignupPage = location.pathname.startsWith("/signup");
     const isLoginPage = location.pathname.startsWith("/login");
     const isChangePassword = location.pathname.startsWith("/changePassword");
+    const isPublic = location.pathname.match("/public");
 
     // If the JWT token does not exist or the role is not set, redirect to login
-    if (isSignupPage || isLoginPage || isChangePassword) {
+    if (isSignupPage || isLoginPage || isChangePassword || isPublic) {
       return;
     }
 
-    if (!decoded || !decoded.role) {
-      navigate("/login");
+    if ((!decoded || !decoded.role) && !isPublic) {
+      showToast("Log In or Sign Up to use all functions", "warn");
+      navigate("/public");
       return;
     }
 
     if (decoded.role === "admin" && !isAdminPage) {
+      showToast("you are not a user", "warn");
       navigate("/adminPage");
       return;
     }
 
     if (decoded.role === "user" && !isUserPage) {
+      showToast("you are not an admin", "warn");
       navigate("/userPage");
       return;
     }
@@ -91,9 +96,6 @@ function App() {
   useEffect(() => {
     checkRole();
   }, [location, navigate]);
-  useEffect(() => {
-    checkRole();
-  }, []);
 
   return (
     <div className={darkMode ? "app-dark" : "app"}>
@@ -102,6 +104,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/changePassword" element={<ChangePasswordPage />} />
+
+        <Route path="/public">
+          <Route index element={<HomePageUser />} />
+        </Route>
 
         <Route path="/adminPage">
           <Route index element={<HomePage />} />

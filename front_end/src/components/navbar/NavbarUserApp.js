@@ -32,7 +32,8 @@ const NavbarUserApp = () => {
     setProductName(e.target.value);
   };
 
-  const moveToCartPage = async () => {
+  const moveToCartPage = async (e) => {
+    e.preventDefault();
     navigate("/userPage/cartPage");
   };
 
