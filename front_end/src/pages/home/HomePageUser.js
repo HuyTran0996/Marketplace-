@@ -23,7 +23,7 @@ const gridStyle = {
   flexWrap: "wrap",
   justifyContent: "space-evenly",
   marginTop: "15px",
-  height: "280px",
+  height: "300px",
 };
 
 const responsive = {
