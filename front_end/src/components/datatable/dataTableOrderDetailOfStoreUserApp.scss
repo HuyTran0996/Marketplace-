@@ -93,7 +93,7 @@
 @media (min-width: 650px) and (max-width: 1024px) {
   .datatable {
     .dataGrid {
-      width: 75vw;
+      max-width: 75vw;
     }
   }
 }
