@@ -6,7 +6,6 @@ import {
   useSearchParams,
 } from "react-router-dom";
 
-import { Paginate } from "../../components/Pagination";
 import { DarkModeContext } from "../../context/darkModeContext";
 
 import "./searchPageUserApp.scss";
@@ -14,7 +13,9 @@ import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
 import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import ProductCard from "../../components/productCard/ProductCard";
+import Loading from "../../components/Loading";
 import Widget from "../../components/widget/Widget";
+import { Paginate } from "../../components/Pagination";
 
 import Pagination from "@mui/material/Pagination";
 import { red } from "@mui/material/colors";
@@ -85,10 +86,7 @@ const SearchPageUserApp = () => {
     return (
       <div className="home">
         <SidebarUser />
-        <div className="homeContainer">
-          {/* <NavbarUserApp /> */}
-          <div className="widgets">loading....</div>
-        </div>
+        <div className="homeContainer">{Loading()}</div>
       </div>
     );
   }

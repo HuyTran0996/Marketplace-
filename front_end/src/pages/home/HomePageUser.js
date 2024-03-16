@@ -7,6 +7,7 @@ import SidebarUser from "../../components/sidebar/SideBarUser";
 import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import ProductCard from "../../components/productCard/ProductCard";
 import { PageContext } from "../../context/PageContext";
+import Loading from "../../components/Loading";
 
 import "./homePageUserApp.scss";
 
@@ -78,10 +79,7 @@ function HomePageUser() {
     return (
       <div className="home">
         <SidebarUser />
-        <div className="homeContainer">
-          {/* <NavbarUserApp /> */}
-          <div className="widgets">loading....</div>
-        </div>
+        <div className="homeContainer">{Loading()}</div>
       </div>
     );
   }

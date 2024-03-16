@@ -10,8 +10,10 @@ import "./yourStoreProducts.scss";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { PageContext } from "../../context/PageContext";
 import SidebarUser from "../../components/sidebar/SideBarUser";
-import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import ProductCardOfStoreOwner from "../../components/productCard/ProductCardOfStoreOwner";
+import Loading from "../../components/Loading";
+
+import NavbarUserApp from "../../components/navbar/NavbarUserApp";
 import Widget from "../../components/widget/Widget";
 
 import Grid from "@mui/material/Grid";
@@ -97,10 +99,8 @@ const YourStoreProducts = () => {
     return (
       <div className="home">
         <SidebarUser />
-        <div className="homeContainer">
-          {/* <NavbarUserApp /> */}
-          <div className="widgets">loading....</div>
-        </div>
+
+        <div className="homeContainer">{Loading()}</div>
       </div>
     );
   }

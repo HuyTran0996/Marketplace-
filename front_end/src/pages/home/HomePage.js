@@ -5,8 +5,9 @@ import "./homeAdmin.scss";
 import { PageContext } from "../../context/PageContext";
 
 import Sidebar from "../../components/sidebar/SideBar";
-// import Navbar from "../../components/navbar/NavBar";
 import Widget from "../../components/widget/Widget";
+import Loading from "../../components/Loading";
+// import Navbar from "../../components/navbar/NavBar";
 
 const HomePage = () => {
   const { state, dispatch, getData } = useContext(PageContext);
@@ -46,9 +47,7 @@ const HomePage = () => {
     return (
       <div className="home">
         <Sidebar />
-        <div className="homeContainer">
-          <div className="widgets">loading....</div>
-        </div>
+        <div className="homeContainer">{Loading()}</div>
       </div>
     );
   }
