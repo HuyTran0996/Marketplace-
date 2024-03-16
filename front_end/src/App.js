@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./style/dark.scss";
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 
 import HomePage from "./pages/home/HomePage";
 import HomePageUser from "./pages/home/HomePageUser";
@@ -55,12 +54,6 @@ function App() {
     const cookie = Cookies.get("jwtFe");
     let decoded;
     // Check if the JWT token exists before attempting to decode it
-    if (cookie) {
-      decoded = jwtDecode(cookie);
-    }
-    const isProtectedRoute =
-      location.pathname.startsWith("/adminPage") ||
-      location.pathname.startsWith("/userPage");
 
     const isUserPage = location.pathname.startsWith("/userPage");
     const isAdminPage = location.pathname.startsWith("/adminPage");
@@ -74,22 +67,24 @@ function App() {
       return;
     }
 
-    if ((!decoded || !decoded.role) && !isPublic) {
-      showToast("Log In or Sign Up to use all functions", "warn");
+    if (!cookie && !isPublic) {
       navigate("/public");
-      return;
+      showToast("Log In or Sign Up to use all functions", "warn");
+      // return;
     }
+    if (cookie) {
+      decoded = jwtDecode(cookie);
+      if (decoded.role === "admin" && !isAdminPage) {
+        showToast("you are not a user", "warn");
+        navigate("/adminPage");
+        return;
+      }
 
-    if (decoded.role === "admin" && !isAdminPage) {
-      showToast("you are not a user", "warn");
-      navigate("/adminPage");
-      return;
-    }
-
-    if (decoded.role === "user" && !isUserPage) {
-      showToast("you are not an admin", "warn");
-      navigate("/userPage");
-      return;
+      if (decoded.role === "user" && !isUserPage) {
+        showToast("you are not an admin", "warn");
+        navigate("/userPage");
+        return;
+      }
     }
   };
 
