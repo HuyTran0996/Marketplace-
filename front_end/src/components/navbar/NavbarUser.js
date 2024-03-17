@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "./navbar.scss";
+import "./navbarUser.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";

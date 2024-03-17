@@ -68,9 +68,10 @@ const NavbarUserApp = () => {
   }, []);
 
   return (
-    <div className="wrapper">
-      <form className="search" onSubmit={handleSubmit}>
+    <div className="wrapperOfUserApp">
+      <form className="searchOfUserApp" onSubmit={handleSubmit}>
         <input
+          className="inputOfUserApp"
           type="text"
           placeholder="Search Product Name..."
           value={productName}

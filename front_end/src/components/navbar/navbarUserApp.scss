@@ -1,4 +1,4 @@
-.wrapper {
+.wrapperOfUserApp {
   // width: ;
   max-height: 70px;
   height: 70px;
@@ -11,7 +11,7 @@
   color: #555;
   ////////////
 
-  .search {
+  .searchOfUserApp {
     display: flex;
     align-items: center;
     border: 0.5px solid lightgray;
@@ -19,7 +19,7 @@
     padding: 3px;
     margin-left: 2vw;
 
-    input {
+    .inputOfUserApp {
       height: 35px;
       width: 50vw;
       border: none;
@@ -92,10 +92,10 @@
   }
 }
 @media (max-width: 600px) {
-  .wrapper {
-    .search {
+  .wrapperOfUserApp {
+    .searchOfUserApp {
       margin-left: 0px;
-      input {
+      inputOfUserApp {
         height: 35px;
         width: 40vw;
         border: none;
