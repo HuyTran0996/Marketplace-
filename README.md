@@ -65,8 +65,11 @@ Our product is a web application that serves as a marketplace for buyers and sel
 ### Common schemas
 
 1. User schema: This schema would include fields such as user ID, username, email, password, and user role (buyer, seller, or admin).
-2. Product schema: This schema would include fields such as product ID, title, description, price, images, and seller ID.
-3. Order schema: This schema would include fields such as order ID, buyer ID, product ID, order status, delivery information, and payment information.
+2. Store schema: This schema would include fields such as store ID, storeName, ownerEmail, storeOwner Id, and address.
+3. Review schema: This schema would include fields such as productID, productName, reviewerID, userReview, and reviewerName.
+4. Product schema: This schema would include fields such as product ID, storeID, storeName, productName, description, price, unit, and genre.
+5. OrderProduct schema: This schema would include fields such as orderID, productID, storeID, productName, productPrice, orderProductStatus.
+6. Order schema: This schema would include fields such as customerID, customerName, deliverTo, orderStatus.
 
 ## Entity Relationship Diagram:
 
