@@ -1,10 +1,12 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import "./navbarUserApp.scss";
 
 import { PageContext } from "../../context/PageContext";
 import { DarkModeContext } from "../../context/darkModeContext";
+import { showToast } from "../ToastMessage";
 import { FetchCreateOrder } from "../../data/FetchOrdersData";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -34,25 +36,52 @@ const NavbarUserApp = () => {
 
   const moveToCartPage = async (e) => {
     e.preventDefault();
-    navigate("/userPage/cartPage");
+    const cookie = Cookies.get("jwtFe");
+    if (cookie) {
+      navigate("/userPage/cartPage");
+    }
+    if (!cookie) {
+      showToast("Log In or Sign Up to use all functions", "warn");
+      return;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      if (productName === "") {
-        // await getDataAllProducts();
-        navigate("/userPage");
-      } else {
-        // await searchProductByName(productName);
-        navigate(`/userPage/search/${productName}`);
-      }
+    const cookie = Cookies.get("jwtFe");
 
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError("ERROR....");
+    if (cookie) {
+      try {
+        if (productName === "") {
+          // await getDataAllProducts();
+          navigate("/userPage");
+        } else {
+          // await searchProductByName(productName);
+          navigate(`/userPage/search/${productName}`);
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError("ERROR....");
+      }
+    }
+    if (!cookie) {
+      try {
+        if (productName === "") {
+          // await getDataAllProducts();
+          navigate("/public");
+        } else {
+          // await searchProductByName(productName);
+          navigate(`/public/search/${productName}`);
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError("ERROR....");
+      }
     }
   };
 

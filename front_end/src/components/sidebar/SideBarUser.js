@@ -56,7 +56,13 @@ const SideBarUser = () => {
     }
   };
   const getProductByGenre = async (genre) => {
-    navigate(`/userPage/search/${genre}?page=1`);
+    const cookie = Cookies.get("jwtFe");
+    if (cookie) {
+      navigate(`/userPage/search/${genre}?page=1`);
+    }
+    if (!cookie) {
+      navigate(`/public/search/${genre}?page=1`);
+    }
   };
   return (
     <div className="sidebar">

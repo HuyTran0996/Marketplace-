@@ -61,14 +61,14 @@ function App() {
     const isSignupPage = location.pathname.startsWith("/signup");
     const isLoginPage = location.pathname.startsWith("/login");
     const isChangePassword = location.pathname.startsWith("/changePassword");
-    const isPublic = location.pathname.match("/public");
+    const isPublic = location.pathname.startsWith("/public");
 
     // If the JWT token does not exist or the role is not set, redirect to login
     if (isSignupPage || isLoginPage || isChangePassword || isPublic) {
       return;
     }
 
-    if (!cookie && !isPublic) {
+    if (!cookie && (isUserPage || isAdminPage)) {
       navigate("/public");
       showToast("Log In or Sign Up to use all functions", "warn");
       // return;
@@ -81,7 +81,7 @@ function App() {
         return;
       }
 
-      if (decoded.role === "user" && !isUserPage) {
+      if (decoded.role === "user" && isAdminPage) {
         showToast("you are not an admin", "warn");
         navigate("/userPage");
         return;
@@ -103,6 +103,7 @@ function App() {
 
         <Route path="/public">
           <Route index element={<HomePageUser />} />
+          <Route path="search/:genre" element={<SearchPageUserApp />} />
         </Route>
 
         <Route path="/adminPage">
