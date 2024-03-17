@@ -1,3 +1,23 @@
+# Getting Started by move to this url
+
+https://marketplace-front-end-2024.netlify.app
+
+# Login as a user
+
+You can create your own account, this app is just for learning purpose so you don't have to use a real email to be able to create a account
+
+if you want to login as a user without sign up, use this info:
+Email: user4@gmail.com
+Password: user4
+
+# Login as a admin
+
+if you want to login as an admin, use this info:
+Email: admin@gmail.com
+Password: admin
+
+<!-- auto readme of react -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
