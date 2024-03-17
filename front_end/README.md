@@ -2,6 +2,8 @@
 
 https://marketplace-front-end-2024.netlify.app
 
+# Backend server is deployed on Render with a free account, it may takes about 5 to 10 minutes to awake the server.
+
 # Login as a user
 
 You can create your own account, this app is just for learning purpose so you don't have to use a real email to be able to create a account
