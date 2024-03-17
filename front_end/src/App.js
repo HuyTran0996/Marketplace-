@@ -49,7 +49,7 @@ function App() {
   const location = useLocation();
   const { darkMode } = useContext(DarkModeContext);
   const { state } = useContext(PageContext);
-  const [role, setRole] = useState("");
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const checkRole = () => {
     const cookie = Cookies.get("jwtFe");
@@ -92,6 +92,28 @@ function App() {
   useEffect(() => {
     checkRole();
   }, [location, navigate]);
+
+  useEffect(() => {
+    if (firstLoad) {
+      const cookie = Cookies.get("jwtFe");
+      if (!cookie) {
+        navigate("/public");
+      }
+      if (cookie) {
+        let decoded = jwtDecode(cookie);
+        if (decoded.role === "admin") {
+          navigate("/adminPage");
+          return;
+        }
+
+        if (decoded.role === "user") {
+          navigate("/userPage");
+          return;
+        }
+      }
+      setFirstLoad(false);
+    }
+  }, [navigate, firstLoad]);
 
   return (
     <div className={darkMode ? "app-dark" : "app"}>
