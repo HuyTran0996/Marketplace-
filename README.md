@@ -6,24 +6,6 @@ https://marketplace-front-end-2024.netlify.app
 
 # Backend server is deployed on Render with a free account, it may takes about 5 to 10 minutes to awake the server.
 
-# Login as a user
-
-You can create your own account, this app is just for learning purpose so you don't have to use a real email to be able to create a account<br>
-
-If you want to login as a user without signing up, use this info:<br>
-Email: user4@gmail.com<br>
-Password: user4
-
-# Login as an admin
-
-Login as an admin, use this info:<br>
-Email: admin@gmail.com<br>
-Password: admin
-
-## Project Description:
-
-Our product is a web application that serves as a marketplace for buyers and sellers to connect and engage in transactions. The application will offer a range of features and functionalities to facilitate product listing, browsing, and managing transactions between buyers and sellers.
-
 ## User Stories:
 
 ##### Buyers (B):
@@ -80,151 +62,14 @@ Our product is a web application that serves as a marketplace for buyers and sel
 
 1. Implement security measures such as data encryption, user authentication, and password policies to ensure the integrity and confidentiality of user data.
 
-## Schema & ERD Suggestion
-
-### Common schemas
-
-1. User schema: This schema would include fields such as user ID, username, email, password, and user role (buyer, seller, or admin).
-2. Store schema: This schema would include fields such as store ID, storeName, ownerEmail, storeOwner Id, and address.
-3. Review schema: This schema would include fields such as productID, productName, reviewerID, userReview, and reviewerName.
-4. Product schema: This schema would include fields such as product ID, storeID, storeName, productName, description, price, unit, and genre.
-5. OrderProduct schema: This schema would include fields such as orderID, productID, storeID, productName, productPrice, orderProductStatus.
-6. Order schema: This schema would include fields such as customerID, customerName, deliverTo, orderStatus.
-
 ## Entity Relationship Diagram:
 
 https://github.com/HuyTran0996/Marketplace/blob/main/marketplacediagram2024-02-21.pdf
 
-## API endpoints
+# Informations of Front-end app:
 
-## Users:
+https://github.com/HuyTran0996/Marketplace/blob/front-end/front_end/README.md
 
-### app.use('/api/v1/users', userRouter);
+# Informations of Back-end app:
 
-### 1. router.post('/signup', authController.signup);
-
-Sign Up user, role default is user, must login to DataBase to promote a user to admin
-
-### 2. router.post('/login', authController.login);
-
-Login to the app
-
-### 3. router.patch('/updateMyPassword',authController.protect,authController.updatePassword);
-
-User can update password
-
-### 4. router.route('/').get(userController.getAllUsers);
-
-fetch all users (for admin dashboard)
-
-### 5. router.route('/:id').get(userController.getUser);
-
-fetch a user by user ID
-
-### 6. router.route('/:id').patch(userController.updateUser);
-
-update user information
-
-### 7. router.delete('/deleteMe', authController.protect, userController.deleteMe);
-
-user can delete their own account
-
-### 8. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),userController.adminDeleteUser);
-
-Admin can delete any user
-
-## Stores:
-
-## app.use('/api/v1/stores', storeRouter);
-
-### 1. router.route('/').get(authController.protect, storeController.getAllStores);
-
-fetch all stores
-
-### 2. router.route('/').post(authController.protect, storeController.createStore);
-
-user can create their store
-
-### 3. router.route('/:id').get(storeController.getStore);
-
-fetch a store
-
-### 4. router.route('/:id').patch(storeController.updateStore);
-
-update store informations
-
-### 5. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),storeController.deleteStore);
-
-Admin can delete any store
-
-## Reviews
-
-### app.use('/api/v1/reviews', reviewRouter);
-
-### 1. router.route('/').get(authController.protect, reviewController.getAllReviews);
-
-fetch all reviews of a product
-
-### 2. router.route('/:id').post(authController.protect, reviewController.createReview);
-
-create a review, this route uses ID of the product
-
-### 3. router.route('/:id').patch(reviewController.updateReview);
-
-update a review, this routes use ID of review
-
-### 4. router.route('/:id').delete(authController.protect,authController.restrictTo('admin'),reviewController.adminDeleteReview);
-
-only admin can delete review so if reviewer use bad language, store owner can report reviewer to admin
-
-## Product
-
-### app.use('/api/v1/products', productRouter);
-
-### 1. router.route('/').get(authController.protect, productController.getAllProducts);
-
-fetch all products, fetch all product of a store
-
-### 2. router.route('/').post(authController.protect, productController.createProduct);
-
-create a product
-
-### 3. router.route('/:id').get(productController.getProduct);
-
-get a product
-
-### 4. router.route('/:id').patch(productController.updateProduct);
-
-update a product
-
-### 5. router .route('/:id') .delete( authController.protect, authController.restrictTo('admin'), productController.deleteProduct );
-
-admin can delete any product
-
-## Order
-
-### app.use('/api/v1/orders', orderRouter);
-
-### 1. router.route('/').get(authController.protect, orderController.getAllOrders);
-
-### 2. router.route('/').post(authController.protect, orderController.createOrder);
-
-### 3. router.route('/:id').get(authController.protect, orderController.getOrder);
-
-### 4. router.route('/:id').patch(authController.protect, orderController.updateOrder);
-
-### 5. router.route('/:id').delete(authController.protect,authController.estrictTo('admin'),orderController.adminDeleteOrder);
-
-//only admin can delete Order
-
-## OrderProduct
-
-### app.use('/api/v1/orderProducts', orderProductRouter);
-
-### 1. router .route('/') .get(authController.protect, orderProductController.getAllOrderProducts);
-
-### 2. router.route('/').post(authController.protect, orderProductController.createOrderProduct);
-
-### 3. router.route('/:id').patch(authController.protect, orderProductController.updateOrderProduct);
-
-### 4. router.route('/:id').delete(authController.protect, orderProductController.deleteOrderProduct);
+https://github.com/HuyTran0996/backup-Backend-final-project/blob/main/README.md
