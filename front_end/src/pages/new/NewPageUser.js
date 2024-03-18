@@ -74,6 +74,7 @@ const Error = () => {
 };
 
 const UserDetails = ({ dataUser, getSingleUser, getMyInfo, title }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { userId } = useParams();
   const { isUserEditPage, isMyInfoEditPage, isUserApp } = usePage();
@@ -97,7 +98,11 @@ const UserDetails = ({ dataUser, getSingleUser, getMyInfo, title }) => {
 
   const moveToChangePasswordPage = (e) => {
     e.preventDefault();
-    navigate(`/adminPage/users/adminChangeUserPassword/${userId}`);
+    const currentUrl = location.pathname;
+    const isMyInfo = currentUrl.includes("myInfo");
+    if (isMyInfo) {
+      navigate(`/changePassword`);
+    } else navigate(`/adminPage/users/adminChangeUserPassword/${userId}`);
   };
 
   const handleSubmit = async (e) => {
