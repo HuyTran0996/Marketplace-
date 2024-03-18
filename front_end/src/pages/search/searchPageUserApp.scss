@@ -12,6 +12,7 @@
     top: 0;
     left: 0;
     width: 12vw;
+    position: fixed;
   }
 
   .homeContainer {
@@ -20,6 +21,7 @@
     width: 88vw;
     top: 0;
     left: 0;
+    left: 12vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -57,12 +59,14 @@
   .home {
     width: 100vw;
     .sideBar {
+      position: fixed;
       width: 20vw;
     }
 
     .homeContainer {
       width: 80vw;
       max-width: 80vw;
+      left: 20vw;
 
       .navBar {
         width: 79vw;
@@ -79,11 +83,13 @@
     width: 100vw;
     .sideBar {
       width: 20vw;
+      position: relative;
     }
 
     .homeContainer {
       width: 80vw;
       max-width: 80vw;
+      left: 0;
 
       .navBar {
         width: 79vw;

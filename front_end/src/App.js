@@ -113,7 +113,7 @@ function App() {
       }
       setFirstLoad(false);
     }
-  }, [navigate, firstLoad]);
+  }, [firstLoad]);
 
   return (
     <div className={darkMode ? "app-dark" : "app"}>
