@@ -103,39 +103,42 @@ const DataTableCartProduct = () => {
       toast.error("Your Cart Is Empty.");
       return;
     }
-    dataCart.forEach(async (item) => {
-      try {
-        setError(false);
-        setIsLoading(true);
-        const promises = dataCart.map(async (item) => {
-          const data = { productID: item._id, quantity: item.quantity };
-          await FetchCreateOrderProduct(data);
 
-          const data2 = {
-            orderStatus: "sentOrderToStore",
-            deliverTo: address,
-          };
+    try {
+      setError(false);
+      setIsLoading(true);
 
-          await FetchUpdateOrder({ orderId, data: data2 });
-          let result = await FetchCreateOrder();
-          let orderID1 = result.data.order[0]._id;
-          setOrderID(orderID1);
-          dispatch({
-            type: "SET_DATA_CART",
-            payload: null,
-          });
-        });
+      const promises = dataCart.map(async (item) => {
+        const data = { productID: item._id, quantity: item.quantity };
+        await FetchCreateOrderProduct(data);
+      });
 
-        await Promise.all(promises);
-        localStorage.removeItem("favorite");
-        setAddress("");
-        toast.success("Order has been sent successfully");
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        setError(true);
-      }
-    });
+      await Promise.all(promises);
+
+      const data2 = {
+        orderStatus: "sentOrderToStore",
+        deliverTo: address,
+      };
+
+      await FetchUpdateOrder({ orderId, data: data2 });
+
+      let result = await FetchCreateOrder();
+      let orderID1 = result.data.order[0]._id;
+      setOrderID(orderID1);
+      dispatch({
+        type: "SET_DATA_CART",
+        payload: null,
+      });
+
+      localStorage.removeItem("favorite");
+      setAddress("");
+      setIsLoading(false);
+      toast.success("Order has been sent successfully");
+    } catch (error) {
+      toast.error("System Error...");
+      setIsLoading(false);
+      setError(true);
+    }
   };
 
   const totalPrice = calculateTotalPrice();
@@ -255,7 +258,6 @@ const DataTableCartProduct = () => {
 
   return (
     <div className="datatable">
-      <ToastContainer />
       <div className="dataGrid">
         <DataGrid
           rows={data}

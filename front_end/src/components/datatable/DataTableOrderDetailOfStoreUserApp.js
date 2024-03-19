@@ -152,17 +152,13 @@ const DataTableOrderDetailOfStoreUserApp = () => {
     dataOriginal = dataAllOrdersProductOfStore.data.orderProducts;
     userColumns = [
       // { field: "id", headerName: "ID", width: 70 },
-      { field: "orderID", headerName: "Order ID", width: 70 },
-      { field: "productID", headerName: "pID", width: 70 },
-      {
-        field: "storeName",
-        headerName: "Store",
-        width: 100,
-
-        renderCell: (params) => {
-          return <div className="cellWithImg">{params.row.storeName}</div>;
-        },
-      },
+      { field: "orderID", headerName: "Order ID", width: 230 },
+      // { field: "productID", headerName: "pID", width: 70 },
+      // {
+      //   field: "storeName",
+      //   headerName: "Store",
+      //   width: 100,
+      // },
       {
         field: "productName",
         headerName: "Product",

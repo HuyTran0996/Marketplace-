@@ -70,7 +70,7 @@ function App() {
 
     if (!cookie && (isUserPage || isAdminPage)) {
       navigate("/public");
-      showToast("Log In or Sign Up to use all functions", "warn");
+      showToast("Log In or Sign Up to use all features", "warn");
       // return;
     }
     if (cookie) {

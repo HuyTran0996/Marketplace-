@@ -55,11 +55,11 @@ const DataTableOrderDetail = () => {
   } else {
     dataOriginal = listProducts;
     userColumns = [
-      { field: "id", headerName: "ID", width: 70 },
+      { field: "orderID", headerName: "ORDER ID", width: 250 },
       {
         field: "storeName",
         headerName: "Store",
-        width: 100,
+        width: 150,
 
         renderCell: (params) => {
           return <div className="cellWithImg">{params.row.storeName}</div>;

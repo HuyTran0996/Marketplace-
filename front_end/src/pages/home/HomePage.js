@@ -62,10 +62,10 @@ const HomePage = () => {
       </div>
     );
   } else {
-    let totalUsers = dataAllUsers?.data?.totalUsers;
-    let totalOrders = dataAllOrders?.data?.totalOrders;
-    let totalStores = dataAllStores?.data?.totalStores;
-
+    let totalUsers = dataAllUsers?.data?.total;
+    let totalOrders = dataAllOrders?.data?.total;
+    let totalStores = dataAllStores?.data?.total;
+    console.log("ádasda", dataAllUsers);
     return (
       <div className="homeAdmin">
         <div className="sideBarAdmin">
