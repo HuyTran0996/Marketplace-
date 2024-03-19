@@ -180,7 +180,13 @@ const CreateStore = ({
   );
 };
 
-const StoreDetails = ({ dataSingle, getSingleStore, title, storeId }) => {
+const StoreDetails = ({
+  dataSingle,
+  getSingleStore,
+  title,
+  storeId,
+  isDeleted,
+}) => {
   const [name, setName] = useState(`${dataSingle.data.stores.storeName}`);
   const [address, setAddress] = useState(`${dataSingle.data.stores.address}`);
   const [fileSubmit, setFileSubmit] = useState(
@@ -229,67 +235,76 @@ const StoreDetails = ({ dataSingle, getSingleStore, title, storeId }) => {
     }
   };
 
+  console.log("isDeteled", isDeleted);
+
   return (
     <div className="new">
       <SidebarUser />
       <div className="newContainer">
-        {/* <Navbar /> */}
-        <div className="top">
-          <h1>{title}</h1>
-        </div>
-        <div className="bottom">
-          <div className="left">
-            <img src={file ? file : avatar} alt="avatar" />
+        {isDeleted ? (
+          <div className="top">
+            <div>Your Store has been blocked by admin</div>
           </div>
-
-          <div className="right">
-            <form onSubmit={handleSubmit}>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={handleFileChange}
-                  style={{ display: "none" }}
-                />
+        ) : (
+          <>
+            <div className="top">
+              <h1>{title}</h1>
+            </div>
+            <div className="bottom">
+              <div className="left">
+                <img src={file ? file : avatar} alt="avatar" />
               </div>
 
-              <div className="formInput" key="1">
-                <label>Store Name</label>
-                <input
-                  type="text"
-                  placeholder="store name"
-                  value={name}
-                  onChange={handleNameChange}
-                />
+              <div className="right">
+                <form onSubmit={handleSubmit}>
+                  <div className="formInput">
+                    <label htmlFor="file">
+                      Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                    </label>
+                    <input
+                      type="file"
+                      id="file"
+                      onChange={handleFileChange}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+
+                  <div className="formInput" key="1">
+                    <label>Store Name</label>
+                    <input
+                      type="text"
+                      placeholder="store name"
+                      value={name}
+                      onChange={handleNameChange}
+                    />
+                  </div>
+
+                  <div className="formInput" key="2">
+                    <label>Owner Email (email can not be changed)</label>
+
+                    <span>{dataSingle.data.stores.ownerEmail}</span>
+                  </div>
+
+                  <div className="formInput" key="3">
+                    <label>Address</label>
+                    <input
+                      type="text"
+                      placeholder="Store Address"
+                      value={address}
+                      onChange={handlePhoneChange}
+                    />
+                  </div>
+
+                  {error ? <div className="error">{error}</div> : ""}
+
+                  <button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Loading..." : "Send"}
+                  </button>
+                </form>
               </div>
-
-              <div className="formInput" key="2">
-                <label>Owner Email (email can not be changed)</label>
-
-                <span>{dataSingle.data.stores.ownerEmail}</span>
-              </div>
-
-              <div className="formInput" key="3">
-                <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="Store Address"
-                  value={address}
-                  onChange={handlePhoneChange}
-                />
-              </div>
-
-              {error ? <div className="error">{error}</div> : ""}
-
-              <button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Loading..." : "Send"}
-              </button>
-            </form>
-          </div>
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -299,6 +314,7 @@ const NewPageStoreOfUserApp = ({ title }) => {
   const { isStoreEditPage } = usePage();
 
   const [storeId, setStoreId] = useState("");
+  const [isDeleted, setIsDeleted] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [foundNoStore, setFoundNoStore] = useState(false);
   const { state, getSingleStore, getDataAllStoreByOwnerEmail, getMyInfo } =
@@ -321,6 +337,7 @@ const NewPageStoreOfUserApp = ({ title }) => {
           setFoundNoStore(true);
         }
         setStoreId(result.data.stores._id);
+        setIsDeleted(result.data.stores.isDeleted);
 
         setIsLoading(false);
       } catch (error) {
@@ -345,6 +362,7 @@ const NewPageStoreOfUserApp = ({ title }) => {
       getSingleStore={getSingleStore}
       title={title}
       storeId={storeId}
+      isDeleted={isDeleted}
     />
   );
 };

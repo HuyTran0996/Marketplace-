@@ -42,6 +42,12 @@ const AdminDeleteUser = async (id) => {
   const adminDeleteUser = await apiService.delete(`/users/${id}`);
   return adminDeleteUser;
 };
+const AdminActiveUser = async (id) => {
+  const AdminActiveUser = await apiService.get(
+    `/users/adminActivateUser/${id}`
+  );
+  return AdminActiveUser;
+};
 
 export {
   FetchAllUsers,
@@ -50,4 +56,5 @@ export {
   FetchUpdateMe,
   FetchUpdateUser,
   AdminDeleteUser,
+  AdminActiveUser,
 };

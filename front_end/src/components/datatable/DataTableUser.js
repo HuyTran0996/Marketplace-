@@ -14,7 +14,7 @@ import { usePage } from "../usePage";
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
 
-import { AdminDeleteUser } from "../../data/FetchUsersData";
+import { AdminDeleteUser, AdminActiveUser } from "../../data/FetchUsersData";
 
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -102,7 +102,7 @@ const DataTableUser = () => {
           width: 90,
           renderCell: (params) => {
             // Correctly reference the isDeleted field and convert the boolean to a string
-            const status = params.row.isDeleted ? "Deleted" : "Active";
+            const status = params.row.isDeleted ? "Passive" : "Active";
             return (
               <div className={`cellWithStatus ${status.toLowerCase()}`}>
                 {status}
@@ -119,12 +119,21 @@ const DataTableUser = () => {
           renderCell: (params) => {
             return (
               <div className="cellAction">
-                <Link
-                  to={`/adminPage/users/edit/${params.row.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="editButton">View & Edit</div>
-                </Link>
+                {!params.row.isDeleted ? (
+                  <Link
+                    to={`/adminPage/users/edit/${params.row.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="editButton">View & Edit</div>
+                  </Link>
+                ) : (
+                  <div
+                    className="editButton"
+                    onClick={() => handleActivate(params.row.id)}
+                  >
+                    activate
+                  </div>
+                )}
 
                 <div
                   className="deleteButton"
@@ -150,6 +159,12 @@ const DataTableUser = () => {
   const handleDelete = async (id) => {
     if (isUserPage) {
       await AdminDeleteUser(id);
+      await getDataAllUsers();
+    }
+  };
+  const handleActivate = async (id) => {
+    if (isUserPage) {
+      await AdminActiveUser(id);
       await getDataAllUsers();
     }
   };

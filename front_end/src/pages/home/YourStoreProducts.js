@@ -73,6 +73,13 @@ const YourStoreProducts = () => {
           showToast("Your need to create your store first!", "warn");
           return;
         }
+        if (result?.data?.stores.isDeleted) {
+          setFoundNoStore(true);
+          setIsLoading(false);
+          navigate("/userPage");
+          showToast("Your store has been blocked by admin", "warn");
+          return;
+        }
 
         await getDataAllProductsOfAStore(
           `${result.data.stores._id}&page=${page}&limit=8`

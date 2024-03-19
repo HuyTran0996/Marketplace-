@@ -58,6 +58,11 @@ const DataTableOrderDetailOfStoreUserApp = () => {
           showToast("Your need to create your store first!", "warn");
           return;
         }
+        if (result?.data.stores.isDeleted) {
+          navigate("/userPage");
+          showToast("Your store has been blocked by admin!", "warn");
+          return;
+        }
 
         let storeID = result.data.stores._id;
 

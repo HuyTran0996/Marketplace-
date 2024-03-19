@@ -13,6 +13,7 @@ const FetchAllStores = async (storeName, page, limit) => {
     return dataAllStores;
   }
 };
+
 const FetchStoreByOwnerEmail = async (ownerEmail) => {
   const dataAllStores = await apiService.get(
     `/stores?ownerEmail=${ownerEmail}`
@@ -49,6 +50,12 @@ const DeleteStore = async (storeId) => {
   const deleteStore = await apiService.delete(`/stores/${storeId}`);
   return deleteStore;
 };
+const AdminActivateStore = async (storeId) => {
+  const AdminActivateStore = await apiService.get(
+    `/stores/adminActivateStore/${storeId}`
+  );
+  return AdminActivateStore;
+};
 
 export {
   FetchAllStores,
@@ -57,4 +64,5 @@ export {
   FetchSingleStore,
   FetchUpdateStore,
   DeleteStore,
+  AdminActivateStore,
 };

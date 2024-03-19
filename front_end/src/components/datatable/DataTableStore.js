@@ -11,7 +11,7 @@ import { usePage } from "../usePage";
 
 import avatar from "../../images/avatar.png";
 import { PageContext } from "../../context/PageContext";
-import { DeleteStore } from "../../data/FetchStoresData";
+import { DeleteStore, AdminActivateStore } from "../../data/FetchStoresData";
 
 import "./dataTableStore.scss";
 import { DataGrid } from "@mui/x-data-grid";
@@ -37,7 +37,6 @@ const DataTableStore = () => {
         setIsLoading(true);
 
         await getDataAllStores("", page, limit);
-
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -97,7 +96,7 @@ const DataTableStore = () => {
           width: 110,
           renderCell: (params) => {
             // Correctly reference the isDeleted field and convert the boolean to a string
-            const status = params.row.isDeleted ? "Deleted" : "Active";
+            const status = params.row.isDeleted ? "Passive" : "Active";
             return (
               <div className={`cellWithStatus ${status.toLowerCase()}`}>
                 {status}
@@ -114,12 +113,21 @@ const DataTableStore = () => {
           renderCell: (params) => {
             return (
               <div className="cellAction">
-                <Link
-                  to={`/adminPage/stores/edit/${params.row.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="editButton">View & Edit</div>
-                </Link>
+                {!params.row.isDeleted ? (
+                  <Link
+                    to={`/adminPage/stores/edit/${params.row.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="editButton">View & Edit</div>
+                  </Link>
+                ) : (
+                  <div
+                    className="editButton"
+                    onClick={() => handleActivateStore(params.row.id)}
+                  >
+                    activate
+                  </div>
+                )}
 
                 <div
                   className="deleteButton"
@@ -145,6 +153,12 @@ const DataTableStore = () => {
   const handleDelete = async (id) => {
     if (isStorePage) {
       await DeleteStore(id);
+      await getDataAllStores();
+    }
+  };
+  const handleActivateStore = async (id) => {
+    if (isStorePage) {
+      await AdminActivateStore(id);
       await getDataAllStores();
     }
   };
