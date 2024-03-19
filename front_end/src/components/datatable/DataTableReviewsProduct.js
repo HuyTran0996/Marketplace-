@@ -57,7 +57,7 @@ const DataTableReviewsProduct = () => {
     if (error || !reviewsOfThisProduct) {
       userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
     } else {
-      dataOriginal = reviewsOfThisProduct.data.reviews;
+      dataOriginal = reviewsOfThisProduct?.data?.reviews;
 
       userColumns = [
         {
@@ -145,8 +145,12 @@ const DataTableReviewsProduct = () => {
 
   return (
     <div className="datatable">
-      <div>{`Reviews of product: ${reviewsOfThisProduct?.data?.reviews[0].productName}`}</div>
-      <div>{`Product ID: ${reviewsOfThisProduct?.data?.reviews[0].productID}`}</div>
+      {reviewsOfThisProduct?.data?.reviews[0]?.productName ? (
+        <div>{`Reviews of product: ${reviewsOfThisProduct?.data?.reviews[0]?.productName}`}</div>
+      ) : (
+        <div>This product not yet has reviews</div>
+      )}
+      <div>{`Product ID: ${productId}`}</div>
       <div className="dataGrid">
         <DataGrid
           rows={data}

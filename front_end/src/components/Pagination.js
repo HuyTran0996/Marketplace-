@@ -27,7 +27,7 @@ export const Paginate = (data, link, limit) => {
   const handleChangeFilter = (e, p) => {
     navigate(`${link}?page=${p}`);
   };
-  console.log("đâsdasd", data?.data.total);
+
   return (
     <Grid style={stackStyle}>
       <Pagination
