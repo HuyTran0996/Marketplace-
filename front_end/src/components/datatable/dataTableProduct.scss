@@ -56,6 +56,21 @@
       transform: scale(1.05);
       transition: transform 0.3s ease-in-out;
     }
+
+    .pending {
+      padding: 2px 5px;
+      border-radius: 5px;
+      border: 1px dotted goldenrod;
+      cursor: pointer;
+      transition-duration: 0.3s;
+      color: goldenrod;
+    }
+    .pending:hover {
+      background-color: aqua;
+      filter: brightness(120%);
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
   }
 }
 @media (max-width: 600px) {

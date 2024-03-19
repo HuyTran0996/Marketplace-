@@ -26,7 +26,10 @@ import {
 
 import { FetchAllOrdersProductOfStore } from "../data/FetchOrdersProductData";
 
-import { FetchReviewOfProduct } from "../data/FetchReviewData";
+import {
+  FetchReviewOfProduct,
+  FetchReviewOfProductForAdmin,
+} from "../data/FetchReviewData";
 
 const PageContext = createContext();
 
@@ -238,6 +241,14 @@ function PageProvider({ children }) {
     });
   };
 
+  const getReviewsOfThisForAdmin = async (productId, page, limit) => {
+    const reviews = await FetchReviewOfProductForAdmin(productId, page, limit);
+    dispatch({
+      type: "SET_REVIEW_THIS",
+      payload: reviews,
+    });
+  };
+
   useEffect(() => {
     const productInStorage = JSON.parse(localStorage.getItem("favorite"));
     dispatch({
@@ -267,6 +278,7 @@ function PageProvider({ children }) {
     getSingleProduct,
     getReviewsOfThis,
     getDataOfThreeGenres,
+    getReviewsOfThisForAdmin,
   };
 
   return (

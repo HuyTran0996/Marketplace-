@@ -30,6 +30,7 @@ import {
   ListPageOrderDetail,
   ListPageOrderDetailOfStore,
   ListPageOrderDetailOfStoreAdminApp,
+  ListPageReviewsProduct,
 } from "./pages/list/ListPage";
 
 import NewPageUser from "./pages/new/NewPageUser";
@@ -172,6 +173,10 @@ function App() {
             <Route
               path="edit/:productId"
               element={<NewPageProduct title="Edit Product" />}
+            />
+            <Route
+              path="reviews/:productId"
+              element={<ListPageReviewsProduct />}
             />
           </Route>
         </Route>

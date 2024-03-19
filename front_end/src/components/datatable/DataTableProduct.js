@@ -18,6 +18,7 @@ import "./dataTableProduct.scss";
 import { DataGrid } from "@mui/x-data-grid";
 
 const DataTableProduct = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -106,7 +107,7 @@ const DataTableProduct = () => {
         {
           field: "action",
           headerName: "ACTION",
-          width: 170,
+          width: 290,
           renderCell: (params) => {
             return (
               <div className="cellAction">
@@ -123,6 +124,13 @@ const DataTableProduct = () => {
                 >
                   Delete
                 </div>
+
+                <Link
+                  to={`/adminPage/products/reviews/${params.row.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="pending">See reviews</div>
+                </Link>
               </div>
             );
           },
