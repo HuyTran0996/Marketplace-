@@ -65,10 +65,6 @@ const DataTableProduct = () => {
           field: "storeName",
           headerName: "Store",
           width: 100,
-
-          renderCell: (params) => {
-            return <div className="cellWithImg">{params.row.storeName}</div>;
-          },
         },
         {
           field: "productName",
@@ -126,7 +122,10 @@ const DataTableProduct = () => {
                 </div>
 
                 <Link
-                  to={`/adminPage/products/reviews/${params.row.id}`}
+                  to={{
+                    pathname: `/adminPage/products/reviews/${params.row.id}`,
+                    search: `?product=${params.row.productName}&store=${params.row.storeName}`,
+                  }}
                   style={{ textDecoration: "none" }}
                 >
                   <div className="pending">See reviews</div>

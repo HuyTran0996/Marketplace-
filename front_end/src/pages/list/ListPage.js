@@ -78,7 +78,7 @@ const ListPageReviewsProduct = () => {
         <Sidebar />
       </div>
       <div className="listContainer">
-        <NavbarProduct />
+        {/* <NavbarProduct /> */}
         <DataTableReviewsProduct />
       </div>
     </div>

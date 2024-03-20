@@ -30,6 +30,8 @@ const DataTableReviewsProduct = () => {
 
   let [searchParams] = useSearchParams();
   let page = parseInt(searchParams.get("page")) || 1;
+  const product = searchParams.get("product");
+  const store = searchParams.get("store");
   const limit = 8;
 
   useEffect(() => {
@@ -145,12 +147,10 @@ const DataTableReviewsProduct = () => {
 
   return (
     <div className="datatable">
-      {reviewsOfThisProduct?.data?.reviews[0]?.productName ? (
-        <div>{`Reviews of product: ${reviewsOfThisProduct?.data?.reviews[0]?.productName}`}</div>
-      ) : (
-        <div>This product not yet has reviews</div>
-      )}
+      <div>{`Reviews of product: ${product}`}</div>
       <div>{`Product ID: ${productId}`}</div>
+      <div>{`From Store: ${store}`}</div>
+
       <div className="dataGrid">
         <DataGrid
           rows={data}
