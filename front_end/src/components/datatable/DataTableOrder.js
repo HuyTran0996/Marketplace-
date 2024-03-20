@@ -134,13 +134,13 @@ const DataTableOrder = () => {
 
   const handleCancelOrder = async (id) => {
     await FetchCancelOrder(id);
-    await getDataAllOrders();
+    await getDataAllOrders("", page, limit);
   };
 
   const handleDelete = async (id) => {
     if (isOrderPage) {
       await DeleteOrder(id);
-      await getDataAllOrders();
+      await getDataAllOrders("", page, limit);
     }
   };
 

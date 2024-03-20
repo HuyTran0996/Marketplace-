@@ -52,17 +52,17 @@ function App() {
   const { state } = useContext(PageContext);
   const [firstLoad, setFirstLoad] = useState(true);
 
+  const isUserPage = location.pathname.startsWith("/userPage");
+  const isAdminPage = location.pathname.startsWith("/adminPage");
+  const isSignupPage = location.pathname.startsWith("/signup");
+  const isLoginPage = location.pathname.startsWith("/login");
+  const isChangePassword = location.pathname.startsWith("/changePassword");
+  const isPublic = location.pathname.startsWith("/public");
+
   const checkRole = () => {
     const cookie = Cookies.get("jwtFe");
     let decoded;
     // Check if the JWT token exists before attempting to decode it
-
-    const isUserPage = location.pathname.startsWith("/userPage");
-    const isAdminPage = location.pathname.startsWith("/adminPage");
-    const isSignupPage = location.pathname.startsWith("/signup");
-    const isLoginPage = location.pathname.startsWith("/login");
-    const isChangePassword = location.pathname.startsWith("/changePassword");
-    const isPublic = location.pathname.startsWith("/public");
 
     // If the JWT token does not exist or the role is not set, redirect to login
     if (isSignupPage || isLoginPage || isChangePassword || isPublic) {
@@ -102,12 +102,12 @@ function App() {
       }
       if (cookie) {
         let decoded = jwtDecode(cookie);
-        if (decoded.role === "admin") {
+        if (decoded.role === "admin" && !isAdminPage) {
           navigate("/adminPage");
           return;
         }
 
-        if (decoded.role === "user") {
+        if (decoded.role === "user" && !isUserPage) {
           navigate("/userPage");
           return;
         }

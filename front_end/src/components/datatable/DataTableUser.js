@@ -159,13 +159,13 @@ const DataTableUser = () => {
   const handleDelete = async (id) => {
     if (isUserPage) {
       await AdminDeleteUser(id);
-      await getDataAllUsers();
+      await getDataAllUsers("", page, limit);
     }
   };
   const handleActivate = async (id) => {
     if (isUserPage) {
       await AdminActiveUser(id);
-      await getDataAllUsers();
+      await getDataAllUsers("", page, limit);
     }
   };
 

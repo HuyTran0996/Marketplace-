@@ -18,7 +18,6 @@ const DataTableOrderDetail = () => {
   let actionColumn = [];
 
   useEffect(() => {
-    console.log("order ID:", orderID);
     const createOrder = async () => {
       try {
         setError(false);

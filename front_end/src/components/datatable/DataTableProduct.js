@@ -148,7 +148,7 @@ const DataTableProduct = () => {
   const handleDelete = async (id) => {
     if (isProductPage) {
       await DeleteProduct(id);
-      await getDataAllProducts();
+      await getDataProductsUsePageAndLimit(page, limit);
     }
   };
 

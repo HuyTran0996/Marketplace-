@@ -153,13 +153,13 @@ const DataTableStore = () => {
   const handleDelete = async (id) => {
     if (isStorePage) {
       await DeleteStore(id);
-      await getDataAllStores();
+      await getDataAllStores("", page, limit);
     }
   };
   const handleActivateStore = async (id) => {
     if (isStorePage) {
       await AdminActivateStore(id);
-      await getDataAllStores();
+      await getDataAllStores("", page, limit);
     }
   };
 
