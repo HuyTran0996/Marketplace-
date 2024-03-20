@@ -3,8 +3,10 @@ import "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";
+import { useNavigate } from "react-router-dom";
 
 const NavbarStore = () => {
+  const navigate = useNavigate();
   const { getDataAllStores } = useContext(PageContext);
   const [isLoading, setIsLoading] = useState(false);
   const [storeName, setStoreName] = useState("");
@@ -19,7 +21,8 @@ const NavbarStore = () => {
     setIsLoading(true);
     try {
       if (storeName === "") {
-        await getDataAllStores();
+        await getDataAllStores("", 1, 8);
+        navigate("/adminPage/stores?page=1");
       } else {
         await getDataAllStores(storeName);
       }

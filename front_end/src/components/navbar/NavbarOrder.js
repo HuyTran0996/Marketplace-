@@ -3,8 +3,10 @@ import "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";
+import { useNavigate } from "react-router-dom";
 
 const NavbarOrder = () => {
+  const navigate = useNavigate();
   const { getDataAllOrders } = useContext(PageContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +23,8 @@ const NavbarOrder = () => {
     setError(null);
     try {
       if (orderId === "") {
-        await getDataAllOrders();
+        await getDataAllOrders("", 1, 8);
+        navigate("/adminPage/orders?page=1");
       } else {
         await getDataAllOrders(orderId);
       }

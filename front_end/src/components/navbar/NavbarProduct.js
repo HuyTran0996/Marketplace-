@@ -3,9 +3,15 @@ import "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";
+import { useNavigate } from "react-router-dom";
 
 const NavbarProduct = () => {
-  const { searchProductByName, getDataAllProducts } = useContext(PageContext);
+  const {
+    searchProductByName,
+    getDataAllProducts,
+    getDataProductsUsePageAndLimit,
+  } = useContext(PageContext);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [productName, setProductName] = useState("");
   const [error, setError] = useState(null);
@@ -19,7 +25,8 @@ const NavbarProduct = () => {
     setIsLoading(true);
     try {
       if (productName === "") {
-        await getDataAllProducts();
+        await getDataProductsUsePageAndLimit(1, 8);
+        navigate("/adminPage/products?page=1");
       } else {
         await searchProductByName(productName);
       }

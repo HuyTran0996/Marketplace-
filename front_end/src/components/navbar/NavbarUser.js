@@ -3,8 +3,10 @@ import "./navbarUser.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { PageContext } from "../../context/PageContext";
+import { useNavigate } from "react-router-dom";
 
 const NavbarUser = () => {
+  const navigate = useNavigate();
   const { getDataAllUsers } = useContext(PageContext);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -19,7 +21,8 @@ const NavbarUser = () => {
     setIsLoading(true);
     try {
       if (email === "") {
-        await getDataAllUsers();
+        await getDataAllUsers("", 1, 8);
+        navigate("/adminPage/users?page=1");
       } else {
         await getDataAllUsers(email);
       }
