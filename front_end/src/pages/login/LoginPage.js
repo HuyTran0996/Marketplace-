@@ -49,7 +49,7 @@ export default function LoginPage() {
       // Cookies.remove("jwtFe");
       Cookies.remove("jwt");
       // Cookies.set("jwtFe", jwt, { expires: 2 });
-
+      console.log("ádasdasd", role);
       setIsLoading(false);
 
       navigate(role === "admin" ? "/adminPage" : "/userPage");
