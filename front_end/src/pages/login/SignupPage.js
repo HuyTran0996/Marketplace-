@@ -84,11 +84,11 @@ export default function SignupPage() {
     } catch (error) {
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
-      let errorName = error.response.data.message;
+      let errorName = error.message;
 
       showToast(errorName, "error");
       ///Note: không hiểu vì sao ở Netlify không nhả error.response.data đúng như ở local
-      if (!error.response.data.message) {
+      if (!error.message) {
         showToast("Duplicate value", "error");
       }
     }

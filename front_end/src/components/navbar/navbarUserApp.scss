@@ -95,7 +95,7 @@
   .wrapperOfUserApp {
     .searchOfUserApp {
       margin-left: 0px;
-      inputOfUserApp {
+      .inputOfUserApp {
         height: 35px;
         width: 40vw;
         border: none;
@@ -124,6 +124,10 @@
             color: rgb(18, 183, 128);
             transition: 0.15s;
           }
+        }
+
+        .avatar {
+          display: none;
         }
       }
     }

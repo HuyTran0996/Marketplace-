@@ -25,7 +25,7 @@
     left: 12vw;
     display: flex;
     flex-direction: column;
-    // justify-content: flex-start;
+    justify-content: flex-start;
 
     .navBar {
       position: relative;
@@ -60,7 +60,7 @@
       width: 20vw;
     }
 
-    .homeContainerSearch {
+    .homeContainer {
       width: 80vw;
       max-width: 80vw;
       left: 20vw;
@@ -83,7 +83,7 @@
       position: relative;
     }
 
-    .homeContainerSearch {
+    .homeContainer {
       width: 80vw;
       max-width: 80vw;
       left: 0;
