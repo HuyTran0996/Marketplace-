@@ -9,11 +9,11 @@ const apiService = axios.create({
 
 apiService.interceptors.request.use(
   (request) => {
-    const token = Cookies.get("jwt");
+    // const token = Cookies.get("jwt");
 
-    if (token) {
-      request.headers.Authorization = `Bearer ${token}`;
-    }
+    // if (token) {
+    //   request.headers.Authorization = `Bearer ${token}`;
+    // }
     console.log("Start request", request);
     return request;
   },
