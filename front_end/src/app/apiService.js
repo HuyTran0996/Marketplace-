@@ -4,16 +4,16 @@ import Cookies from "js-cookie";
 
 const apiService = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 apiService.interceptors.request.use(
   (request) => {
-    const token = Cookies.get("jwtFe");
+    // const token = Cookies.get("jwtFe");
 
-    if (token) {
-      request.headers.Authorization = `Bearer ${token}`;
-    }
+    // if (token) {
+    //   request.headers.Authorization = `Bearer ${token}`;
+    // }
     console.log("Start request", request);
     return request;
   },
