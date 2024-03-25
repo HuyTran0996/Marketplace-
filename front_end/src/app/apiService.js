@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 const apiService = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 apiService.interceptors.request.use(
