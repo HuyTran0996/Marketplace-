@@ -102,7 +102,7 @@ const SearchPageUserApp = () => {
   }
   if (!isLoading && !error && dataAllProducts) {
     return (
-      <div className="home">
+      <div className="homeSearch">
         <div className="sideBar">
           <SidebarUser />
         </div>
