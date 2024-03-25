@@ -50,6 +50,10 @@ export default function SignupPage() {
         showToast("All fields are required.", "warn");
         return;
       }
+      if (passwordConfirm !== password) {
+        showToast("passwordConfirm and password are not the same", "warn");
+        return;
+      }
       setIsLoading(true);
       const result = await apiService.post(
         "/users/signup",
@@ -83,6 +87,10 @@ export default function SignupPage() {
       let errorName = error.response.data.message;
 
       showToast(errorName, "error");
+      ///Note: không hiểu vì sao ở Netlify không nhả error.response.data đúng như ở local
+      if (!error.response.data.message) {
+        showToast("Duplicate value", "error");
+      }
     }
   };
 
@@ -102,6 +110,7 @@ export default function SignupPage() {
             placeholder="name"
             value={name}
             onChange={handleNameChange}
+            autoComplete="off"
           />
 
           <label>Email</label>
@@ -110,6 +119,7 @@ export default function SignupPage() {
             placeholder="email"
             value={email}
             onChange={handleEmailChange}
+            autoComplete="off"
           />
 
           <label>Password</label>
@@ -118,6 +128,7 @@ export default function SignupPage() {
             placeholder="password"
             value={password}
             onChange={handlePasswordChange}
+            autoComplete="off"
           />
 
           <label>Password Confirm</label>
@@ -126,12 +137,14 @@ export default function SignupPage() {
             placeholder="passwordConfirm"
             value={passwordConfirm}
             onChange={handlePasswordConfirmChange}
+            autoComplete="off"
           />
 
           <label>Phone Number</label>
           <input
             type="number"
             placeholder="Phone number"
+            autoComplete="off"
             value={phone}
             onChange={handlePhoneChange}
             className="no-spinners"
