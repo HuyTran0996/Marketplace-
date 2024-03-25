@@ -66,7 +66,8 @@ const SideBarUser = () => {
     }
   };
   const getProductByGenre = async (genre) => {
-    const cookie = Cookies.get("jwtFe");
+    // const cookie = Cookies.get("jwtFe");
+    const cookie = Cookies.get("jwt");
     if (cookie) {
       navigate(`/userPage/search/${genre}?page=1`);
     }
