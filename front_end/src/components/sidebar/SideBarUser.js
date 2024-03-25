@@ -154,8 +154,8 @@ const SideBarUser = () => {
           </Link>
 
           <Link
-            to="/login"
             onClick={handleLogOut}
+            to="/login"
             style={{ textDecoration: "none" }}
           >
             <li>
