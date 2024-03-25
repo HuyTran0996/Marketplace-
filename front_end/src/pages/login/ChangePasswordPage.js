@@ -54,7 +54,7 @@ export default function ChangePasswordPage() {
         }
       );
 
-      // Cookies.remove("jwtFe");
+      Cookies.remove("jwtFe");
       Cookies.remove("jwt");
 
       showToast(

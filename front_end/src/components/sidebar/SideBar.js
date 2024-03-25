@@ -19,7 +19,7 @@ const Sidebar = () => {
 
   const handleLogOut = async (e) => {
     Cookies.remove("forFe");
-    // Cookies.remove("jwtFe");
+    Cookies.remove("jwtFe");
     Cookies.remove("jwt");
 
     try {

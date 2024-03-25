@@ -60,8 +60,8 @@ function App() {
   const isPublic = location.pathname.startsWith("/public");
 
   const checkRole = () => {
-    // const cookie = Cookies.get("jwtFe");
-    const cookie = Cookies.get("jwt");
+    const cookie = Cookies.get("jwtFe");
+
     let decoded;
     // Check if the JWT token exists before attempting to decode it
 
@@ -97,8 +97,8 @@ function App() {
 
   useEffect(() => {
     if (firstLoad) {
-      // const cookie = Cookies.get("jwtFe");
-      const cookie = Cookies.get("jwt");
+      const cookie = Cookies.get("jwtFe");
+
       if (!cookie) {
         navigate("/public");
       }

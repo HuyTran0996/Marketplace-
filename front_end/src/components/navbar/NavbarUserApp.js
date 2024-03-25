@@ -36,8 +36,8 @@ const NavbarUserApp = () => {
 
   const moveToCartPage = async (e) => {
     e.preventDefault();
-    // const cookie = Cookies.get("jwtFe");
-    const cookie = Cookies.get("jwt");
+    const cookie = Cookies.get("jwtFe");
+
     if (cookie) {
       navigate("/userPage/cartPage");
     }
@@ -50,8 +50,7 @@ const NavbarUserApp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // const cookie = Cookies.get("jwtFe");
-    const cookie = Cookies.get("jwt");
+    const cookie = Cookies.get("jwtFe");
 
     if (cookie) {
       try {

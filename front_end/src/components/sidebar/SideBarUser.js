@@ -40,7 +40,7 @@ const SideBarUser = () => {
     //   payload: [],
     // });
     Cookies.remove("forFe");
-    // Cookies.remove("jwtFe");
+    Cookies.remove("jwtFe");
     Cookies.remove("jwt");
 
     try {
@@ -66,8 +66,8 @@ const SideBarUser = () => {
     }
   };
   const getProductByGenre = async (genre) => {
-    // const cookie = Cookies.get("jwtFe");
-    const cookie = Cookies.get("jwt");
+    const cookie = Cookies.get("jwtFe");
+
     if (cookie) {
       navigate(`/userPage/search/${genre}?page=1`);
     }

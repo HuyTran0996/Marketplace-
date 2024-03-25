@@ -70,9 +70,9 @@ export default function SignupPage() {
 
       const role = result.data.user.role;
       const jwt = result.data.token;
-      // Cookies.remove("jwtFe");
+      Cookies.remove("jwtFe");
       Cookies.remove("jwt");
-      // Cookies.set("jwtFe", jwt, { expires: 2 });
+      Cookies.set("jwtFe", jwt, { expires: 2 });
       setIsLoading(false);
 
       showToast("Successful account registration", "success");
