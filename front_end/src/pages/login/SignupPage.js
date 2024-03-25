@@ -80,7 +80,7 @@ export default function SignupPage() {
     } catch (error) {
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
-      let errorName = error.message;
+      let errorName = error.response.data.message;
 
       showToast(errorName, "error");
     }
