@@ -54,7 +54,8 @@ export default function ChangePasswordPage() {
         }
       );
 
-      Cookies.remove("jwtFe");
+      // Cookies.remove("jwtFe");
+      Cookies.remove("jwt");
 
       showToast(
         "Changed password successfully, login with your new password",

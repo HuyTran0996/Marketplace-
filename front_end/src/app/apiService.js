@@ -9,7 +9,8 @@ const apiService = axios.create({
 
 apiService.interceptors.request.use(
   (request) => {
-    const token = Cookies.get("jwtFe");
+    // const token = Cookies.get("jwtFe");
+    const token = Cookies.get("jwt");
     if (token) {
       request.headers.Authorization = `Bearer ${token}`;
     }

@@ -46,8 +46,9 @@ export default function LoginPage() {
       );
       const role = result.data.user.role;
       const jwt = result.data.token;
-      Cookies.remove("jwtFe");
-      Cookies.set("jwtFe", jwt, { expires: 2 });
+      // Cookies.remove("jwtFe");
+      Cookies.remove("jwt");
+      // Cookies.set("jwtFe", jwt, { expires: 2 });
 
       setIsLoading(false);
 
