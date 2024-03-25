@@ -95,7 +95,7 @@ const SearchPageUserApp = () => {
       <div className="home">
         <SidebarUser />
         <div className="homeContainer">
-          <div className="widgets">ERROR....</div>
+          <div className="movieStyle">ERROR....</div>
         </div>
       </div>
     );

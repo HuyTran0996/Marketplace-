@@ -12,7 +12,6 @@ export default function SignupPage() {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(PageContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +46,6 @@ export default function SignupPage() {
       phone,
     };
     try {
-      setMessage("");
       if (!name || !email || !password || !passwordConfirm || !phone) {
         showToast("All fields are required.", "warn");
         return;
@@ -83,9 +81,8 @@ export default function SignupPage() {
       setIsLoading(false);
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
       let errorName = error.message;
-      setMessage(errorName);
 
-      showToast(message, "error");
+      showToast(errorName, "error");
     }
   };
 

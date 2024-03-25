@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import "./sidebarUser.scss";
@@ -20,9 +20,18 @@ import CategoryIcon from "@mui/icons-material/Category";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const SideBarUser = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { dispatchDarkMode } = useContext(DarkModeContext);
+  const [isPublic, setIsPublic] = useState(false);
   const { state, dispatch, getDataAllProducts } = useContext(PageContext);
+
+  useEffect(() => {
+    const currentUrl = location.pathname;
+    //user//
+    const isPublic = currentUrl.includes("public");
+    if (isPublic) setIsPublic(true);
+  }, [location]);
 
   const handleLogOut = async (e) => {
     localStorage.removeItem("favorite");
@@ -149,7 +158,7 @@ const SideBarUser = () => {
           >
             <li>
               <ExitToAppIcon className="icon" />
-              <span>Logout</span>
+              {isPublic ? <span>Login</span> : <span>Logout</span>}
             </li>
           </Link>
         </ul>

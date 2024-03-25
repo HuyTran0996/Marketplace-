@@ -3,6 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
+  height: 100vh;
 
   display: flex;
   flex-direction: row;
@@ -24,7 +25,7 @@
     left: 12vw;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    // justify-content: flex-start;
 
     .navBar {
       position: relative;
@@ -32,38 +33,34 @@
       width: 88vw;
     }
 
-    .movieStyle {
-      color: #000000;
-      font-weight: bold;
-      font-size: 36px;
-    }
-
     .products {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      // position: relative;
+      // left: 5vw;
       // margin-top: 15px;
       // margin-left: 5vw;
-    }
-    .widgets {
-      display: flex;
-      padding: 20px;
-      margin-top: 15px;
-      margin-left: 5vw;
+      .movieStyle {
+        color: #000000;
+        font-weight: bold;
+        font-size: 36px;
+      }
     }
   }
 }
 
 @media (max-width: 600px) {
-  .home {
+  .homeSearch {
     width: 100vw;
     .sideBar {
       position: fixed;
       width: 20vw;
     }
 
-    .homeContainer {
+    .homeContainerSearch {
       width: 80vw;
       max-width: 80vw;
       left: 20vw;
@@ -79,14 +76,14 @@
   }
 }
 @media (min-width: 650px) and (max-width: 1024px) {
-  .home {
+  .homeSearch {
     width: 100vw;
     .sideBar {
       width: 20vw;
       position: relative;
     }
 
-    .homeContainer {
+    .homeContainerSearch {
       width: 80vw;
       max-width: 80vw;
       left: 0;
