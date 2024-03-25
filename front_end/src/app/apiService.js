@@ -30,7 +30,8 @@ apiService.interceptors.response.use(
   },
   function (error) {
     // console.log("RESPONSE ERROR", error);
-    console.log("RESPONSE ERROR", error.response.data.error);
+    // console.log("RESPONSE ERROR", error.response.data.error);
+    console.log("RESPONSE ERROR", error);
 
     // return Promise.reject(error);
     return Promise.reject(error.response.data);
