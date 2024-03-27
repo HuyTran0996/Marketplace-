@@ -213,7 +213,7 @@ const ProductDetails = ({
               </div>
 
               <div className="formInput" key="6">
-                <label>Order Status</label>
+                <label>Genres</label>
                 <select value={genre} onChange={handleGenreChange}>
                   <option value="">{genre}</option>
                   <option value="Foods">Foods</option>
