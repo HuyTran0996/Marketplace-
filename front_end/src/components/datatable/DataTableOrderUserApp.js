@@ -51,6 +51,22 @@ const DataTableOrderUserApp = () => {
     fetchData();
   }, [location, isOrderPageUserApp]);
 
+  const STATUS = {
+    DELIVERED_TO_APP: "deliveredToApp",
+    CANCELED_BY_STORE: "canceledByStore",
+  };
+
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case STATUS.DELIVERED_TO_APP:
+        return "Delivered To App";
+      case STATUS.CANCELED_BY_STORE:
+        return "Canceled By Store";
+      default:
+        return "Sent Order To Store";
+    }
+  };
+
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   }
@@ -84,13 +100,19 @@ const DataTableOrderUserApp = () => {
           field: "orderStatus",
           headerName: "STATUS",
           width: 150,
+
           renderCell: (params) => {
-            // Correctly reference the isDeleted field and convert the boolean to a string
-            const status =
-              params.row.orderStatus === "openToAdd" ? "Active" : "Passive";
+            const { orderProductStatus } = params.row;
+            const statusClass =
+              orderProductStatus === STATUS.DELIVERED_TO_APP
+                ? "active"
+                : orderProductStatus === STATUS.CANCELED_BY_STORE
+                ? "passive"
+                : "pending";
+            const statusLabel = getStatusLabel(orderProductStatus);
             return (
-              <div className={`cellWithStatus ${status.toLowerCase()}`}>
-                {params.row.orderStatus}
+              <div className={`cellWithStatus ${statusClass}`}>
+                {statusLabel}
               </div>
             );
           },
@@ -134,6 +156,7 @@ const DataTableOrderUserApp = () => {
           className="datagrid"
           autoHeight
           hideFooterPagination
+          disableRowSelectionOnClick
         />
       </div>
       {Paginate(dataAllOrders, "/userPage/myOrders", limit)}

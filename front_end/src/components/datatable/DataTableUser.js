@@ -131,7 +131,7 @@ const DataTableUser = () => {
                     className="editButton"
                     onClick={() => handleActivate(params.row.id)}
                   >
-                    activate
+                    Activate
                   </div>
                 )}
 

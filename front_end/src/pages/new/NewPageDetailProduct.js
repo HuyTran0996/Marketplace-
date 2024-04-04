@@ -6,6 +6,7 @@ import { FetchCreateReviewOfProduct } from "../../data/FetchReviewData";
 import { PageContext } from "../../context/PageContext";
 import { usePage } from "../../components/usePage";
 import avatar from "../../images/avatar.png";
+import { showToast } from "../../components/ToastMessage";
 
 import "./new.scss";
 import SidebarUser from "../../components/sidebar/SideBarUser";
@@ -85,8 +86,13 @@ const ProductDetails = ({
     const isProductAlreadyInCart = newFavorite.find(
       (existingProduct) => existingProduct._id === productId
     );
+    if (isProductAlreadyInCart) {
+      showToast("Your cart already contains this product.", "warn");
+      return;
+    }
     if (!isProductAlreadyInCart) {
       newFavorite.push({ ...dataSingle.data.product, quantity: 1 });
+      showToast("Add product to cart successfully", "success");
     }
 
     dispatch({

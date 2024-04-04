@@ -152,7 +152,7 @@ const DataTableCartProduct = () => {
   } else {
     dataOriginal = dataCart;
     userColumns = [
-      { field: "id", headerName: "ID", width: 70 },
+      { field: "id", headerName: "ID", width: 70, sortable: false },
       {
         field: "storeName",
         headerName: "Store",
@@ -188,6 +188,7 @@ const DataTableCartProduct = () => {
         field: "unit",
         headerName: "Unit",
         width: 60,
+        sortable: false,
       },
     ];
 
@@ -265,6 +266,7 @@ const DataTableCartProduct = () => {
           className="datagrid"
           autoHeight
           hideFooterPagination
+          disableRowSelectionOnClick
         />
       </div>
 

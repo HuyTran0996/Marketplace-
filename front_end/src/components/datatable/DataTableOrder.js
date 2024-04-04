@@ -48,6 +48,31 @@ const DataTableOrder = () => {
     fetchData();
   }, [location, isOrderPage]);
 
+  const STATUS = {
+    SENT_ORDER_TO_STORE: "sentOrderToStore",
+    DELIVERED: "delivered",
+    DELIVERING: "delivering",
+    OPEN_TO_ADD: "openToAdd",
+    CANCELED: "canceled",
+  };
+
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case STATUS.SENT_ORDER_TO_STORE:
+        return "Sent Order To Store";
+      case STATUS.DELIVERED:
+        return "Delivered";
+      case STATUS.DELIVERING:
+        return "Delivering";
+      case STATUS.CANCELED:
+        return "Canceled";
+      case STATUS.OPEN_TO_ADD:
+        return "Open To Add";
+      default:
+        return "Error";
+    }
+  };
+
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   }
@@ -78,13 +103,19 @@ const DataTableOrder = () => {
           field: "orderStatus",
           headerName: "STATUS",
           width: 150,
+
           renderCell: (params) => {
-            // Correctly reference the isDeleted field and convert the boolean to a string
-            const status =
-              params.row.orderStatus === "openToAdd" ? "Active" : "Passive";
+            const { orderStatus } = params.row;
+            const statusClass =
+              orderStatus === STATUS.DELIVERED
+                ? "active"
+                : orderStatus === STATUS.CANCELED
+                ? "passive"
+                : "pending";
+            const statusLabel = getStatusLabel(orderStatus);
             return (
-              <div className={`cellWithStatus ${status.toLowerCase()}`}>
-                {params.row.orderStatus}
+              <div className={`cellWithStatus ${statusClass}`}>
+                {statusLabel}
               </div>
             );
           },
@@ -153,6 +184,7 @@ const DataTableOrder = () => {
           className="datagrid"
           autoHeight
           hideFooterPagination
+          disableRowSelectionOnClick
         />
       </div>
 

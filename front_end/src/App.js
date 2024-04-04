@@ -63,9 +63,7 @@ function App() {
     const cookie = Cookies.get("jwtFe");
 
     let decoded;
-    // Check if the JWT token exists before attempting to decode it
 
-    // If the JWT token does not exist or the role is not set, redirect to login
     if (isSignupPage || isLoginPage || isChangePassword || isPublic) {
       return;
     }
@@ -131,6 +129,7 @@ function App() {
           <Route path="search/:genre" element={<SearchPageUserApp />} />
         </Route>
 
+        {/* ////////////////////ADMIN////////////////////// */}
         <Route path="/adminPage">
           <Route index element={<HomePage />} />
 

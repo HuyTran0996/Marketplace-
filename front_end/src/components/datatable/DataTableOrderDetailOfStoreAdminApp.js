@@ -58,6 +58,22 @@ const DataTableOrderDetailOfStoreAdminApp = () => {
 
   const totalPrice = calculateTotalPrice();
 
+  const STATUS = {
+    DELIVERED_TO_APP: "deliveredToApp",
+    CANCELED_BY_STORE: "canceledByStore",
+  };
+
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case STATUS.DELIVERED_TO_APP:
+        return "Delivered To App";
+      case STATUS.CANCELED_BY_STORE:
+        return "Canceled By Store";
+      default:
+        return "Sent Order To Store";
+    }
+  };
+
   if (isLoading) {
     userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
   } else if (error || !listProducts) {
@@ -129,17 +145,16 @@ const DataTableOrderDetailOfStoreAdminApp = () => {
         width: 190,
 
         renderCell: (params) => {
-          // Correctly reference the isDeleted field and convert the boolean to a string
-          const status =
-            params.row.orderProductStatus === "deliveredToApp"
+          const { orderProductStatus } = params.row;
+          const statusClass =
+            orderProductStatus === STATUS.DELIVERED_TO_APP
               ? "active"
-              : params.row.orderProductStatus === "canceledByStore"
+              : orderProductStatus === STATUS.CANCELED_BY_STORE
               ? "passive"
               : "pending";
+          const statusLabel = getStatusLabel(orderProductStatus);
           return (
-            <div className={`cellWithStatus ${status.toLowerCase()}`}>
-              {params.row.orderProductStatus}
-            </div>
+            <div className={`cellWithStatus ${statusClass}`}>{statusLabel}</div>
           );
         },
       },
@@ -162,6 +177,7 @@ const DataTableOrderDetailOfStoreAdminApp = () => {
           className="datagrid"
           autoHeight
           hideFooterPagination
+          disableRowSelectionOnClick
         />
       </div>
 

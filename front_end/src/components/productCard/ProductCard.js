@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./productCard.scss";
 import { PageContext } from "../../context/PageContext";
+import { showToast } from "../ToastMessage";
 
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -26,8 +27,13 @@ export default function ProductCard({ product }) {
     const isProductAlreadyInCart = newFavorite.find(
       (existingProduct) => existingProduct._id === product._id
     );
+    if (isProductAlreadyInCart) {
+      showToast("Your cart already contains this product.", "warn");
+      return;
+    }
     if (!isProductAlreadyInCart) {
       newFavorite.push({ ...product, quantity: 1 });
+      showToast("Add product to cart successfully", "success");
     }
 
     dispatch({

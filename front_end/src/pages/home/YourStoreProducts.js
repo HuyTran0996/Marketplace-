@@ -150,25 +150,25 @@ const YourStoreProducts = () => {
                 ))
               )}
             </Grid>
-            <Grid style={stackStyle}>
-              <Pagination
-                count={Math.ceil(dataAllProducts.data.total / 8 || 1)}
-                color="primary"
-                onChange={handleChangeFilter}
-                page={page}
-                sx={{
-                  "& button": {
-                    color: darkMode ? "white" : "black",
-                  },
-                  "& button:hover": {
-                    transition: "0.3s",
-                    backgroundColor: red[100],
-                    color: "green",
-                  },
-                }}
-              />
-            </Grid>
           </div>
+          <Grid style={stackStyle}>
+            <Pagination
+              count={Math.ceil(dataAllProducts.data.total / 8 || 1)}
+              color="primary"
+              onChange={handleChangeFilter}
+              page={page}
+              sx={{
+                "& button": {
+                  color: darkMode ? "white" : "black",
+                },
+                "& button:hover": {
+                  transition: "0.3s",
+                  backgroundColor: red[100],
+                  color: "green",
+                },
+              }}
+            />
+          </Grid>
         </div>
       </div>
     );
