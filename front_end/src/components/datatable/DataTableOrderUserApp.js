@@ -51,22 +51,6 @@ const DataTableOrderUserApp = () => {
     fetchData();
   }, [location, isOrderPageUserApp]);
 
-  // const STATUS = {
-  //   DELIVERED_TO_APP: "deliveredToApp",
-  //   CANCELED_BY_STORE: "canceledByStore",
-  // };
-
-  // const getStatusLabel = (status) => {
-  //   switch (status) {
-  //     case STATUS.DELIVERED_TO_APP:
-  //       return "Delivered To App";
-  //     case STATUS.CANCELED_BY_STORE:
-  //       return "Canceled By Store";
-  //     default:
-  //       return "Sent Order To Store";
-  //   }
-  // };
-
   const STATUS = {
     SENT_ORDER_TO_STORE: "sentOrderToStore",
     DELIVERED: "delivered",
