@@ -73,14 +73,16 @@ const DataTableCartProduct = () => {
   const handleDecreaseQuantity = (itemId) => {
     const updatedCart = dataCart.map((item) =>
       item._id === itemId
-        ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+        ? { ...item, quantity: Math.max(0, item.quantity - 1) }
         : item
     );
+
+    const filteredCart = updatedCart.filter((item) => item.quantity >= 1);
     dispatch({
       type: "SET_DATA_CART",
-      payload: updatedCart,
+      payload: filteredCart,
     });
-    localStorage.setItem("favorite", JSON.stringify(updatedCart));
+    localStorage.setItem("favorite", JSON.stringify(filteredCart));
   };
 
   const calculateTotalPrice = () => {
