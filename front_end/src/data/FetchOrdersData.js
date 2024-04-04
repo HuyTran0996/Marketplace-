@@ -8,11 +8,13 @@ const FetchCreateOrder = async () => {
 const FetchAllOrders = async (orderId, page, limit) => {
   if (orderId) {
     const encodedOrderId = encodeURIComponent(orderId);
-    const dataAllOrders = await apiService.get(`/orders?_id=${encodedOrderId}`);
+    const dataAllOrders = await apiService.get(
+      `/orders?_id=${encodedOrderId}&orderStatus[ne]=openToAdd`
+    );
     return dataAllOrders;
   } else {
     const dataAllOrders = await apiService.get(
-      `/orders?page=${page || 1}&limit=${limit || 8}`
+      `/orders?page=${page || 1}&limit=${limit || 8}&orderStatus[ne]=openToAdd`
     );
     return dataAllOrders;
   }

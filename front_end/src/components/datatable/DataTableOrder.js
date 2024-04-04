@@ -65,7 +65,7 @@ const DataTableOrder = () => {
       case STATUS.DELIVERING:
         return "Delivering";
       case STATUS.CANCELED:
-        return "Canceled";
+        return "Canceled By Admin";
       case STATUS.OPEN_TO_ADD:
         return "Open To Add";
       default:

@@ -51,19 +51,44 @@ const DataTableOrderUserApp = () => {
     fetchData();
   }, [location, isOrderPageUserApp]);
 
+  // const STATUS = {
+  //   DELIVERED_TO_APP: "deliveredToApp",
+  //   CANCELED_BY_STORE: "canceledByStore",
+  // };
+
+  // const getStatusLabel = (status) => {
+  //   switch (status) {
+  //     case STATUS.DELIVERED_TO_APP:
+  //       return "Delivered To App";
+  //     case STATUS.CANCELED_BY_STORE:
+  //       return "Canceled By Store";
+  //     default:
+  //       return "Sent Order To Store";
+  //   }
+  // };
+
   const STATUS = {
-    DELIVERED_TO_APP: "deliveredToApp",
-    CANCELED_BY_STORE: "canceledByStore",
+    SENT_ORDER_TO_STORE: "sentOrderToStore",
+    DELIVERED: "delivered",
+    DELIVERING: "delivering",
+    OPEN_TO_ADD: "openToAdd",
+    CANCELED: "canceled",
   };
 
   const getStatusLabel = (status) => {
     switch (status) {
-      case STATUS.DELIVERED_TO_APP:
-        return "Delivered To App";
-      case STATUS.CANCELED_BY_STORE:
-        return "Canceled By Store";
-      default:
+      case STATUS.SENT_ORDER_TO_STORE:
         return "Sent Order To Store";
+      case STATUS.DELIVERED:
+        return "Delivered";
+      case STATUS.DELIVERING:
+        return "Delivering";
+      case STATUS.CANCELED:
+        return "Canceled By Admin";
+      case STATUS.OPEN_TO_ADD:
+        return "Open To Add";
+      default:
+        return "Error";
     }
   };
 
@@ -102,14 +127,14 @@ const DataTableOrderUserApp = () => {
           width: 150,
 
           renderCell: (params) => {
-            const { orderProductStatus } = params.row;
+            const { orderStatus } = params.row;
             const statusClass =
-              orderProductStatus === STATUS.DELIVERED_TO_APP
+              orderStatus === STATUS.DELIVERED
                 ? "active"
-                : orderProductStatus === STATUS.CANCELED_BY_STORE
+                : orderStatus === STATUS.CANCELED
                 ? "passive"
                 : "pending";
-            const statusLabel = getStatusLabel(orderProductStatus);
+            const statusLabel = getStatusLabel(orderStatus);
             return (
               <div className={`cellWithStatus ${statusClass}`}>
                 {statusLabel}
