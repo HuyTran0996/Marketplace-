@@ -4,10 +4,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FetchUpdateOrder } from "../../data/FetchOrdersData";
 import { PageContext } from "../../context/PageContext";
 import { usePage } from "../../components/usePage";
+import { showToast } from "../../components/ToastMessage";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
-// import Navbar from "../../components/navbar/NavBar";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
@@ -96,6 +96,7 @@ const OrderDetails = ({ dataSingle, getSingleOrder, title }) => {
 
       setIsSubmitting(false);
       setError(false);
+      showToast("Updated", "success");
       return;
     } catch (error) {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);
