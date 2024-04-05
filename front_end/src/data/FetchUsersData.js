@@ -2,7 +2,7 @@ import { apiService } from "../app/apiService";
 
 const FetchAllUsers = async (email, page, limit) => {
   if (email) {
-    const dataAllUsers = await apiService.get(`/users?email=${email}`);
+    const dataAllUsers = await apiService.get(`/users?search=${email}`);
     return dataAllUsers;
   } else {
     const dataAllUsers = await apiService.get(
@@ -21,6 +21,7 @@ const FetchSingleUser = async (id) => {
   const dataSingleUser = await apiService.get(`/users/${id}`);
   return dataSingleUser;
 };
+
 const FetchUpdateMe = async (formData) => {
   const dataUpdateMe = await apiService.patch("/users/updateMe", formData, {
     withCredentials: true,

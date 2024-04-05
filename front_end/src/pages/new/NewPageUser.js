@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FetchUpdateMe, FetchUpdateUser } from "../../data/FetchUsersData";
 import { PageContext } from "../../context/PageContext";
 import { usePage } from "../../components/usePage";
+import { showToast } from "../../components/ToastMessage";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
@@ -131,6 +132,7 @@ const UserDetails = ({ dataUser, getSingleUser, getMyInfo, title }) => {
 
       setIsSubmitting(false);
       setError(false);
+      showToast("Update successful", "success");
       return;
     } catch (error) {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);

@@ -22,10 +22,6 @@ const FetchAllProductsOfAStore = async (storeID) => {
   return dataAllProducts;
 };
 const FetchSearchProductByName = async (productName) => {
-  // Properly encode the productName to handle special characters and spaces
-  // const encodedProductName = encodeURIComponent(productName);
-
-  // Use the encoded productName in the request URL
   const dataAllProducts = await apiService.get(
     `/products?search=${productName}`
   );

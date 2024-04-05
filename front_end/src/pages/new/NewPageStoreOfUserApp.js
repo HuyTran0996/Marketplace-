@@ -83,12 +83,13 @@ const CreateStore = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!name || !address) {
+      showToast("Please fill in all the fields", "warn");
+      return;
+    }
     try {
       setIsSubmitting(true);
-      let formData = new FormData();
-      // formData.append("storeName", name);
-      // formData.append("address", address);
+      const formData = new FormData();
 
       const data = {
         storeName: name,

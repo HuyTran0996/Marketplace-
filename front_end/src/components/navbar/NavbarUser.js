@@ -20,11 +20,12 @@ const NavbarUser = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      if (email === "") {
+      const trimmedValue = email.trim();
+      if (trimmedValue === "") {
         await getDataAllUsers("", 1, 8);
         navigate("/adminPage/users?page=1");
       } else {
-        await getDataAllUsers(email);
+        await getDataAllUsers(trimmedValue);
       }
       setIsLoading(false);
     } catch (error) {

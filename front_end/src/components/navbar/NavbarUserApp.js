@@ -54,12 +54,11 @@ const NavbarUserApp = () => {
 
     if (cookie) {
       try {
-        if (productName === "") {
-          // await getDataAllProducts();
+        const trimmedValue = productName.trim();
+        if (trimmedValue === "") {
           navigate("/userPage");
         } else {
-          // await searchProductByName(productName);
-          navigate(`/userPage/search/${productName}`);
+          navigate(`/userPage/search/${trimmedValue}`);
         }
 
         setIsLoading(false);

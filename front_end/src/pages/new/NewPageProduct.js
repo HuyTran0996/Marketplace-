@@ -5,6 +5,7 @@ import { FetchUpdateProduct } from "../../data/FetchProductsData";
 import { PageContext } from "../../context/PageContext";
 import { usePage } from "../../components/usePage";
 import avatar from "../../images/avatar.png";
+import { showToast } from "../../components/ToastMessage";
 
 import "./new.scss";
 import Sidebar from "../../components/sidebar/SideBar";
@@ -117,20 +118,13 @@ const ProductDetails = ({
         formData.append("image", fileSubmit);
       }
 
-      // const formData = {
-      //   productName,
-      //   description,
-      //   price,
-      //   unit,
-      //   genre,
-      // };
-
       await FetchUpdateProduct({ productId, formData });
 
       await getSingleProduct(productId);
 
       setIsSubmitting(false);
       setError(false);
+      showToast("Update successful", "success");
       return;
     } catch (error) {
       console.log(`Error fetchData: ${error.name}: ${error.message}`);

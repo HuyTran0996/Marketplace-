@@ -2,9 +2,7 @@ import { apiService } from "../app/apiService";
 
 const FetchAllStores = async (storeName, page, limit) => {
   if (storeName) {
-    const dataAllStores = await apiService.get(
-      `/stores?storeName=${storeName}`
-    );
+    const dataAllStores = await apiService.get(`/stores?search=${storeName}`);
     return dataAllStores;
   } else {
     const dataAllStores = await apiService.get(
