@@ -63,7 +63,7 @@ const DataTableOrderDetail = () => {
   };
 
   if (isLoading) {
-    userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
+    userColumns = [{ field: "id", headerName: "Loading Data...", width: 240 }];
   } else if (error || !listProducts || listProducts.length === 0) {
     userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
   } else {

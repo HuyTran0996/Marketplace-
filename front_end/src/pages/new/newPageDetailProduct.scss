@@ -1,0 +1,296 @@
+.new {
+  width: 100%;
+  display: flex;
+
+  .newContainer {
+    width: 85vw;
+
+    .top,
+    .bottom {
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+
+      h1 {
+        color: lightgray;
+        font-size: 20px;
+      }
+
+      .left {
+        flex: 1;
+        text-align: center;
+
+        img {
+          width: 500px;
+          height: 500px;
+          border-radius: 15px;
+          object-fit: cover;
+        }
+      }
+
+      .right {
+        width: 40vw;
+        margin-top: 1vh;
+
+        form {
+          display: flex;
+          flex-direction: column; /* Change to column to stack elements vertically */
+          gap: 30px;
+          justify-content: space-around;
+
+          .formInput {
+            margin-left: 2vw;
+            width: 30vw;
+            order: 1; /* Ensure this appears first */
+
+            label {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+
+              .icon {
+                cursor: pointer;
+              }
+            }
+
+            input {
+              width: 100%;
+              padding: 5px;
+              border: none;
+              border-bottom: 1px solid gray;
+            }
+          }
+
+          .error {
+            margin-left: 2vw;
+            order: 2;
+            color: red;
+            font-size: 26px;
+          }
+
+          button {
+            margin-left: 2vw;
+            width: 150px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background-color: teal;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition-duration: 0.3s;
+            order: 3; /* Ensure this appears last */
+          }
+          button:hover {
+            filter: brightness(120%);
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+          }
+        }
+
+        //comment section//////
+        .commentsSection {
+          padding: 20px;
+          margin-top: 20px;
+
+          .formInput {
+            order: 1;
+            margin-left: 0;
+            display: flex;
+            margin-bottom: 20px;
+
+            .submitIcon {
+              cursor: pointer;
+              font-size: 24px;
+              margin-left: 10px;
+              transition-duration: 0.3s;
+            }
+
+            .submitIcon:hover {
+              color: rgb(42, 207, 42);
+              filter: brightness(120%);
+              transform: scale(1.2);
+              transition: transform 0.3s ease-in-out;
+            }
+          }
+
+          .comment {
+            order: 2;
+            display: flex;
+            margin-bottom: 20px;
+            box-shadow: 2px 4px 10px 1px rgba(88, 85, 85, 0.47);
+            border-radius: 5px;
+            .commentContent {
+              margin-left: 9px;
+              flex-grow: 1;
+
+              h3 {
+                margin: 0;
+                font-size: 16px;
+                font-weight: bold;
+                color: #333; // Dark text for readability
+              }
+
+              p {
+                margin: 0;
+                font-size: 14px;
+                color: #666; // Lighter text for the review
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .new {
+    margin-right: 0px;
+    width: 100vw;
+    height: auto;
+    display: flex;
+
+    .newContainer {
+      width: 80vw;
+
+      .bottom {
+        display: flex;
+        flex-direction: column;
+
+        .left {
+          flex: 1;
+          text-align: center;
+          margin-bottom: 5px;
+
+          img {
+            display: inline;
+            width: 250px;
+            height: 250px;
+            border-radius: 10px;
+            object-fit: cover;
+          }
+        }
+
+        .right {
+          width: auto;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          form {
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            .formInput {
+              width: auto;
+              height: 20px;
+              margin-bottom: 20px;
+              order: 1;
+
+              label {
+                display: flex;
+                align-items: center;
+                // gap: 10px;
+
+                .icon {
+                  cursor: pointer;
+                }
+              }
+
+              input {
+                width: auto;
+                height: auto;
+                padding: 5px;
+                border: none;
+                border-bottom: 1px solid gray;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 650px) and (max-width: 1024px) {
+  .new {
+    margin-right: 0px;
+    width: 100vw;
+    height: auto;
+    display: flex;
+
+    .newContainer {
+      width: 80vw;
+
+      .bottom {
+        display: flex;
+        flex-direction: row;
+
+        .left {
+          flex: 1;
+          text-align: center;
+          margin-bottom: 5px;
+
+          img {
+            display: inline;
+            width: 250px;
+            height: 250px;
+            border-radius: 10px;
+            object-fit: cover;
+          }
+        }
+
+        .right {
+          width: auto;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          form {
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            .formInput {
+              width: auto;
+              height: 20px;
+              margin-bottom: 20px;
+              order: 1;
+
+              label {
+                display: flex;
+                align-items: center;
+                // gap: 10px;
+
+                .icon {
+                  cursor: pointer;
+                }
+              }
+
+              input {
+                width: auto;
+                height: auto;
+                padding: 5px;
+                border: none;
+                border-bottom: 1px solid gray;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

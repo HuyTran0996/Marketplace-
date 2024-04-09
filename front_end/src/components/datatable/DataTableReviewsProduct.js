@@ -52,7 +52,7 @@ const DataTableReviewsProduct = () => {
   }, [location]);
 
   if (isLoading) {
-    userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
+    userColumns = [{ field: "id", headerName: "Loading Data...", width: 240 }];
   }
 
   if (isProductPage && !isLoading) {

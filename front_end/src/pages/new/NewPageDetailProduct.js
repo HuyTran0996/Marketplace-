@@ -8,7 +8,7 @@ import { usePage } from "../../components/usePage";
 import avatar from "../../images/avatar.png";
 import { showToast } from "../../components/ToastMessage";
 
-import "./new.scss";
+import "./newPageDetailProduct.scss";
 import SidebarUser from "../../components/sidebar/SideBarUser";
 import NavbarUserCartApp from "../../components/navbar/NavbarUserCartApp";
 
@@ -106,6 +106,7 @@ const ProductDetails = ({
     e.preventDefault();
     if (!comment.trim()) {
       // If the comment is empty, do not proceed with the rest of the function
+      showToast("Your Comment Is Empty.", "warn");
       return;
     }
     try {
@@ -200,6 +201,39 @@ const ProductDetails = ({
                   })
                 : ""}
             </div>
+
+            {/* <div className="commentsSection">
+              <h2>Comments</h2>
+              <form onSubmit={handleSendComment}>
+                <div className="formInput" key="1">
+                  <textarea
+                    placeholder="write a comment..."
+                    value={comment}
+                    onChange={handleCommentChange}
+                    rows="4" // Adjust the number of rows as needed
+                    style={{ width: "100%" }} // Ensure the textarea takes full width
+                  />
+                  <IoMdSend
+                    className="submitIcon"
+                    onClick={handleSendComment}
+                    disabled={isSubmitting}
+                  />
+                </div>
+                {error ? <div className="error">{error}</div> : ""}
+              </form>
+              {reviewsOfThisProduct
+                ? reviewsOfThisProduct.data.reviews.map((review) => {
+                    return (
+                      <div className="comment" key={review._id}>
+                        <div className="commentContent">
+                          <h3>{review.reviewerName}</h3>
+                          <p>{review.userReview}</p>
+                        </div>
+                      </div>
+                    );
+                  })
+                : ""}
+            </div> */}
           </div>
         </div>
       </div>

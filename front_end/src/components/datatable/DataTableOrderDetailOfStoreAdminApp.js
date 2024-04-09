@@ -75,7 +75,7 @@ const DataTableOrderDetailOfStoreAdminApp = () => {
   };
 
   if (isLoading) {
-    userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
+    userColumns = [{ field: "id", headerName: "Loading Data...", width: 240 }];
   } else if (error || !listProducts) {
     userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
   } else if (listProducts.length === 0) {

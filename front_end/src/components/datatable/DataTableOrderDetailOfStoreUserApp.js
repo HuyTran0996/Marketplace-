@@ -161,9 +161,9 @@ const DataTableOrderDetailOfStoreUserApp = () => {
   };
 
   if (isLoading) {
-    userColumns = [{ field: "id", headerName: " Loading...", width: 240 }];
+    userColumns = [{ field: "id", headerName: "Loading Data...", width: 240 }];
   } else if (error) {
-    userColumns = [{ field: "id", headerName: " Error...", width: 240 }];
+    userColumns = [{ field: "id", headerName: "Error...", width: 240 }];
   } else if (dataAllOrdersProductOfStore.data.orderProducts === 0) {
     userColumns = [
       { field: "id", headerName: " Your Store Has No Orders...", width: 240 },
