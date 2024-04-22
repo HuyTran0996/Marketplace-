@@ -170,7 +170,7 @@ const ProductDetails = ({
 
             {/* ////Comment section//// */}
 
-            <div className="commentsSection">
+            {/* <div className="commentsSection">
               <h2>Comments</h2>
               <form onSubmit={handleSendComment}>
                 <div className="formInput" key="1">
@@ -200,9 +200,9 @@ const ProductDetails = ({
                     );
                   })
                 : ""}
-            </div>
+            </div> */}
 
-            {/* <div className="commentsSection">
+            <div className="commentsSection">
               <h2>Comments</h2>
               <form onSubmit={handleSendComment}>
                 <div className="formInput" key="1">
@@ -233,7 +233,7 @@ const ProductDetails = ({
                     );
                   })
                 : ""}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
