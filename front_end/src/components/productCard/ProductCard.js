@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import "./productCard.scss";
 import { PageContext } from "../../context/PageContext";
@@ -21,26 +22,32 @@ export default function ProductCard({ product }) {
   };
 
   const addToCart = async () => {
-    const productInStorage = JSON.parse(localStorage.getItem("favorite"));
-    const favoriteList = productInStorage ? productInStorage : [];
-    let newFavorite = [...favoriteList];
-    const isProductAlreadyInCart = newFavorite.find(
-      (existingProduct) => existingProduct._id === product._id
-    );
-    if (isProductAlreadyInCart) {
-      showToast("Your cart already contains this product.", "warn");
+    const cookie = Cookies.get("jwtFe");
+    if (!cookie) {
+      showToast("Log In or Sign Up to use all features", "warn");
       return;
-    }
-    if (!isProductAlreadyInCart) {
-      newFavorite.push({ ...product, quantity: 1 });
-      showToast("Add product to cart successfully", "success");
-    }
+    } else {
+      const productInStorage = JSON.parse(localStorage.getItem("favorite"));
+      const favoriteList = productInStorage ? productInStorage : [];
+      let newFavorite = [...favoriteList];
+      const isProductAlreadyInCart = newFavorite.find(
+        (existingProduct) => existingProduct._id === product._id
+      );
+      if (isProductAlreadyInCart) {
+        showToast("Your cart already contains this product.", "warn");
+        return;
+      }
+      if (!isProductAlreadyInCart) {
+        newFavorite.push({ ...product, quantity: 1 });
+        showToast("Add product to cart successfully", "success");
+      }
 
-    dispatch({
-      type: "SET_DATA_CART",
-      payload: newFavorite,
-    });
-    localStorage.setItem("favorite", JSON.stringify(newFavorite));
+      dispatch({
+        type: "SET_DATA_CART",
+        payload: newFavorite,
+      });
+      localStorage.setItem("favorite", JSON.stringify(newFavorite));
+    }
   };
 
   return (
